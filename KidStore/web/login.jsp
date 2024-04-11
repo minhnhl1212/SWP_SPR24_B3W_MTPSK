@@ -22,7 +22,7 @@
             function doForgetPass(){
                 window.location.href="forgetPassword";
             }
-        <script>
+        </script>
     </head>
     <body>
         <div id="logreg-forms">
