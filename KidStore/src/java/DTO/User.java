@@ -11,15 +11,17 @@ package DTO;
  */
 public class User {
     private String username, password , lastname;
-    private boolean isRole;
+    private boolean active;
+    private int isRole;
 
     public User() {
     }
 
-    public User(String username, String password, String lastname, boolean isRole) {
+    public User(String username, String password, String lastname, boolean active, int isRole) {
         this.username = username;
         this.password = password;
         this.lastname = lastname;
+        this.active = active;
         this.isRole = isRole;
     }
 
@@ -47,17 +49,27 @@ public class User {
         this.lastname = lastname;
     }
 
-    public boolean isIsRole() {
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public int getIsRole() {
         return isRole;
     }
 
-    public void setIsRole(boolean isRole) {
+    public void setIsRole(int isRole) {
         this.isRole = isRole;
     }
 
     @Override
     public String toString() {
-        return "User{" + "username=" + username + ", password=" + password + ", lastname=" + lastname + ", isRole=" + isRole + '}';
+        return "User{" + "username=" + username + ", password=" + password + ", lastname=" + lastname + ", active=" + active + ", isRole=" + isRole + '}';
     }
     
 }
+
+   
