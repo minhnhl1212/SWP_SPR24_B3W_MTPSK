@@ -17,7 +17,7 @@
 </script>
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #80dfff;">
     <div class="container px-4 px-lg-5">
-        <a class="navbar-brand" href="home"><img src="img/logo-kids-new3.png" class="logo" alt="KidStore"></a>
+        <a class="navbar-brand" href="home.jsp"><img src="img/logo-kids-new3.png" class="logo" alt="KidStore"></a>
         <button
             class="navbar-toggler"
             type="button"
@@ -69,7 +69,7 @@
                 </button>
             </form>
             <div class="d-flex my-4 mr-2">
-                <a class="btn btn-outline-dark" href="carts">
+                <a class="btn btn-outline-dark" href="cart.jsp">
                     <i class="bi-cart-fill me-1"></i>
                     Cart
                     <span class="badge bg-dark text-white ms-1 rounded-pill">${sessionScope.carts.size()}</span>
