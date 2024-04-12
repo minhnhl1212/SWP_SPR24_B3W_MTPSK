@@ -9,6 +9,6 @@ package DTO;
  *
  * @author admin
  */
-public class Customer {
+public class Payment {
     
 }
