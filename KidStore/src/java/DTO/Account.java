@@ -5,16 +5,16 @@ public class Account {
     private String userName;
     private String password;
     private String fullName;
-    private int phone;
+    private String phone;
     private String address;
-    private int active;
+    private boolean active;
     private int roleId;
     private int paymentId;
 
     public Account() {
     }
 
-    public Account(int userId, String userName, String password, String fullName, int phone, String address, int active, int roleId, int paymentId) {
+    public Account(int userId, String userName, String password, String fullName, String phone, String address, boolean active, int roleId, int paymentId) {
         this.userId = userId;
         this.userName = userName;
         this.password = password;
@@ -25,6 +25,8 @@ public class Account {
         this.roleId = roleId;
         this.paymentId = paymentId;
     }
+
+
 
     public int getUserId() {
         return userId;
@@ -58,28 +60,12 @@ public class Account {
         this.fullName = fullName;
     }
 
-    public int getPhone() {
-        return phone;
-    }
-
-    public void setPhone(int phone) {
-        this.phone = phone;
-    }
-
     public String getAddress() {
         return address;
     }
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public int getActive() {
-        return active;
-    }
-
-    public void setActive(int active) {
-        this.active = active;
     }
 
     public int getRoleId() {
@@ -97,6 +83,22 @@ public class Account {
     public void setPaymentId(int paymentId) {
         this.paymentId = paymentId;
     } 
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
     
 }
 

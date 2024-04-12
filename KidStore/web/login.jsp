@@ -26,7 +26,7 @@
     </head>
     <body>
         <div id="logreg-forms">
-            <form class="form-signin" action="login">
+            <form class="form-signin" action="MainController">
                 <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign in</h1>
                 <div class="d-block mx-4 mb-3 mb-lg-4  text-danger"><b>${mess}</b></div>
                 <input type="text" id="inputEmail" class="form-control" placeholder="Username" required="" autofocus="" name="Username">

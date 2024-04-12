@@ -37,29 +37,39 @@ public class DAO {
         }
     }
     
-    public Account checkLogin(String userName, String password) throws SQLException, Exception {
-        Account user = null;
-        try {
+         public Account Login(String username, String password) throws Exception{
+        Account account = null;
+        int userid;
+        String fullname, phone, address;
+        boolean active;
+        int role, payment;
+        try{  
             con = DBUtils.getConnection();
-            if (con != null) {
-                String sql = "select *  from [User] where UserName = ? and Password = ?";
-                ps = con.prepareStatement(sql);
-                ps.setString(1, userName);
-                ps.setString(2, password);
-                rs = ps.executeQuery();
-                if (rs.next()) {
-                    user = new Account(rs.getInt("UserID"), rs.getString("UserName"), rs.getString("Password"), rs.getString("FullName"), rs.getString("Phone"), rs.getString("Address"), rs.getInt("RoleID"), rs.getString("Avatar"));
-                }
+            String sql = "Select user_id, full_name, phone, address, "
+                    + "active, role_id, payment_id from Account"
+                    + " where [username]=? and [password]=?";
+            ps = con.prepareStatement(sql);
+            ps.setString(1, username);
+            ps.setString(2, password);
+            rs = ps.executeQuery();
+            while (rs.next()){
+                userid = rs.getInt(1);
+                fullname = rs.getString(2);
+                phone = rs.getString(3);
+                address = rs.getString(4);
+                active = rs.getBoolean(5);
+                role = rs.getInt(6);
+                payment = rs.getInt(7);
+                account = new Account(userid, username, password, fullname, phone, address, active, role, payment);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
+        }
+        catch (Exception ex){
+            throw ex;
+        }
+        finally {
             closeConnection();
         }
-        return user;
+        return account;
     }
-    
-    
-             
-        
-}
+    }
+
