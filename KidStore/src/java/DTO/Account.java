@@ -1,44 +1,45 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package DTO;
 
-import java.util.Date;
-
-/**
- *
- * @author admin
- */
 public class Account {
-    private String username;
+    private int userId;
+    private String userName;
     private String password;
-    private String fullname;
+    private String fullName;
+    private int phone;
     private String address;
-    private Date Birthday;
-    private String img;
-    private int role_id;
+    private int active;
+    private int roleId;
+    private int paymentId;
 
     public Account() {
     }
 
-    public Account(String username, String password, String fullname, String address, Date Birthday,String Img, int role_id) {
-        this.username = username;
+    public Account(int userId, String userName, String password, String fullName, int phone, String address, int active, int roleId, int paymentId) {
+        this.userId = userId;
+        this.userName = userName;
         this.password = password;
-        this.fullname = fullname;
+        this.fullName = fullName;
+        this.phone = phone;
         this.address = address;
-        this.Birthday = Birthday;
-        this.img = Img;
-        this.role_id = role_id;
-    }
-    
-    public String getUsername() {
-        return username;
+        this.active = active;
+        this.roleId = roleId;
+        this.paymentId = paymentId;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {
@@ -49,12 +50,20 @@ public class Account {
         this.password = password;
     }
 
-    public String getFullname() {
-        return fullname;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public int getPhone() {
+        return phone;
+    }
+
+    public void setPhone(int phone) {
+        this.phone = phone;
     }
 
     public String getAddress() {
@@ -65,28 +74,30 @@ public class Account {
         this.address = address;
     }
 
-    public Date getBirthday() {
-        return Birthday;
+    public int getActive() {
+        return active;
     }
 
-    public void setBirthday(Date Birthday) {
-        this.Birthday = Birthday;
+    public void setActive(int active) {
+        this.active = active;
     }
 
-    public int getRole_id() {
-        return role_id;
+    public int getRoleId() {
+        return roleId;
     }
 
-    public void setRole_id(int role_id) {
-        this.role_id = role_id;
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
     }
 
-    public String getImg() {
-        return img;
+    public int getPaymentId() {
+        return paymentId;
     }
 
-    public void setImg(String img) {
-        this.img = img;
-    }
+    public void setPaymentId(int paymentId) {
+        this.paymentId = paymentId;
+    } 
     
 }
+
+   

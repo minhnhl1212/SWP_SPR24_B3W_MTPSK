@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package DTO;
 
 /**
@@ -10,30 +5,51 @@ package DTO;
  * @author admin
  */
 public class Payment {
-    private int id;
-    private String credit_card;
+    private int paymentId;
+    private String fullName;
+    private String cardId;
+    private int userId;
 
     public Payment() {
     }
 
-    public Payment(int id, String credit_card) {
-        this.id = id;
-        this.credit_card = credit_card;
+    public Payment(int paymentId, String fullName, String cardId, int userId) {
+        this.paymentId = paymentId;
+        this.fullName = fullName;
+        this.cardId = cardId;
+        this.userId = userId;
     }
 
-    public int getId() {
-        return id;
+    public int getPaymentId() {
+        return paymentId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setPaymentId(int paymentId) {
+        this.paymentId = paymentId;
     }
 
-    public String getCredit_card() {
-        return credit_card;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setCredit_card(String credit_card) {
-        this.credit_card = credit_card;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
+
+    public String getCardId() {
+        return cardId;
+    }
+
+    public void setCardId(String cardId) {
+        this.cardId = cardId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
 }

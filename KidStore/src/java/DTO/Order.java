@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package DTO;
 
 import java.util.Date;
@@ -12,83 +7,62 @@ import java.util.Date;
  * @author admin
  */
 public class Order {
-    private int id;
-    private int product_id;
-    private int ammount;
-    private double price;
-    private Date selling_date;
-    private String username;
-    private int payment_id;
+    
+    private int userId;
+    private int toyId;
+    private int quantity;
+    private double amount;
+    private int orderId;
 
     public Order() {
     }
 
-    public Order(int id, int product_id, int ammount, double price, Date selling_date, String Username, int payment_id) {
-        this.id = id;
-        this.product_id = product_id;
-        this.ammount = ammount;
-        this.price = price;
-        this.selling_date = selling_date;
-        this.username = Username;
-        this.payment_id = payment_id;
+    public Order(int userId, int toyId, int quantity, double amount, int orderId) {
+        this.userId = userId;
+        this.toyId = toyId;
+        this.quantity = quantity;
+        this.amount = amount;
+        this.orderId = orderId;
     }
 
-    public int getId() {
-        return id;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
-    public int getProduct_id() {
-        return product_id;
+    public int getToyId() {
+        return toyId;
     }
 
-    public void setProduct_id(int product_id) {
-        this.product_id = product_id;
+    public void setToyId(int toyId) {
+        this.toyId = toyId;
     }
 
-    public int getAmmount() {
-        return ammount;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setAmmount(int ammount) {
-        this.ammount = ammount;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
-    public double getPrice() {
-        return price;
+    public double getAmount() {
+        return amount;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
 
-    public Date getSelling_date() {
-        return selling_date;
+    public int getOrderId() {
+        return orderId;
     }
 
-    public void setSelling_date(Date selling_date) {
-        this.selling_date = selling_date;
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-
-
-    public int getPayment_id() {
-        return payment_id;
-    }
-
-    public void setPayment_id(int payment_id) {
-        this.payment_id = payment_id;
-    }
-    
 }

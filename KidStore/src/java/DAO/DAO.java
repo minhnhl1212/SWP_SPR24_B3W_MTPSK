@@ -12,58 +12,54 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
+import Utils.DBUtils;
+import java.util.ArrayList;
 
 /**
  *
  * @author admin
  */
 public class DAO {
-             public static Connection getConnection() throws Exception {
-        try {
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String connectionString = "jdbc:sqlserver://localhost:1433;database=KidStore";
-            Connection cnn = DriverManager.getConnection(connectionString, "sa", "123");
-            return cnn;
-        } catch (ClassNotFoundException | SQLException ex) {
-            throw ex;
+    
+    private Connection con = null;
+    private PreparedStatement ps = null;
+    private ResultSet rs = null;
+
+    private void closeConnection() throws Exception {
+        if (rs != null) {
+            rs.close();
+        }
+        if (ps != null) {
+            ps.close();
+        }
+        if (con != null) {
+            con.close();
         }
     }
-        public Account Login(String username, String password) throws Exception{
-        Account account = null;
-        Connection cnn = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        String fullname, address;
-        Date Birthday;
-        boolean role;
-        try{
-            cnn = getConnection();
-            String sql = "Select fullName, role from Users"
-                    + " where [UserName]=? and [Password]=?";
-            ps = cnn.prepareStatement(sql);
-            ps.setString(1, username);
-            ps.setInt(2, password);
-            rs = ps.executeQuery();
-            while (rs.next()){
-                fullName = rs.getString(1);
-                role = rs.getBoolean(2);
-                Account = new Account(id, username, password);
+    
+    public Account checkLogin(String userName, String password) throws SQLException, Exception {
+        Account user = null;
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "select *  from [User] where UserName = ? and Password = ?";
+                ps = con.prepareStatement(sql);
+                ps.setString(1, userName);
+                ps.setString(2, password);
+                rs = ps.executeQuery();
+                if (rs.next()) {
+                    user = new Account(rs.getInt("UserID"), rs.getString("UserName"), rs.getString("Password"), rs.getString("FullName"), rs.getString("Phone"), rs.getString("Address"), rs.getInt("RoleID"), rs.getString("Avatar"));
+                }
             }
-        }
-        catch (Exception ex){
-            throw ex;
-        }
-        finally {
-            if(rs!=null){
-                rs.close();
-            }
-            if(ps!=null){
-                ps.close();
-            }
-            if(cnn!=null){
-                cnn.close();
-            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
         }
         return user;
     }
+    
+    
+             
+        
 }
