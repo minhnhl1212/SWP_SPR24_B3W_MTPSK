@@ -17,19 +17,19 @@ public class Order {
     private int ammount;
     private double price;
     private Date selling_date;
-    private int account_id;
+    private String username;
     private int payment_id;
 
     public Order() {
     }
 
-    public Order(int id, int product_id, int ammount, double price, Date selling_date, int account_id, int payment_id) {
+    public Order(int id, int product_id, int ammount, double price, Date selling_date, String Username, int payment_id) {
         this.id = id;
         this.product_id = product_id;
         this.ammount = ammount;
         this.price = price;
         this.selling_date = selling_date;
-        this.account_id = account_id;
+        this.username = Username;
         this.payment_id = payment_id;
     }
 
@@ -73,13 +73,15 @@ public class Order {
         this.selling_date = selling_date;
     }
 
-    public int getAccount_id() {
-        return account_id;
+    public String getUsername() {
+        return username;
     }
 
-    public void setAccount_id(int account_id) {
-        this.account_id = account_id;
+    public void setUsername(String username) {
+        this.username = username;
     }
+
+
 
     public int getPayment_id() {
         return payment_id;

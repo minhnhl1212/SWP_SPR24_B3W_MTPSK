@@ -12,7 +12,6 @@ import java.util.Date;
  * @author admin
  */
 public class Account {
-    private int id;
     private String username;
     private String password;
     private String fullname;
@@ -24,8 +23,7 @@ public class Account {
     public Account() {
     }
 
-    public Account(int id, String username, String password, String fullname, String address, Date Birthday,String Img, int role_id) {
-        this.id = id;
+    public Account(String username, String password, String fullname, String address, Date Birthday,String Img, int role_id) {
         this.username = username;
         this.password = password;
         this.fullname = fullname;
@@ -34,15 +32,7 @@ public class Account {
         this.img = Img;
         this.role_id = role_id;
     }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
+    
     public String getUsername() {
         return username;
     }
