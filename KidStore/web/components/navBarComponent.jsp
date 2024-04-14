@@ -12,7 +12,7 @@
         window.location.href = "login.jsp";
     }
     function logout() {
-        window.location.href = "logout";
+        window.location.href = "LogoutController";
     }
 </script>
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #80dfff;">
@@ -77,7 +77,7 @@
             </div>
 
             <c:choose>
-                <c:when test="${sessionScope.acc == null}">
+                <c:when test="${sessionScope.acc != null}">
                     <button class="btn btn-outline-primary ms-lg-2" onclick="login()">Login</button>
                 </c:when>
 

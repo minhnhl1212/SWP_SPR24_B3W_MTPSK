@@ -3,7 +3,9 @@
     Created on : Apr 11, 2024, 9:49:30 PM
     Author     : TUF
 --%>
-
+<%@page import="DTO.Category"%>
+<%@page import="DTO.Toy"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -35,41 +37,58 @@
                 <div class="row">
                     <div class="col-md-3 mb-5">
 
+                        <%
+                            ArrayList<Category> categoryList = (ArrayList<Category>) request.getAttribute("CATEGORY_LIST");
+                            if (categoryList != null) {
+                        %>
+
                         <h3>Danh mục</h3>
                         <ul class="list-group category_block">
-                            <li class="list-group-item text-black"><a href="">Đồ chơi lắp ghép</a></li>
-                            <li class="list-group-item text-black"><a href="">Đồ chơi sáng tạo</a></li>
-                            <li class="list-group-item text-black"><a href="">Đồ chơi vận động</a></li>
-                            <li class="list-group-item text-black"><a href="">Đồ chơi mầm non</a></li>
-                            <li class="list-group-item text-black"><a href="">Đồ chơi bay</a></li>
-                            <li class="list-group-item text-black"><a href="">ROBOT</a></li>
+                            <%
+                                for (Category category : categoryList) {
+                            %>
+
+                            <li class="list-group-item text-black"><a href=""><%=category.getCategoryName()%></a></li>
+                                <%}
+                                } else {
+                                %>
+                            <p>Không có loại đồ chơi nào</p>
+                            <%
+                                }
+                            %>
                         </ul>
                     </div>
                     <div class="col-md-9">
                         <h3>Danh mục sản phẩm</h3>
                         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 justify-content-center">
+
+                            <%
+                                ArrayList<Toy> toyList = (ArrayList<Toy>) request.getAttribute("TOY_LIST");
+                                if (toyList != null) {
+                                    for (Toy toy : toyList) {
+                            %>
                             <div class="col mb-5">
                                 <div class="card h-100">
-                                    <!-- Sale badge-->
+                                    Sale badge
                                     <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
                                         Sale off
                                     </div>
-                                    <!-- Product image-->
-                                    <img class="card-img-top" src="https://www.mykingdom.com.vn/cdn/shop/products/10913-_13_1.jpg?v=1684948062&width=1100" alt="..."/>
-                                    <!-- Product details-->
+                                    Product image
+                                    <img class="card-img-top" src="https://www.mykingdom.com.vn/cdn/shop/files/6941848233653_1.jpg?v=1711523586&width=990" alt="..."/>
+                                    Product details
                                     <div class="card-body p-4">
                                         <div class="text-center">
-                                            <!-- Product name-->
-                                            <h5 class="fw-bolder">Thùng Gạch Duplo Sáng Tạo</h5>
-                                            <!-- Product reviews-->
+                                            Product name
+                                            <h5 class="fw-bolder"><%=toy.getToyName()%></h5>
+                                            Product reviews
                                             <div class="d-flex justify-content-center small text-warning mb-2">
                                                 <div class="bi-star-fill">5</div>
                                             </div>
-                                            <!-- Product price-->
-                                            <span class="text-muted text-decoration-line-through">1.319.000 Đ</span>        
+                                            Product price
+                                            <span class="text-muted text-decoration-line-through"><%=toy.getPrice()%> Đ</span>        
                                             791.000 Đ
                                         </div>
-                                        <!-- Product actions-->
+                                        Product actions
                                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                             <div class="text-center">
                                                 <a class="btn btn-outline-dark mt-auto">Thêm vào giỏ hàng</a>
@@ -78,246 +97,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col mb-5">
-                                <div class="card h-100">
-                                    <!-- Sale badge-->
-                                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
-                                        Sale off
-                                    </div>
-                                    <!-- Product image-->
-                                    <img class="card-img-top" src="https://www.mykingdom.com.vn/cdn/shop/products/10913-_13_1.jpg?v=1684948062&width=1100" alt="..."/>
-                                    <!-- Product details-->
-                                    <div class="card-body p-4">
-                                        <div class="text-center">
-                                            <!-- Product name-->
-                                            <h5 class="fw-bolder">Thùng Gạch Duplo Sáng Tạo</h5>
-                                            <!-- Product reviews-->
-                                            <div class="d-flex justify-content-center small text-warning mb-2">
-                                                <div class="bi-star-fill">5</div>
-                                            </div>
-                                            <!-- Product price-->
-                                            <span class="text-muted text-decoration-line-through">1.319.000 Đ</span>        
-                                            791.000 Đ
-                                        </div>
-                                        <!-- Product actions-->
-                                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                            <div class="text-center">
-                                                <a class="btn btn-outline-dark mt-auto">Thêm vào giỏ hàng</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col mb-5">
-                                <div class="card h-100">
-                                    <!-- Sale badge-->
-                                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
-                                        Sale off
-                                    </div>
-                                    <!-- Product image-->
-                                    <img class="card-img-top" src="https://www.mykingdom.com.vn/cdn/shop/products/10913-_13_1.jpg?v=1684948062&width=1100" alt="..."/>
-                                    <!-- Product details-->
-                                    <div class="card-body p-4">
-                                        <div class="text-center">
-                                            <!-- Product name-->
-                                            <h5 class="fw-bolder">Thùng Gạch Duplo Sáng Tạo</h5>
-                                            <!-- Product reviews-->
-                                            <div class="d-flex justify-content-center small text-warning mb-2">
-                                                <div class="bi-star-fill">5</div>
-                                            </div>
-                                            <!-- Product price-->
-                                            <span class="text-muted text-decoration-line-through">1.319.000 Đ</span>        
-                                            791.000 Đ
-                                        </div>
-                                        <!-- Product actions-->
-                                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                            <div class="text-center">
-                                                <a class="btn btn-outline-dark mt-auto">Thêm vào giỏ hàng</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col mb-5">
-                                <div class="card h-100">
-                                    <!-- Sale badge-->
-                                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
-                                        Sale off
-                                    </div>
-                                    <!-- Product image-->
-                                    <img class="card-img-top" src="https://www.mykingdom.com.vn/cdn/shop/products/10913-_13_1.jpg?v=1684948062&width=1100" alt="..."/>
-                                    <!-- Product details-->
-                                    <div class="card-body p-4">
-                                        <div class="text-center">
-                                            <!-- Product name-->
-                                            <h5 class="fw-bolder">Thùng Gạch Duplo Sáng Tạo</h5>
-                                            <!-- Product reviews-->
-                                            <div class="d-flex justify-content-center small text-warning mb-2">
-                                                <div class="bi-star-fill">5</div>
-                                            </div>
-                                            <!-- Product price-->
-                                            <span class="text-muted text-decoration-line-through">1.319.000 Đ</span>        
-                                            791.000 Đ
-                                        </div>
-                                        <!-- Product actions-->
-                                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                            <div class="text-center">
-                                                <a class="btn btn-outline-dark mt-auto">Thêm vào giỏ hàng</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col mb-5">
-                                <div class="card h-100">
-                                    <!-- Sale badge-->
-                                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
-                                        Sale off
-                                    </div>
-                                    <!-- Product image-->
-                                    <img class="card-img-top" src="https://www.mykingdom.com.vn/cdn/shop/products/10913-_13_1.jpg?v=1684948062&width=1100" alt="..."/>
-                                    <!-- Product details-->
-                                    <div class="card-body p-4">
-                                        <div class="text-center">
-                                            <!-- Product name-->
-                                            <h5 class="fw-bolder">Thùng Gạch Duplo Sáng Tạo</h5>
-                                            <!-- Product reviews-->
-                                            <div class="d-flex justify-content-center small text-warning mb-2">
-                                                <div class="bi-star-fill">5</div>
-                                            </div>
-                                            <!-- Product price-->
-                                            <span class="text-muted text-decoration-line-through">1.319.000 Đ</span>        
-                                            791.000 Đ
-                                        </div>
-                                        <!-- Product actions-->
-                                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                            <div class="text-center">
-                                                <a class="btn btn-outline-dark mt-auto">Thêm vào giỏ hàng</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col mb-5">
-                                <div class="card h-100">
-                                    <!-- Sale badge-->
-                                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
-                                        Sale off
-                                    </div>
-                                    <!-- Product image-->
-                                    <img class="card-img-top" src="https://www.mykingdom.com.vn/cdn/shop/products/10913-_13_1.jpg?v=1684948062&width=1100" alt="..."/>
-                                    <!-- Product details-->
-                                    <div class="card-body p-4">
-                                        <div class="text-center">
-                                            <!-- Product name-->
-                                            <h5 class="fw-bolder">Thùng Gạch Duplo Sáng Tạo</h5>
-                                            <!-- Product reviews-->
-                                            <div class="d-flex justify-content-center small text-warning mb-2">
-                                                <div class="bi-star-fill">5</div>
-                                            </div>
-                                            <!-- Product price-->
-                                            <span class="text-muted text-decoration-line-through">1.319.000 Đ</span>        
-                                            791.000 Đ
-                                        </div>
-                                        <!-- Product actions-->
-                                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                            <div class="text-center">
-                                                <a class="btn btn-outline-dark mt-auto">Thêm vào giỏ hàng</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col mb-5">
-                                <div class="card h-100">
-                                    <!-- Sale badge-->
-                                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
-                                        Sale off
-                                    </div>
-                                    <!-- Product image-->
-                                    <img class="card-img-top" src="https://www.mykingdom.com.vn/cdn/shop/products/10913-_13_1.jpg?v=1684948062&width=1100" alt="..."/>
-                                    <!-- Product details-->
-                                    <div class="card-body p-4">
-                                        <div class="text-center">
-                                            <!-- Product name-->
-                                            <h5 class="fw-bolder">Thùng Gạch Duplo Sáng Tạo</h5>
-                                            <!-- Product reviews-->
-                                            <div class="d-flex justify-content-center small text-warning mb-2">
-                                                <div class="bi-star-fill">5</div>
-                                            </div>
-                                            <!-- Product price-->
-                                            <span class="text-muted text-decoration-line-through">1.319.000 Đ</span>        
-                                            791.000 Đ
-                                        </div>
-                                        <!-- Product actions-->
-                                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                            <div class="text-center">
-                                                <a class="btn btn-outline-dark mt-auto">Thêm vào giỏ hàng</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col mb-5">
-                                <div class="card h-100">
-                                    <!-- Sale badge-->
-                                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
-                                        Sale off
-                                    </div>
-                                    <!-- Product image-->
-                                    <img class="card-img-top" src="https://www.mykingdom.com.vn/cdn/shop/products/10913-_13_1.jpg?v=1684948062&width=1100" alt="..."/>
-                                    <!-- Product details-->
-                                    <div class="card-body p-4">
-                                        <div class="text-center">
-                                            <!-- Product name-->
-                                            <h5 class="fw-bolder">Thùng Gạch Duplo Sáng Tạo</h5>
-                                            <!-- Product reviews-->
-                                            <div class="d-flex justify-content-center small text-warning mb-2">
-                                                <div class="bi-star-fill">5</div>
-                                            </div>
-                                            <!-- Product price-->
-                                            <span class="text-muted text-decoration-line-through">1.319.000 Đ</span>        
-                                            791.000 Đ
-                                        </div>
-                                        <!-- Product actions-->
-                                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                            <div class="text-center">
-                                                <a class="btn btn-outline-dark mt-auto">Thêm vào giỏ hàng</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col mb-5">
-                                <div class="card h-100">
-                                    <!-- Sale badge-->
-                                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
-                                        Sale off
-                                    </div>
-                                    <!-- Product image-->
-                                    <img class="card-img-top" src="https://www.mykingdom.com.vn/cdn/shop/products/10913-_13_1.jpg?v=1684948062&width=1100" alt="..."/>
-                                    <!-- Product details-->
-                                    <div class="card-body p-4">
-                                        <div class="text-center">
-                                            <!-- Product name-->
-                                            <h5 class="fw-bolder">Thùng Gạch Duplo Sáng Tạo</h5>
-                                            <!-- Product reviews-->
-                                            <div class="d-flex justify-content-center small text-warning mb-2">
-                                                <div class="bi-star-fill">5</div>
-                                            </div>
-                                            <!-- Product price-->
-                                            <span class="text-muted text-decoration-line-through">1.319.000 Đ</span>        
-                                            791.000 Đ
-                                        </div>
-                                        <!-- Product actions-->
-                                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                            <div class="text-center">
-                                                <a class="btn btn-outline-dark mt-auto">Thêm vào giỏ hàng</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <%}
+                            } else {
+                            %>
+                            <p>Không có đồ chơi nào</p>
+                            <%
+                                }
+                            %>
+
                         </div>
                     </div>
                 </div>

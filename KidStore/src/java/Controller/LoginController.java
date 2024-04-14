@@ -5,10 +5,15 @@
  */
 package Controller;
 
+import DAO.CategoryDAO;
 import DAO.DAO;
+import DAO.ToyDAO;
 import DTO.Account;
+import DTO.Category;
+import DTO.Toy;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -21,7 +26,9 @@ import javax.servlet.http.HttpSession;
  * @author admin
  */
 public class LoginController extends HttpServlet {
-private static final String HOMEPAGE = "home.jsp";
+
+    private static final String HOMEPAGE = "home.jsp";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -33,21 +40,32 @@ private static final String HOMEPAGE = "home.jsp";
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       String url = HOMEPAGE;
+        String url = HOMEPAGE;
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             String username = request.getParameter("Username");
             String password = request.getParameter("Password");
             DAO dao = new DAO();
-            Account acc  = dao.Login(username, password);
-            if(acc!=null){
+            Account acc = dao.Login(username, password);
+
+            // Lấy danh sách đồ chơi
+            ToyDAO toyDAO = new ToyDAO();
+            ArrayList<Toy> toyList = toyDAO.toyList();
+            
+            //Lấy danh sách Category
+            CategoryDAO categeoryDAO = new CategoryDAO();
+            ArrayList<Category> categoryList = categeoryDAO.categoryList();
+            
+            request.setAttribute("TOY_LIST", toyList);
+            request.setAttribute("CATEGORY_LIST", categoryList);
+
+            if (acc != null) {
                 HttpSession session = request.getSession();
-                session.setAttribute("account", acc);
+                session.setAttribute("account", acc);                
             }
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

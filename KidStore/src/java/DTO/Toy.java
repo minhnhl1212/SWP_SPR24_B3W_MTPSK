@@ -16,6 +16,11 @@ public class Toy {
     public Toy() {
     }
 
+    public Toy(String toyName, int quantity) {
+        this.toyName = toyName;
+        this.quantity = quantity;
+    }   
+
     public Toy(int toyId, String toyName, int quantity, double price, String description, int categoryId, int cartId) {
         this.toyId = toyId;
         this.toyName = toyName;
