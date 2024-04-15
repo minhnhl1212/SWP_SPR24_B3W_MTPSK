@@ -8,6 +8,7 @@ public class Toy {
     private int toyId;
     private String toyName;
     private int quantity;
+    private String image;
     private double price;
     private String description;
     private int categoryId;
@@ -16,10 +17,11 @@ public class Toy {
     public Toy() {
     }
 
-    public Toy(String toyName, int quantity) {
+    public Toy(String toyName, String image, double price) {
         this.toyName = toyName;
-        this.quantity = quantity;
-    }   
+        this.image = image;
+        this.price = price;
+    } 
 
     public Toy(int toyId, String toyName, int quantity, double price, String description, int categoryId, int cartId) {
         this.toyId = toyId;
@@ -85,6 +87,14 @@ public class Toy {
 
     public void setCartId(int cartId) {
         this.cartId = cartId;
+    }
+    
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
 }

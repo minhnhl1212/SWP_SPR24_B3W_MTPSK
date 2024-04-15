@@ -69,27 +69,29 @@
                             %>
                             <div class="col mb-5">
                                 <div class="card h-100">
-                                    Sale badge
+                                    <!--                                    Sale badge-->
                                     <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
                                         Sale off
                                     </div>
-                                    Product image
-                                    <img class="card-img-top" src="https://www.mykingdom.com.vn/cdn/shop/files/6941848233653_1.jpg?v=1711523586&width=990" alt="..."/>
-                                    Product details
+                                    <!--                                    Product image-->
+                                    <img class="card-img-top" src="<%=toy.getImage()%>" alt="..."/>
+                                    <!--                                    Product details-->
                                     <div class="card-body p-4">
                                         <div class="text-center">
-                                            Product name
+                                            <!--                                            Product name-->
                                             <h5 class="fw-bolder"><%=toy.getToyName()%></h5>
-                                            Product reviews
+                                            <!--                                            Product reviews-->
                                             <div class="d-flex justify-content-center small text-warning mb-2">
                                                 <div class="bi-star-fill">5</div>
                                             </div>
-                                            Product price
-                                            <span class="text-muted text-decoration-line-through"><%=toy.getPrice()%> Đ</span>        
-                                            791.000 Đ
+                                            <!--                                            Discount-->
+                                            <span class="text-muted text-decoration-line-through"><%=toy.getPrice()%> Đ</span><br/> 
+                                            <!--                                            Price-->
+                                            <span class="text-black" ><%=toy.getPrice() * 0.95%> Đ</span>        
+
                                         </div>
-                                        Product actions
-                                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                        <!--                                        Product actions-->
+                                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent ">
                                             <div class="text-center">
                                                 <a class="btn btn-outline-dark mt-auto" href="MainController?btAction=Sell&toyId=<%=toy.getToyId()%>">Thêm vào giỏ hàng</a>
                                             </div>
