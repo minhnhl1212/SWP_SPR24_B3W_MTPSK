@@ -5,7 +5,7 @@
  */
 package Controller;
 
-import DAO.DAO;
+import DAO.LoginDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -22,6 +22,7 @@ public class MainController extends HttpServlet {
 
     private final static String ERRORPAGE = "error.jsp";
     private final static String LOGIN = "LoginController";
+    private final static String SIGNUP = "SignUpController";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,6 +43,10 @@ public class MainController extends HttpServlet {
             switch (action) {
                 case "Sign in": {
                     url = LOGIN;
+                    break;
+                }
+                case "Sign up": {
+                    url = SIGNUP;
                     break;
                 }
             }

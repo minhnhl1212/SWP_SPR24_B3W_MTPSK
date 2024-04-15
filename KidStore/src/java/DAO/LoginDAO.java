@@ -19,7 +19,7 @@ import java.util.ArrayList;
  *
  * @author admin
  */
-public class DAO {
+public class LoginDAO {
     
     private Connection con = null;
     private PreparedStatement ps = null;

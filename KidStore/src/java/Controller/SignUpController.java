@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 public class SignUpController extends HttpServlet {
 
     private static final String SUCCESS = "login.jsp";
-    private static final String ERROR = "login.jsp";
+    private static final String ERROR = "signup.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
