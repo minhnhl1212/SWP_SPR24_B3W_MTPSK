@@ -13,6 +13,12 @@ public class News {
 
     public News() {
     }
+    
+    public News(String description, String image, String name) {
+        this.description = description;
+        this.image = image;
+        this.name = name;
+    }  
 
     public News(int newsId, String description, String image, String name) {
         this.newsId = newsId;

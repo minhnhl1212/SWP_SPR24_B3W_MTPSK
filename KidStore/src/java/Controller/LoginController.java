@@ -42,6 +42,7 @@ public class LoginController extends HttpServlet {
             throws ServletException, IOException {
         String url = HOMEPAGE;
         try (PrintWriter out = response.getWriter()) {
+            HttpSession session = request.getSession();
             //Lấy username và password
             String username = request.getParameter("Username");
             String password = request.getParameter("Password");
@@ -49,8 +50,18 @@ public class LoginController extends HttpServlet {
             //check có đúng tài khoản ko
             Account acc = dao.Login(username, password);
             //đúng trả về home
+            
+            //Lấy danh sách đồ chơi
+            ToyDAO toyDAO = new ToyDAO();
+            ArrayList<Toy> toyList = toyDAO.toyList();
+            //Lấy danh sách Category
+            CategoryDAO categeoryDAO = new CategoryDAO();
+            ArrayList<Category> categoryList = categeoryDAO.categoryList();
+            
+            session.setAttribute("CATEGORY_LIST", categoryList);
+            request.setAttribute("TOY_LIST", toyList);
+            
             if (acc != null) {
-                HttpSession session = request.getSession();
                 session.setAttribute("acc", acc);                
             }
             //sai trả về login và báo lỗi

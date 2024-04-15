@@ -79,4 +79,29 @@ public class ToyDAO {
         }
         return toy;
     }
+    
+    public ArrayList<Toy> toyCategoryById(int categoryId) throws Exception {
+        ArrayList<Toy> listToy = new ArrayList<>();
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "select Toy.toy_name, Image.imageToy, Toy.price\n"
+                        + "from Image\n"
+                        + "inner join Toy on Image.image_id = Toy.image_id\n"
+                        + "where Toy.category_id = ?";
+                ps = con.prepareStatement(sql);
+                ps.setInt(1, categoryId);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    Toy list = new Toy(rs.getString("toy_name"), rs.getString("imageToy"), rs.getDouble("price"));
+                    listToy.add(list);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+        return listToy;
+    }
 }

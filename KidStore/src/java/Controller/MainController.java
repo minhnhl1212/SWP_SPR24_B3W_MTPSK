@@ -18,6 +18,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -43,6 +44,7 @@ public class MainController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        HttpSession session = request.getSession();
         String url = ERRORPAGE;
         try {
             String action = request.getParameter("btAction");
@@ -69,7 +71,7 @@ public class MainController extends HttpServlet {
             CategoryDAO categeoryDAO = new CategoryDAO();
             ArrayList<Category> categoryList = categeoryDAO.categoryList();
             request.setAttribute("TOY_LIST", toyList);
-            request.setAttribute("CATEGORY_LIST", categoryList);
+            session.setAttribute("CATEGORY_LIST", categoryList);
             url = HOMEPAGE;
             }
             RequestDispatcher rd = request.getRequestDispatcher(url);

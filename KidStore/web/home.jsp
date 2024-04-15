@@ -31,6 +31,7 @@
                 </div>
             </div>
         </header>
+        <a class="btn btn-outline-dark mt-auto" href="NewsController">Xem news</a>
         <!-- Section-->
         <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
@@ -38,7 +39,7 @@
                     <div class="col-md-3 mb-5">
 
                         <%
-                            ArrayList<Category> categoryList = (ArrayList<Category>) request.getAttribute("CATEGORY_LIST");
+                            ArrayList<Category> categoryList = (ArrayList<Category>) session.getAttribute("CATEGORY_LIST");
                             if (categoryList != null) {
                         %>
 
@@ -48,7 +49,7 @@
                                 for (Category category : categoryList) {
                             %>
 
-                            <li class="list-group-item text-black"><a href=""><%=category.getCategoryName()%></a></li>
+                            <li class="list-group-item text-black"><a href="CategoryController?categoryId=<%=category.getCategoryId()%>"><%=category.getCategoryName()%></a></li>
                                 <%}
                                 } else {
                                 %>
@@ -62,10 +63,48 @@
                         <h3>Danh mục sản phẩm</h3>
                         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 justify-content-center">
 
-                            <%
+                            <%                                
                                 ArrayList<Toy> toyList = (ArrayList<Toy>) request.getAttribute("TOY_LIST");
+                                ArrayList<Toy> toyCategoryList = (ArrayList<Toy>) request.getAttribute("TOY_CATEGORY_LIST");
                                 if (toyList != null) {
                                     for (Toy toy : toyList) {
+                            %>
+                            <div class="col mb-5">
+                                <div class="card h-100">
+                                    <!--                                    Sale badge-->
+                                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
+                                        Sale off
+                                    </div>
+                                    <!--                                    Product image-->
+                                    <img class="card-img-top" src="<%=toy.getImage()%>" alt="..."/>
+                                    <!--                                    Product details-->
+                                    <div class="card-body p-4">
+                                        <div class="text-center">
+                                            <!--                                            Product name-->
+                                            <h5 class="fw-bolder"><%=toy.getToyName()%></h5>
+                                            <!--                                            Product reviews-->
+                                            <div class="d-flex justify-content-center small text-warning mb-2">
+                                                <div class="bi-star-fill">5</div>
+                                            </div>
+                                            <!--                                            Discount-->
+                                            <span class="text-muted text-decoration-line-through"><%=toy.getPrice()%> Đ</span><br/> 
+                                            <!--                                            Price-->
+                                            <span class="text-black" ><%=toy.getPrice() * 0.95%> Đ</span>        
+
+                                        </div>
+                                        <!--                                        Product actions-->
+                                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent ">
+                                            <div class="text-center">
+                                                <a class="btn btn-outline-dark mt-auto" href="MainController?btAction=Sell&toyId=<%=toy.getToyId()%>">Thêm vào giỏ hàng</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Danh sách đồ chơi theo CategoryId-->
+                            <%}
+                            } else if (toyCategoryList != null) {
+                                for (Toy toy : toyCategoryList) {
                             %>
                             <div class="col mb-5">
                                 <div class="card h-100">
