@@ -18,35 +18,56 @@
         <link href="css/styles.css" rel="stylesheet" />
         <link href="css/footer.css" rel="stylesheet"/>
     </head>
-    
+
     <body>
         <%@include file="components/navBarComponent.jsp" %>
-        
+
         <!-- Product section -->
         <section class="py-5">
             <div class="container" style="min-height: 1000px">
-                <h1>Your Cart Is Empty</h1>
-                
-                <h3>Your Cart</h3>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">No</th>
-                            <th scope="col">Image</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Quantity</th>
-                            <th scope="col">Total Price</th>
-                            <th scope="col">Action</th>
-                        </tr>
-                    </thead>
-                      
-                </table>
-                <h3>Total Amount: $</h3>
-                <a href="checkout" class="btn btn-success w-25">Check out</a>
+                <c:choose>
+                    <c:when test="${sessionScope.carts==null||sessionScope.carts.size()==0}">
+                        <h1>Your Cart Is Empty</h1>
+                    </c:when>
+                    <c:otherwise>
+
+                        <h3>Your Cart</h3>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">No</th>
+                                    <th scope="col">Image</th>
+                                    <th scope="col">Toy Name</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Total Price</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <c:forEach items="${carts}" var="C">
+                                <form action="update-quantity">
+                                    <tr>
+                                    <input type="hidden" name="productId" value="Id"/>
+                                        <th scope="row">Id</th>
+                                        <td>Name</td>
+                                        <td><img src="${C.value.product.imageUrl}" width="50"/></td>
+                                        <td>price</td>
+                                        <td><input onchange="this.form.submit()" type="number" name="quantity" value="quantity"/></td>
+                                        <td>quantity</td>
+                                        <td><a href="delete-cart?productId=${C.value.product.id}" class="btn btn-outline-danger"><i class="bi bi-trash"></i>Delete</a></td>
+                                    </tr>
+                                </form>
+                            </c:forEach>
+                            </tbody>
+
+                        </table>
+                        <h3>Total Amount: $</h3>
+                        <a href="checkout" class="btn btn-success w-25">Check out</a>
+                    </c:otherwise>
+                </c:choose>
             </div>
-            
-            
         </section>
         <%@include file="components/footerComponent.jsp" %>
     </body>
