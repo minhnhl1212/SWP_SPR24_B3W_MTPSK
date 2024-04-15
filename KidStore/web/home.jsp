@@ -64,7 +64,7 @@
                         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 justify-content-center">
 
                             <%                                
-                                ArrayList<Toy> toyList = (ArrayList<Toy>) request.getAttribute("TOY_LIST");
+                                ArrayList<Toy> toyList = (ArrayList<Toy>) session.getAttribute("TOY_LIST");
                                 ArrayList<Toy> toyCategoryList = (ArrayList<Toy>) request.getAttribute("TOY_CATEGORY_LIST");
                                 if (toyList != null) {
                                     for (Toy toy : toyList) {
