@@ -72,12 +72,12 @@
                 <a class="btn btn-outline-dark" href="cart.jsp">
                     <i class="bi-cart-fill me-1"></i>
                     Cart
-                    <span class="badge bg-dark text-white ms-1 rounded-pill">${sessionScope.carts.size()}</span>
+                    <span class="badge bg-dark text-white ms-1 rounded-pill">${sessionScope.cartList.size()}</span>
                 </a>
             </div>
 
             <c:choose>
-                <c:when test="${sessionScope.acc != null}">
+                <c:when test="${sessionScope.acc == null}">
                     <button class="btn btn-outline-primary ms-lg-2" onclick="login()">Login</button>
                 </c:when>
 
