@@ -26,7 +26,7 @@
         <section class="py-5">
             <div class="container" style="min-height: 1000px">
                 <c:choose>
-                    <c:when test="${sessionScope.carts==null||sessionScope.carts.size()==0}">
+                    <c:when test="${sessionScope.cartList==null||sessionScope.cartList.size()==0}">
                         <h1>Your Cart Is Empty</h1>
                     </c:when>
                     <c:otherwise>
@@ -46,17 +46,17 @@
                             </thead>
 
                             <tbody>
-                                <c:forEach items="${carts}" var="C">
+                                <c:forEach items="${cartList.Toy}" var="C">
                                 <form action="update-quantity">
                                     <tr>
                                     <input type="hidden" name="productId" value="Id"/>
-                                        <th scope="row">Id</th>
-                                        <td>Name</td>
-                                        <td><img src="${C.value.product.imageUrl}" width="50"/></td>
-                                        <td>price</td>
+                                        <th scope="row">${C.getToyId}</th>
+                                        <td>${C.getToyName}</td>
+                                        <td><img src="${C.getImage}" width="50"/></td>
+                                        <td>${C.getPrice}</td>
                                         <td><input onchange="this.form.submit()" type="number" name="quantity" value="quantity"/></td>
-                                        <td>quantity</td>
-                                        <td><a href="delete-cart?productId=${C.value.product.id}" class="btn btn-outline-danger"><i class="bi bi-trash"></i>Delete</a></td>
+                                        <td>${cartList.Integer}</td>
+                                        <td><a href="delete-cart?productId=${C.getToyId}" class="btn btn-outline-danger"><i class="bi bi-trash"></i>Delete</a></td>
                                     </tr>
                                 </form>
                             </c:forEach>

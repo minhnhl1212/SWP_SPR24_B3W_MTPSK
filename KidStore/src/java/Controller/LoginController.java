@@ -48,7 +48,6 @@ public class LoginController extends HttpServlet {
             LoginDAO dao = new LoginDAO();
             //check có đúng tài khoản ko
             Account acc = dao.Login(username, password);
-
             // Lấy danh sách đồ chơi
             ToyDAO toyDAO = new ToyDAO();
             ArrayList<Toy> toyList = toyDAO.toyList();

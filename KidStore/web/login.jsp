@@ -48,7 +48,7 @@
                 <span style="color: green">${SIGNUP_SUCCESS}</span>
                 <span style="color: red">${SIGNUP_ERROR}</span>
                 <span style="color: red">${PASS_NOT_MATH}</span>
-                <button class="btn btn-primary btn-block" type="submit"><i class="fas fa-user-plus"></i> Sign Up</button>
+                <button class="btn btn-primary btn-block" type="submit" name="btAction" value="Sign up"><i class="fas fa-user-plus"></i> Sign Up</button>
                 <a href="#" id="cancel_signup"><i class="fas fa-angle-left"></i> Back</a>
             </form>
             <br>

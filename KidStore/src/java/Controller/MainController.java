@@ -5,9 +5,14 @@
  */
 package Controller;
 
+import DAO.CategoryDAO;
 import DAO.LoginDAO;
+import DAO.ToyDAO;
+import DTO.Category;
+import DTO.Toy;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -19,10 +24,11 @@ import javax.servlet.http.HttpServletResponse;
  * @author admin
  */
 public class MainController extends HttpServlet {
-
+    private final static String HOMEPAGE = "home.jsp";
     private final static String ERRORPAGE = "error.jsp";
     private final static String LOGIN = "LoginController";
     private final static String SIGNUP = "SignUpController";
+    private final static String CART = "CartController";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,6 +46,7 @@ public class MainController extends HttpServlet {
         String url = ERRORPAGE;
         try {
             String action = request.getParameter("btAction");
+            if(action!=null){
             switch (action) {
                 case "Sign in": {
                     url = LOGIN;
@@ -49,6 +56,21 @@ public class MainController extends HttpServlet {
                     url = SIGNUP;
                     break;
                 }
+                case "Sell": {
+                    url = CART;
+                    break;
+                }
+            }
+            }
+            else {
+            ToyDAO toyDAO = new ToyDAO();
+            ArrayList<Toy> toyList = toyDAO.toyList();
+            //Lấy danh sách Category
+            CategoryDAO categeoryDAO = new CategoryDAO();
+            ArrayList<Category> categoryList = categeoryDAO.categoryList();
+            request.setAttribute("TOY_LIST", toyList);
+            request.setAttribute("CATEGORY_LIST", categoryList);
+            url = HOMEPAGE;
             }
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
