@@ -9,27 +9,68 @@
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>News Detail</title>
+        <!-- Favicon -->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+        <!-- Bootstrap 4.6.2 -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+        <link href="css/styles.css" rel="stylesheet">
+        <link href="css/footer.css" rel="stylesheet">
+        <style>
+            /* Custom styles */
+            .news-item {
+                margin-bottom: 20px;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+            .news-image {
+                max-width: 100%;
+                height: auto;
+                margin-bottom: 10px;
+            }
+            .description {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 3; /* Number of lines to show */
+                -webkit-box-orient: vertical;
+            }
+        </style>
     </head>
     <body>
-        <%
-            ArrayList<News> newsList = (ArrayList<News>) request.getAttribute("NEWS_LIST");
-            if (newsList != null) {
-                for (News news : newsList) {
-        %>
-    <li><%=news.getName()%></li>
-    <li><img src="<%=news.getImage()%>"</li>
-    <li><%=news.getDescription()%></li>
-        <%
-                }
-            }
-        %>
+        <%@include file="components/navBarComponent.jsp" %>
 
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>News </h1>
+                    <%
+                        ArrayList<News> newsList = (ArrayList<News>) request.getAttribute("NEWS_LIST");
+                        if (newsList != null) {
+                            for (News news : newsList) {
+                    %>
+                    <div class="news-item">
+                        <h3><%=news.getName()%></h3>
+                        <img src="<%=news.getImage()%>" class="news-image" alt="<%=news.getName()%>">
+                        <p><%=news.getDescription()%></p>
+                    </div>
+                    <%
+                            }
+                        }
+                    %>
+                </div>
+            </div>
+        </div>
 
+        <p>${NEWS_LIST_ERROR}</p>
 
-    <p>${NEWS_LIST_ERROR}</p>
-</body>
+        <%@include file="components/footerComponent.jsp" %>
+    </body>
 </html>
