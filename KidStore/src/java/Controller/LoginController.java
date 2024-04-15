@@ -63,6 +63,9 @@ public class LoginController extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("account", acc);                
             }
+            else{
+                    request.setAttribute("LOGIN_ERROR", "Username or password is incorrect");
+            }
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
         } catch (Exception e) {
