@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +24,7 @@ import javax.servlet.http.HttpSession;
  */
 public class CartController extends HttpServlet {
 
-    private static final String CartPage = "cart.jsp";
+    private static final String CARTPAGE = "cart.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -36,24 +37,30 @@ public class CartController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = "ErrorPage.jsp";
-        HashMap<String,Toy> cartList = null;
+        String url = CARTPAGE;
+        HashMap<Toy, Integer> cartList;
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             HttpSession session = request.getSession();
             int id = Integer.parseInt(request.getParameter("toyId"));
             ToyDAO dao = new ToyDAO();
             Toy item = dao.getToyUsingID(id);
-            cartList = (HashMap<String,Toy>) session.getAttribute("cartList");
+            cartList = (HashMap<Toy, Integer>) session.getAttribute("cartList");
+            //không có List thì tạo cái mới
             if(cartList==null){
-                cartList = new HashMap<String,Toy>();
+                cartList = new HashMap<>();         
             }
-            if(cartList.containsKey((String.valueOf(item.getToyId())))){
-                
+            //check xem đã có trong cart chưa, nếu có thì quantity +1
+            if(cartList.containsKey(item)){
+               int quantity = cartList.get(item) + 1;
+               cartList.put(item, quantity);
             }
-            
-            
-            
+            else {
+                cartList.put(item, 1);
+            }
+            session.setAttribute("cartList", cartList);
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response); 
         }
         catch (Exception e){
             e.printStackTrace();

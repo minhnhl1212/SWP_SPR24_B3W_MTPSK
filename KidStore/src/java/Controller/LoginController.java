@@ -26,7 +26,7 @@ import javax.servlet.http.HttpSession;
  * @author admin
  */
 public class LoginController extends HttpServlet {
-
+    private final static String LOGINPAGE = "login.jsp";
     private static final String HOMEPAGE = "home.jsp";
 
     /**
@@ -42,29 +42,30 @@ public class LoginController extends HttpServlet {
             throws ServletException, IOException {
         String url = HOMEPAGE;
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
+            //Lấy username và password
             String username = request.getParameter("Username");
             String password = request.getParameter("Password");
             LoginDAO dao = new LoginDAO();
+            //check có đúng tài khoản ko
             Account acc = dao.Login(username, password);
 
             // Lấy danh sách đồ chơi
             ToyDAO toyDAO = new ToyDAO();
             ArrayList<Toy> toyList = toyDAO.toyList();
-            
             //Lấy danh sách Category
             CategoryDAO categeoryDAO = new CategoryDAO();
             ArrayList<Category> categoryList = categeoryDAO.categoryList();
-            
             request.setAttribute("TOY_LIST", toyList);
             request.setAttribute("CATEGORY_LIST", categoryList);
-
+            //đúng trả về home
             if (acc != null) {
                 HttpSession session = request.getSession();
-                session.setAttribute("account", acc);                
+                session.setAttribute("acc", acc);                
             }
+            //sai trả về login và báo lỗi
             else{
-                    request.setAttribute("LOGIN_ERROR", "Username or password is incorrect");
+            request.setAttribute("LOGIN_ERROR", "Username or password is incorrect");
+            url = LOGINPAGE;
             }
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);

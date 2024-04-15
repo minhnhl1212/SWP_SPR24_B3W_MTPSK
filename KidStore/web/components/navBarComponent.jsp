@@ -31,9 +31,9 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-<%--
+
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                <c:if test="${sessionScope.acc.isAdmin == 1}">
+                <c:if test="${sessionScope.acc.roleId == 1}">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="managerAccount">Manager Account</a>
                     </li>
@@ -42,18 +42,18 @@
                     </li>
 
                 </c:if>
-                <c:if test="${sessionScope.acc.isSell == 2}">
+                <c:if test="${sessionScope.acc.roleId == 2}">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="manager">Manager Product</a>
                     </li>
                 </c:if>
                 <c:if test="${sessionScope.acc != null}">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#!">Hello ${sessionScope.acc.user}!</a>
+                        <a class="nav-link active" aria-current="page" href="#!">Hello ${sessionScope.acc.userName}!</a>
                     </li>
                 </c:if>       
 
-            </ul>--%>
+            </ul>
 
             <form action="search" class="d-flex mx-auto">
                 <input

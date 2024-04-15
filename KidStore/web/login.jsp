@@ -31,7 +31,7 @@
                 <div class="d-block mx-4 mb-3 mb-lg-4  text-danger"><b>${mess}</b></div>
                 <input type="text" id="inputEmail" class="form-control" placeholder="Username" required="" autofocus="" name="Username">
                 <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="" name="Password">
-
+                <span style="color: red">${LOGIN_ERROR}</span>
                 <button class="btn btn-success btn-block" type="submit" value="Sign in" name="btAction"><i class="fas fa-sign-in-alt"></i> Sign in</button>
                 <hr>
                 <button class="btn btn-success btn-block" type="button" onclick="doforgetPass()"><i class="fa-light fa-repeat"></i> forget Password</button>
