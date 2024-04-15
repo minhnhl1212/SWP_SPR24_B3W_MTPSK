@@ -70,7 +70,7 @@ public class MainController extends HttpServlet {
             //Lấy danh sách Category
             CategoryDAO categeoryDAO = new CategoryDAO();
             ArrayList<Category> categoryList = categeoryDAO.categoryList();
-            request.setAttribute("TOY_LIST", toyList);
+            session.setAttribute("TOY_LIST", toyList);
             session.setAttribute("CATEGORY_LIST", categoryList);
             url = HOMEPAGE;
             }

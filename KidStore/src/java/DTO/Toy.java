@@ -33,6 +33,17 @@ public class Toy {
         this.cartId = cartId;
     }
 
+    public Toy(int toyId, String toyName, int quantity, String image, double price, String description, int categoryId, int cartId) {
+        this.toyId = toyId;
+        this.toyName = toyName;
+        this.quantity = quantity;
+        this.image = image;
+        this.price = price;
+        this.description = description;
+        this.categoryId = categoryId;
+        this.cartId = cartId;
+    }
+
     public int getToyId() {
         return toyId;
     }

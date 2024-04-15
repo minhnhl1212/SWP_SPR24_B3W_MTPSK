@@ -38,13 +38,16 @@ public class ToyDAO {
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "select Toy.toy_name, Image.imageToy, Toy.price\n"
+                String sql = "select Toy.toy_id, Toy.toy_name,Toy.quantity, Image.imageToy,"
+                        + " Toy.price, Toy.description, Toy.category_id, Toy.cart_id\n"
                         + "from Image\n"
                         + "inner join Toy on Image.image_id = Toy.image_id";
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
-                    Toy list = new Toy(rs.getString("toy_name"), rs.getString("imageToy"), rs.getDouble("price"));
+                    Toy list = new Toy(rs.getInt("toy_id"), rs.getString("toy_name"),rs.getInt("quantity"), rs.getString("imageToy")
+                            , rs.getDouble("price"),rs.getString("description"), 
+                            rs.getInt("category_id"), rs.getInt("cart_id"));
                     listToy.add(list);
                 }
             }

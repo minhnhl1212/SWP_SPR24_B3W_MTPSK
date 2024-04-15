@@ -1,3 +1,5 @@
+<%@page import="java.util.HashMap"%>
+<%@page import="DTO.Toy"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -18,55 +20,51 @@
         <link href="css/styles.css" rel="stylesheet" />
         <link href="css/footer.css" rel="stylesheet"/>
     </head>
-
+    <%  int i = 1;
+        double sum = 0;
+        HashMap<Toy, Integer> cartItems = (HashMap<Toy, Integer>) session.getAttribute("cartList");%>
     <body>
         <%@include file="components/navBarComponent.jsp" %>
 
         <!-- Product section -->
         <section class="py-5">
             <div class="container" style="min-height: 1000px">
-                <c:choose>
-                    <c:when test="${sessionScope.cartList==null||sessionScope.cartList.size()==0}">
-                        <h1>Your Cart Is Empty</h1>
-                    </c:when>
-                    <c:otherwise>
-
-                        <h3>Your Cart</h3>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">No</th>
-                                    <th scope="col">Image</th>
-                                    <th scope="col">Toy Name</th>
-                                    <th scope="col">Price</th>
-                                    <th scope="col">Quantity</th>
-                                    <th scope="col">Total Price</th>
-                                    <th scope="col">Action</th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                <c:forEach items="${cartList.Toy}" var="C">
-                                <form action="update-quantity">
-                                    <tr>
-                                    <input type="hidden" name="productId" value="Id"/>
-                                        <th scope="row">${C.getToyId}</th>
-                                        <td>${C.getToyName}</td>
-                                        <td><img src="${C.getImage}" width="50"/></td>
-                                        <td>${C.getPrice}</td>
-                                        <td><input onchange="this.form.submit()" type="number" name="quantity" value="quantity"/></td>
-                                        <td>${cartList.Integer}</td>
-                                        <td><a href="delete-cart?productId=${C.getToyId}" class="btn btn-outline-danger"><i class="bi bi-trash"></i>Delete</a></td>
-                                    </tr>
-                                </form>
-                            </c:forEach>
-                            </tbody>
-
-                        </table>
-                        <h3>Total Amount: $</h3>
-                        <a href="checkout" class="btn btn-success w-25">Check out</a>
-                    </c:otherwise>
-                </c:choose>
+                <%if (cartItems != null) {%>
+                <h3>Your Cart</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">Image</th>
+                            <th scope="col">Toy Name</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Total Price</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%for (HashMap.Entry<Toy, Integer> c : cartItems.entrySet()) {%>
+                    <form action="update-quantity">
+                        <tr>
+                        <input type="hidden" name="productId" value="Id"/>
+                        <th scope="row"><%=i++%></th>
+                        <td><img src="<%=c.getKey().getImage()%>" width="50"/></td>
+                        <td><%=c.getKey().getToyName()%></td>
+                        <td><%=c.getKey().getPrice()%></td>
+                        <td><input onchange="this.form.submit()" type="number" name="quantity" value="<%=c.getValue()%>"/></td>
+                        <td><% sum = c.getKey().getPrice() * c.getValue();%><%=c.getKey().getPrice() * c.getValue()%></td>
+                        <td><a href="delete-cart?productId=<%=c.getKey().getToyId()%>" class="btn btn-outline-danger"><i class="bi bi-trash"></i>Delete</a></td>
+                        </tr>
+                    </form>
+                    <%}%>
+                    </tbody>
+                </table>
+                <%} else {%>
+                <h1>Your Cart Is Empty</h1>
+                <%}%>
+                <h3>Total Amount: <%=sum%></h3>
+                <a href="checkout" class="btn btn-success w-25">Check out</a>
             </div>
         </section>
         <%@include file="components/footerComponent.jsp" %>
