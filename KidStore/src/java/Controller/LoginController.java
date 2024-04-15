@@ -48,14 +48,6 @@ public class LoginController extends HttpServlet {
             LoginDAO dao = new LoginDAO();
             //check có đúng tài khoản ko
             Account acc = dao.Login(username, password);
-            // Lấy danh sách đồ chơi
-            ToyDAO toyDAO = new ToyDAO();
-            ArrayList<Toy> toyList = toyDAO.toyList();
-            //Lấy danh sách Category
-            CategoryDAO categeoryDAO = new CategoryDAO();
-            ArrayList<Category> categoryList = categeoryDAO.categoryList();
-            request.setAttribute("TOY_LIST", toyList);
-            request.setAttribute("CATEGORY_LIST", categoryList);
             //đúng trả về home
             if (acc != null) {
                 HttpSession session = request.getSession();
