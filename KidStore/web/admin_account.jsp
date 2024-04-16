@@ -56,7 +56,7 @@
             </ul>
             <ul class="side-menu">
                 <li>
-                    <a href="" id="logoutButton" class="menu_button">
+                    <a href="#" id="logoutButton" class="menu_button">
                         <i class='bx bxs-log-out-circle'></i>
                         <span class="text">Logout</span>
                     </a>
@@ -66,7 +66,7 @@
                         <div class="modal-content">
                             <!-- Change class from "close" to "cancelButton" -->
                             <p>Are you sure you want to logout?</p>
-                            <button id="confirmLogout">Logout</button>
+                            <button id="confirmLogout" class="">Logout</button>
                             <button id="cancelButton">Cancel</button>
                         </div>
                     </div>
@@ -123,7 +123,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <%ArrayList<Account> accountList = (ArrayList<Account>) request.getAttribute("ACCOUNT_LIST");
+                                <%ArrayList<Account> accountList = (ArrayList<Account>) session.getAttribute("ACCOUNT_LIST");
                                 int i = 1;
                                 if(accountList!=null){
                                 for (Account a : accountList){

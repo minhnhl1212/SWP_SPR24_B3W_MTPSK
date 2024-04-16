@@ -15,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -36,9 +37,10 @@ private final static String ADMINACCOUNT = "admin_account.jsp";
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
+            HttpSession session = request.getSession();
             AccountDAO dao = new AccountDAO();
             ArrayList<Account> accountList = dao.getAllAccount();
-            request.setAttribute("ACCOUNT_LIST", accountList);
+            session.setAttribute("ACCOUNT_LIST", accountList);
             RequestDispatcher rd = request.getRequestDispatcher(ADMINACCOUNT);
             rd.forward(request, response);
         }
