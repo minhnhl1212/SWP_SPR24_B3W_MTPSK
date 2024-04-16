@@ -25,6 +25,7 @@ import javax.servlet.http.HttpSession;
 public class CartController extends HttpServlet {
 
     private static final String CARTPAGE = "cart.jsp";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -47,63 +48,73 @@ public class CartController extends HttpServlet {
             Toy item = dao.getToyUsingID(id);
             cartList = (HashMap<Toy, Integer>) session.getAttribute("cartList");
             //không có List thì tạo cái mới
-            if(cartList==null){
-                cartList = new HashMap<>();         
-            }
-            //check xem đã có trong cart chưa, nếu có thì quantity +1
-            if(cartList.containsKey(item)){
-               int quantity = cartList.get(item) + 1;
-               cartList.put(item, quantity);
-            }
-            else {
+            if (cartList == null) {
+                cartList = new HashMap<>();
                 cartList.put(item, 1);
             }
-            session.setAttribute("cartList", cartList);
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response); 
-        }
-        catch (Exception e){
+            else{
+            //check xem đã có trong cart chưa, nếu có thì quantity +1
+            for (HashMap.Entry<Toy, Integer> c : cartList.entrySet()) {
+                if (item.equals(c.getKey())) {
+                    int quantity = cartList.get(item) + 1;
+                    cartList.put(item, quantity);
+                    break;
+                } else if (!item.equals(c.getKey())) {  
+                    cartList.put(item, 1);
+                    break;
+                }
+            }
+            }
+
+                session.setAttribute("cartList", cartList);
+                RequestDispatcher rd = request.getRequestDispatcher(url);
+                rd.forward(request, response);
+            }catch (Exception e) {
             e.printStackTrace();
         }
-    }
+        }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+        // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+        /**
+         * Handles the HTTP <code>GET</code> method.
+         *
+         * @param request servlet request
+         * @param response servlet response
+         * @throws ServletException if a servlet-specific error occurs
+         * @throws IOException if an I/O error occurs
+         */
+        @Override
+        protected void doGet
+        (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-    }
+            processRequest(request, response);
+        }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+        /**
+         * Handles the HTTP <code>POST</code> method.
+         *
+         * @param request servlet request
+         * @param response servlet response
+         * @throws ServletException if a servlet-specific error occurs
+         * @throws IOException if an I/O error occurs
+         */
+        @Override
+        protected void doPost
+        (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-    }
+            processRequest(request, response);
+        }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
+        /**
+         * Returns a short description of the servlet.
+         *
+         * @return a String containing servlet description
+         */
+        @Override
+        public String getServletInfo
+        
+            () {
         return "Short description";
-    }// </editor-fold>
+        }// </editor-fold>
 
-}
+    }

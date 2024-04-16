@@ -146,4 +146,30 @@ public class Toy {
     public void setIdCategory(int idCategory) {
         this.idCategory = idCategory;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 71 * hash + this.toyId;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Toy other = (Toy) obj;
+        if (this.toyId != other.toyId) {
+            return false;
+        }
+        return true;
+    }
+    
 }

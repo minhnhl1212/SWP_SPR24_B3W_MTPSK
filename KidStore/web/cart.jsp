@@ -51,8 +51,8 @@
                         <th scope="row"><%=i++%></th>
                         <td><img src="<%=c.getKey().getImage()%>" width="50"/></td>
                         <td><%=c.getKey().getToyName()%></td>
-                        <td><%=c.getKey().getPrice()%></td>
-                        <td><input onchange="this.form.submit()" type="number" name="quantity" value="<%=c.getValue()*0.95%>"/></td>
+                        <td><%=c.getKey().getPrice()*0.95%></td>
+                        <td><input onchange="this.form.submit()" type="number" name="quantity" value="<%=c.getValue()%>"/></td>
                         <td><% sum += c.getKey().getPrice() * c.getValue() *0.95;%><%=c.getKey().getPrice() * c.getValue()*0.95%></td>
                         <td><a href="delete-cart?productId=<%=c.getKey().getToyId()%>" class="btn btn-outline-danger"><i class="bi bi-trash"></i>Delete</a></td>
                         </tr>
@@ -64,7 +64,7 @@
                 <h1>Your Cart Is Empty</h1>
                 <%}%>
                 <h3>Total Amount: <%=sum%></h3>
-                <a href="checkout" class="btn btn-success w-25">Check out</a>
+                <a href="checkout.jsp" class="btn btn-success w-25">Check out</a>
             </div>
         </section>
         <%@include file="components/footerComponent.jsp" %>
