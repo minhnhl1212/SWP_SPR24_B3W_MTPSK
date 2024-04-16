@@ -17,7 +17,7 @@
 </script>
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #80dfff;">
     <div class="container px-4 px-lg-5">
-        <a class="navbar-brand" href="home.jsp"><img src="img/logo-kids-new3.png" class="logo" alt="KidStore"></a>
+        <a class="navbar-brand" href="MainController"><img src="img/logo-kids-new3.png" class="logo" alt="KidStore"></a>
         <button
             class="navbar-toggler"
             type="button"
