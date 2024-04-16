@@ -1,14 +1,14 @@
 const allSideMenu = document.querySelectorAll('#sidebar .side-menu.top li a');
 
-allSideMenu.forEach(item=> {
-	const li = item.parentElement;
+allSideMenu.forEach(item => {
+    const li = item.parentElement;
 
-	item.addEventListener('click', function () {
-		allSideMenu.forEach(i=> {
-			i.parentElement.classList.remove('active');
-		})
-		li.classList.add('active');
-	})
+    item.addEventListener('click', function () {
+        allSideMenu.forEach(i => {
+            i.parentElement.classList.remove('active');
+        })
+        li.classList.add('active');
+    })
 });
 
 
@@ -19,7 +19,7 @@ const menuBar = document.querySelector('#content nav .bx.bx-menu');
 const sidebar = document.getElementById('sidebar');
 
 menuBar.addEventListener('click', function () {
-	sidebar.classList.toggle('hide');
+    sidebar.classList.toggle('hide');
 })
 
 
@@ -33,34 +33,34 @@ const searchButtonIcon = document.querySelector('#content nav form .form-input b
 const searchForm = document.querySelector('#content nav form');
 
 searchButton.addEventListener('click', function (e) {
-	if(window.innerWidth < 576) {
-		e.preventDefault();
-		searchForm.classList.toggle('show');
-		if(searchForm.classList.contains('show')) {
-			searchButtonIcon.classList.replace('bx-search', 'bx-x');
-		} else {
-			searchButtonIcon.classList.replace('bx-x', 'bx-search');
-		}
-	}
+    if (window.innerWidth < 576) {
+        e.preventDefault();
+        searchForm.classList.toggle('show');
+        if (searchForm.classList.contains('show')) {
+            searchButtonIcon.classList.replace('bx-search', 'bx-x');
+        } else {
+            searchButtonIcon.classList.replace('bx-x', 'bx-search');
+        }
+    }
 })
 
 
 
 
 
-if(window.innerWidth < 768) {
-	sidebar.classList.add('hide');
-} else if(window.innerWidth > 576) {
-	searchButtonIcon.classList.replace('bx-x', 'bx-search');
-	searchForm.classList.remove('show');
+if (window.innerWidth < 768) {
+    sidebar.classList.add('hide');
+} else if (window.innerWidth > 576) {
+    searchButtonIcon.classList.replace('bx-x', 'bx-search');
+    searchForm.classList.remove('show');
 }
 
 
 window.addEventListener('resize', function () {
-	if(this.innerWidth > 576) {
-		searchButtonIcon.classList.replace('bx-x', 'bx-search');
-		searchForm.classList.remove('show');
-	}
+    if (this.innerWidth > 576) {
+        searchButtonIcon.classList.replace('bx-x', 'bx-search');
+        searchForm.classList.remove('show');
+    }
 })
 
 
@@ -68,25 +68,59 @@ window.addEventListener('resize', function () {
 const switchMode = document.getElementById('switch-mode');
 
 switchMode.addEventListener('change', function () {
-	if(this.checked) {
-		document.body.classList.add('dark');
-	} else {
-		document.body.classList.remove('dark');
-	}
+    if (this.checked) {
+        document.body.classList.add('dark');
+    } else {
+        document.body.classList.remove('dark');
+    }
 })
 
-document.querySelectorAll("#toggleButton").forEach(function(button) {
-  button.addEventListener("click", function() {
-    if (this.classList.contains("red")) {
-      this.classList.remove("red");
-      this.style.color = "#007bff";
-      this.innerHTML = "Active"; 
-    } else {
-      this.classList.add("red");
-      this.style.color = "#FF0000";      
-      this.innerHTML = "Ban"; 
-    }
-  });
+document.querySelectorAll("#toggleButton").forEach(function (button) {
+    button.addEventListener("click", function () {
+        if (this.classList.contains("red")) {
+            this.classList.remove("red");
+            this.style.background = "transparent";
+            this.style.border = "2px solid #007bff";
+            this.style.borderradius = "6px";
+            this.style.color = "#007bff";
+            this.innerHTML = "Active";
+            this.style.padding = "10px 20px"; // added padding
+            this.style.cursor = "pointer"; // added cursor style
+            this.style.fontSize = "16px"; // added font size
+            this.style.transition = "all 0.3s ease"; // added transition
+
+            this.onmouseover = function () {
+                this.style.backgroundColor = "#007bff";
+                this.style.color = "#fff";
+            };
+            // Remove hover effect
+            this.onmouseout = function () {
+                this.style.backgroundColor = "transparent";
+                this.style.color = "#007bff";
+            };
+        } else {
+            this.classList.add("red");
+            this.style.background = "transparent";
+            this.style.border = "2px solid #FF0000";
+            this.style.borderradius = "6px";
+            this.style.color = "#FF0000";
+            this.innerHTML = "Banned";
+            this.style.padding = "10px 20px"; // added padding
+            this.style.cursor = "pointer"; // added cursor style
+            this.style.fontSize = "16px"; // added font size
+            this.style.transition = "all 0.3s ease"; // added transition
+
+            this.onmouseover = function () {
+                this.style.backgroundColor = "#FF0000";
+                this.style.color = "#fff";
+            };
+            // Remove hover effect
+            this.onmouseout = function () {
+                this.style.backgroundColor = "transparent";
+                this.style.color = "#FF0000";
+            };
+        }
+    });
 });
 
 /* logout script */
@@ -110,19 +144,19 @@ function closeModal() {
 logoutButton.addEventListener("click", showModal);
 
 // Event listener for Cancel button
-cancelButton.addEventListener("click", function() {
+cancelButton.addEventListener("click", function () {
     window.location.href = "http://localhost:8080/adminpage/admin_account.jsp"; // Redirect to specified URL
 });
 
 // Event listener to close modal when clicking outside the modal content
-window.addEventListener("click", function(event) {
+window.addEventListener("click", function (event) {
     if (event.target === modal) {
         closeModal();
     }
 });
 
 // Logout functionality
-confirmLogoutButton.addEventListener("click", function() {
+confirmLogoutButton.addEventListener("click", function () {
     // Add your logout logic here, e.g., redirecting to logout page
     // window.location.href = "logout.php";
     alert("Logged out successfully!");

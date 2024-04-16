@@ -81,7 +81,6 @@ body {
     top: 0;
     left: 0;
     background: var(--light);
-    z-index: 500;
     padding-bottom: 20px;
     box-sizing: content-box;
 }
@@ -811,19 +810,186 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.cancelButton {
-    color: #aaa;
-    float: right;
-    font-size: 24px;
-    font-weight: bold;
-    background: none;
-    border: none;
-    cursor: pointer;
-    outline: none;
+#cancelButton {
+    color: #007bff; /* Màu chữ */
+    border: 2px solid #007bff; /* Viền bo có độ dày 2px và màu xanh */
+    border-radius: 6px; /* Độ cong của các góc */
+    padding: 10px 20px; /* Kích thước của nút */
+    cursor: pointer; /* Con trỏ chuột khi di chuyển qua */
+    font-size: 16px; /* Kích thước chữ */
+    transition: all 0.3s ease; /* Hiệu ứng chuyển đổi mềm mại */
+    margin-top: 20px;
 }
 
-.cancelButton:hover,
-.cancelButton:focus {
-    color: #000;
-    text-decoration: none;
+#cancelButton:hover {
+    background-color: #007bff; /* Màu nền khi di chuột qua */
+    color: #fff; /* Màu chữ khi di chuột qua */
+}
+
+#confirmLogout {
+    color: #007bff; /* Màu chữ */
+    border: 2px solid #007bff; /* Viền bo có độ dày 2px và màu xanh */
+    border-radius: 6px; /* Độ cong của các góc */
+    padding: 10px 20px; /* Kích thước của nút */
+    cursor: pointer; /* Con trỏ chuột khi di chuyển qua */
+    font-size: 16px; /* Kích thước chữ */
+    transition: all 0.3s ease; /* Hiệu ứng chuyển đổi mềm mại */
+    margin-top: 20px;
+    margin-right: 20px;
+}
+
+#confirmLogout:hover {
+    background-color: #007bff; /* Màu nền khi di chuột qua */
+    color: #fff; /* Màu chữ khi di chuột qua */
+}
+
+
+
+
+
+.toast-all,
+.toast-all:before,
+.toast-all:after {
+  box-sizing: border-box;
+}
+.toast-all {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+}
+img,
+picture,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+:root {
+  --dark: #16213e;
+  --light: #fff;
+  --success: #00b894;
+  --error: #d63031;
+  --warning: #fdcb6e;
+  --info: #0984e3;
+  --gray: #cccccc;
+}
+.toast-all {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: var(--dark);
+  font-family: "Roboto", sans-serif;
+}
+.notifications {
+  position: fixed;
+  top: 30px;
+  right: 20px;
+  z-index: 1001;
+}
+.notifications .column,
+.toast {
+  display: flex;
+  align-items: center;
+}
+.notifications .toast {
+  width: 400px;
+  position: relative;
+  list-style: none;
+  background: var(--light);
+  border-radius: 4px;
+  margin-bottom: 10px;
+  padding: 20px;
+  justify-content: space-between;
+  overflow: hidden;
+  animation: show_toast 0.3s ease forwards;
+}
+.notifications .toast.remove {
+  animation: hide_toast 0.3s ease forwards;
+}
+@keyframes hide_toast {
+  0% {
+    transform: translateX(0%);
+  }
+  40% {
+    transform: translateX(0%);
+  }
+  80% {
+    transform: translateX(-5%);
+  }
+  100% {
+    transform: translateX(calc(100% + 20px));
+  }
+}
+@keyframes show_toast {
+  0% {
+    transform: translateX(100%);
+  }
+  40% {
+    transform: translateX(-5%);
+  }
+  80% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-10px);
+  }
+}
+.toast::before {
+  content: "";
+  position: absolute;
+  height: 3px;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  animation: progress 3s linear forwards;
+}
+@keyframes progress {
+  100% {
+    width: 0%;
+  }
+}
+.toast.success::before,
+.btn#success {
+  background-color: var(--success);
+}
+.toast.error::before,
+.btn#error {
+  background-color: var(--error);
+}
+.toast.warning::before,
+.btn#warning {
+  background-color: var(--warning);
+}
+.toast.info::before,
+.btn#info {
+  background-color: var(--info);
+}
+.toast .column i {
+  font-size: 1.5rem;
+  margin-right: 10px;
+}
+.toast.success .column i {
+  color: var(--success);
+}
+.toast.error .column i {
+  color: var(--error);
+}
+.toast.warning .column i {
+  color: var(--warning);
+}
+.toast.info .column i {
+  color: var(--info);
+}
+.toast .column .span {
+  font-size: 1.2rem;
+}
+.toast i:last-child {
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: var(--gray);
+  transition: all 0.2s ease-in-out;
+}
+.toast i:last-child:hover {
+  color: var(--dark);
 }

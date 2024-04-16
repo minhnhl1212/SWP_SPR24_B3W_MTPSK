@@ -15,6 +15,14 @@
         <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
         <!-- My CSS -->
         <link rel="stylesheet" href="css/admin.css">
+        <!-- ICON CSS-->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+            integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+            />
         <title>AdminHub</title>
     </head>
     <body>
@@ -101,7 +109,7 @@
                         <h1>Manage Category</h1>
                     </div>
                 </div>
-
+                <ul class="notifications"></ul>
                 <div class="table-data-category">
                     <div class="order">
                         <div class="head">
@@ -122,40 +130,40 @@
                                     <td>1</td>
                                     <td>Đồ chơi theo phim</td>
                                     <td>Nguyen Thanh Tien</td>
-                                    <td><button class="button-bordered">Approve</button></td> 
-                                    <td><button class="button-bordered">Cancel</button></td> 
+                                    <td><button class="button-bordered" id="success">Approve</button></td> 
+                                    <td><button class="button-bordered" id="error">Cancel</button></td> 
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td>2</td>
                                     <td>Đồ chơi trang</td>
                                     <td>Nguyen Thanh Tien</td>
-                                    <td><button class="button-bordered">Approve</button></td> 
-                                    <td><button class="button-bordered">Cancel</button></td> 
+                                    <td><button class="button-bordered" id="success">Approve</button></td> 
+                                    <td><button class="button-bordered" id="error">Cancel</button></td> 
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td>3</td>
                                     <td>Đồ chơi vận động</td>
                                     <td>Nguyen Thanh Tien</td>
-                                    <td><button class="button-bordered">Approve</button></td> 
-                                    <td><button class="button-bordered">Cancel</button></td> 
+                                    <td><button class="button-bordered" id="success">Approve</button></td> 
+                                    <td><button class="button-bordered" id="error">Cancel</button></td> 
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td>4</td>
                                     <td>Đồ chơi mầm non</td>
                                     <td>Nguyen Thanh Tien</td>
-                                    <td><button class="button-bordered">Approve</button></td> 
-                                    <td><button class="button-bordered">Cancel</button></td> 
+                                    <td><button class="button-bordered" id="success">Approve</button></td> 
+                                    <td><button class="button-bordered" id="error">Cancel</button></td> 
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td>5</td>
                                     <td>Thú bông</td>
                                     <td>Nguyen Thanh Tien</td>
-                                    <td><button class="button-bordered">Approve</button></td> 
-                                    <td><button class="button-bordered">Cancel</button></td> 
+                                    <td><button class="button-bordered" id="success">Approve</button></td> 
+                                    <td><button class="button-bordered" id="error">Cancel</button></td> 
                                     <td></td>
                                 </tr>
                                 
@@ -169,5 +177,6 @@
         <!-- CONTENT -->
         
         <script src="js/admin.js"></script>
+        <script src="js/toast.js"></script>
     </body>
 </html>
