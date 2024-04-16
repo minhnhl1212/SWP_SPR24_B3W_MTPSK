@@ -47,6 +47,14 @@
                         <a class="nav-link active" aria-current="page" href="ManagerProduct.jsp">Manager Product</a>
                     </li>
                 </c:if>
+                <c:if test="${sessionScope.acc.roleId == 3}">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="viewhistory.jsp">View History</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="warranty.jsp">Check Warranty</a>
+                    </li>
+                </c:if>
                 <c:if test="${sessionScope.acc != null}">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#!">Hello ${sessionScope.acc.userName}!</a>
