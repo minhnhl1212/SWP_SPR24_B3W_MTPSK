@@ -1,9 +1,11 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="DTO.Category"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8">
+        <meta charset=UTF-8>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Manager Product</title>
@@ -22,14 +24,14 @@
         </style>
         <script>
             function back() {
-                window.location.href = "home";
+                window.location.href = "home.jsp";
             }
-             function doDelete(id)
+            function doDelete(id)
             {
                 var c = confirm("Are you sure?");
-                if(c)
+                if (c)
                 {
-                    window.location.href = "delete?pid="+id;
+                    window.location.href = "delete?pid=" + id;
                 }
             }
         </script>
@@ -44,9 +46,26 @@
                             <h2>Manager <b>Category</b></h2>
                         </div>
                         <div class="col-sm-6">
-                            <a href="#addEmployeeModal"  class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Product</span></a>
-					
+                            <a href="#addEmployeeModal"  class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Category</span></a>	
+                            <%
+                                String success = (String) request.getAttribute("ADD_CATEGORY_SUCCESS");
+                                String failed = (String) request.getAttribute("ADD_CATEGORY_FAILED");
+                                if (success != null) {
+                            %>
+                            <p style="color: green"><%= success%></p>                        
+                            <%
+                            } else if (success == null) {
+                            %>
+                            <p></p>
+                            <%
+                            } else {
+                            %>
+                            <p style="color: red"><%= failed%></p>
+                            <%
+                                }
+                            %>
                         </div>
+
                     </div>
                 </div>
                 <table class="table table-striped table-hover">
@@ -64,22 +83,34 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach items="${listCategories}" var="c">
-                            <tr>
-                                <td>
-                                    <span class="custom-checkbox">
-                                        <input type="checkbox" id="checkbox1" name="options[]" value="1">
-                                        <label for="checkbox1"></label>
-                                    </span>
-                                </td>
-                                <td>${c.cid}</td>
-                                <td>${c.cname}</td>
-                             
-                                <td>
-                                    <a href="loadCategory?cid=${c.cid}"  class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                </td>
-                            </tr>
-                        </c:forEach>
+                        <%
+                            ArrayList<Category> categoryList = (ArrayList<Category>) session.getAttribute("CATEGORY_LIST");
+                            if (categoryList != null) {
+                                for (Category category : categoryList) {
+                        %>
+
+                        <tr>
+                            <td>
+                                <span class="custom-checkbox">
+                                    <input type="checkbox" id="checkbox1" name="options[]" value="1">
+                                    <label for="checkbox1"></label>
+                                </span>
+                            </td>
+                            <td><%=category.getCategoryId()%></td>
+                            <td><%=category.getCategoryName()%></td>
+
+                            <td>
+                                <a href="EditCategoryController?idCategory=<%=category.getCategoryId()%>&&nameCategory=<%=category.getCategoryName()%>"  class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                            </td>
+                            <%}
+                            } else {
+                            %>
+                    <p>Không có loại đồ chơi nào</p>
+                    <%
+                        }
+                    %>
+                    </tr>
+
                     </tbody>
                 </table>
                 <div class="clearfix">
@@ -103,7 +134,7 @@
         <div id="addEmployeeModal" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form action="addcategory" method="post">
+                    <form action="AddCategoryController">
                         <div class="modal-header">						
                             <h4 class="modal-title">Add Category</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -111,9 +142,9 @@
                         <div class="modal-body">					
                             <div class="form-group">
                                 <label>Name</label>
-                                <input name="name" type="text" class="form-control" required >
+                                <input name="nameCategory" type="text" class="form-control" required >
                             </div>
-                           
+
                         </div>
                         <div class="modal-footer">
                             <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
@@ -123,9 +154,9 @@
                 </div>
             </div>
         </div>
-        
-        
-        
+
+
+
 
 
         <script src="js/ManagerProduct.js" type="text/javascript"></script>

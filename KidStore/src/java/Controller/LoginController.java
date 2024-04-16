@@ -59,7 +59,7 @@ public class LoginController extends HttpServlet {
             ArrayList<Category> categoryList = categeoryDAO.categoryList();
             
             session.setAttribute("CATEGORY_LIST", categoryList);
-            request.setAttribute("TOY_LIST", toyList);
+            session.setAttribute("TOY_LIST", toyList);
             
             if (acc != null) {
                 session.setAttribute("acc", acc);                

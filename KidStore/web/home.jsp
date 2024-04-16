@@ -31,7 +31,9 @@
                 </div>
             </div>
         </header>
-        <a class="btn btn-outline-dark mt-auto" href="NewsController">Xem news</a>
+        <a style="background-color: orange; color: 664d03" class="btn btn-outline-dark mt-auto" href="NewsController">Xem news</a>
+        <a style="background-color: greenyellow; color: #664d03" class="btn btn-outline-dark mt-auto" href="ManagerCategory.jsp">Xem CategoryManager</a>
+        <a style="background-color: paleturquoise; color: 664d03" class="btn btn-outline-dark mt-auto" href="ManagerProduct.jsp">Xem ProductManager</a>
         <!-- Section-->
         <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
@@ -102,7 +104,7 @@
                                 </div>
                             </div>
                             <!-- Danh sách đồ chơi theo CategoryId-->
-                            <%}
+                            <% session.removeAttribute("TOY_LIST");}
                             } else if (toyCategoryList != null) {
                                 for (Toy toy : toyCategoryList) {
                             %>

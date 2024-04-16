@@ -13,6 +13,8 @@ public class Toy {
     private String description;
     private int categoryId;
     private int cartId;
+    private int approve;
+    private int idCategory;
 
     public Toy() {
     }
@@ -23,6 +25,15 @@ public class Toy {
         this.price = price;
     } 
 
+    public Toy(String toyName, String image, double price, String description, int approve, int idCategory) {
+        this.toyName = toyName;
+        this.image = image;
+        this.price = price;
+        this.description = description;
+        this.approve = approve;
+        this.idCategory = idCategory;
+    }
+
     public Toy(int toyId, String toyName, int quantity, double price, String description, int categoryId, int cartId) {
         this.toyId = toyId;
         this.toyName = toyName;
@@ -32,6 +43,18 @@ public class Toy {
         this.categoryId = categoryId;
         this.cartId = cartId;
     }
+
+    public Toy(int toyId, String toyName, int quantity, String image, double price, String description, int categoryId, int cartId, int approve) {
+        this.toyId = toyId;
+        this.toyName = toyName;
+        this.quantity = quantity;
+        this.image = image;
+        this.price = price;
+        this.description = description;
+        this.categoryId = categoryId;
+        this.cartId = cartId;
+        this.approve = approve;
+    }    
 
     public Toy(int toyId, String toyName, int quantity, String image, double price, String description, int categoryId, int cartId) {
         this.toyId = toyId;
@@ -108,4 +131,19 @@ public class Toy {
         this.image = image;
     }
 
+    public int getApprove() {
+        return approve;
+    }
+
+    public void setApprove(int approve) {
+        this.approve = approve;
+    }
+
+    public int getIdCategory() {
+        return idCategory;
+    }
+
+    public void setIdCategory(int idCategory) {
+        this.idCategory = idCategory;
+    }
 }

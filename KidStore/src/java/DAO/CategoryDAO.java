@@ -4,6 +4,7 @@ package DAO;
  *
  * @author trant
  */
+import DTO.Account;
 import DTO.Category;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -51,6 +52,47 @@ public class CategoryDAO {
             closeConnection();
         }
         return listCategory;
+    }
+
+    public Category addCategory(String nameCategory) throws SQLException, Exception {
+        Category category = null;
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "insert into Category(category_name) values (?)";
+                ps = con.prepareStatement(sql);
+                ps.setString(1, nameCategory);
+                ps.executeUpdate();
+                category = new Category(nameCategory);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+        return category;
+    }
+
+    public Category editCategory(int idCategory, String nameCategory) throws SQLException, Exception {
+        Category category = null;
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "update Category\n"
+                        + "set category_name = ?\n"
+                        + "where category_id = ?";
+                ps = con.prepareStatement(sql);
+                ps.setString(1, nameCategory);
+                ps.setInt(2, idCategory);
+                ps.executeUpdate();
+                category = new Category(idCategory, nameCategory);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+        return category;
     }
 
 }

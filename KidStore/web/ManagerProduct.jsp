@@ -4,14 +4,17 @@
     Author     : ADMIN
 --%>
 
+<%@page import="DTO.Category"%>
+<%@page import="DTO.Toy"%>
+<%@page import="DTO.Toy"%>
+<%@page import="java.util.ArrayList"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
 <html lang="en">
     <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Manager Product</title>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
@@ -29,14 +32,14 @@
         </style>
         <script>
             function back() {
-                window.location.href = "home";
+                window.location.href = "home.jsp";
             }
-             function doDelete(id)
+            function doDelete(id)
             {
                 var c = confirm("Are you sure?");
-                if(c)
+                if (c)
                 {
-                    window.location.href = "delete?pid="+id;
+                    window.location.href = "DeleteToyController?idToy=" + id;
                 }
             }
         </script>
@@ -51,8 +54,24 @@
                             <h2>Manage <b>Product</b></h2>
                         </div>
                         <div class="col-sm-6">
-                            <a href="#addEmployeeModal"  class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Product</span></a>
-					
+                            <a href="#addToyModal"  class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Product</span></a>
+                            <%
+                                String success = (String) request.getAttribute("ADD_TOY_SUCCESS");
+                                String failed = (String) request.getAttribute("ADD_TOY_FAILED");
+                                if (success != null) {
+                            %>
+                            <p style="color: green"><%= success%></p>                        
+                            <%
+                            } else if (success == null) {
+                            %>
+                            <p></p>
+                            <%
+                            } else {
+                            %>
+                            <p style="color: red"><%= failed%></p>
+                            <%
+                                }
+                            %>
                         </div>
                     </div>
                 </div>
@@ -73,26 +92,38 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach items="${products}" var="p">
-                            <tr>
-                                <td>
-                                    <span class="custom-checkbox">
-                                        <input type="checkbox" id="checkbox1" name="options[]" value="1">
-                                        <label for="checkbox1"></label>
-                                    </span>
-                                </td>
-                                <td>${p.id}</td>
-                                <td>${p.name}</td>
-                                <td>
-                                    <img src="${p.imageUrl}">
-                                </td>
-                                <td>${p.price} $</td>
-                                <td>
-                                    <a href="load?pid=${p.id}"  class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                    <a href="#" class="delete" data-toggle="modal" onclick="doDelete(${p.id})"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                                </td>
-                            </tr>
-                        </c:forEach>
+                        <%
+                            ArrayList<Toy> toyList = (ArrayList<Toy>) session.getAttribute("TOY_LIST");
+                            if (toyList != null) {
+                                for (Toy toy : toyList) {
+                        %>
+
+                        <tr>
+                            <td>
+                                <span class="custom-checkbox">
+                                    <input type="checkbox" id="checkbox1" name="options[]" value="1">
+                                    <label for="checkbox1"></label>
+                                </span>
+                            </td>
+                            <td><%=toy.getToyId()%></td>
+                            <td><%=toy.getToyName()%></td>
+                            <td>
+                                <img src="<%=toy.getImage()%>">
+                            </td>
+                            <td><%=toy.getPrice()%> VNĐ</td>
+                            <td>
+                                <a href="load?pid=${p.id}"  class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                <a href="#" class="delete" data-toggle="modal" onclick="doDelete(<%=toy.getToyId()%>)"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                            </td>
+                            <%}
+                            } else {
+                            %>
+                    <p>Không có loại đồ chơi nào</p>
+                    <%
+                        }
+                    %>
+                    </tr>
+
                     </tbody>
                 </table>
                 <div class="clearfix">
@@ -113,10 +144,10 @@
 
         </div>
         <!-- Edit Modal HTML -->
-        <div id="addEmployeeModal" class="modal fade">
+        <div id="addToyModal" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form action="add" method="post">
+                    <form action="AddToyController" >
                         <div class="modal-header">						
                             <h4 class="modal-title">Add Product</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -133,21 +164,27 @@
                             <div class="form-group">
                                 <label>Price</label>
                                 <input name="price" type="text" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Title</label>
-                                <textarea name="title" class="form-control" required></textarea>
-                            </div>
+                            </div>         
                             <div class="form-group">
                                 <label>Description</label>
                                 <textarea name="description" class="form-control" required></textarea>
                             </div>
                             <div class="form-group">
                                 <label>Category</label>
-                                <select name="category" class="form-select" aria-label="Default select example">
-                                    <c:forEach items="${listCategories}" var="o">
-                                        <option value="${o.cid}">${o.cname}</option>
-                                    </c:forEach>
+                                <select name="idCategory" class="form-select" aria-label="Default select example">
+                                    <%
+                                        ArrayList<Category> categoryList = (ArrayList<Category>) session.getAttribute("CATEGORY_LIST");
+                                        if (categoryList != null) {
+                                            for (Category category : categoryList) {
+                                    %>
+                                    <option value="<%=category.getCategoryId()%>"><%=category.getCategoryName()%></option>
+                                    <%}
+                                    } else {
+                                    %>
+                                    <p>Không có loại đồ chơi nào</p>
+                                    <%
+                                        }
+                                    %>
                                 </select>
                             </div>
 
@@ -160,9 +197,9 @@
                 </div>
             </div>
         </div>
-        
-        
-        
+
+
+
 
 
         <script src="js/ManagerProduct.js" type="text/javascript"></script>
