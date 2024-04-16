@@ -31,9 +31,11 @@
                 </div>
             </div>
         </header>
-        <a style="background-color: orange; color: 664d03" class="btn btn-outline-dark mt-auto" href="NewsController">Xem news</a>
-        <a style="background-color: greenyellow; color: #664d03" class="btn btn-outline-dark mt-auto" href="ManagerCategory.jsp">Xem CategoryManager</a>
-        <a style="background-color: paleturquoise; color: 664d03" class="btn btn-outline-dark mt-auto" href="ManagerProduct.jsp">Xem ProductManager</a>
+        <a style="background-color: orange; color: 664d03" class="btn btn-outline-dark mt-auto" href="NewsController">News</a>
+        <a style="background-color: greenyellow; color: #664d03" class="btn btn-outline-dark mt-auto" href="ManagerCategory.jsp">Manager Category</a>
+        <a style="background-color: paleturquoise; color: 664d03" class="btn btn-outline-dark mt-auto" href="ManagerProduct.jsp">Manager Product</a>
+        <a style="background-color: wheat; color: 664d03" class="btn btn-outline-dark mt-auto" href="ManagerProduct.jsp">Manager Customer</a>
+        <a style="background-color: #0d6efd; color: 664d03" class="btn btn-outline-dark mt-auto" href="ManagerProduct.jsp">Manager Other</a>
         <!-- Section-->
         <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
@@ -68,7 +70,7 @@
                             <%                                
                                 ArrayList<Toy> toyList = (ArrayList<Toy>) session.getAttribute("TOY_LIST");
                                 ArrayList<Toy> toyCategoryList = (ArrayList<Toy>) session.getAttribute("TOY_CATEGORY_LIST");
-                                if (toyList != null) {
+                                if (toyList != null && toyCategoryList == null) {
                                     for (Toy toy : toyList) {
                             %>
                             <div class="col mb-5">
@@ -104,7 +106,7 @@
                                 </div>
                             </div>
                             <!-- Danh sách đồ chơi theo CategoryId-->
-                            <% session.removeAttribute("TOY_LIST");}
+                            <%}
                             } else if (toyCategoryList != null) {
                                 for (Toy toy : toyCategoryList) {
                             %>
