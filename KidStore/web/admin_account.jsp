@@ -56,7 +56,7 @@
             </ul>
             <ul class="side-menu">
                 <li>
-                    <a href="LogoutController" id="logoutButton" class="menu_button">
+                    <a href="" id="logoutButton" class="menu_button">
                         <i class='bx bxs-log-out-circle'></i>
                         <span class="text">Logout</span>
                     </a>

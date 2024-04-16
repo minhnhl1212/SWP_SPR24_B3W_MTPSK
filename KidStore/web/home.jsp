@@ -3,6 +3,7 @@
     Created on : Apr 11, 2024, 9:49:30 PM
     Author     : TUF
 --%>
+<%@page import="DTO.Account"%>
 <%@page import="DTO.Category"%>
 <%@page import="DTO.Toy"%>
 <%@page import="java.util.ArrayList"%>
@@ -31,11 +32,20 @@
                 </div>
             </div>
         </header>
-        <a style="background-color: orange; color: 664d03" class="btn btn-outline-dark mt-auto" href="NewsController">News</a>
+        <% Account a = (Account) session.getAttribute("acc");
+            int role =0;
+            if(a!=null){
+                role=a.getRoleId();
+            }
+        %>
+        <a style="background-color: orange; color: #664d03" class="btn btn-outline-dark mt-auto" href="NewsController">News</a>
+        <%if (role <= 2 && role!=0) {%>
         <a style="background-color: greenyellow; color: #664d03" class="btn btn-outline-dark mt-auto" href="ManagerCategory.jsp">Manager Category</a>
-        <a style="background-color: paleturquoise; color: 664d03" class="btn btn-outline-dark mt-auto" href="ManagerProduct.jsp">Manager Product</a>
-        <a style="background-color: wheat; color: 664d03" class="btn btn-outline-dark mt-auto" href="ManagerProduct.jsp">Manager Customer</a>
-        <a style="background-color: #0d6efd; color: 664d03" class="btn btn-outline-dark mt-auto" href="ManagerProduct.jsp">Manager Other</a>
+        <a style="background-color: paleturquoise; color: #664d03" class="btn btn-outline-dark mt-auto" href="ManagerProduct.jsp">Manager Product</a>
+        <%} if (role == 1) {%>
+        <a style="background-color: wheat; color: #664d03" class="btn btn-outline-dark mt-auto" href="ManagerProduct.jsp">Manager Customer</a>
+        <a style="background-color: #0d6efd; color: #664d03" class="btn btn-outline-dark mt-auto" href="ManagerProduct.jsp">Manager Other</a>
+        <%}%>
         <!-- Section-->
         <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
