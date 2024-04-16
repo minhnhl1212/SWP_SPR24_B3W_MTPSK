@@ -65,7 +65,7 @@
 
                             <%                                
                                 ArrayList<Toy> toyList = (ArrayList<Toy>) session.getAttribute("TOY_LIST");
-                                ArrayList<Toy> toyCategoryList = (ArrayList<Toy>) request.getAttribute("TOY_CATEGORY_LIST");
+                                ArrayList<Toy> toyCategoryList = (ArrayList<Toy>) session.getAttribute("TOY_CATEGORY_LIST");
                                 if (toyList != null) {
                                     for (Toy toy : toyList) {
                             %>

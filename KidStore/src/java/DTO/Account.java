@@ -7,8 +7,9 @@ public class Account {
     private String fullName;
     private String phone;
     private String address;
-    private boolean active;
-    private int roleId;
+    private boolean active = true;
+    private String role;
+    private int roleId = 3;
     private int paymentId;
 
     public Account() {
@@ -29,6 +30,16 @@ public class Account {
         this.active = active;
         this.roleId = roleId;
         this.paymentId = paymentId;
+    }
+
+    public Account(int userId, String userName, String fullName, String phone, String address, boolean active, String role) {
+        this.userId = userId;
+        this.userName = userName;
+        this.fullName = fullName;
+        this.phone = phone;
+        this.address = address;
+        this.active = active;
+        this.role = role;
     }
 
 
@@ -103,6 +114,14 @@ public class Account {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
     
 }

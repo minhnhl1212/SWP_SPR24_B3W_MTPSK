@@ -35,16 +35,16 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                 <c:if test="${sessionScope.acc.roleId == 1}">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="managerAccount">Manager Account</a>
+                        <a class="nav-link active" aria-current="page" href="AccountController">Admin Hub</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="managerCategory">View Revenue</a>
+                        <a class="nav-link active" aria-current="page" href="managerCategory.jsp">View Revenue</a>
                     </li>
 
                 </c:if>
                 <c:if test="${sessionScope.acc.roleId == 2}">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="manager">Manager Product</a>
+                        <a class="nav-link active" aria-current="page" href="ManagerProduct.jsp">Manager Product</a>
                     </li>
                 </c:if>
                 <c:if test="${sessionScope.acc != null}">

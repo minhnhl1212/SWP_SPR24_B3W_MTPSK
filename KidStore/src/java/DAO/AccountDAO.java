@@ -52,4 +52,46 @@ public class AccountDAO {
         return user;
     }
 
+    public ArrayList<Account> getAllAccount() throws Exception {
+        ArrayList<Account> allAccount = new ArrayList<>();
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "Select user_id, username, full_name, "
+                        + "phone, address, active, "
+                        + "role_name from Account\n"
+                        + "left join Role on Account.role_id = Role.role_id";
+                ps = con.prepareStatement(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    Account acc = new Account(rs.getInt("user_id"), rs.getString("username"),
+                            rs.getString("full_name"), rs.getString("phone"),
+                            rs.getString("address"), rs.getBoolean("active"),
+                            rs.getString("role_name"));
+                    allAccount.add(acc);
+                }
+                System.out.println(allAccount);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+        return allAccount;
+    }
+
+    public void UpdateActiveAccount(int role_id, boolean active) throws Exception {
+        try {
+            con = DBUtils.getConnection();
+            String sql = "Update Account Set role_id=?, active=?";
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, role_id);
+            ps.setBoolean(2, active);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            closeConnection();
+        }
+    }
 }

@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -23,14 +24,15 @@ public class CategoryController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
         try {
             response.setContentType("text/html;charset=UTF-8");
             String url = HOMEPAGE;
             int categoryId = Integer.parseInt(request.getParameter("categoryId"));
-
+            
             ToyDAO toyDAO = new ToyDAO();
             ArrayList<Toy> toyCategory = toyDAO.toyCategoryById(categoryId);
-            request.setAttribute("TOY_CATEGORY_LIST", toyCategory);
+            session.setAttribute("TOY_CATEGORY_LIST", toyCategory);
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
         } catch (Exception ex) {
