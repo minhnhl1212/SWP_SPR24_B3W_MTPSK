@@ -4,6 +4,8 @@
     Author     : TUF
 --%>
 
+<%@page import="DTO.Account"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,14 +17,6 @@
         <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
         <!-- My CSS -->
         <link rel="stylesheet" href="css/admin.css">
-        <!-- ICON CSS-->
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
-            integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
-            crossorigin="anonymous"
-            referrerpolicy="no-referrer"
-            />
         <title>AdminHub</title>
     </head>
     <body>
@@ -62,14 +56,15 @@
             </ul>
             <ul class="side-menu">
                 <li>
-                    <a href="#" id="logoutButton" class="menu_button">
+                    <a href="LogoutController" id="logoutButton" class="menu_button">
                         <i class='bx bxs-log-out-circle'></i>
-                        <span class="text">Logout</span>    
+                        <span class="text">Logout</span>
                     </a>
+
                     <!-- Logout confirmation dialog -->
                     <div id="logoutConfirmationDialog" class="modal">
                         <div class="modal-content">
-                            <!--Change class from "close" to "cancelButton"-->
+                            <!-- Change class from "close" to "cancelButton" -->
                             <p>Are you sure you want to logout?</p>
                             <button id="confirmLogout">Logout</button>
                             <button id="cancelButton">Cancel</button>
@@ -128,14 +123,19 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <%ArrayList<Account> accountList = (ArrayList<Account>) request.getAttribute("ACCOUNT_LIST");
+                                int i = 1;
+                                if(accountList!=null){
+                                for (Account a : accountList){
+                                %>
+<!--                                <tr>
                                     <td>1</td>
                                     <td>minhle</td>
                                     <td>Nguyen Hoang Le Minh</td>
                                     <td>0912345678</td>
                                     <td>TPHCM</td>
                                     <td>Admin</td>
-                                    <td><button id="toggleButton" class="button-bordered">Active</button></td>
+                                    <td><button id="toggleButton" class="button-bordered">Active</button></td>  
                                 </tr>
                                 <tr>
                                     <td>2</td>
@@ -172,19 +172,27 @@
                                     <td>TPHCM</td>
                                     <td>Customer</td>
                                     <td><button id="toggleButton" class="button-bordered">Active</button></td> 
+                                </tr>-->
+                                 <tr>
+                                    <td><%=i++%></td>
+                                    <td><%=a.getUserName()%></td>
+                                    <td><%=a.getFullName()%></td>
+                                    <td><%=a.getPhone()%></td>
+                                    <td><%=a.getAddress()%></td>
+                                    <td><%=a.getRole()%></td>
+                                    <td><button id="toggleButton" class="button-bordered">Active</button></td> 
                                 </tr>
-
+                                <%}
+}%>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </main>
             <!-- MAIN -->
-
         </section>
         <!-- CONTENT -->
 
         <script src="js/admin.js"></script>
-        <script src="js/toast.js"></script>
     </body>
 </html>
