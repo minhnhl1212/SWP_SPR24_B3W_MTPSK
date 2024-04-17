@@ -26,9 +26,11 @@ import javax.servlet.http.HttpSession;
  * @author admin
  */
 public class LoginController extends HttpServlet {
+
     private final static String LOGINPAGE = "login.jsp";
     private static final String HOMEPAGE = "home.jsp";
     private static final String ADMIN = "AccountController";
+    private static final String STAFF = "ManagerProduct.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -50,7 +52,7 @@ public class LoginController extends HttpServlet {
             LoginDAO dao = new LoginDAO();
             //check có đúng tài khoản ko
             Account acc = dao.Login(username, password);
-                        ToyDAO toyDAO = new ToyDAO();
+            ToyDAO toyDAO = new ToyDAO();
             ArrayList<Toy> toyList = toyDAO.toyList();
             //Lấy danh sách Category
             CategoryDAO categeoryDAO = new CategoryDAO();
@@ -59,15 +61,16 @@ public class LoginController extends HttpServlet {
             session.setAttribute("CATEGORY_LIST", categoryList);
             //đúng trả về home
             if (acc != null) {
-                session.setAttribute("acc", acc);  
-                if(acc.getRoleId()==1){
-                    url=ADMIN;
+                session.setAttribute("acc", acc);
+                if (acc.getRoleId() == 1) {
+                    url = ADMIN;
+                } else if (acc.getRoleId() == 2) {
+                    url = STAFF;
                 }
-            }
-            //sai trả về login và báo lỗi
-            else{
-            request.setAttribute("LOGIN_ERROR", "Username or password is incorrect");
-            url = LOGINPAGE;
+            } //sai trả về login và báo lỗi
+            else {
+                request.setAttribute("LOGIN_ERROR", "Username or password is incorrect");
+                url = LOGINPAGE;
             }
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);

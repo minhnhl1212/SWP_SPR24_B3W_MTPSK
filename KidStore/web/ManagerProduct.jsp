@@ -1,209 +1,129 @@
-<%-- 
-    Document   : ManagerProduct
-    Created on : Apr 15, 2024, 11:23:47 AM
-    Author     : ADMIN
---%>
-
-<%@page import="DTO.Category"%>
-<%@page import="DTO.Toy"%>
-<%@page import="DTO.Toy"%>
 <%@page import="java.util.ArrayList"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
-<html lang="en">
+<html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Manager Product</title>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <link href="css/ManagerProduct.css" rel="stylesheet" type="text/css"/>
-        <style>
-            img{
-                width: 200px;
-                height: 120px;
-            }
-        </style>
-        <script>
-            function back() {
-                window.location.href = "home.jsp";
-            }
-            function doDelete(id)
-            {
-                var c = confirm("Are you sure?");
-                if (c)
-                {
-                    window.location.href = "DeleteToyController?idToy=" + id;
-                }
-            }
-        </script>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>STAFF</title>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="css/ManagerProduct.css">
+
     </head>
     <body>
+        <header>
+            <h1>Manager Product</h1>
+            <a style="background-color: greenyellow; color: #664d03" class="btn btn-outline-dark mt-auto" href="ManagerCategory.jsp">Manager Category</a>
+            <a style="background-color: paleturquoise; color: #664d03" class="btn btn-outline-dark mt-auto" href="ManagerProduct.jsp">Manager Product</a>
+            <a style="background-color: wheat; color: #664d03" class="btn btn-outline-dark mt-auto" href="ManagerCustomer.jsp">Manager Customer</a>
+            <a style="background-color: #0d6efd; color: #664d03" class="btn btn-outline-dark mt-auto" href="ManagerOther.jsp">Manager Other</a>
+        </header>
 
-        <div class="container">
-            <div class="table-wrapper">
-                <div class="table-title">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <h2>Manage <b>Product</b></h2>
-                        </div>
-                        <div class="col-sm-6">
-                            <a href="#addToyModal"  class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Product</span></a>
-                            <%
-                                String success = (String) request.getAttribute("ADD_TOY_SUCCESS");
-                                String failed = (String) request.getAttribute("ADD_TOY_FAILED");
-                                if (success != null) {
-                            %>
-                            <p style="color: green"><%= success%></p>                        
-                            <%
-                            } else if (success == null) {
-                            %>
-                            <p></p>
-                            <%
-                            } else {
-                            %>
-                            <p style="color: red"><%= failed%></p>
-                            <%
-                                }
-                            %>
-                        </div>
+        <div id="product-list">
+            <h2>Product</h2>
+        </div>
+
+        <button onclick="toggleAddProductForm()" class="add">Add New Product</button>
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Product Name</th>
+                    <th>Image</th>
+                    <th>Price</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>name</td>
+                    <td>image</td>
+                    <td>price</td>
+                    <td>status</td>
+                    <td class="col-2">
+                        <a href="">Edit</a>                       
+                        <a href="">Delete</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>name</td>
+                    <td>image</td>
+                    <td>price</td>
+                    <td>status</td>
+                    <td>
+                        <a href="">Edit</a>                       
+                        <a href="">Delete</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>name</td>
+                    <td>image</td>
+                    <td>price</td>
+                    <td>status</td>
+                    <td>
+                        <a href="">Edit</a>                       
+                        <a href="">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        </br>
+        </br>
+        </br>
+        </br>
+        </br>
+
+        <div class="wrap">
+            <div class="addProduct overlay">
+                <div id="add-product-form">                    
+                    <div>
+                        <form action="AddToyController">
+                            <h2>Add Product</h2>
+                            <label for="productName">Name</label></br>
+                            <input type="text" id="productName" name="productName" required></br>
+
+                            <label for="image">Image</label></br>
+                            <input type="text" id="productName" name="image" required></br>
+
+                            <label for="price">Price</label></br>
+                            <input type="number" id="productPrice" name="price" required></br>
+
+                            <label for="description">Description</label></br>
+                            <input type="text" id="productName" name="description" required></br>
+
+                            <label for="category">Category</label></br>
+                            <input type="text" id="productName" name="category" required></br>
+
+                            <button type="submit">Add new Product</button>
+                        </form>
                     </div>
                 </div>
-                <table class="table table-striped table-hover">
-                    <thead>
-                        <tr>
-                            <th>
-                                <span class="custom-checkbox">
-                                    <input type="checkbox" id="selectAll">
-                                    <label for="selectAll"></label>
-                                </span>
-                            </th>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Image</th>
-                            <th>Price</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <%
-                            ArrayList<Toy> toyList = (ArrayList<Toy>) session.getAttribute("TOY_LIST");
-                            if (toyList != null) {
-                                for (Toy toy : toyList) {
-                        %>
-
-                        <tr>
-                            <td>
-                                <span class="custom-checkbox">
-                                    <input type="checkbox" id="checkbox1" name="options[]" value="1">
-                                    <label for="checkbox1"></label>
-                                </span>
-                            </td>
-                            <td><%=toy.getToyId()%></td>
-                            <td><%=toy.getToyName()%></td>
-                            <td>
-                                <img src="<%=toy.getImage()%>">
-                            </td>
-                            <td><%=toy.getPrice()%> VNĐ</td>
-                            <td>
-                                <a href="load?pid=${p.id}"  class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                <a href="#" class="delete" data-toggle="modal" onclick="doDelete(<%=toy.getToyId()%>)"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                            </td>
-                            <%}
-                            } else {
-                            %>
-                    <p>Không có loại đồ chơi nào</p>
-                    <%
-                        }
-                    %>
-                    </tr>
-
-                    </tbody>
-                </table>
-                <div class="clearfix">
-                    <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-                    <ul class="pagination">
-                        <li class="page-item disabled"><a href="#">Previous</a></li>
-                        <li class="page-item"><a href="#" class="page-link">1</a></li>
-                        <li class="page-item"><a href="#" class="page-link">2</a></li>
-                        <li class="page-item active"><a href="#" class="page-link">3</a></li>
-                        <li class="page-item"><a href="#" class="page-link">4</a></li>
-                        <li class="page-item"><a href="#" class="page-link">5</a></li>
-                        <li class="page-item"><a href="#" class="page-link">Next</a></li>
-                    </ul>
-                </div>
-            </div>
-            <a href="#">
-                <button type="button" class="btn btn-primary" onclick="back()">Back to home</button>
-
-        </div>
-        <!-- Edit Modal HTML -->
-        <div id="addToyModal" class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <form action="AddToyController" >
-                        <div class="modal-header">						
-                            <h4 class="modal-title">Add Product</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        </div>
-                        <div class="modal-body">					
-                            <div class="form-group">
-                                <label>Name</label>
-                                <input name="name" type="text" class="form-control" required >
-                            </div>
-                            <div class="form-group">
-                                <label>Image</label>
-                                <input name="image" type="text" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Price</label>
-                                <input name="price" type="text" class="form-control" required>
-                            </div>         
-                            <div class="form-group">
-                                <label>Description</label>
-                                <textarea name="description" class="form-control" required></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label>Category</label>
-                                <select name="idCategory" class="form-select" aria-label="Default select example">
-                                    <%
-                                        ArrayList<Category> categoryList = (ArrayList<Category>) session.getAttribute("CATEGORY_LIST");
-                                        if (categoryList != null) {
-                                            for (Category category : categoryList) {
-                                    %>
-                                    <option value="<%=category.getCategoryId()%>"><%=category.getCategoryName()%></option>
-                                    <%}
-                                    } else {
-                                    %>
-                                    <p>Không có loại đồ chơi nào</p>
-                                    <%
-                                        }
-                                    %>
-                                </select>
-                            </div>
-
-                        </div>
-                        <div class="modal-footer">
-                            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                            <input type="submit" class="btn btn-success" value="Add">
-                        </div>
-                    </form>
-                </div>
             </div>
         </div>
 
-
-
-
-
-        <script src="js/ManagerProduct.js" type="text/javascript"></script>
+        <script src="js/admin.js"></script>
     </body>
+    <script>
+            function toggleAddProductForm() {
+                var addProductForm = document.querySelector('.addProduct');
+                if (addProductForm.style.display === 'none') {
+                    addProductForm.style.display = 'block';
+                    addProductForm.classList.add("overlay");
+                } else {
+                    addProductForm.style.display = 'none';
+                    addProductForm.classList.remove("overlay");
+                }
+            }
+    </script>
 </html>
+
+
 
 

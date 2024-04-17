@@ -37,13 +37,13 @@
                         <h1 style="text-align: center; font-weight: 800; color: #d8ffde; text-shadow: 4px 3px 10px #1a451b">LOGIN</h1>
                         <div style="margin-left: 3%">
                             <label for="fullname">User Name</label><br>
-                            <input style="border-style: none none solid none; margin-bottom: 4%; width: 93%" type="text" id="fullname" name="Username"></br>
+                            <input style="border-style: none none solid none; margin-bottom: 4%; width: 93%" type="text" id="fullname" name="Username" required></br>
                             <label for="password">Password</label></br>
-                            <input style="border-style: none none solid none; margin-bottom: 4%; width: 93%" type="password" id="password" name="Password"></br>
+                            <input style="border-style: none none solid none; margin-bottom: 4%; width: 93%" type="password" id="password" name="Password" required></br>
                             <input type="checkbox" id="terms" name="terms">
                             <label for="terms">Remember me</label></br>
                             <input style="border-radius: 40px; font-size: 24px; font-weight: 800; color: white; margin: 2% 19%; padding: 2% 25%; background: linear-gradient(90deg, rgba(58,116,180,1) 0%, rgba(29,161,253,1) 50%, rgba(192,196,19,1) 100%);; border: none" type="submit" value="Login">
-                            <p>${LOGIN_ERROR}</p>
+                            <p style="color: red">${LOGIN_ERROR}</p>
                             <a style="color: #007bff; font-size: 16px; margin-left: 1%;" href="signup.jsp">Register an account ?</a>
                         </div>
                     </form>

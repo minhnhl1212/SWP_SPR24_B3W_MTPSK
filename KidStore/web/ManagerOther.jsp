@@ -1,116 +1,67 @@
-<%-- 
-    Document   : ManagerOther
-    Created on : Apr 16, 2024, 11:40:57 AM
-    Author     : ADMIN
---%>
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="DTO.Other"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
-<html lang="en">
+<html>
     <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Manager Product</title>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <link href="css/ManagerProduct.css" rel="stylesheet" type="text/css"/>
-        <style>
-            img{
-                width: 200px;
-                height: 120px;
-            }
-        </style>
-        <script>
-            function back() {
-                window.location.href = "home";
-            }
-             function doDelete(id)
-            {
-                var c = confirm("Are you sure?");
-                if(c)
-                {
-                    window.location.href = "delete?pid="+id;
-                }
-            }
-        </script>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>STAFF</title>
+        <link rel="stylesheet" href="css/styles.css">
 
+    </head>
     <body>
+        <header>
+            <h1>Manager Product</h1>
+            <a style="background-color: greenyellow; color: #664d03" class="btn btn-outline-dark mt-auto" href="ManagerCategory.jsp">Manager Category</a>
+            <a style="background-color: paleturquoise; color: #664d03" class="btn btn-outline-dark mt-auto" href="ManagerProduct.jsp">Manager Product</a>
+            <a style="background-color: wheat; color: #664d03" class="btn btn-outline-dark mt-auto" href="ManagerCustomer.jsp">Manager Customer</a>
+            <a style="background-color: #0d6efd; color: #664d03" class="btn btn-outline-dark mt-auto" href="ManagerOther.jsp">Manager Other</a>
+        </header>
 
         <div class="container">
-            <div class="table-wrapper">
-                <div class="table-title">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <h2>Manage <b>Product</b></h2>
-                        </div>
-                        
-                    </div>
-                </div>
-                <table class="table table-striped table-hover">
+
+            <section id="product-list">
+                <h2>Product</h2>
+                <table>
                     <thead>
                         <tr>
-                            <th>
-                                <span class="custom-checkbox">
-                                    <input type="checkbox" id="selectAll">
-                                    <label for="selectAll"></label>
-                                </span>
-                            </th>
                             <th>ID</th>
-                            <th>AccountId</th>
-                            <th>TotalPrice</th>
-                            <th>CreatedDate</th>
-                            <th>ShippingId</th>
+                            <th>Account Id</th>
+                            <th>Total Price</th>
+                            <th>Created Date</th>
+                            <th>Shipping Id</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach items="${orders}" var="p">
+
+                        <%
+                            ArrayList<Other> productList = (ArrayList<Other>) request.getAttribute("productList");
+                            if (productList != null) {
+                                for (Other product : productList) {
+                        %>
                             <tr>
-                                <td>
-                                    <span class="custom-checkbox">
-                                        <input type="checkbox" id="checkbox1" name="options[]" value="1">
-                                        <label for="checkbox1"></label>
-                                    </span>
-                                </td>
                                 <td>${p.getId()}</td>
-                                <td>${p.getAccountId()}</td>
-                                
+                                <td>${p.getAccountId()}</td>         
                                 <td>${p.getTotalPrice()} $</td>
                                 <td>${p.getCreatedDate()} $</td>
                                 <td>${p.getShippingId()} $</td>
-                                <td>
-                                    <a href="editOrder?pid=${p.id}"  class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                    
-                                </td>
+                            <td>
+                                <a href="edit_product.jsp?id=${p.getId()}">Edit</a>
+                                <a href="delete_product.jsp?id=${p.getId()}">Delete</a>
+                            </td>
                             </tr>
-                        </c:forEach>
+                        <% }
+                    } else { %>
+                        <tr><td colspan="5">No Others</td></tr>
+                        <% }%>
                     </tbody>
                 </table>
-                <div class="clearfix">
-                    <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-                    <ul class="pagination">
-                        <li class="page-item disabled"><a href="#">Previous</a></li>
-                        <li class="page-item"><a href="#" class="page-link">1</a></li>
-                        <li class="page-item"><a href="#" class="page-link">2</a></li>
-                        <li class="page-item active"><a href="#" class="page-link">3</a></li>
-                        <li class="page-item"><a href="#" class="page-link">4</a></li>
-                        <li class="page-item"><a href="#" class="page-link">5</a></li>
-                        <li class="page-item"><a href="#" class="page-link">Next</a></li>
-                    </ul>
-                </div>
-            </div>
-            <a href="#">
-                <button type="button" class="btn btn-primary" onclick="back()">Back to home</button>
-
+            </section>
+                    <button type="button" class="btn btn-primary" onclick="back()">Back to home</button>
         </div>
-        <!-- Edit Modal HTML -->
-        <div id="addEmployeeModal" class="modal fade">
+
+            <div id="addEmployeeModal" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <form action="add" method="post">
@@ -157,14 +108,11 @@
                 </div>
             </div>
         </div>
-        
-        
-        
 
-
-        <script src="js/ManagerProduct.js" type="text/javascript"></script>
+        <script src="js/admin.js"></script>
     </body>
 </html>
+
 
 
 

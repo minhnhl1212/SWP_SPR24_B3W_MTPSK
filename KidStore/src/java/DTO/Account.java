@@ -15,10 +15,13 @@ public class Account {
     public Account() {
     }
 
-    public Account(String userName, String password) {
+    public Account(String userName, String password, String fullName, String phone, String address) {
         this.userName = userName;
         this.password = password;
-    } 
+        this.fullName = fullName;
+        this.phone = phone;
+        this.address = address;
+    }
 
     public Account(int userId, String userName, String password, String fullName, String phone, String address, boolean active, int roleId, int paymentId) {
         this.userId = userId;

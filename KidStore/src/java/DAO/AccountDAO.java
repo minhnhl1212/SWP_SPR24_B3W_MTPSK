@@ -32,17 +32,20 @@ public class AccountDAO {
         }
     }
 
-    public Account signup(String userName, String password) throws SQLException, Exception {
+    public Account signup(String userName, String password, String fullName, String phone, String address) throws SQLException, Exception {
         Account user = null;
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "insert into Account (username, password) values (?,?)";
+                String sql = "insert into Account (username, password, full_name, phone, address, active) values (?,?,?,?,?,0)";
                 ps = con.prepareStatement(sql);
                 ps.setString(1, userName);
                 ps.setString(2, password);
+                ps.setString(3, fullName);
+                ps.setString(4, phone);
+                ps.setString(5, address);
                 ps.executeUpdate();
-                user = new Account(userName, password);
+                user = new Account(userName, password, fullName, phone, address);
             }
         } catch (Exception e) {
             e.printStackTrace();

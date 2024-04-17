@@ -39,25 +39,30 @@ public class SignUpController extends HttpServlet {
         processRequest(request, response);
         String url = ERROR;
         try {
+            request.setCharacterEncoding("UTF-8");
+            response.setCharacterEncoding("UTF-8");
             String userName = request.getParameter("userName");
             String password = request.getParameter("password");
+            String fullName = request.getParameter("fullName");
+            String phone = request.getParameter("phone");
+            String address = request.getParameter("address");
             String confirmPassword = request.getParameter("confirmPassword");
 
             AccountDAO accountDAO = new AccountDAO();
             if (password.equals(confirmPassword)) {
-                Account signUp = accountDAO.signup(userName, password);
+                Account signUp = accountDAO.signup(userName, password, fullName, phone, address);
                 if (signUp != null) {
                     url = SUCCESS;
-                    request.setAttribute("SIGNUP_SUCCESS", "SignUp Success");
+                    request.setAttribute("SIGNUP_SUCCESS", "Sign Up Success");
                     RequestDispatcher dispatcher = request.getRequestDispatcher(url);
                     dispatcher.forward(request, response);
                 } else {
-                    request.setAttribute("SIGNUP_ERROR", "SignUp Failed");
+                    request.setAttribute("SIGNUP_ERROR", "Sign Up Failed");
                     RequestDispatcher dispatcher = request.getRequestDispatcher(url);
                     dispatcher.forward(request, response);
                 }
             } else {
-                request.setAttribute("PASS_NOT_MATH", "Password and confirm password not math");
+                request.setAttribute("PASS_NOT_MATH", "Password And Confirm Password Not Math");
                 RequestDispatcher dispatcher = request.getRequestDispatcher(url);
                 dispatcher.forward(request, response);
             }
