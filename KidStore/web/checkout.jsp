@@ -46,13 +46,34 @@
 
         <div class="container">
             <h1>Thanh Toán</h1>
+            <%
+                String paymentMethod = request.getParameter("paymentMethod");
+                if (paymentMethod != null && paymentMethod.equals("bankTransfer")) {
+                    String vnpayUrl = "https://shopee.vn/";
+            %>
+            <meta http-equiv="refresh" content="0;url=<%= vnpayUrl%>">
+
+            <%
+                }
+            %>
+
+            <%
+                if (paymentMethod != null && paymentMethod.equals("cashOnDelivery")) {
+            %>
+            <div class="alert alert-success" role="alert">
+                <h4>Đơn hàng của bạn đã được xác nhận. Chúng tôi sẽ liên hệ với bạn để sắp xếp giao hàng.</h4>
+            </div>
+
+            <% }%>
+
+
             <div class="row">
                 <div class="container">
                     <div class="row">
 
                         <div class="col-md-6">
                             <h5>Billing Details</h5>
-                            <form class="checkout-form">
+                            <form class="checkout-form" action="checkout.jsp" method="post">
                                 <div class="form-group required">
                                     <label for="name">Tên</label>
                                     <input type="text" class="form-control" id="name" placeholder="">
@@ -74,6 +95,17 @@
                                     <label for="phone">Ghi chú</label>
                                     <input type="text" class="form-control form-control-lg" id="phone" placeholder="">
                                 </div>
+
+                                <div class="form-group">
+                                    <h5>Phương thức thanh toán</h5><br>
+                                    <input type="radio" id="cashOnDelivery" name="paymentMethod" value="cashOnDelivery">
+                                    <label for="cashOnDelivery">Thanh toán khi nhận hàng</label><br>
+                                    <input type="radio" id="bankTransfer" name="paymentMethod" value="bankTransfer">
+                                    <label for="bankTransfer">Thanh toán qua ngân hàng</label>
+                                </div>
+
+                                <input type="submit" class="btn btn-success btn-block" value="Xác nhận thanh toán">
+
                             </form>
                         </div>
                         <div class="col-md-6">
@@ -120,43 +152,6 @@
                                                 <td>Qty: 1</td>
                                                 <td>260.000 đ</td>
                                             </tr>
-                                            <tr>
-                                                <td><img src="https://cdn-v2.kidsplaza.vn/media/catalog/product/d/o/do-choi-o-to-day-da-cy-7712-1.jpg" width="50" alt="Product Image"></td>
-                                                <td>Mô Hình Universal Kung Fu Panda</td>
-                                                <td>260.000 đ</td>
-                                                <td>Qty: 1</td>
-                                                <td>260.000 đ</td>
-                                            </tr>
-                                            <tr>
-                                                <td><img src="https://cdn-v2.kidsplaza.vn/media/catalog/product/d/o/do-choi-o-to-day-da-cy-7712-1.jpg" width="50" alt="Product Image"></td>
-                                                <td>Mô Hình Universal Kung Fu Panda</td>
-                                                <td>260.000 đ</td>
-                                                <td>Qty: 1</td>
-                                                <td>260.000 đ</td>
-                                            </tr>
-                                            <tr>
-                                                <td><img src="https://cdn-v2.kidsplaza.vn/media/catalog/product/d/o/do-choi-o-to-day-da-cy-7712-1.jpg" width="50" alt="Product Image"></td>
-                                                <td>Mô Hình Universal Kung Fu Panda</td>
-                                                <td>260.000 đ</td>
-                                                <td>Qty: 1</td>
-                                                <td>260.000 đ</td>
-                                            </tr>
-                                            <tr>
-                                                <td><img src="https://cdn-v2.kidsplaza.vn/media/catalog/product/d/o/do-choi-o-to-day-da-cy-7712-1.jpg" width="50" alt="Product Image"></td>
-                                                <td>Mô Hình Universal Kung Fu Panda</td>
-                                                <td>260.000 đ</td>
-                                                <td>Qty: 1</td>
-                                                <td>260.000 đ</td>
-                                            </tr>
-                                            <tr>
-                                                <td><img src="https://cdn-v2.kidsplaza.vn/media/catalog/product/d/o/do-choi-o-to-day-da-cy-7712-1.jpg" width="50" alt="Product Image"></td>
-                                                <td>Mô Hình Universal Kung Fu Panda</td>
-                                                <td>260.000 đ</td>
-                                                <td>Qty: 1</td>
-                                                <td>260.000 đ</td>
-                                            </tr>
-
-
                                         </tbody>
                                     </table>
                                 </div>
@@ -166,7 +161,6 @@
                                     <p class="card-text">Discount: 0 đ</p>
                                     <p class="card-text">Total: 260.000 đ</p>
                                 </div>
-                                <a href="history.jsp"><button class="btn btn-success btn-block">Xác nhận thanh toán</button></a>
                             </div>
                         </div>
                     </div>
