@@ -27,23 +27,24 @@
                     <img src="img/background-register.jpg" style="max-width: 100%; height: 100vh; margin-left: -1vw">
                 </div>
                 <div class="col-md-5">
-                    <form style="margin-top: 10%" action="register" method="post" onsubmit="return validateForm()">
+                    <form style="margin-top: 10%" action="SignUpController" method="post" onsubmit="return validateForm()">
                         <h1 style="text-align: center; font-weight: 800; color: #d8ffde; text-shadow: 4px 3px 10px #1a451b">REGISTER</h1>
                         <div style="margin-left: 3%">
-                        <label for="fullname">Full Name</label><br>
-                        <input style="border-style: none none solid none; margin-bottom: 4%; width: 93%" type="text" id="fullname" name="fullname"></br>
-                        <label for="email">Email or Phone Number</label></br>
-                        <input style="border-style: none none solid none; margin-bottom: 4%; width: 93%" type="text" id="email" name="email"></br>
-                        <label for="password">Password</label></br>
-                        <input style="border-style: none none solid none; margin-bottom: 4%; width: 93%" type="password" id="password" name="password"></br>
-                        <label for="confirmpassword">Confirm Password</label></br>
-                        <input style="border-style: none none solid none; margin-bottom: 4%; width: 93%" type="password" id="confirmpassword" name="confirmpassword"></br>
-                        <input type="checkbox" id="terms" name="terms">
-                        <label for="terms">Lorem ipsum is simply dummy text of the printing and type.</label></br>
-                        <input style="border-radius: 40px; font-size: 24px; font-weight: 800; color: white; margin: 2% 19%; padding: 2% 25%; background: linear-gradient(90deg, rgba(58,116,180,1) 0%, rgba(29,161,253,1) 50%, rgba(192,196,19,1) 100%);; border: none" type="submit" value="Register">
-                        <p>Already have an account? <a style="color: #007bff; font-size: 16px; margin-left: 1%;" href="login.jsp">Log in</a></p>
+                            <label for="fullname">Full Name</label><br>
+                            <input style="border-style: none none solid none; margin-bottom: 4%; width: 93%" type="text" id="fullname" name="userName"></br>
+                            <label for="email">Email or Phone Number</label></br>
+                            <input style="border-style: none none solid none; margin-bottom: 4%; width: 93%" type="text" id="email" name="email"></br>
+                            <label for="password">Password</label></br>
+                            <input style="border-style: none none solid none; margin-bottom: 4%; width: 93%" type="password" id="password" name="password"></br>
+                            <label for="confirmpassword">Confirm Password</label></br>
+                            <input style="border-style: none none solid none; margin-bottom: 4%; width: 93%" type="password" id="confirmpassword" name="confirmPassword"></br>
+                            <input style="border-radius: 40px; font-size: 24px; font-weight: 800; color: white; margin: 2% 19%; padding: 2% 25%; background: linear-gradient(90deg, rgba(58,116,180,1) 0%, rgba(29,161,253,1) 50%, rgba(192,196,19,1) 100%);; border: none" type="submit" value="Register">
+                            <p style="color: green">${SIGNUP_SUCCESS}</p>
+                            <p style="color: red">${SIGNUP_ERROR}</p>
+                            <p style="color: red">${PASS_NOT_MATH}</p>
+                            <a style="color: #007bff; font-size: 16px; margin-left: 1%;" href="login.jsp">Log in</a>
                         </div>
-</form>
+                    </form>
                 </div>
             </div>
         </div>
