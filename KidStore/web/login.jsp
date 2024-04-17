@@ -27,26 +27,28 @@
         </script>
     </head>
     <body>
-        <div id="logreg-forms">
-            <form class="form-signin" action="MainController">
-                <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign in</h1>
-                <div class="d-block mx-4 mb-3 mb-lg-4  text-danger"><b>${mess}</b></div>
-                <input type="text" id="inputEmail" class="form-control" placeholder="Username" required="" autofocus="" name="Username">
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="" name="Password">
-                <span style="color: red">${LOGIN_ERROR}</span>
-                <button class="btn btn-success btn-block" type="submit" value="Sign in" name="btAction"><i class="fas fa-sign-in-alt"></i> Sign in</button>
-                <hr>
-                <button class="btn btn-success btn-block" type="button" onclick="doforgetPass()"><i class="fa-light fa-repeat"></i> forget Password</button>
-                <hr>
-                <!-- <p>Don't have an account!</p>  -->
-                
-                <a href="signup.jsp">Đăng ký</a>
-                
-            </form>
-
-                
-            <br>
-
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-7">
+                    <img src="img/background-register.jpg" style="max-width: 100%; height: 100vh; margin-left: -1vw">
+                </div>
+                <div class="col-md-5">
+                    <form style="margin-top: 10%" action="LoginController" onsubmit="return validateForm()">
+                        <h1 style="text-align: center; font-weight: 800; color: #d8ffde; text-shadow: 4px 3px 10px #1a451b">LOGIN</h1>
+                        <div style="margin-left: 3%">
+                            <label for="fullname">User Name</label><br>
+                            <input style="border-style: none none solid none; margin-bottom: 4%; width: 93%" type="text" id="fullname" name="Username"></br>
+                            <label for="password">Password</label></br>
+                            <input style="border-style: none none solid none; margin-bottom: 4%; width: 93%" type="password" id="password" name="Password"></br>
+                            <input type="checkbox" id="terms" name="terms">
+                            <label for="terms">Remember me</label></br>
+                            <input style="border-radius: 40px; font-size: 24px; font-weight: 800; color: white; margin: 2% 19%; padding: 2% 25%; background: linear-gradient(90deg, rgba(58,116,180,1) 0%, rgba(29,161,253,1) 50%, rgba(192,196,19,1) 100%);; border: none" type="submit" value="Login">
+                            <p>${LOGIN_ERROR}</p>
+                            <a style="color: #007bff; font-size: 16px; margin-left: 1%;" href="signup.jsp">Register an account ?</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
