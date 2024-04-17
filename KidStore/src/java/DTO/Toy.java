@@ -12,9 +12,9 @@ public class Toy {
     private double price;
     private String description;
     private int categoryId;
-    private int cartId;
     private int approve;
     private int idCategory;
+    private double discount;
 
     public Toy() {
     }
@@ -25,38 +25,40 @@ public class Toy {
         this.price = price;
     } 
 
-    public Toy(String toyName, String image, double price, String description, int approve, int idCategory) {
+    public Toy(String toyName, String image, double price, String description, int approve, int idCategory, double discount) {
         this.toyName = toyName;
         this.image = image;
         this.price = price;
         this.description = description;
         this.approve = approve;
         this.idCategory = idCategory;
+        this.discount = discount;
     }
 
-    public Toy(int toyId, String toyName, int quantity, double price, String description, int categoryId, int cartId) {
+    public Toy(int toyId, String toyName, int quantity, double price, String description, int categoryId, double discount) {
         this.toyId = toyId;
         this.toyName = toyName;
         this.quantity = quantity;
         this.price = price;
         this.description = description;
         this.categoryId = categoryId;
-        this.cartId = cartId;
+        this.discount = discount;
+        
     }
 
-    public Toy(int toyId, String toyName, int quantity, String image, double price, String description, int categoryId, int cartId, int approve) {
+    public Toy(int toyId, String toyName, int quantity, String image, double price, String description, int categoryId, int approve, double discount) {
         this.toyId = toyId;
         this.toyName = toyName;
         this.quantity = quantity;
         this.image = image;
         this.price = price;
         this.description = description;
-        this.categoryId = categoryId;
-        this.cartId = cartId;
+        this.categoryId = categoryId; 
         this.approve = approve;
+        this.discount = discount;
     }    
 
-    public Toy(int toyId, String toyName, int quantity, String image, double price, String description, int categoryId, int cartId) {
+    public Toy(int toyId, String toyName, int quantity, String image, double price, String description, int categoryId, double discount) {
         this.toyId = toyId;
         this.toyName = toyName;
         this.quantity = quantity;
@@ -64,7 +66,7 @@ public class Toy {
         this.price = price;
         this.description = description;
         this.categoryId = categoryId;
-        this.cartId = cartId;
+        this.discount = discount;
     }
 
     public int getToyId() {
@@ -114,14 +116,6 @@ public class Toy {
     public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
     }
-
-    public int getCartId() {
-        return cartId;
-    }
-
-    public void setCartId(int cartId) {
-        this.cartId = cartId;
-    }
     
     public String getImage() {
         return image;
@@ -145,6 +139,14 @@ public class Toy {
 
     public void setIdCategory(int idCategory) {
         this.idCategory = idCategory;
+    }
+
+    public double getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(double discount) {
+        this.discount = discount;
     }
 
     @Override

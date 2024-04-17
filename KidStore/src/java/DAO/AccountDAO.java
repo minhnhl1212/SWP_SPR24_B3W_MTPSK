@@ -57,9 +57,9 @@ public class AccountDAO {
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "Select user_id, username, full_name, "
-                        + "phone, address, active, "
-                        + "role_name from Account\n"
+                String sql = "Select Account.user_id, Account.username, Account.full_name, "
+                        + "Account.phone, Account.address, Account.active,Account.role_id, "
+                        + "Role.role_name from Account\n"
                         + "left join Role on Account.role_id = Role.role_id";
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
@@ -67,7 +67,7 @@ public class AccountDAO {
                     Account acc = new Account(rs.getInt("user_id"), rs.getString("username"),
                             rs.getString("full_name"), rs.getString("phone"),
                             rs.getString("address"), rs.getBoolean("active"),
-                            rs.getString("role_name"));
+                            rs.getInt("role_id"), rs.getString("role_name"));
                     allAccount.add(acc);
                 }
                 System.out.println(allAccount);

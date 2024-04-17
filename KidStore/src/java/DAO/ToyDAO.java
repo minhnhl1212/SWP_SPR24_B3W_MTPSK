@@ -38,15 +38,16 @@ public class ToyDAO {
             con = DBUtils.getConnection();
             if (con != null) {
                 String sql = "select Toy.toy_id, Toy.toy_name,Toy.quantity, Image.imageToy,"
-                        + " Toy.price, Toy.description, Toy.category_id, Toy.cart_id\n"
+                        + " Toy.price, Toy.description, Toy.category_id, Toy.discount\n"
                         + "from Image\n"
                         + "inner join Toy on Image.image_id = Toy.image_id";
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
-                    Toy list = new Toy(rs.getInt("toy_id"), rs.getString("toy_name"), rs.getInt("quantity"), rs.getString("imageToy"),
+                    Toy list = new Toy(rs.getInt("toy_id"), rs.getString("toy_name"),
+                            rs.getInt("quantity"), rs.getString("imageToy"),
                             rs.getDouble("price"), rs.getString("description"),
-                            rs.getInt("category_id"), rs.getInt("cart_id"));
+                            rs.getInt("category_id"), rs.getDouble("discount"));
                     listToy.add(list);
                 }
             }
@@ -63,15 +64,18 @@ public class ToyDAO {
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "select toy_name,quantity, price, description, category_id, cart_id from Toy"
-                        + " where toy_id = ?";
+                String sql = "select Toy.toy_name,Toy.quantity, Image.imageToy,"
+                        + " Toy.price, Toy.description, Toy.category_id, Toy.discount\n"
+                        + "from Image\n"
+                        + "inner join Toy on Image.image_id = Toy.image_id where Toy.toy_id = ?";
                 ps = con.prepareStatement(sql);
                 ps.setInt(1, toyId);
                 rs = ps.executeQuery();
                 while (rs.next()) {
-                    toy = new Toy(rs.getInt(toyId), rs.getString("toy_name"), rs.getInt("quantity"),
+                    toy = new Toy(toyId, rs.getString("toy_name"), 
+                            rs.getInt("quantity"), rs.getString("imageToy"),
                             rs.getDouble("price"), rs.getString("description"),
-                            rs.getInt("category_id"), rs.getInt("cart_id"));
+                            rs.getInt("category_id"),rs.getDouble("discount"));
                 }
             }
         } catch (Exception e) {
@@ -87,7 +91,7 @@ public class ToyDAO {
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "select Toy.toy_name, Image.imageToy, Toy.price\n"
+                String sql = "select Toy.toy_name, Image.imageToy, Toy.price, Toy.discount\n"
                         + "from Image\n"
                         + "inner join Toy on Image.image_id = Toy.image_id\n"
                         + "where Toy.category_id = ?";
@@ -134,7 +138,7 @@ public class ToyDAO {
                 ps.setString(4, description);
                 ps.setInt(5, idCategory);
                 ps.executeUpdate();
-                toy = new Toy(name, image, price, description, 0, idCategory);
+                toy = new Toy(name, image, price, description, 0, idCategory, 1);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -159,7 +163,7 @@ public class ToyDAO {
                 ps.setDouble(4, price);
                 ps.setString(5, description);
                 ps.executeUpdate();
-                toy = new Toy(name, image, price, description, 0, idCategory);
+                toy = new Toy(name, image, price, description, 0, idCategory, 1);
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -32,14 +32,16 @@ public class Account {
         this.paymentId = paymentId;
     }
 
-    public Account(int userId, String userName, String fullName, String phone, String address, boolean active, String role) {
+    public Account(int userId, String userName, String fullName, String phone, String address, boolean active, int role_id, String role) {
         this.userId = userId;
         this.userName = userName;
         this.fullName = fullName;
         this.phone = phone;
         this.address = address;
         this.active = active;
+        this.roleId = role_id;
         this.role = role;
+        
     }
 
 
