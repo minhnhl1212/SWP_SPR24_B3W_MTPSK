@@ -127,6 +127,7 @@
                                 int i = 1;
                                 if(accountList!=null){
                                 for (Account a : accountList){
+                                    if(a.getRoleId()!=1){
                                 %>
 <!--                                <tr>
                                     <td>1</td>
@@ -183,6 +184,7 @@
                                     <td><button id="toggleButton" class="button-bordered">Active</button></td> 
                                 </tr>
                                 <%}
+}
 }%>
                             </tbody>
                         </table>

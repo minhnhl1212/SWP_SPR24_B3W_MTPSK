@@ -145,7 +145,7 @@ logoutButton.addEventListener("click", showModal);
 
 // Event listener for Cancel button
 cancelButton.addEventListener("click", function () {
-    window.location.href = "http://localhost:8080/adminpage/admin_account.jsp"; // Redirect to specified URL
+    window.location.href = "admin_account.jsp"; // Redirect to specified URL
 });
 
 // Event listener to close modal when clicking outside the modal content
@@ -158,7 +158,7 @@ window.addEventListener("click", function (event) {
 // Logout functionality
 confirmLogoutButton.addEventListener("click", function () {
     // Add your logout logic here, e.g., redirecting to logout page
-    // window.location.href = "logout.php";
+     window.location.href = "LogoutController";
     alert("Logged out successfully!");
     closeModal();
 });
