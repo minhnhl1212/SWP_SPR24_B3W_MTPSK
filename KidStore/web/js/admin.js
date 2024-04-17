@@ -65,15 +65,52 @@ window.addEventListener('resize', function () {
 
 
 
-const switchMode = document.getElementById('switch-mode');
+//const switchMode = document.getElementById('switch-mode');
+//
+//switchMode.addEventListener('change', function () {
+//    if (this.checked) {
+//        document.body.classList.add('dark');
+//    } else {
+//        document.body.classList.remove('dark');
+//    }
+//})
 
-switchMode.addEventListener('change', function () {
-    if (this.checked) {
-        document.body.classList.add('dark');
+const switchMode = document.getElementById('switch-mode');
+const darkModeKey = 'darkModeEnabled';
+
+// Function to set dark mode
+function setDarkMode() {
+    document.body.classList.add('dark');
+    localStorage.setItem(darkModeKey, 'enabled');
+}
+
+// Function to remove dark mode
+function removeDarkMode() {
+    document.body.classList.remove('dark');
+    localStorage.removeItem(darkModeKey);
+}
+
+// Function to toggle dark mode
+function toggleDarkMode() {
+    if (switchMode.checked) {
+        setDarkMode();
     } else {
-        document.body.classList.remove('dark');
+        removeDarkMode();
     }
-})
+}
+
+// Check dark mode state on page load
+window.addEventListener('load', function () {
+    const darkModeEnabled = localStorage.getItem(darkModeKey);
+    if (darkModeEnabled === 'enabled') {
+        switchMode.checked = true;
+        setDarkMode();
+    }
+});
+
+// Listen for mode change
+switchMode.addEventListener('change', toggleDarkMode);
+
 
 document.querySelectorAll("#toggleButton").forEach(function (button) {
     button.addEventListener("click", function () {
@@ -145,7 +182,7 @@ logoutButton.addEventListener("click", showModal);
 
 // Event listener for Cancel button
 cancelButton.addEventListener("click", function () {
-    window.location.href = "admin_account.jsp"; // Redirect to specified URL
+    window.location.href = "http://localhost:8080/adminpage/admin_account.jsp"; // Redirect to specified URL
 });
 
 // Event listener to close modal when clicking outside the modal content
@@ -158,7 +195,7 @@ window.addEventListener("click", function (event) {
 // Logout functionality
 confirmLogoutButton.addEventListener("click", function () {
     // Add your logout logic here, e.g., redirecting to logout page
-     window.location.href = "LogoutController";
+    // window.location.href = "logout.php";
     alert("Logged out successfully!");
     closeModal();
 });

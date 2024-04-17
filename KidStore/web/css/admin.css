@@ -207,7 +207,7 @@ body {
 #content nav a {
     color: var(--dark);
 }
-#content nav .bx.bx-menu {
+sidebarsidebar {
     cursor: pointer;
     color: var(--dark);
 }
@@ -891,6 +891,11 @@ video {
 .toast {
   display: flex;
   align-items: center;
+}
+
+.dark .notifications .toast {
+    background-color: white; 
+    color: #333; 
 }
 .notifications .toast {
   width: 400px;
