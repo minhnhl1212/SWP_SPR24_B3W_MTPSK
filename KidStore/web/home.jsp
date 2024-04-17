@@ -79,7 +79,7 @@
 
                             <%                                
                                 ArrayList<Toy> toyList = (ArrayList<Toy>) session.getAttribute("TOY_LIST");
-                                ArrayList<Toy> toyCategoryList = (ArrayList<Toy>) session.getAttribute("TOY_CATEGORY_LIST");
+                                ArrayList<Toy> toyCategoryList = (ArrayList<Toy>)request.getAttribute("TOY_CATEGORY_LIST");
                                 if (toyList != null && toyCategoryList == null) {
                                     for (Toy toy : toyList) {
                             %>
@@ -103,7 +103,7 @@
                                             <!--                                            Discount-->
                                             <span class="text-muted text-decoration-line-through"><%=toy.getPrice()%> Đ</span><br/> 
                                             <!--                                            Price-->
-                                            <span class="text-black" ><%=toy.getPrice() * 0.95%> Đ</span>        
+                                            <span class="text-black" ><%=toy.getPrice() * toy.getDiscount()%> Đ</span>        
 
                                         </div>
                                         <!--                                        Product actions-->
