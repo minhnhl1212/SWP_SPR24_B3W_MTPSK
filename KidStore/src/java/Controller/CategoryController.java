@@ -32,7 +32,7 @@ public class CategoryController extends HttpServlet {
             
             ToyDAO toyDAO = new ToyDAO();
             ArrayList<Toy> toyCategory = toyDAO.toyCategoryById(categoryId);
-            session.setAttribute("TOY_CATEGORY_LIST", toyCategory);
+            request.setAttribute("TOY_CATEGORY_LIST", toyCategory);
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
         } catch (Exception ex) {

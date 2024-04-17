@@ -46,6 +46,7 @@ public class CartController extends HttpServlet {
             int id = Integer.parseInt(request.getParameter("toyId"));
             ToyDAO dao = new ToyDAO();
             Toy item = dao.getToyUsingID(id);
+            System.out.println(item);
             cartList = (HashMap<Toy, Integer>) session.getAttribute("cartList");
             //không có List thì tạo cái mới
             if (cartList == null) {
@@ -54,16 +55,11 @@ public class CartController extends HttpServlet {
             }
             else{
             //check xem đã có trong cart chưa, nếu có thì quantity +1
-            for (HashMap.Entry<Toy, Integer> c : cartList.entrySet()) {
-                if (item.equals(c.getKey())) {
-                    int quantity = cartList.get(item) + 1;
-                    cartList.put(item, quantity);
-                    break;
-                } else if (!item.equals(c.getKey())) {  
-                    cartList.put(item, 1);
-                    break;
-                }
+            if(cartList.containsKey(item)){
+                int quantity = cartList.get(item) + 1;
+                    cartList.put(item, quantity);   
             }
+            else cartList.put(item, 1);
             }
 
                 session.setAttribute("cartList", cartList);
