@@ -40,9 +40,9 @@
                         <div class="social-links">
                             <h2>Follow Us</h2>
                             <div class="social-icons">
-                                <li><i class="fa-solid fa-facebook-f"></i>Facebook</li>
-                                <li><i class="fa-solid fa-instagram"></i>Instagram</li>
-                                <li><i class="fa-solid fa-linkedin-in"></i>Youtube</li>
+                                <li><i></i>Facebook</li>
+                                <li><i></i>Instagram</li>
+                                <li><i></i>Youtube</li>
                             </div>
                         </div>
 

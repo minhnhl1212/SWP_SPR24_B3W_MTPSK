@@ -6,6 +6,10 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!-- Icon -->
+<link href="assets/fontawesome-free-6.1.1-web/css/all.css" rel="stylesheet" type="text/css">
+<!-- Boxicons -->
+        <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 <!-- Navigation-->
 <script>
     function login() {
@@ -47,12 +51,17 @@
             </form>
             
             <div class="d-flex my-4 mr-2">
-                <a  style="margin-right: 15px;"class="btn btn-outline-dark mt-auto" href="NewsController">News</a>
+                <a style="margin-right: 15px;"class="btn btn-outline-dark mt-auto" href="NewsController">News</a>
                 <a class="btn btn-outline-dark" href="cart.jsp">
                     <i class="bi-cart-fill me-1"></i>
                     Cart
                     <span class="badge bg-dark text-white ms-1 rounded-pill">${sessionScope.cartList.size()}</span>
                 </a>
+                <a style="margin-left: 15px;" class="btn btn-outline-dark" href="profileHistory.jsp">
+                    <i class='bx bx-user'></i>
+                    Account
+                </a>
+              
             </div>
 
             <c:choose>
