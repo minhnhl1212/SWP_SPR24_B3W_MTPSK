@@ -32,37 +32,6 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                <c:if test="${sessionScope.acc.roleId == 1}">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="AccountController">Admin Hub</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="managerCategory.jsp">View Revenue</a>
-                    </li>
-
-                </c:if>
-                <c:if test="${sessionScope.acc.roleId == 2}">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="ManagerProduct.jsp">Manager Product</a>
-                    </li>
-                </c:if>
-                <c:if test="${sessionScope.acc.roleId == 3}">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="viewhistory.jsp">View History</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="warranty.jsp">Check Warranty</a>
-                    </li>
-                </c:if>
-                <c:if test="${sessionScope.acc != null}">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#!">Hello ${sessionScope.acc.userName}!</a>
-                    </li>
-                </c:if>       
-
-            </ul>
-
             <form action="search" class="d-flex mx-auto">
                 <input
                     value="${key}"
@@ -76,7 +45,9 @@
                     Search
                 </button>
             </form>
+            
             <div class="d-flex my-4 mr-2">
+                <a  style="margin-right: 15px;"class="btn btn-outline-dark mt-auto" href="NewsController">News</a>
                 <a class="btn btn-outline-dark" href="cart.jsp">
                     <i class="bi-cart-fill me-1"></i>
                     Cart

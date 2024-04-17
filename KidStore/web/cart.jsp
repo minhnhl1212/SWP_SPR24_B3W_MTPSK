@@ -14,10 +14,11 @@
         <meta name="author" content="" />
         <title>Giỏ Hàng</title>
         <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet"/>
         <%--Bootstrap 4.6.2--%>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-        <link href="css/styles.css" rel="stylesheet" />
+        <link href="css/styles.css" rel="stylesheet"/>
         <link href="css/footer.css" rel="stylesheet"/>
     </head>
     <style>
@@ -82,7 +83,7 @@
                             <p class="card-text">Total: 260.000 đ</p>
                         </div>
                     </div>
-                    <a href="checkout.jsp" class="btn btn-primary btn-block">Thanh Toán</a>
+                    <a href="checkout.jsp" class="btn btn-success btn-block">Thanh Toán</a>
                 </div>
             </div>
         </div>

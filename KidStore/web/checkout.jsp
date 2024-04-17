@@ -14,78 +14,168 @@
         <meta name="author" content="" />
         <title>Checkout</title>
         <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet"/>
         <%--Bootstrap 4.6.2--%>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-        <link href="css/styles.css" rel="stylesheet" />
+        <link href="css/styles.css" rel="stylesheet"/>
         <link href="css/footer.css" rel="stylesheet"/>
     </head>
-    <%  int i = 1;
-        double sum = 0;
-        HashMap<Toy, Integer> cartItems = (HashMap<Toy, Integer>) session.getAttribute("cartList");%>
+    <style>
+        .container{
+            margin-bottom: 20px;
+        }
+        .checkout-form {
+            margin-bottom: 20px;
+        }
+
+        .confirmation {
+            border: 1px solid #ccc;
+            padding: 20px;
+        }
+
+        .confirmation h5 {
+            margin-bottom: 20px;
+        }
+
+        .confirmation p {
+            margin: 5px 0;
+        }
+    </style>
     <body>
         <%@include file="components/navBarComponent.jsp" %>
 
-        <div class="container" style="min-height: 1000px">
-            <h1>Checkout</h1>
+        <div class="container">
+            <h1>Thanh Toán</h1>
             <div class="row">
-                <div class="col-md-8" style="border: 1px solid #ccc; border-radius: 5px; padding: 1rem">
-                    <h3>Your Cart</h3>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">No</th>
-                                <th scope="col">Image</th>
-                                <th scope="col">Toy Name</th>
-                                <th scope="col">Price</th>
-                                <th scope="col">Quantity</th>
-                                <th scope="col">Total Price</th>
-                                <th scope="col">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <%for (HashMap.Entry<Toy, Integer> c : cartItems.entrySet()) {%>
-                            <tr>
-                        <input type="hidden" name="productId" value="Id"/>
-                        <th scope="row"><%=i++%></th>
-                        <td><img src="<%=c.getKey().getImage()%>" width="50"/></td>
-                        <td><%=c.getKey().getToyName()%></td>
-                        <td><%=c.getKey().getPrice()%></td>
-                        <td><input onchange="this.form.submit()" type="number" name="quantity" value="<%=c.getValue()%>"/></td>
-                        <td><% sum = c.getKey().getPrice() * c.getValue();%><%=c.getKey().getPrice() * c.getValue()%></td>
-                        <td><a href="delete-cart?productId=<%=c.getKey().getToyId()%>" class="btn btn-outline-danger"><i class="bi bi-trash"></i>Delete</a></td>
-                        </tr>
-                        <%}%>
-                        </tbody>
-                    </table>
-                    <h3>Total Amount: <%=sum%></h3>
-                </div>
+                <div class="container">
+                    <div class="row">
 
-                <div class="col-md-4" style="border: 1px solid #ccc; border-radius: 5px; padding: 1rem">
-                    <h3>Information</h3>
-                    <form action="checkout" method="POST">
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp">
+                        <div class="col-md-6">
+                            <h5>Billing Details</h5>
+                            <form class="checkout-form">
+                                <div class="form-group required">
+                                    <label for="name">Tên</label>
+                                    <input type="text" class="form-control" id="name" placeholder="">
+                                </div>
+                                <div class="form-group required">
+                                    <label for="phone">Thành Phố</label>
+                                    <input type="text" class="form-control" id="phone" placeholder="">
+                                </div>
+                                <div class="form-group required">
+                                    <label for="address">Địa chỉ</label>
+                                    <input type="text" class="form-control" id="address" placeholder="">
+                                </div>
+                                <div class="form-group required">
+                                    <label for="phone">Số Điện Thoại</label>
+                                    <input type="text" class="form-control" id="phone" placeholder="">
+                                </div>
+                                <h5>Additional Information</h5>
+                                <div class="form-group">
+                                    <label for="phone">Ghi chú</label>
+                                    <input type="text" class="form-control form-control-lg" id="phone" placeholder="">
+                                </div>
+                            </form>
                         </div>
-                        <div class="mb-3">
-                            <label for="phone" class="form-label">Phone</label>
-                            <input type="text" class="form-control" id="phone" name="phone" aria-describedby="emailHelp">
+                        <div class="col-md-6">
+                            <div class="confirmation">
+                                <h5>Xác Nhận Đơn Hàng</h5>
+                                <div class="row mb-5">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col"></th>
+                                                <th scope="col"></th>
+                                                <th scope="col"></th>
+                                                <th scope="col"></th>
+                                                <th scope="col"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><img src="https://cdn-v2.kidsplaza.vn/media/catalog/product/d/o/do-choi-o-to-day-da-cy-7712-1.jpg" width="50" alt="Product Image"></td>
+                                                <td>Mô Hình Universal Kung Fu Panda</td>
+                                                <td>260.000 đ</td>
+                                                <td>SL: 1</td>
+                                                <td>260.000 đ</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td><img src="https://cdn-v2.kidsplaza.vn/media/catalog/product/d/o/do-choi-o-to-day-da-cy-7712-1.jpg" width="50" alt="Product Image"></td>
+                                                <td>Mô Hình Universal Kung Fu Panda</td>
+                                                <td>260.000 đ</td>
+                                                <td>Qty: 1</td>
+                                                <td>260.000 đ</td>
+                                            </tr>
+                                            <tr>
+                                                <td><img src="https://cdn-v2.kidsplaza.vn/media/catalog/product/d/o/do-choi-o-to-day-da-cy-7712-1.jpg" width="50" alt="Product Image"></td>
+                                                <td>Mô Hình Universal Kung Fu Panda</td>
+                                                <td>260.000 đ</td>
+                                                <td>Qty: 1</td>
+                                                <td>260.000 đ</td>
+                                            </tr>
+                                            <tr>
+                                                <td><img src="https://cdn-v2.kidsplaza.vn/media/catalog/product/d/o/do-choi-o-to-day-da-cy-7712-1.jpg" width="50" alt="Product Image"></td>
+                                                <td>Mô Hình Universal Kung Fu Panda</td>
+                                                <td>260.000 đ</td>
+                                                <td>Qty: 1</td>
+                                                <td>260.000 đ</td>
+                                            </tr>
+                                            <tr>
+                                                <td><img src="https://cdn-v2.kidsplaza.vn/media/catalog/product/d/o/do-choi-o-to-day-da-cy-7712-1.jpg" width="50" alt="Product Image"></td>
+                                                <td>Mô Hình Universal Kung Fu Panda</td>
+                                                <td>260.000 đ</td>
+                                                <td>Qty: 1</td>
+                                                <td>260.000 đ</td>
+                                            </tr>
+                                            <tr>
+                                                <td><img src="https://cdn-v2.kidsplaza.vn/media/catalog/product/d/o/do-choi-o-to-day-da-cy-7712-1.jpg" width="50" alt="Product Image"></td>
+                                                <td>Mô Hình Universal Kung Fu Panda</td>
+                                                <td>260.000 đ</td>
+                                                <td>Qty: 1</td>
+                                                <td>260.000 đ</td>
+                                            </tr>
+                                            <tr>
+                                                <td><img src="https://cdn-v2.kidsplaza.vn/media/catalog/product/d/o/do-choi-o-to-day-da-cy-7712-1.jpg" width="50" alt="Product Image"></td>
+                                                <td>Mô Hình Universal Kung Fu Panda</td>
+                                                <td>260.000 đ</td>
+                                                <td>Qty: 1</td>
+                                                <td>260.000 đ</td>
+                                            </tr>
+                                            <tr>
+                                                <td><img src="https://cdn-v2.kidsplaza.vn/media/catalog/product/d/o/do-choi-o-to-day-da-cy-7712-1.jpg" width="50" alt="Product Image"></td>
+                                                <td>Mô Hình Universal Kung Fu Panda</td>
+                                                <td>260.000 đ</td>
+                                                <td>Qty: 1</td>
+                                                <td>260.000 đ</td>
+                                            </tr>
+                                            <tr>
+                                                <td><img src="https://cdn-v2.kidsplaza.vn/media/catalog/product/d/o/do-choi-o-to-day-da-cy-7712-1.jpg" width="50" alt="Product Image"></td>
+                                                <td>Mô Hình Universal Kung Fu Panda</td>
+                                                <td>260.000 đ</td>
+                                                <td>Qty: 1</td>
+                                                <td>260.000 đ</td>
+                                            </tr>
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <h5>Card Total</h5>
+                                <div class="card-body">
+                                    <p class="card-text">Subtotal: 260.000 đ</p>
+                                    <p class="card-text">Discount: 0 đ</p>
+                                    <p class="card-text">Total: 260.000 đ</p>
+                                </div>
+                                <a href="history.jsp"><button class="btn btn-success btn-block">Xác nhận thanh toán</button></a>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="address" class="form-label">Address</label>
-                            <input type="text" class="form-control" id="address" name="address" aria-describedby="emailHelp">
-                        </div>
-                        <div class="mb-3">
-                            <label for="note" class="form-label">Note</label>
-                            <textarea class="form-control" id="note" name="note" rows="3"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary w-100">Submit</button>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
-    <%@include file="components/footerComponent.jsp" %>
-</body>
+
+        <%@include file="components/footerComponent.jsp" %>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="js/scripts.js"></script>
+    </body>
 </html>

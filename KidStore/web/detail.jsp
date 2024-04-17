@@ -12,7 +12,7 @@
         <meta name="author" content="" />
         <title>detail</title>
         <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet"/>
         <%--Bootstrap 4.6.2--%>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
         <link href="css/styles.css" rel="stylesheet"/>
@@ -20,15 +20,12 @@
     </head>
     <style>
 
-        .container{
-            margin-bottom: 20px;
-
-        }
         .product-container {
             padding: 30px;
             border: 1px solid #ccc;
             border-radius: 5px;
-            margin-top: 20px;
+            margin-top: 70px;
+            margin-bottom: 130px;
         }
 
         .carousel-item img {
@@ -112,28 +109,41 @@
                                 &#9733; &#9733; &#9733; &#9733; &#9733;
                             </div>
                             <div class="product-price">260.000</div>
-                            <p>&#10159; Warranty genuine</p>
-                            <p>&#10159; Apply discount vouchers</p>
-                            <p>&#10159; Return if the product is defective</p>
+                            <div class="product-name"><p>&#10159; Bảo hành chính hãng</p></div>
+                            <div class="product-name"><p>&#10159; Áp dụng nhiều voucher giảm giá</p></div>
+                            <div class="product-name"><p>&#10159; Hoàn trả khi sản phẩm có lỗi</p></div>
 
                             <div class="quantity">
                                 <label for="quantity"></label>
                                 <input type="number" id="quantity" class="quantity-input" value="1">
+                            </div>  
 
-                            </div>                           
-                        </div>
-                        <a href="cart.jsp"><button  class="btn btn-primary add-to-cart-button">Add to Cart</button></a>
-                        <div class="product-details">ID: A001</div>
-                        <div class="product-details">Danh mục: Đồ chơi sưu tập</div>
+                            <div class="product-name">ID: A001</div>
+                            <div class="product-name">Danh mục: Đồ chơi sưu tập</div>
+                            <a href="cart.jsp"><button  style="margin-top: 50px;" class="btn btn-success btn-block">Thêm vào giỏ hàng</button></a>  
+                        </div>                       
+
 
                     </div>
                 </div>
+                <div class="row">
+                    <div class="product-details">
+                        <div class="product-name">Thông tin chi tiết</div>
+
+                    </div>
+                    <div class="product-details">
+                        <div class="col-md-6">
+                            Bộ sưu tập gồm 12 nhân vật thường và 1 nhân vật hiếm.
+                            Kích thước: 6-9cm
+                            Chất liệu: nhựa PVC/ABS
+                        </div>                                                                
+                    </div>
+                </div>
+
             </div>
 
-        </div>
-
-        <%@include file="components/footerComponent.jsp" %>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="js/scripts.js"></script>
+            <%@include file="components/footerComponent.jsp" %>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="js/scripts.js"></script>
     </body>
 </html>

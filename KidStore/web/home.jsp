@@ -38,7 +38,6 @@
                 role=a.getRoleId();
             }
         %>
-        <a style="background-color: orange; color: #664d03" class="btn btn-outline-dark mt-auto" href="NewsController">News</a>
         <%if (role <= 2 && role!=0) {%>
         <a style="background-color: greenyellow; color: #664d03" class="btn btn-outline-dark mt-auto" href="ManagerCategory.jsp">Manager Category</a>
         <a style="background-color: paleturquoise; color: #664d03" class="btn btn-outline-dark mt-auto" href="ManagerProduct.jsp">Manager Product</a>
