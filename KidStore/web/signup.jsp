@@ -4,26 +4,51 @@
     Author     : admin
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Sign up</title>
+        <meta charset="UTF-8">
+        <title>Register</title>
+        <link rel="stylesheet" type="text/css" href="login.css">
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet"/>
+        <%--Bootstrap 4.6.2--%>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+        <link href="css/styles.css" rel="stylesheet"/>
+        <link href="css/footer.css" rel="stylesheet"/>
+        <script src="login.js"></script>
     </head>
     <body>
-        <div>
-            <form action="MainController" method="POST" class="form-signup">
-                <p style="text-align:center">OR</p>
-                <input type="text" id="user-email" class="form-control" placeholder="Username" required autofocus="" name="userName">
-                <input type="password" id="user-pass" class="form-control" placeholder="Password" required autofocus="" name="password">
-                <input type="password" id="user-repeatpass" class="form-control" placeholder="Repeat Password" required autofocus="" name="confirmPassword">
-                <span style="color: green">${SIGNUP_SUCCESS}</span>
-                <span style="color: red">${SIGNUP_ERROR}</span>
-                <span style="color: red">${PASS_NOT_MATH}</span>
-                <button class="btn btn-primary btn-block" type="submit" name="btAction" value="Sign Up"><i class="fas fa-user-plus"></i> Sign Up</button>
-                <a href="#" id="cancel_signup"><i class="fas fa-angle-left"></i> Back</a>
-            </form>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-7">
+                    <img src="img/background-register.jpg" style="max-width: 100%; height: 100vh; margin-left: -1vw">
+                </div>
+                <div class="col-md-5">
+                    <form style="margin-top: 10%" action="register" method="post" onsubmit="return validateForm()">
+                        <h1 style="text-align: center; font-weight: 800; color: #d8ffde; text-shadow: 4px 3px 10px #1a451b">REGISTER</h1>
+                        <div style="margin-left: 3%">
+                        <label for="fullname">Full Name</label><br>
+                        <input style="border-style: none none solid none; margin-bottom: 4%; width: 93%" type="text" id="fullname" name="fullname"></br>
+                        <label for="email">Email or Phone Number</label></br>
+                        <input style="border-style: none none solid none; margin-bottom: 4%; width: 93%" type="text" id="email" name="email"></br>
+                        <label for="password">Password</label></br>
+                        <input style="border-style: none none solid none; margin-bottom: 4%; width: 93%" type="password" id="password" name="password"></br>
+                        <label for="confirmpassword">Confirm Password</label></br>
+                        <input style="border-style: none none solid none; margin-bottom: 4%; width: 93%" type="password" id="confirmpassword" name="confirmpassword"></br>
+                        <input type="checkbox" id="terms" name="terms">
+                        <label for="terms">Lorem ipsum is simply dummy text of the printing and type.</label></br>
+                        <input style="border-radius: 40px; font-size: 24px; font-weight: 800; color: white; margin: 2% 19%; padding: 2% 25%; background: linear-gradient(90deg, rgba(58,116,180,1) 0%, rgba(29,161,253,1) 50%, rgba(192,196,19,1) 100%);; border: none" type="submit" value="Register">
+                        <p>Already have an account? <a style="color: #007bff; font-size: 16px; margin-left: 1%;" href="login.jsp">Log in</a></p>
+                        </div>
+</form>
+                </div>
+            </div>
         </div>
+
+
+
     </body>
 </html>

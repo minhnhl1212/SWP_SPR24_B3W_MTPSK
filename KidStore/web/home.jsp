@@ -42,6 +42,8 @@
         <%if (role <= 2 && role!=0) {%>
         <a style="background-color: greenyellow; color: #664d03" class="btn btn-outline-dark mt-auto" href="ManagerCategory.jsp">Manager Category</a>
         <a style="background-color: paleturquoise; color: #664d03" class="btn btn-outline-dark mt-auto" href="ManagerProduct.jsp">Manager Product</a>
+        <a style="background-color: wheat; color: #664d03" class="btn btn-outline-dark mt-auto" href="ManagerProduct.jsp">Manager Customer</a>
+        <a style="background-color: #0d6efd; color: #664d03" class="btn btn-outline-dark mt-auto" href="ManagerProduct.jsp">Manager Other</a>
         <%} if (role == 1) {%>
         <a style="background-color: wheat; color: #664d03" class="btn btn-outline-dark mt-auto" href="ManagerProduct.jsp">Manager Customer</a>
         <a style="background-color: #0d6efd; color: #664d03" class="btn btn-outline-dark mt-auto" href="ManagerProduct.jsp">Manager Other</a>
