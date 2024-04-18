@@ -25,7 +25,9 @@
             margin-bottom: 20px;
         }
     </style>
-
+    <%  int i = 1;
+       double sum = 0, discount = 0;
+       HashMap<Toy, Integer> cartItems = (HashMap<Toy, Integer>) session.getAttribute("cartList");%>
     <body>
         <%@include file="components/navBarComponent.jsp" %>
 
@@ -46,18 +48,23 @@
                             </tr>
                         </thead>
                         <tbody>
-                        <form action="update-quantity">
+                            <%for (HashMap.Entry<Toy, Integer> c : cartItems.entrySet()) {
+                                    double prices = c.getKey().getPrice() * c.getValue() * c.getKey().getDiscount();
+                            %>
+                        <form action="CartController">
                             <tr>
                             <input type="hidden" name="productId" value="Id"/>
-                            <th scope="row">1</th>
-                            <td><img src="https://cdn-v2.kidsplaza.vn/media/catalog/product/d/o/do-choi-o-to-day-da-cy-7712-1.jpg" width="50"/></td>
-                            <td>Mô Hình Universal Kung Fu Panda</td>
-                            <td>260.000 đ</td>
-                            <td><input onchange="" type="number" name="quantity" value=""/></td>
-                            <td>260.000 đ</td>
-                            <td><a href="delete-cart?productId=" class="btn btn-outline-dark"><i></i>X</a></td>
+                            <th scope="row"><%=i++%></th>
+                            <td><img src="<%=c.getKey().getImage()%>" width="50"/></td>
+                            <td><%=c.getKey().getToyName()%></td>
+                            <td><%=c.getKey().getPrice() * c.getKey().getDiscount()%></td>
+                            <td><input onchange="this.form.submit()" type="number" name="quantity" value="<%=c.getValue()%>"/></td>
+                            <td><% sum += prices;%><%=prices%> Đ</td>
+                            <td><a href="DeleteCartController?productId=<%=c.getKey().getToyId()%>" class="btn btn-outline-danger"><i class="bi bi-trash"></i>Delete</a></td>
                             </tr>
                         </form>
+                        <%}%>
+
                         </tbody>
                     </table>
 
@@ -68,18 +75,20 @@
                 </div>
 
                 <div class="col-md-5">
+                    <form>
                     <div class="input-group mb-4">
-                        <input type="text" class="form-control" placeholder="Enter voucher code">
+                        <input type="text" class="form-control" placeholder="Enter voucher code" name="voucher">
                         <div class="input-group-append">
-                            <button class="btn btn-outline-danger" type="button">Áp dụng</button>
+                            <button class="btn btn-outline-danger" type="submit">Áp dụng</button>
                         </div>
                     </div>
+                    </form>
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Summary</h5>
-                            <p class="card-text">Subtotal: 260.000 đ</p>
+                            <p class="card-text">Subtotal:<%=sum%> đ</p>
                             <p class="card-text">Discount: 0 đ</p>
-                            <p class="card-text">Total: 260.000 đ</p>
+                            <p class="card-text">Total: <%=sum%> đ</p>
                         </div>
                     </div>
                     <a href="checkout.jsp" class="btn btn-success btn-block">Thanh Toán</a>
