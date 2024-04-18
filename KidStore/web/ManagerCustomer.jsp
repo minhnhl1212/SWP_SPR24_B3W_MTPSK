@@ -1,5 +1,6 @@
-<%@page import="java.util.ArrayList"%>
 <%@page import="DTO.Category"%>
+<%@page import="DTO.Toy"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -7,7 +8,10 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>STAFF</title>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="css/ManagerProduct.css">
 
     </head>
     <body>
@@ -19,66 +23,99 @@
             <a style="background-color: #0d6efd; color: #664d03" class="btn btn-outline-dark mt-auto" href="ManagerOther.jsp">Manager Other</a>
         </header>
 
-        <div class="container">
-
-            <section id="product-list">
-                <h2>Product</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>User Name</th>
-                            <th>Password</th>
-                            <th>Is Sell</th>
-                            <th>Active</th>
-                            <th>Edit</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                        <%
-                            ArrayList<Category> productList = (ArrayList<Category>) request.getAttribute("productList");
-                            if (productList != null) {
-                                for (Category product : productList) {
-                        %>
-                        <tr>
-                            <td>${p.uid}</td>
-                            <td>${p.user}</td>
-                            <td>${p.pass}</td>
-                            <td>${p.isSell}</td>
-                            <td>
-                                <a href="edit_product.jsp?id=${p.uid}">Edit</a>
-                                <a href="delete_product.jsp?id=${p.uid}">Delete</a>
-                            </td>
-                        </tr>
-                        <% }
-                        } else { %>
-                        <tr><td colspan="5">No Customers</td></tr>
-                        <% }%>
-                    </tbody>
-                </table>
-            </section>
-
-
-            <section id="add-product-form">
-                <h2>Add Customers</h2>
-                <form action="ManagerProduct.jsp" method="post">
-                    <label for="productName">Name:</label>
-                    <input type="text" id="productName" name="productName" required>
-
-                    <label for="productPrice">Price:</label>
-                    <input type="number" id="productPrice" name="productPrice" required>
-
-                    <label for="productAction">Action:</label>
-                    <textarea id="productAction" name="productAction"></textarea>
-
-                    <button type="submit">Add new Customers</button>
-                </form>
-            </section>
+        <div id="product-list">
+            <h2>Product</h2>
         </div>
 
-        <script src="js/admin.js"></script>
-    </body>
+        <button onclick="toggleAddProductForm()" class="add">Add New Customer</button>
+        <p style="color: red">${ADD_TOY_SUCCESS}</p>
+        <p style="color: red">${ADD_TOY_FAILED}</p>
+
+
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>UserName</th>
+                    <th>Password</th>
+                    <th>IsSell</th>
+                    <th>Active</th>
+                    <th>Edit</th>                    
+                </tr>
+            </thead>
+            <tbody>
+                <%
+                    ArrayList<Toy> toyList = (ArrayList<Toy>) session.getAttribute("TOY_LIST");
+                    if (toyList != null) {
+                        for (Toy toy : toyList) {
+                %>
+                <tr>
+                    <td><%=toy.getToyId()%></td>
+                    <td><%=toy.getToyName()%></td>
+                    <td><img src="<%=toy.getImage()%>" alt="Toy Image" style="max-width: 10%"></td>
+                    <td><%=toy.getPrice()%></td>
+                    <td>Category</td>
+                    <td><%=toy.getDiscount()%></td>
+                    <td><%=toy.getWarranty_time()%></td>
+                    <td class="col-2">
+                        <a href="">Edit</a>                       
+                        <a href="">Delete</a>
+                    </td>
+                </tr>
+                <%}
+                } else {
+                %>
+            <p>Không có đồ chơi nào</p>
+            <%
+                }
+            %>                
+        </tbody>
+    </table>
+
+    <div class="wrap">
+        <div class="addProduct overlay">
+            <div id="add-product-form">                    
+                <div>
+                    <form action="AddToyController">
+                        <h2>Add New Customer</h2>
+                        <label for="productName">Name</label></br>
+                        <input type="text" id="productName" name="productName" required></br>
+
+                        <label for="image">Password</label></br>
+                        <input type="text" id="password" name="password" required></br>
+
+                        <label for="price">IsSell</label></br>
+                        <input type="number" id="issell" name="issell" required></br>
+                        
+                        <label for="description">Active</label></br>
+                        <input type="text" id="active" name="active" required></br>                                                  
+
+                        <label for="discount">Edit</label></br>
+                        <input type="number" id="edit" name="edit" required></br>
+     
+
+                        <button type="submit">Add New Customer</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/admin.js"></script>
+</body>
+<script>
+            function toggleAddCustomerForm() {
+                var addCustomerForm = document.querySelector('.addCustomer');
+                if (addCustomerForm.style.display === 'none') {
+                    addCustomerForm.style.display = 'block';
+                    addCustomerForm.classList.add("overlay");
+                } else {
+                    addCustomerForm.style.display = 'none';
+                    addCustomerForm.classList.remove("overlay");
+                }
+            }
+</script>
 </html>
 
 
