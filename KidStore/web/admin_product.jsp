@@ -4,6 +4,8 @@
     Author     : TUF
 --%>
 
+<%@page import="DTO.Toy"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -114,6 +116,10 @@
                     <div class="order">
                         <div class="head">
                             <h3>Product List</h3>
+                            <p style="color: green">${APPROVE_SUCCESS}</p>
+                            <p style="color: green">${CANCEL_SUCCESS}</p>
+                            <p style="color: red">${APPROVE_FAILED}</p>
+                            <p style="color: red">${CANCEL_FAILED}</p>
                         </div>
                         <table>
                             <thead>
@@ -128,56 +134,28 @@
                                 </tr>
                             </thead>
                             <tbody>  
+                                <%
+                                    ArrayList<Toy> toyList = (ArrayList<Toy>) session.getAttribute("TOY_LIST_NOT_APPROVE");
+                                    if (toyList != null) {
+                                        for (Toy toy : toyList) {
+                                %>
                                 <tr>
-                                    <td>1</td>
-                                    <td>Mô Hình Đồ Chơi Detective Conan Carnival POP MART 6941848233653</td>
-                                    <td>Hình ảnh</td>
-                                    <td>Nguyen Thanh Tien</td>
-                                    <td>280.000 Đ</td>
-                                    <td><button class="button-bordered" id="success">Approve</button></td>
-                                    <td><button class="button-bordered" id="error">Cancel</button></td> 
+                                    <td><%=toy.getToyId()%></td>
+                                    <td><%=toy.getToyName()%></td>
+                                    <td><img src="<%=toy.getImage()%>" alt="Toy Image"></td>
+                                    <td><%=toy.getNameStaff()%></td>
+                                    <td><%=toy.getPrice()%> Đ</td>
+                                    <td><a href="ApproveToyController?toyId=<%=toy.getToyId()%>"class="button-bordered" id="success">Approve</a></td> 
+                                    <td><a href="CancelToyController?toyId=<%=toy.getToyId()%>" class="button-bordered" id="error">Cancel</a></td>  
                                     <td></td>
                                 </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Mô Hình Universal Kung Fu Panda</td>
-                                    <td>Hình ảnh</td>
-                                    <td>Nguyen Thanh Tien</td>
-                                    <td>280.000 Đ</td>
-                                    <td><button class="button-bordered" id="success">Approve</button></td> 
-                                    <td><button class="button-bordered" id="error">Cancel</button></td> 
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Mô Hình Disney Stitch On A Date POP MART 6941848254726</td>
-                                    <td>Hình ảnh</td>
-                                    <td>Nguyen Thanh Tien</td>
-                                    <td>280.000 Đ</td>
-                                    <td><button class="button-bordered" id="success">Approve</button></td> 
-                                    <td><button class="button-bordered" id="error">Cancel</button></td> 
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>Bộ Đường Đua Hot Wheels Xoắc Ốc Dốc Bay</td>
-                                    <td>Hình ảnh</td>
-                                    <td>Nguyen Thanh Tien</td>
-                                    <td>280.000 Đ</td>
-                                    <td><button class="button-bordered" id="success">Approve</button></td> 
-                                    <td><button class="button-bordered" id="error">Cancel</button></td> 
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>Đồ Chơi Xe Cảnh Sát Biến Hình Paw Patrol The Movie - Chase</td>
-                                    <td>Hình ảnh</td>
-                                    <td>Nguyen Thanh Tien</td>
-                                    <td>280.000 Đ</td>
-                                    <td><button class="button-bordered" id="success">Approve</button></td> 
-                                    <td><button class="button-bordered" id="error">Cancel</button></td> 
-                                    <td></td>
-                                </tr>
+                                <%}
+                                } else {
+                                %>
+                            <p>Không có loại đồ chơi nào</p>
+                            <%
+                                }
+                            %>
 
                             </tbody>
                         </table>

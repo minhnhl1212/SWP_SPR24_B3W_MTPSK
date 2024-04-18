@@ -59,11 +59,11 @@ public class CategoryDAO {
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "select category_id ,category_name from Category where approve = 0";
+                String sql = "select category_id ,category_name, name_staff from Category where approve = 0";
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
-                    Category list = new Category(rs.getInt("category_id"), rs.getString("category_name"));
+                    Category list = new Category(rs.getInt("category_id"), rs.getString("category_name"), rs.getString("name_staff"));
                     listCategory.add(list);
                 }
             }
@@ -96,16 +96,17 @@ public class CategoryDAO {
         return listCategory;
     }
 
-    public Category addCategory(String nameCategory) throws SQLException, Exception {
+    public Category addCategory(String nameCategory, String nameStaff) throws SQLException, Exception {
         Category category = null;
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "insert into Category(category_name, approve) values (?,0)";
+                String sql = "insert into Category(category_name, approve, name_staff) values (?,0,?)";
                 ps = con.prepareStatement(sql);
                 ps.setString(1, nameCategory);
+                ps.setString(2, nameStaff);
                 ps.executeUpdate();
-                category = new Category(nameCategory);
+                category = new Category(nameCategory, nameStaff);
             }
         } catch (Exception e) {
             e.printStackTrace();

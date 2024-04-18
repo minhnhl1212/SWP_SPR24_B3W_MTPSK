@@ -140,7 +140,7 @@
                                 <tr>
                                     <td><%=category.getCategoryId()%></td>
                                     <td><%=category.getCategoryName()%></td>
-                                    <td>Nguyen Thanh Tien</td>
+                                    <td><%=category.getNameStaff()%></td>
                                     <td><a href="ApproveCategoryController?categoryId=<%=category.getCategoryId()%>"class="button-bordered" id="success">Approve</a></td> 
                                     <td><a href="CancelCategoryController?categoryId=<%=category.getCategoryId()%>" class="button-bordered" id="error">Cancel</a></td> 
                                     <td></td>
@@ -148,7 +148,7 @@
                                 <%}
                                 } else {
                                 %>
-                            <p>Không có loại đồ chơi nào</p>
+                            <p>Không có đồ chơi nào</p>
                             <%
                                 }
                             %>

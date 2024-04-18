@@ -35,7 +35,8 @@ public class AddToyController extends HttpServlet {
             int idCategory = Integer.parseInt(request.getParameter("idCategory"));
             double discount = Double.parseDouble(request.getParameter("discount"));
             int warrantyTime = Integer.parseInt(request.getParameter("warrantyTime"));
-            Toy addToy = toyDAO.addToy(name, image, price, description, idCategory, discount, warrantyTime);
+            String nameStaff = request.getParameter("nameStaff");
+            Toy addToy = toyDAO.addToy(name, image, price, description, idCategory, discount, warrantyTime, nameStaff);
             if (addToy != null) {
                 request.setAttribute("ADD_TOY_SUCCESS", "Added Success");
             } else {

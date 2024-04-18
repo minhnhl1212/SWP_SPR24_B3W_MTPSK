@@ -1,3 +1,4 @@
+<%@page import="DTO.Account"%>
 <%@page import="DTO.Category"%>
 <%@page import="java.util.ArrayList"%>
 
@@ -42,19 +43,20 @@
                 <tbody>
                     <%
                         ArrayList<Category> categoryList = (ArrayList<Category>) session.getAttribute("CATEGORY_LIST_ALL");
+                        Account acc = (Account) session.getAttribute("acc");
                         if (categoryList != null) {
                             for (Category category : categoryList) {
                     %>
                     <tr>
                         <td><%=category.getCategoryId()%></td>
-                        <td><%=category.getCategoryName()%></td>                    
-                        <td class="col-2">
-                            <a href="DisableCategoryController">Disable</a>                       
-                        </td>
-                    </tr>
-                    <%}
-                    } else {
-                    %>
+                        <td><%=category.getCategoryName()%></td>                   
+                       <td class="col-2">
+                       <a href="DisableCategoryController">Disable</a>                       
+                </td>
+                </tr>
+                <%}
+                } else {
+                %>
                 <p>Không có loại đồ chơi nào</p>
                 <%
                     }
@@ -69,7 +71,8 @@
                             <form class="form" action="AddCategoryController">
                                 <h2>Add New Toy Category</h2>
                                 <label for="nameCategory">Name Category</label></br>
-                                <input type="text" id="productName" name="nameCategory" required></br>                                            
+                                <input type="text" id="productName" name="nameCategory" required></br>      
+                                <input name="nameStaff" type="hidden" value="<%=acc.getFullName()%>">
                                 <button type="submit">Add</button>
                             </form>
                         </div>
@@ -84,10 +87,10 @@
                     var addCategoryForm = document.querySelector('.addCategory');
                     if (addCategoryForm.style.display === 'none') {
                         addCategoryForm.style.display = 'block';
-                        
+
                     } else {
                         addCategoryForm.style.display = 'none';
-                        
+
                     }
                 }
     </script>

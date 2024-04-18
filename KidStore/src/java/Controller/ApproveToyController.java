@@ -1,7 +1,7 @@
 package Controller;
 
-import DAO.CategoryDAO;
-import DTO.Category;
+import DAO.ToyDAO;
+import DTO.Toy;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -18,32 +18,31 @@ import javax.servlet.http.HttpSession;
  *
  * @author trant
  */
-public class AddCategoryController extends HttpServlet {
+public class ApproveToyController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
             response.setContentType("text/html;charset=UTF-8");
             HttpSession session = request.getSession();
-            CategoryDAO categeoryDAO = new CategoryDAO();
-            ArrayList<Category> categoryList = categeoryDAO.categoryList();
-            session.setAttribute("CATEGORY_LIST", categoryList);
+            int toyId = Integer.parseInt(request.getParameter("toyId"));
             
-            String nameCategory = request.getParameter("nameCategory");
-            String nameStaff = request.getParameter("nameStaff");
-            CategoryDAO cagoryDAO = new CategoryDAO();
-            Category addCategory = cagoryDAO.addCategory(nameCategory, nameStaff);
-            if (addCategory != null) {
-                request.setAttribute("ADD_CATEGORY_SUCCESS", "Added " + addCategory.getCategoryName() + " Success");
+            ToyDAO toyDAO = new  ToyDAO();
+            Toy approve = toyDAO.approveToy(toyId);
+            ArrayList<Toy> toyListNotApprove = toyDAO.toyListNotApprove();
+            session.setAttribute("TOY_LIST_NOT_APPROVE", toyListNotApprove);
+            
+            if (approve != null){
+                request.setAttribute("APPROVE_SUCCESS", "Approved");
             } else {
-                request.setAttribute("ADD_CATEGORY_FAILED", "Added " + addCategory.getCategoryName() + " Failed");
+                request.setAttribute("APPROVE_FAILED", "Approve Failed");
             }
-            RequestDispatcher rd = request.getRequestDispatcher("ManagerCategory.jsp");
+            
+            RequestDispatcher rd = request.getRequestDispatcher("admin_product.jsp");
             rd.forward(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(AddCategoryController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ApproveCategoryController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     @Override

@@ -1,3 +1,4 @@
+<%@page import="DTO.Account"%>
 <%@page import="DTO.Category"%>
 <%@page import="DTO.Toy"%>
 <%@page import="java.util.ArrayList"%>
@@ -49,6 +50,7 @@
             <tbody>
                 <%
                     ArrayList<Toy> toyList = (ArrayList<Toy>) session.getAttribute("TOY_LIST");
+                    Account acc = (Account) session.getAttribute("acc");
                     if (toyList != null) {
                         for (Toy toy : toyList) {
                 %>
@@ -81,6 +83,7 @@
                 <div>
                     <form action="AddToyController">
                         <h2>Add New Toy</h2>
+                        
                         <label for="productName">Name</label></br>
                         <input type="text" id="productName" name="productName" required></br>
 
@@ -117,8 +120,8 @@
                         <input type="number" id="discount" name="discount" required></br>
 
                         <label for="warrantyTime">Warranty Time</label></br>
-                        <input type="date" id="warrantyTime" name="warrantyTime" required></br>
-
+                        <input type="number" id="warrantyTime" name="warrantyTime" required></br>
+                        <input name="nameStaff" type="hidden" value="<%=acc.getFullName()%>">
                         <button type="submit">Add New Toy</button>
                     </form>
                 </div>

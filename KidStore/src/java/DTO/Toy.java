@@ -16,9 +16,14 @@ public class Toy {
     private int categoryId;
     private double discount;
     private int warranty_time;
+    private String nameStaff;
 
     public Toy() {
     }
+
+    public Toy(int toyId) {
+        this.toyId = toyId;
+    }        
 
     public Toy(String toyName, String image, double price, double discount) {
         this.toyName = toyName;
@@ -36,7 +41,21 @@ public class Toy {
         this.categoryId = categoryId;
         this.discount = discount;
         this.warranty_time = warranty_time;
-    }        
+    }       
+
+    public Toy(String toyName, String image, double price, String description, int approve, int categoryId, double discount, int warranty_time, String nameStaff) {
+        this.toyName = toyName;
+        this.image = image;
+        this.price = price;
+        this.description = description;
+        this.approve = approve;
+        this.categoryId = categoryId;
+        this.discount = discount;
+        this.warranty_time = warranty_time;
+        this.nameStaff = nameStaff;
+    }
+    
+    
 
     public Toy(String toyName, String image, double price, String description, int approve, int categoryId, double discount) {
         this.toyName = toyName;
@@ -81,6 +100,8 @@ public class Toy {
         this.categoryId = categoryId;
         this.discount = discount;
     }
+    
+    
 
     public Toy(int toyId, String toyName, int quantity, String image, double price, String description, int approve, int categoryId, double discount, int warranty_time) {
         this.toyId = toyId;
@@ -93,6 +114,20 @@ public class Toy {
         this.categoryId = categoryId;
         this.discount = discount;
         this.warranty_time = warranty_time;
+    }        
+
+    public Toy(int toyId, String toyName, int quantity, String image, double price, String description, int approve, int categoryId, double discount, int warranty_time, String nameStaff) {
+        this.toyId = toyId;
+        this.toyName = toyName;
+        this.quantity = quantity;
+        this.image = image;
+        this.price = price;
+        this.description = description;
+        this.approve = approve;
+        this.categoryId = categoryId;
+        this.discount = discount;
+        this.warranty_time = warranty_time;
+        this.nameStaff = nameStaff;
     }        
 
     public int getToyId() {
@@ -174,6 +209,16 @@ public class Toy {
     public void setWarranty_time(int warranty_time) {
         this.warranty_time = warranty_time;
     }
+
+    public String getNameStaff() {
+        return nameStaff;
+    }
+
+    public void setNameStaff(String nameStaff) {
+        this.nameStaff = nameStaff;
+    }
+    
+    
 
     
 

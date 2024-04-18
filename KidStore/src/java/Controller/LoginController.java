@@ -54,6 +54,7 @@ public class LoginController extends HttpServlet {
             Account acc = dao.Login(username, password);
             ToyDAO toyDAO = new ToyDAO();
             ArrayList<Toy> toyList = toyDAO.toyList();
+            ArrayList<Toy> toyListNotApprove = toyDAO.toyListNotApprove();
             //Lấy danh sách Category approve
             CategoryDAO categoryDAO = new CategoryDAO();
             ArrayList<Category> categoryList = categoryDAO.categoryList();
@@ -68,6 +69,7 @@ public class LoginController extends HttpServlet {
             session.setAttribute("CATEGORY_LIST", categoryList);
             session.setAttribute("CATEGORY_LIST_ALL", categoryListAll);
             session.setAttribute("CATEGORY_LIST_NOT_APPROVE", categoryListNotApprove);
+            session.setAttribute("TOY_LIST_NOT_APPROVE", toyListNotApprove);
             //đúng trả về home
             if (acc != null) {
                 session.setAttribute("acc", acc);
