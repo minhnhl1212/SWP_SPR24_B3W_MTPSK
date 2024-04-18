@@ -112,7 +112,7 @@ public class ToyDAO {
         return listToy;
     }
 
-    public Toy addToy(String name, String image, double price, String description, int idCategory, double discount, int warrantyTime) throws SQLException, Exception {
+    public Toy addToy(String name, String image, double price, String description, int idCategory, double discount, int warrantyTime, String nameStaff) throws SQLException, Exception {
         Toy toy = null;
         try {
             con = DBUtils.getConnection();
@@ -123,8 +123,8 @@ public class ToyDAO {
                         + "DECLARE @image_id INT\n"
                         + "SET @image_id = SCOPE_IDENTITY();\n"
                         + "               \n"
-                        + "insert into Toy (toy_name, price, description, category_id, discount, warranty_time, approve)\n"
-                        + "values (?,?,?,?,?,?,0)\n"
+                        + "insert into Toy (toy_name, price, description, category_id, discount, warranty_time, approve, name_staff)\n"
+                        + "values (?,?,?,?,?,?,0,?)\n"
                         + "                       \n"
                         + "DECLARE @toy_id INT;\n"
                         + "SET @toy_id = SCOPE_IDENTITY();\n"
@@ -140,8 +140,9 @@ public class ToyDAO {
                 ps.setInt(5, idCategory);
                 ps.setDouble(6, discount);
                 ps.setInt(7, warrantyTime);
+                ps.setString(8, nameStaff);
                 ps.executeUpdate();
-                toy = new Toy(name, image, price, description, 0, idCategory, discount, warrantyTime);
+                toy = new Toy(name, image, price, description, 0, idCategory, discount, warrantyTime, nameStaff);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -217,5 +218,78 @@ public class ToyDAO {
             closeConnection();
         }
         return listToy;
+    }
+        
+        public ArrayList<Toy> toyListNotApprove() throws SQLException, Exception {
+        ArrayList<Toy> listToy = new ArrayList<>();
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "select Toy.toy_id, Toy.toy_name,Toy.quantity, Image.imageToy, Toy.price, Toy.description, Toy.category_id, Toy.discount, Toy.warranty_time, Toy.approve, Image.image_id, Image.main, Toy.name_staff\n"
+                        + "from Image\n"
+                        + "inner join Toy on Image.toy_id = Toy.toy_id\n"
+                        + "where approve = 0";
+                ps = con.prepareStatement(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    Toy list = new Toy(rs.getInt("toy_id"), rs.getString("toy_name"),
+                            rs.getInt("quantity"), rs.getString("imageToy"),
+                            rs.getDouble("price"), rs.getString("description"),
+                            rs.getInt("approve"), rs.getInt("category_id"),
+                            rs.getDouble("discount"), rs.getInt("warranty_time"), rs.getString("name_staff"));
+                    listToy.add(list);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+        return listToy;
+    }
+        
+        public Toy approveToy(int toyId) throws SQLException, Exception {
+        Toy toy = null;
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "update Toy\n"
+                        + "set approve = 1\n"
+                        + "where toy_id = ?";
+                ps = con.prepareStatement(sql);
+                ps.setInt(1, toyId);
+                ps.executeUpdate();
+                toy = new Toy(toyId);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+        return toy;
+    }
+
+    public Toy cancelToy(int toyId) throws SQLException, Exception {
+        Toy toy = null;
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "delete from Image\n"
+                        + "where toy_id = ?\n"
+                        + "\n"
+                        + "delete from Toy \n"
+                        + "where toy_id = ?";
+                ps = con.prepareStatement(sql);
+                ps.setInt(1, toyId);
+                ps.setInt(2, toyId);
+                ps.executeUpdate();
+                toy = new Toy(toyId);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+        return toy;
     }
 }
