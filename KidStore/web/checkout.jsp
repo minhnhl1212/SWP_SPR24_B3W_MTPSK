@@ -108,6 +108,9 @@
 
                             </form>
                         </div>
+                        <%  int i = 1;
+                             double sum = 0, discount = 0;
+                             HashMap<Toy, Integer> cartItems = (HashMap<Toy, Integer>) session.getAttribute("cartList");%>
                         <div class="col-md-6">
                             <div class="confirmation">
                                 <h5>Xác Nhận Đơn Hàng</h5>
@@ -123,35 +126,17 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <%for (HashMap.Entry<Toy, Integer> c : cartItems.entrySet()) {
+                                                    double prices = c.getKey().getPrice() * c.getValue() * c.getKey().getDiscount();
+                                            %>
                                             <tr>
-                                                <td><img src="https://cdn-v2.kidsplaza.vn/media/catalog/product/d/o/do-choi-o-to-day-da-cy-7712-1.jpg" width="50" alt="Product Image"></td>
-                                                <td>Mô Hình Universal Kung Fu Panda</td>
-                                                <td>260.000 đ</td>
-                                                <td>SL: 1</td>
-                                                <td>260.000 đ</td>
+                                                <td><img src="<%=c.getKey().getImage()%>" width="50" alt="Product Image"></td>
+                                                <td><%=c.getKey().getToyName()%></td>
+                                                <td><%=c.getKey().getPrice()* c.getKey().getDiscount()%></td>
+                                                <td>SL: <%=c.getValue()%></td>
+                                                <td><%sum+=prices;%><%=prices%> đ</td>
                                             </tr>
-
-                                            <tr>
-                                                <td><img src="https://cdn-v2.kidsplaza.vn/media/catalog/product/d/o/do-choi-o-to-day-da-cy-7712-1.jpg" width="50" alt="Product Image"></td>
-                                                <td>Mô Hình Universal Kung Fu Panda</td>
-                                                <td>260.000 đ</td>
-                                                <td>Qty: 1</td>
-                                                <td>260.000 đ</td>
-                                            </tr>
-                                            <tr>
-                                                <td><img src="https://cdn-v2.kidsplaza.vn/media/catalog/product/d/o/do-choi-o-to-day-da-cy-7712-1.jpg" width="50" alt="Product Image"></td>
-                                                <td>Mô Hình Universal Kung Fu Panda</td>
-                                                <td>260.000 đ</td>
-                                                <td>Qty: 1</td>
-                                                <td>260.000 đ</td>
-                                            </tr>
-                                            <tr>
-                                                <td><img src="https://cdn-v2.kidsplaza.vn/media/catalog/product/d/o/do-choi-o-to-day-da-cy-7712-1.jpg" width="50" alt="Product Image"></td>
-                                                <td>Mô Hình Universal Kung Fu Panda</td>
-                                                <td>260.000 đ</td>
-                                                <td>Qty: 1</td>
-                                                <td>260.000 đ</td>
-                                            </tr>
+                                            <%}%>
                                         </tbody>
                                     </table>
                                 </div>

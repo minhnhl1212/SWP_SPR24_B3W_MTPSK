@@ -4,14 +4,16 @@ public class Image {
     private int imageId;
     private String image;
     private int toyId;
+    private boolean main;
 
     public Image() {
     }
 
-    public Image(int imageId, String image, int toyId) {
+    public Image(int imageId, String image, int toyId, boolean main) {
         this.imageId = imageId;
         this.image = image;
         this.toyId = toyId;
+        this.main = main;
     }
 
     public int getImageId() {
@@ -36,6 +38,14 @@ public class Image {
 
     public void setToyId(int toyId) {
         this.toyId = toyId;
+    }
+
+    public boolean isMain() {
+        return main;
+    }
+
+    public void setMain(boolean main) {
+        this.main = main;
     }
     
 }
