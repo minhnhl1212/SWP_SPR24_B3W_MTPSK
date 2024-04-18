@@ -3,6 +3,7 @@
     Created on : Apr 11, 2024, 9:49:30 PM
     Author     : TUF
 --%>
+<%@ page import="java.text.DecimalFormat" %>
 <%@page import="DTO.Account"%>
 <%@page import="DTO.Category"%>
 <%@page import="DTO.Toy"%>
@@ -52,6 +53,8 @@
         <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row">
+
+                    <!-- Section Left -->
                     <div class="col-md-3 mb-5">
 
                         <%
@@ -75,6 +78,8 @@
                             %>
                         </ul>
                     </div>
+
+                    <!-- Section Right -->    
                     <div class="col-md-9">
                         <h3>Danh mục sản phẩm</h3>
                         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 justify-content-center">
@@ -86,79 +91,129 @@
                                     for (Toy toy : toyList) {
                             %>
                             <div class="col mb-5">
+
                                 <div class="card h-100">
-                                    <!--                                    Sale badge-->
+
+                                    <!--  Sale badge -->
                                     <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
                                         Sale off
                                     </div>
-                                    <!--                                    Product image-->
+
+                                    <!-- Product image -->
                                     <img class="card-img-top" src="<%=toy.getImage()%>" alt="..."/>
-                                    <!--                                    Product details-->
-                                    <div class="card-body p-4">
+
+
+                                    <div class="card-body">
                                         <div class="text-center">
-                                            <!--                                            Product name-->
-                                            <h5 class="fw-bolder"><%=toy.getToyName()%></h5>
-                                            <!--                                            Product reviews-->
-                                            <div class="d-flex justify-content-center small text-warning mb-2">
-                                                <div class="bi-star-fill">5</div>
-                                            </div>
-                                            <!--                                            Discount-->
-                                            <span class="text-muted text-decoration-line-through"><%=toy.getPrice()%> VNĐ</span><br/> 
-                                            <!--                                            Price-->
+
+                                            <!-- Product name -->
+                                            <h5 class="fw-bolder"><%=toy.getToyName()%></h5> 
+                                        </div>
+                                    </div>
+                                    <ul class="text-center list-group-item">
+                                        <!-- Product reviews -->
+                                        <div class="d-flex justify-content-center small text-warning mb-2">
+                                            <div class="bi-star-fill"></div>
+                                            <div class="bi-star-fill"></div>
+                                            <div class="bi-star-fill"></div>
+                                            <div class="bi-star-fill"></div>
+                                            <div class="bi-star-fill"></div>
+                                            <div class="bi-star-fill"></div>
+                                        </div>
+                                        <li class="text-center list-group-item">
+                                            <!-- Format VND -->
                                             <%
                                                 double price = toy.getPrice();
                                                 double discount = toy.getDiscount();
                                                 double discountedPrice = price * discount;
+
+                                                DecimalFormat vnCurrencyFormat = new DecimalFormat("###,### VNĐ");
+
+                                                // Định dạng giá giảm giá thành tiền tệ Việt Nam
+                                                String formattedPrice = vnCurrencyFormat.format(discountedPrice);
+                                                String priceBefore = vnCurrencyFormat.format(price);
                                             %>
-                                            <span class="text-black"><%= String.format("%.2f", discountedPrice)%> VNĐ</span>
-
-
-                                        </div>
-                                        <!--                                        Product actions-->
-                                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent ">
-                                            <div class="text-center">
-                                                <a class="btn btn-outline-dark mt-auto" href="MainController?btAction=Sell&toyId=<%=toy.getToyId()%>">Thêm vào giỏ hàng</a>
-                                            </div>
+                                            <!-- Discount -->
+                                            <span class="text-muted text-decoration-line-through"><%=priceBefore%></span><br/> 
+                                            <!-- Price -->
+                                            <span class="text-black"><%= formattedPrice%></span></li>
+                                    </ul>
+                                    <!-- Product actions -->
+                                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent ">
+                                        <div class="text-center">
+                                            <a class="btn btn-outline-dark mt-auto" href="MainController?btAction=Sell&toyId=<%=toy.getToyId()%>">
+                                                Thêm vào giỏ hàng
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
-                            <!-- Danh sách đồ chơi theo CategoryId-->
+
+
+                            <!-- Danh sách đồ chơi theo CategoryId -->
                             <%}
                             } else if (toyCategoryList != null) {
                                 for (Toy toy : toyCategoryList) {
                             %>
                             <div class="col mb-5">
+
                                 <div class="card h-100">
-                                    <!--                                    Sale badge-->
+
+                                    <!--  Sale badge -->
                                     <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
                                         Sale off
                                     </div>
-                                    <!--                                    Product image-->
-                                    <img class="card-img-top" src="<%=toy.getImage()%>" alt="..."/>
-                                    <!--                                    Product details-->
-                                    <div class="card-body p-4">
-                                        <div class="text-center">
-                                            <!--                                            Product name-->
-                                            <h5 class="fw-bolder"><%=toy.getToyName()%></h5>
-                                            <!--                                            Product reviews-->
-                                            <div class="d-flex justify-content-center small text-warning mb-2">
-                                                <div class="bi-star-fill">5</div>
-                                            </div>
-                                            <!--                                            Discount-->
-                                            <span class="text-muted text-decoration-line-through"><%=toy.getPrice()%> Đ</span><br/> 
-                                            <!--                                            Price-->
-                                            <span class="text-black" ><%=toy.getPrice() * 0.95%> Đ</span>        
 
+                                    <!-- Product image -->
+                                    <img class="card-img-top" src="<%=toy.getImage()%>" alt="..."/>
+
+
+                                    <div class="card-body">
+                                        <div class="text-center">
+
+                                            <!-- Product name -->
+                                            <h5 class="fw-bolder"><%=toy.getToyName()%></h5> 
                                         </div>
-                                        <!--                                        Product actions-->
-                                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent ">
-                                            <div class="text-center">
-                                                <a class="btn btn-outline-dark mt-auto" href="MainController?btAction=Sell&toyId=<%=toy.getToyId()%>">Thêm vào giỏ hàng</a>
-                                            </div>
+                                    </div>
+                                    <ul class="text-center list-group-item">
+                                        <!-- Product reviews -->
+                                        <div class="d-flex justify-content-center small text-warning mb-2">
+                                            <div class="bi-star-fill"></div>
+                                            <div class="bi-star-fill"></div>
+                                            <div class="bi-star-fill"></div>
+                                            <div class="bi-star-fill"></div>
+                                            <div class="bi-star-fill"></div>
+                                            <div class="bi-star-fill"></div>
+                                        </div>
+                                        <li class="text-center list-group-item">
+                                            <!-- Format VND -->
+                                            <%
+                                                double price = toy.getPrice();
+                                                double discount = toy.getDiscount();
+                                                double discountedPrice = price * discount;
+
+                                                DecimalFormat vnCurrencyFormat = new DecimalFormat("###,### VNĐ");
+
+                                                // Định dạng giá giảm giá thành tiền tệ Việt Nam
+                                                String formattedPrice = vnCurrencyFormat.format(discountedPrice);
+                                                String priceBefore = vnCurrencyFormat.format(price);
+                                            %>
+                                            <!-- Discount -->
+                                            <span class="text-muted text-decoration-line-through"><%=priceBefore%></span><br/> 
+                                            <!-- Price -->
+                                            <span class="text-black"><%= formattedPrice%></span></li>
+                                    </ul>
+                                    <!-- Product actions -->
+                                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent ">
+                                        <div class="text-center">
+                                            <a class="btn btn-outline-dark mt-auto" href="MainController?btAction=Sell&toyId=<%=toy.getToyId()%>">
+                                                Thêm vào giỏ hàng
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                             <%}
                             } else {
@@ -172,6 +227,7 @@
                     </div>
                 </div>
         </section>   
+
         <!-- Footer-->
         <%@include file="components/footerComponent.jsp" %>
         <!-- Bootstrap core JS-->
