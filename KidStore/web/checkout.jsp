@@ -43,31 +43,44 @@
     </style>
     <body>
         <%@include file="components/navBarComponent.jsp" %>
-        <%  int i = 1;
-        double sum = 0, discount = 0;
-        HashMap<Toy, Integer> cartItems = (HashMap<Toy, Integer>) session.getAttribute("cartList");%>
+
         <div class="container">
             <h1>Thanh Toán</h1>
-            <%
-                String paymentMethod = request.getParameter("paymentMethod");
-                if (paymentMethod != null && paymentMethod.equals("bankTransfer")) {
-                    String vnpayUrl = "https://shopee.vn/";
-            %>
-            <meta http-equiv="refresh" content="0;url=<%= vnpayUrl%>">
+            <script>
+                function validateFormData() {
+                    var name = document.getElementById("name").value.trim();
+                    var address = document.getElementById("address").value.trim();
+                    var phoneNumber = document.getElementById("phone").value.trim();
+                    var paymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
 
-            <%
+                    var errorMessage = "";
+                    if (name === "") {
+                        errorMessage += "Vui lòng nhập Tên.<br>";
+                    }
+                    if (address === "") {
+                        errorMessage += "Vui lòng nhập Địa chỉ.<br>";
+                    }
+                    if (phoneNumber === "") {
+                        errorMessage += "Vui lòng nhập Số Điện Thoại.<br>";
+                    } else if (!phoneNumber.match(/^\d{10,11}$/)) {
+                        errorMessage += "Số Điện Thoại không hợp lệ.<br>";
+                    }
+                    if (!paymentMethod) {
+                        errorMessage += "Vui lòng chọn phương thức thanh toán.<br>";
+                    }
+                    if (errorMessage !== "") {
+                        document.getElementById("errorMessages").innerHTML = errorMessage;
+                        return false;
+                    }
+                    if (paymentMethod.value === "cashOnDelivery") {
+                        alert("Đơn hàng của bạn đã được xác nhận. Chúng tôi sẽ liên hệ với bạn để sắp xếp giao hàng.");
+                    } else if (paymentMethod.value === "bankTransfer") {
+                        var vnpayUrl = "";
+                        window.open(vnpayUrl, "_blank");
+                    }
+                    return true;
                 }
-            %>
-
-            <%
-                if (paymentMethod != null && paymentMethod.equals("cashOnDelivery")) {
-            %>
-            <div class="alert alert-success" role="alert">
-                <h4>Đơn hàng của bạn đã được xác nhận. Chúng tôi sẽ liên hệ với bạn để sắp xếp giao hàng.</h4>
-            </div>
-
-            <% }%>
-
+            </script>
 
             <div class="row">
                 <div class="container">
@@ -75,37 +88,22 @@
 
                         <div class="col-md-6">
                             <h5>Billing Details</h5>
-                            <form class="checkout-form" action="checkout.jsp" method="post">
-                                <div class="form-group required">
-                                    <label for="name">Tên</label>
-                                    <input type="text" class="form-control" id="name" placeholder="">
-                                </div>
-                                <div class="form-group required">
-                                    <label for="phone">Thành Phố</label>
-                                    <input type="text" class="form-control" id="phone" placeholder="">
-                                </div>
-                                <div class="form-group required">
-                                    <label for="address">Địa chỉ</label>
-                                    <input type="text" class="form-control" id="address" placeholder="">
-                                </div>
-                                <div class="form-group required">
-                                    <label for="phone">Số Điện Thoại</label>
-                                    <input type="text" class="form-control" id="phone" placeholder="">
-                                </div>
-                                <h5>Additional Information</h5>
-                                <div class="form-group">
-                                    <label for="phone">Ghi chú</label>
-                                    <input type="text" class="form-control form-control-lg" id="phone" placeholder="">
-                                </div>
+                            <form class="checkout-form" action="checkout.jsp" method="post" onsubmit="return validateFormData()">
 
-                                <div class="form-group">
-                                    <h5>Phương thức thanh toán</h5><br>
-                                    <input type="radio" id="cashOnDelivery" name="paymentMethod" value="cashOnDelivery">
-                                    <label for="cashOnDelivery">Thanh toán khi nhận hàng</label><br>
-                                    <input type="radio" id="bankTransfer" name="paymentMethod" value="bankTransfer">
-                                    <label for="bankTransfer">Thanh toán qua ngân hàng</label>
-                                </div>
+                                <label>Tên</label>
+                                <input type="text" class="form-control" id="name" placeholder="Tên">
+                                <label>Địa chỉ</label>
+                                <input type="text" class="form-control" id="address" placeholder="Địa chỉ">
+                                <label>Số Điện Thoại</label>
+                                <input type="text" class="form-control" id="phone" placeholder="Số Điện Thoại">
 
+                                <div><label>Phương thức thanh toán</label></div>
+                                <input type="radio" id="cashOnDelivery" name="paymentMethod" value="cashOnDelivery">
+                                <label for="cashOnDelivery">Thanh toán khi nhận hàng</label><br>
+                                <input type="radio" id="bankTransfer" name="paymentMethod" value="bankTransfer">
+                                <label for="bankTransfer">Thanh toán qua ngân hàng</label>
+
+                                <div id="errorMessages" style="color: red; margin-top: 10px;"></div>
                                 <input type="submit" class="btn btn-success btn-block" value="Xác nhận thanh toán">
 
                             </form>
@@ -125,49 +123,25 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <%for (HashMap.Entry<Toy, Integer> c : cartItems.entrySet()) {
-                                                    double prices = c.getKey().getPrice() * c.getValue() * c.getKey().getDiscount();
-                                            %>
+
                                         <form action="CartController">
 
                                             <tr>
-                                                <td><img src="<%=c.getKey().getImage()%>" width="50" alt="Product Image"></td>
-                                                <td><%=c.getKey().getToyName()%></td>
-                                                <td><%=c.getKey().getPrice()*c.getKey().getDiscount()%> đ</td>
-                                                <td>Qty: <%=c.getValue()%></td>
-                                                <td><%sum+=prices;%><%=prices%> đ</td>
+                                                <td><img src="https://cdn-v2.kidsplaza.vn/media/catalog/product/d/o/do-choi-o-to-day-da-cy-7712-1.jpg" width="50" alt="Product Image"></td>
+                                                <td>Mô Hình Universal Kung Fu Panda</td>
+                                                <td>260.000 đ</td>
+                                                <td>SL: 1</td>
+                                                <td>260.000 đ</td>
                                             </tr>
                                         </form>
-                                        <%}%>
-                                        <!--                                            <tr>
-                                                                                        <td><img src="https://cdn-v2.kidsplaza.vn/media/catalog/product/d/o/do-choi-o-to-day-da-cy-7712-1.jpg" width="50" alt="Product Image"></td>
-                                                                                        <td>Mô Hình Universal Kung Fu Panda</td>
-                                                                                        <td>260.000 đ</td>
-                                                                                        <td>Qty: 1</td>
-                                                                                        <td>260.000 đ</td>
-                                                                                    </tr>
-                                                                                    <tr>
-                                                                                        <td><img src="https://cdn-v2.kidsplaza.vn/media/catalog/product/d/o/do-choi-o-to-day-da-cy-7712-1.jpg" width="50" alt="Product Image"></td>
-                                                                                        <td>Mô Hình Universal Kung Fu Panda</td>
-                                                                                        <td>260.000 đ</td>
-                                                                                        <td>Qty: 1</td>
-                                                                                        <td>260.000 đ</td>
-                                                                                    </tr>
-                                                                                    <tr>
-                                                                                        <td><img src="https://cdn-v2.kidsplaza.vn/media/catalog/product/d/o/do-choi-o-to-day-da-cy-7712-1.jpg" width="50" alt="Product Image"></td>
-                                                                                        <td>Mô Hình Universal Kung Fu Panda</td>
-                                                                                        <td>260.000 đ</td>
-                                                                                        <td>Qty: 1</td>
-                                                                                        <td>260.000 đ</td>
-                                                                                    </tr>-->
                                         </tbody>
                                     </table>
                                 </div>
                                 <h5>Card Total</h5>
                                 <div class="card-body">
-                                    <p class="card-text">Subtotal:<%=sum%> đ</p>
+                                    <p class="card-text">Subtotal: đ</p>
                                     <p class="card-text">Discount: 0 đ</p>
-                                    <p class="card-text">Total: <%=sum%> đ</p>
+                                    <p class="card-text">Total:  đ</p>
                                 </div>
                             </div>
                         </div>
@@ -175,7 +149,6 @@
                 </div>
             </div>
         </div>
-
         <%@include file="components/footerComponent.jsp" %>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src="js/scripts.js"></script>
