@@ -16,7 +16,7 @@
     </head>
     <body>
         <header>
-            <h1>Manager Product</h1>
+            <h1>Manager Customer</h1>
             <a style="background-color: greenyellow; color: #664d03" class="btn btn-outline-dark mt-auto" href="ManagerCategory.jsp">Manager Category</a>
             <a style="background-color: paleturquoise; color: #664d03" class="btn btn-outline-dark mt-auto" href="ManagerProduct.jsp">Manager Product</a>
             <a style="background-color: wheat; color: #664d03" class="btn btn-outline-dark mt-auto" href="ManagerCustomer.jsp">Manager Customer</a>
@@ -24,12 +24,12 @@
         </header>
 
         <div id="product-list">
-            <h2>Product</h2>
+            <h2>Customer</h2>
         </div>
 
-        <button onclick="toggleAddProductForm()" class="add">Add New Customer</button>
-        <p style="color: red">${ADD_TOY_SUCCESS}</p>
-        <p style="color: red">${ADD_TOY_FAILED}</p>
+        <button onclick="toggleAddCustomerForm()" class="add">Add New Customer</button>
+        <p style="color: red">${ADD_CUSTOMER_SUCCESS}</p>
+        <p style="color: red">${ADD_CUSTOMER_FAILED}</p>
 
 
 
@@ -82,16 +82,16 @@
                         <label for="productName">Name</label></br>
                         <input type="text" id="productName" name="productName" required></br>
 
-                        <label for="image">Password</label></br>
+                        <label for="password">Password</label></br>
                         <input type="text" id="password" name="password" required></br>
 
-                        <label for="price">IsSell</label></br>
+                        <label for="issell">IsSell</label></br>
                         <input type="number" id="issell" name="issell" required></br>
                         
-                        <label for="description">Active</label></br>
+                        <label for="active">Active</label></br>
                         <input type="text" id="active" name="active" required></br>                                                  
 
-                        <label for="discount">Edit</label></br>
+                        <label for="edit">Edit</label></br>
                         <input type="number" id="edit" name="edit" required></br>
      
 
