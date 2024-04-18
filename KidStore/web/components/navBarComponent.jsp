@@ -40,36 +40,34 @@
                 <input                    
                     class="form-control me-2"
                     type="search"
-                    placeholder="Search"
+                    placeholder="Tìm kiếm"
                     aria-label="Search"
                     name="nameSearch"
                     />
-                <input class="btn btn-outline-success ml-2" type="submit">
-                    Search
-                </input>
+                <input class="btn btn-outline-success ml-2" type="submit"></input>
             </form>
             
             <div class="d-flex my-4 mr-2">
-                <a style="margin-right: 15px;"class="btn btn-outline-dark mt-auto" href="NewsController">News</a>
+                <a style="margin-right: 15px;"class="btn btn-outline-dark mt-auto" href="NewsController">Tin tức</a>
                 <a class="btn btn-outline-dark" href="cart.jsp">
                     <i class="bi-cart-fill me-1"></i>
-                    Cart
+                    Giỏ hàng
                     <span class="badge bg-dark text-white ms-1 rounded-pill">${sessionScope.cartList.size()}</span>
                 </a>
                 <a style="margin-left: 15px;" class="btn btn-outline-dark" href="profileHistory.jsp">
                     <i class='bx bx-user'></i>
-                    Account
+                    Thông tin
                 </a>
               
             </div>
 
             <c:choose>
                 <c:when test="${sessionScope.acc == null}">
-                    <button class="btn btn-outline-primary ms-lg-2" onclick="login()">Login</button>
+                    <button class="btn btn-outline-primary ms-lg-2" onclick="login()">Đăng nhập</button>
                 </c:when>
 
                 <c:otherwise>
-                    <button class="btn btn-outline-primary ms-lg-2" onclick="logout()">Log Out</button>
+                    <button class="btn btn-outline-primary ms-lg-2" onclick="logout()">Đăng xuất</button>
                 </c:otherwise>
             </c:choose>
 

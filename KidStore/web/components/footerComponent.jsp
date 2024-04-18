@@ -25,24 +25,23 @@
                     </div>
                     <div class="col-md-3">
                         <div class="useful-link">
-                            <h2>Useful Links</h2>
+                            <h2>Liên kết</h2>
                             <img src="./assets/images/about/home_line.png" alt="" class="img-fluid">
                             <div class="use-links">
-                                <li><i class="fa-solid fa-angles-right"></i>Home</li>
-                                <li><i class="fa-solid fa-angles-right"></i>About Us</li>
-                                <li><i class="fa-solid fa-angles-right"></i>Gallery</li>
-                                <li><i class="fa-solid fa-angles-right"></i>Contact</li>
+                                <li><i class='bx bx-chevrons-right'></i>Trang chủ</li>
+                                <li><i class='bx bx-chevrons-right'></i>Về chúng tôi</li>
+                                <li><i class='bx bx-chevrons-right'></i>Liên hệ</li>
                             </div>
                         </div>
 
                     </div>
                     <div class="col-md-3">
                         <div class="social-links">
-                            <h2>Follow Us</h2>
+                            <h2>Theo dõi chúng tôi</h2>
                             <div class="social-icons">
-                                <li><i></i>Facebook</li>
-                                <li><i></i>Instagram</li>
-                                <li><i></i>Youtube</li>
+                                <li><i class='bx bxl-facebook-circle' ></i>&nbsp; Facebook</li>
+                                <li><i class='bx bxl-instagram-alt' ></i>&nbsp; Instagram</li>
+                                <li><i class='bx bxl-youtube' ></i>&nbsp; Youtube</li>
                             </div>
                         </div>
 
@@ -50,12 +49,12 @@
                     </div>
                     <div class="col-md-3">
                         <div class="address">
-                            <h2>Address</h2>
+                            <h2>Địa chỉ</h2>
                             <img src="./assets/images/about/home_line.png" alt="" class="img-fluid">
                             <div class="address-links">
-                                <li class="address1"><i class="fa-solid fa-location-dot"></i>Lô E2a-7, Đường D1, Đ. D1, Long Thạnh Mỹ, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh</li>
-                                <li><i class="fa-solid fa-phone"></i>028 7300 5588</li>
-                                <li><i class="fa-solid fa-envelope"></i>hcmuni.fpt.edu.vn</li>
+                                <li class="address1"><i class='bx bx-location-plus'></i></i>Lô E2a-7, Đường D1, Đ. D1, Long Thạnh Mỹ, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh</li>
+                                <li><i class='bx bxs-phone-call'></i></i>028 7300 5588</li>
+                                <li><i class='bx bx-link' ></i></i>hcmuni.fpt.edu.vn</li>
                             </div>
                         </div>
                     </div>
