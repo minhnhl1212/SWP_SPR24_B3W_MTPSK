@@ -4,6 +4,8 @@
     Author     : TUF
 --%>
 
+<%@page import="DTO.Category"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -65,7 +67,7 @@
                     <a href="#" id="logoutButton" class="menu_button">
                         <i class='bx bxs-log-out-circle'></i>
                         <span class="text">Logout</span>
-                    </a>
+                    </a>                    
 
                     <!-- Logout confirmation dialog -->
                     <div id="logoutConfirmationDialog" class="modal">
@@ -107,6 +109,10 @@
                 <div class="head-title">
                     <div class="left">
                         <h1>Manage Category</h1>
+                        <p style="color: green">${APPROVE_SUCCESS}</p>
+                        <p style="color: green">${CANCEL_SUCCESS}</p>
+                        <p style="color: red">${APPROVE_FAILED}</p>
+                        <p style="color: red">${CANCEL_FAILED}</p>
                     </div>
                 </div>
                 <ul class="notifications"></ul>
@@ -126,47 +132,26 @@
                                 </tr>
                             </thead>
                             <tbody>  
+                                <%
+                                    ArrayList<Category> categoryList = (ArrayList<Category>) session.getAttribute("CATEGORY_LIST_NOT_APPROVE");
+                                    if (categoryList != null) {
+                                        for (Category category : categoryList) {
+                                %>
                                 <tr>
-                                    <td>1</td>
-                                    <td>Đồ chơi theo phim</td>
+                                    <td><%=category.getCategoryId()%></td>
+                                    <td><%=category.getCategoryName()%></td>
                                     <td>Nguyen Thanh Tien</td>
-                                    <td><button class="button-bordered" id="success">Approve</button></td> 
-                                    <td><button class="button-bordered" id="error">Cancel</button></td> 
+                                    <td><a href="ApproveCategoryController?categoryId=<%=category.getCategoryId()%>"class="button-bordered" id="success">Approve</a></td> 
+                                    <td><a href="CancelCategoryController?categoryId=<%=category.getCategoryId()%>" class="button-bordered" id="error">Cancel</a></td> 
                                     <td></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Đồ chơi trang</td>
-                                    <td>Nguyen Thanh Tien</td>
-                                    <td><button class="button-bordered" id="success">Approve</button></td> 
-                                    <td><button class="button-bordered" id="error">Cancel</button></td> 
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Đồ chơi vận động</td>
-                                    <td>Nguyen Thanh Tien</td>
-                                    <td><button class="button-bordered" id="success">Approve</button></td> 
-                                    <td><button class="button-bordered" id="error">Cancel</button></td> 
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>Đồ chơi mầm non</td>
-                                    <td>Nguyen Thanh Tien</td>
-                                    <td><button class="button-bordered" id="success">Approve</button></td> 
-                                    <td><button class="button-bordered" id="error">Cancel</button></td> 
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>Thú bông</td>
-                                    <td>Nguyen Thanh Tien</td>
-                                    <td><button class="button-bordered" id="success">Approve</button></td> 
-                                    <td><button class="button-bordered" id="error">Cancel</button></td> 
-                                    <td></td>
-                                </tr>
-                                
+                                </tr>           
+                                <%}
+                                } else {
+                                %>
+                            <p>Không có loại đồ chơi nào</p>
+                            <%
+                                }
+                            %>
                             </tbody>
                         </table>
                     </div>
@@ -175,7 +160,7 @@
             <!-- MAIN -->
         </section>
         <!-- CONTENT -->
-        
+
         <script src="js/admin.js"></script>
         <script src="js/toast.js"></script>
     </body>
