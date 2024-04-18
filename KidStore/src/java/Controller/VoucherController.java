@@ -34,7 +34,7 @@ public class VoucherController extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             String voucher = request.getParameter("Voucher");
-            System.out.println(voucher);
+            
             RequestDispatcher rd = request.getRequestDispatcher("cart.jsp");
             rd.forward(request, response);
         }

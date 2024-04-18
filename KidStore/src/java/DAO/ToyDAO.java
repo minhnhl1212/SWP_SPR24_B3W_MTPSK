@@ -48,7 +48,7 @@ public class ToyDAO {
                             rs.getInt("quantity"), rs.getString("imageToy"),
                             rs.getDouble("price"), rs.getString("description"),
                             rs.getInt("approve"), rs.getInt("category_id"),
-                            rs.getDouble("discount"), rs.getDate("warranty_time"));
+                            rs.getDouble("discount"), rs.getInt("warranty_time"));
                     listToy.add(list);
                 }
             }
@@ -112,7 +112,7 @@ public class ToyDAO {
         return listToy;
     }
 
-    public Toy addToy(String name, String image, double price, String description, int idCategory, double discount, java.sql.Date warrantyTime) throws SQLException, Exception {
+    public Toy addToy(String name, String image, double price, String description, int idCategory, double discount, int warrantyTime) throws SQLException, Exception {
         Toy toy = null;
         try {
             con = DBUtils.getConnection();
@@ -139,7 +139,7 @@ public class ToyDAO {
                 ps.setString(4, description);
                 ps.setInt(5, idCategory);
                 ps.setDouble(6, discount);
-                ps.setDate(7, warrantyTime);
+                ps.setInt(7, warrantyTime);
                 ps.executeUpdate();
                 toy = new Toy(name, image, price, description, 0, idCategory, discount, warrantyTime);
             }
