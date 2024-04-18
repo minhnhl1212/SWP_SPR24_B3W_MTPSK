@@ -40,7 +40,7 @@ public class VoucherDAO {
             }
         }
 
-        private Voucher getVoucherByNameCode(String namecode) throws Exception {
+        public Voucher getVoucherByNameCode(String namecode) throws Exception {
             Voucher voucher = null;
             try {
                 con = DBUtils.getConnection();
