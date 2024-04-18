@@ -68,7 +68,7 @@ public class ToyDAO {
                 String sql = "select Toy.toy_name,Toy.quantity, Image.imageToy,"
                         + " Toy.price, Toy.description, Toy.category_id, Toy.discount\n"
                         + "from Image\n"
-                        + "inner join Toy on Image.image_id = Toy.image_id where Toy.toy_id = ?";
+                        + "inner join Toy on Image.toy_id = Toy.toy_id where Toy.toy_id = ?";
                 ps = con.prepareStatement(sql);
                 ps.setInt(1, toyId);
                 rs = ps.executeQuery();

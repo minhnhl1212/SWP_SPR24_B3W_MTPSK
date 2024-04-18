@@ -71,7 +71,7 @@
                 </div>
 
                 <div class="col-md-7">
-                    <a href="" class="btn btn-light btn-block"><- Về Trang Chủ</a>
+                    <a href="MainController" class="btn btn-light btn-block"><- Về Trang Chủ</a>
                 </div>
 
                 <div class="col-md-5">
