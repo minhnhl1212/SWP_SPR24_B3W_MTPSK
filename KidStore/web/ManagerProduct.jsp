@@ -1,3 +1,4 @@
+<%@page import="DTO.Toy"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -26,6 +27,10 @@
         </div>
 
         <button onclick="toggleAddProductForm()" class="add">Add New Product</button>
+        <p style="color: red">${ADD_TOY_SUCCESS}</p>;
+        <p style="color: red">${ADD_TOY_FAILED}</p>;
+
+
 
         <table class="table table-hover">
             <thead>
@@ -34,83 +39,83 @@
                     <th>Product Name</th>
                     <th>Image</th>
                     <th>Price</th>
-                    <th>Status</th>
+                    <th>Category</th>
+                    <th>Discount</th>
+                    <th>Warranty Time</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
+                <%
+                    ArrayList<Toy> toyList = (ArrayList<Toy>) session.getAttribute("TOY_LIST");
+                    if (toyList != null) {
+                        for (Toy toy : toyList) {
+                %>
                 <tr>
-                    <td>1</td>
-                    <td>name</td>
-                    <td>image</td>
-                    <td>price</td>
-                    <td>status</td>
+                    <td><%=toy.getToyId()%></td>
+                    <td><%=toy.getToyName()%></td>
+                    <td><img src="<%=toy.getImage()%>" alt="Toy Image" style="max-width: 10%"></td>
+                    <td><%=toy.getPrice()%></td>
+                    <td>Category</td>
+                    <td><%=toy.getDiscount()%></td>
+                    <td><%=toy.getWarranty_time()%></td>
                     <td class="col-2">
                         <a href="">Edit</a>                       
                         <a href="">Delete</a>
                     </td>
                 </tr>
-                <tr>
-                    <td>2</td>
-                    <td>name</td>
-                    <td>image</td>
-                    <td>price</td>
-                    <td>status</td>
-                    <td>
-                        <a href="">Edit</a>                       
-                        <a href="">Delete</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>name</td>
-                    <td>image</td>
-                    <td>price</td>
-                    <td>status</td>
-                    <td>
-                        <a href="">Edit</a>                       
-                        <a href="">Delete</a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        </br>
-        </br>
-        </br>
-        </br>
-        </br>
+                <%}
+                } else {
+                %>
+            <p>Không có đồ chơi nào</p>
+            <%
+                }
+            %>                
+        </tbody>
+    </table>
+    </br>
+    </br>
+    </br>
+    </br>
+    </br>
 
-        <div class="wrap">
-            <div class="addProduct overlay">
-                <div id="add-product-form">                    
-                    <div>
-                        <form action="AddToyController">
-                            <h2>Add Product</h2>
-                            <label for="productName">Name</label></br>
-                            <input type="text" id="productName" name="productName" required></br>
+    <div class="wrap">
+        <div class="addProduct overlay">
+            <div id="add-product-form">                    
+                <div>
+                    <form action="AddToyController">
+                        <h2>Add New Toy</h2>
+                        <label for="productName">Name</label></br>
+                        <input type="text" id="productName" name="productName" required></br>
 
-                            <label for="image">Image</label></br>
-                            <input type="text" id="productName" name="image" required></br>
+                        <label for="image">Image</label></br>
+                        <input type="text" id="image" name="image" required></br>
 
-                            <label for="price">Price</label></br>
-                            <input type="number" id="productPrice" name="price" required></br>
+                        <label for="price">Price</label></br>
+                        <input type="number" id="price" name="price" required></br>
 
-                            <label for="description">Description</label></br>
-                            <input type="text" id="productName" name="description" required></br>
+                        <label for="description">Description</label></br>
+                        <input type="text" id="description" name="description" required></br>                             
 
-                            <label for="category">Category</label></br>
-                            <input type="text" id="productName" name="category" required></br>
+                        <label for="category">Category</label></br>
+                        <input type="text" id="category" name="category" required></br>
 
-                            <button type="submit">Add new Product</button>
-                        </form>
-                    </div>
+                        <label for="discount">Discount</label></br>
+                        <input type="number" id="discount" name="discount" required></br>
+
+                        <label for="warrantyTime">Warranty Time</label></br>
+                        <input type="date" id="warrantyTime" name="warrantyTime" required></br>
+
+                        <button type="submit">Add New Toy</button>
+                    </form>
                 </div>
             </div>
         </div>
+    </div>
 
-        <script src="js/admin.js"></script>
-    </body>
-    <script>
+    <script src="js/admin.js"></script>
+</body>
+<script>
             function toggleAddProductForm() {
                 var addProductForm = document.querySelector('.addProduct');
                 if (addProductForm.style.display === 'none') {
@@ -121,7 +126,7 @@
                     addProductForm.classList.remove("overlay");
                 }
             }
-    </script>
+</script>
 </html>
 
 

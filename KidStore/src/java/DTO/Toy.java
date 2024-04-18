@@ -1,5 +1,7 @@
 package DTO;
 
+import java.util.Date;
+
 /**
  *
  * @author admin
@@ -11,10 +13,10 @@ public class Toy {
     private String image;
     private double price;
     private String description;
-    private int categoryId;
     private int approve;
-    private int idCategory;
+    private int categoryId;
     private double discount;
+    private Date warranty_time;
 
     public Toy() {
     }
@@ -25,13 +27,24 @@ public class Toy {
         this.price = price;
     } 
 
-    public Toy(String toyName, String image, double price, String description, int approve, int idCategory, double discount) {
+    public Toy(String toyName, String image, double price, String description, int approve, int categoryId, double discount, Date warranty_time) {
         this.toyName = toyName;
         this.image = image;
         this.price = price;
         this.description = description;
         this.approve = approve;
-        this.idCategory = idCategory;
+        this.categoryId = categoryId;
+        this.discount = discount;
+        this.warranty_time = warranty_time;
+    }        
+
+    public Toy(String toyName, String image, double price, String description, int approve, int categoryId, double discount) {
+        this.toyName = toyName;
+        this.image = image;
+        this.price = price;
+        this.description = description;
+        this.approve = approve;
+        this.categoryId = categoryId;
         this.discount = discount;
     }
 
@@ -69,6 +82,19 @@ public class Toy {
         this.discount = discount;
     }
 
+    public Toy(int toyId, String toyName, int quantity, String image, double price, String description, int approve, int categoryId, double discount, Date warranty_time) {
+        this.toyId = toyId;
+        this.toyName = toyName;
+        this.quantity = quantity;
+        this.image = image;
+        this.price = price;
+        this.description = description;
+        this.approve = approve;
+        this.categoryId = categoryId;
+        this.discount = discount;
+        this.warranty_time = warranty_time;
+    }        
+
     public int getToyId() {
         return toyId;
     }
@@ -93,6 +119,14 @@ public class Toy {
         this.quantity = quantity;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public double getPrice() {
         return price;
     }
@@ -109,22 +143,6 @@ public class Toy {
         this.description = description;
     }
 
-    public int getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
-    }
-    
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
     public int getApprove() {
         return approve;
     }
@@ -133,12 +151,12 @@ public class Toy {
         this.approve = approve;
     }
 
-    public int getIdCategory() {
-        return idCategory;
+    public int getCategoryId() {
+        return categoryId;
     }
 
-    public void setIdCategory(int idCategory) {
-        this.idCategory = idCategory;
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 
     public double getDiscount() {
@@ -148,6 +166,16 @@ public class Toy {
     public void setDiscount(double discount) {
         this.discount = discount;
     }
+
+    public Date getWarranty_time() {
+        return warranty_time;
+    }
+
+    public void setWarranty_time(Date warranty_time) {
+        this.warranty_time = warranty_time;
+    }
+
+    
 
     @Override
     public int hashCode() {

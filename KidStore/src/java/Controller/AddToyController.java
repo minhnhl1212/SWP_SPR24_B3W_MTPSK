@@ -4,7 +4,9 @@ import DAO.ToyDAO;
 import DTO.Toy;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -26,13 +28,17 @@ public class AddToyController extends HttpServlet {
             response.setContentType("text/html;charset=UTF-8"); 
             HttpSession session = request.getSession();
             ToyDAO toyDAO = new ToyDAO();
-            String name = request.getParameter("name");
+            String name = request.getParameter("productName");
             String image = request.getParameter("image");
             double price = Double.parseDouble(request.getParameter("price"));
             String description = request.getParameter("description");
             int idCategory = Integer.parseInt(request.getParameter("idCategory"));
+            double discount = Double.parseDouble(request.getParameter("discount"));
+            String warrantyTimeStr = request.getParameter("warrantyTime");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date warrantyTime = dateFormat.parse(warrantyTimeStr);
 
-            Toy addToy = toyDAO.addToy(name, image, price, description, idCategory);
+            Toy addToy = toyDAO.addToy(name, image, price, description, idCategory, discount, warrantyTime);
             if (addToy != null) {
                 request.setAttribute("ADD_TOY_SUCCESS", "Added Success");
             } else {
