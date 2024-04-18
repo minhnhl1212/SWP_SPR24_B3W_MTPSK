@@ -68,6 +68,23 @@
         <servlet-name>SearchController</servlet-name>
         <servlet-class>Controller.SearchController</servlet-class>
     </servlet>
+     <servlet>
+        <servlet-name>ApproveCategoryController</servlet-name>
+        <servlet-class>Controller.ApproveCategoryController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CancelCategoryController</servlet-name>
+        <servlet-class>Controller.CancelCategoryController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ApproveToyController</servlet-name>
+        <servlet-class>Controller.ApproveToyController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CancelToyController</servlet-name>
+        <servlet-class>Controller.CancelToyController</servlet-class>
+    </servlet>
+    
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -135,6 +152,22 @@
     <servlet-mapping>
         <servlet-name>SearchController</servlet-name>
         <url-pattern>/SearchController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ApproveCategoryController</servlet-name>
+        <url-pattern>/ApproveCategoryController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CancelCategoryController</servlet-name>
+        <url-pattern>/CancelCategoryController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ApproveToyController</servlet-name>
+        <url-pattern>/ApproveToyController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CancelToyController</servlet-name>
+        <url-pattern>/CancelToyController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
