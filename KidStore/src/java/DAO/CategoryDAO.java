@@ -53,7 +53,28 @@ public class CategoryDAO {
         }
         return listCategory;
     }
-    
+
+    public ArrayList<Category> categoryListNotApprove() throws SQLException, Exception {
+        ArrayList<Category> listCategory = new ArrayList<>();
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "select category_id ,category_name from Category where approve = 0";
+                ps = con.prepareStatement(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    Category list = new Category(rs.getInt("category_id"), rs.getString("category_name"));
+                    listCategory.add(list);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+        return listCategory;
+    }
+
     public ArrayList<Category> categoryListAll() throws SQLException, Exception {
         ArrayList<Category> listCategory = new ArrayList<>();
         try {
@@ -107,6 +128,47 @@ public class CategoryDAO {
                 ps.setInt(2, idCategory);
                 ps.executeUpdate();
                 category = new Category(idCategory, nameCategory);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+        return category;
+    }
+
+    public Category approveCategory(int categoryId) throws SQLException, Exception {
+        Category category = null;
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "update Category\n"
+                        + "set approve = 1\n"
+                        + "where category_id = ?";
+                ps = con.prepareStatement(sql);
+                ps.setInt(1, categoryId);
+                ps.executeUpdate();
+                category = new Category(categoryId);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+        return category;
+    }
+
+    public Category cancelCategory(int categoryId) throws SQLException, Exception {
+        Category category = null;
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "delete from Category\n"
+                        + "where category_id = ?";
+                ps = con.prepareStatement(sql);
+                ps.setInt(1, categoryId);
+                ps.executeUpdate();
+                category = new Category(categoryId);
             }
         } catch (Exception e) {
             e.printStackTrace();
