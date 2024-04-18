@@ -51,7 +51,7 @@
             </form>
             
             <div class="d-flex my-4 mr-2">
-                <a style="margin-right: 15px;"class="btn btn-outline-dark mt-auto" href="NewsController">News</a>
+                <a style="margin-right: 15px;"class="btn btn-outline-dark mt-auto" href="news.jsp">News</a>
                 <a class="btn btn-outline-dark" href="cart.jsp">
                     <i class="bi-cart-fill me-1"></i>
                     Cart
