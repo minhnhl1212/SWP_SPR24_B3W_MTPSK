@@ -37,10 +37,10 @@ public class ToyDAO {
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "select Toy.toy_id, Toy.toy_name,Toy.quantity, Image.imageToy,\n"
-                        + " Toy.price, Toy.description, Toy.category_id, Toy.discount, Toy.warranty_time, Toy.approve, Image.image_id, Image.main\n"
+                String sql = "select Toy.toy_id, Toy.toy_name,Toy.quantity, Image.imageToy, Toy.price, Toy.description, Toy.category_id, Toy.discount, Toy.warranty_time, Toy.approve, Image.image_id, Image.main\n"
                         + "from Image\n"
-                        + "inner join Toy on Image.toy_id = Toy.toy_id";
+                        + "inner join Toy on Image.toy_id = Toy.toy_id\n"
+                        + "where approve = 1";
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -48,7 +48,7 @@ public class ToyDAO {
                             rs.getInt("quantity"), rs.getString("imageToy"),
                             rs.getDouble("price"), rs.getString("description"),
                             rs.getInt("approve"), rs.getInt("category_id"),
-                            rs.getDouble("discount"), rs.getInt("warranty_time"));
+                            rs.getDouble("discount"), rs.getDate("warranty_time"));
                     listToy.add(list);
                 }
             }
@@ -68,7 +68,7 @@ public class ToyDAO {
                 String sql = "select Toy.toy_name,Toy.quantity, Image.imageToy,"
                         + " Toy.price, Toy.description, Toy.category_id, Toy.discount\n"
                         + "from Image\n"
-                        + "inner join Toy on Image.toy_id = Toy.toy_id where Toy.toy_id = ?";
+                        + "inner join Toy on Image.image_id = Toy.image_id where Toy.toy_id = ?";
                 ps = con.prepareStatement(sql);
                 ps.setInt(1, toyId);
                 rs = ps.executeQuery();
@@ -112,25 +112,26 @@ public class ToyDAO {
         return listToy;
     }
 
-    public Toy addToy(String name, String image, double price, String description, int idCategory, double discount, int warrantyTime) throws SQLException, Exception {
+    public Toy addToy(String name, String image, double price, String description, int idCategory, double discount, java.sql.Date warrantyTime) throws SQLException, Exception {
         Toy toy = null;
         try {
             con = DBUtils.getConnection();
             if (con != null) {
                 String sql = "INSERT INTO Image (imageToy)\n"
                         + "VALUES (?)\n"
-                        + "\n"
-                        + "DECLARE @image_id INT;\n"
+                        + "    \n"
+                        + "DECLARE @image_id INT\n"
                         + "SET @image_id = SCOPE_IDENTITY();\n"
-                        + "\n"
+                        + "               \n"
                         + "insert into Toy (toy_name, price, description, category_id, discount, warranty_time, approve)\n"
                         + "values (?,?,?,?,?,?,0)\n"
-                        + "\n"
+                        + "                       \n"
                         + "DECLARE @toy_id INT;\n"
                         + "SET @toy_id = SCOPE_IDENTITY();\n"
-                        + "\n"
+                        + "                    \n"
                         + "UPDATE Image\n"
-                        + "SET toy_id = @toy_id, main = @toy_id";
+                        + "SET toy_id = @toy_id, main = @toy_id\n"
+                        + "WHERE image_id = @image_id";
                 ps = con.prepareStatement(sql);
                 ps.setString(1, image);
                 ps.setString(2, name);
@@ -138,7 +139,7 @@ public class ToyDAO {
                 ps.setString(4, description);
                 ps.setInt(5, idCategory);
                 ps.setDouble(6, discount);
-                ps.setInt(7, warrantyTime);
+                ps.setDate(7, warrantyTime);
                 ps.executeUpdate();
                 toy = new Toy(name, image, price, description, 0, idCategory, discount, warrantyTime);
             }

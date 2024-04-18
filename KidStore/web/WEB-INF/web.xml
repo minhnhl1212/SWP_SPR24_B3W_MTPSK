@@ -52,14 +52,6 @@
         <servlet-name>EditCategoryController</servlet-name>
         <servlet-class>Controller.EditCategoryController</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>DeleteCartController</servlet-name>
-        <servlet-class>Controller.DeleteCartController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>VoucherController</servlet-name>
-        <servlet-class>Controller.VoucherController</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -111,14 +103,6 @@
     <servlet-mapping>
         <servlet-name>EditCategoryController</servlet-name>
         <url-pattern>/EditCategoryController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>DeleteCartController</servlet-name>
-        <url-pattern>/DeleteCartController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>VoucherController</servlet-name>
-        <url-pattern>/VoucherController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

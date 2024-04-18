@@ -3,7 +3,6 @@ package DTO;
 public class Category {
     private int categoryId;
     private String categoryName;
-    private boolean approve;
 
     public Category() {
     }
@@ -15,12 +14,6 @@ public class Category {
     public Category(int categoryId, String categoryName) {
         this.categoryId = categoryId;
         this.categoryName = categoryName;
-    }
-
-    public Category(int categoryId, String categoryName, boolean approve) {
-        this.categoryId = categoryId;
-        this.categoryName = categoryName;
-        this.approve = approve;
     }
 
     public int getCategoryId() {
@@ -37,14 +30,6 @@ public class Category {
 
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
-    }
-
-    public boolean isApprove() {
-        return approve;
-    }
-
-    public void setApprove(boolean approve) {
-        this.approve = approve;
     }
     
 }

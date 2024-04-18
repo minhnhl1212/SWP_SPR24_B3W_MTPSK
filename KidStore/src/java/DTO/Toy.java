@@ -1,6 +1,6 @@
 package DTO;
 
-
+import java.util.Date;
 
 /**
  *
@@ -16,7 +16,7 @@ public class Toy {
     private int approve;
     private int categoryId;
     private double discount;
-    private int warranty_time;
+    private Date warranty_time;
 
     public Toy() {
     }
@@ -27,7 +27,7 @@ public class Toy {
         this.price = price;
     } 
 
-    public Toy(String toyName, String image, double price, String description, int approve, int categoryId, double discount, int warranty_time) {
+    public Toy(String toyName, String image, double price, String description, int approve, int categoryId, double discount, Date warranty_time) {
         this.toyName = toyName;
         this.image = image;
         this.price = price;
@@ -82,7 +82,7 @@ public class Toy {
         this.discount = discount;
     }
 
-    public Toy(int toyId, String toyName, int quantity, String image, double price, String description, int approve, int categoryId, double discount, int warranty_time) {
+    public Toy(int toyId, String toyName, int quantity, String image, double price, String description, int approve, int categoryId, double discount, Date warranty_time) {
         this.toyId = toyId;
         this.toyName = toyName;
         this.quantity = quantity;
@@ -167,11 +167,11 @@ public class Toy {
         this.discount = discount;
     }
 
-    public int getWarranty_time() {
+    public Date getWarranty_time() {
         return warranty_time;
     }
 
-    public void setWarranty_time(int warranty_time) {
+    public void setWarranty_time(Date warranty_time) {
         this.warranty_time = warranty_time;
     }
 

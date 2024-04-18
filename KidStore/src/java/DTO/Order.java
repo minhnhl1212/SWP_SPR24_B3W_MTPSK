@@ -4,34 +4,24 @@ import java.util.Date;
 
 /**
  *
- * @author trant
+ * @author admin
  */
 public class Order {
-    private int orderId;
-    private int userId;
-    private String status;
-    private Date createDate;
-    private int voucherId;
-    private int payment_type;
     
+    private int userId;
+    private int toyId;
+    private int quantity;
+    private double amount;
+    private int orderId;
 
     public Order() {
     }
 
-    public Order(int orderId, int userId, String status, Date createDate, int voucherId, int payment_type) {
-        this.orderId = orderId;
+    public Order(int userId, int toyId, int quantity, double amount, int orderId) {
         this.userId = userId;
-        this.status = status;
-        this.createDate = createDate;
-        this.voucherId = voucherId;
-        this.payment_type = payment_type;
-    }
-
-    public int getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(int orderId) {
+        this.toyId = toyId;
+        this.quantity = quantity;
+        this.amount = amount;
         this.orderId = orderId;
     }
 
@@ -43,37 +33,36 @@ public class Order {
         this.userId = userId;
     }
 
-    public String getStatus() {
-        return status;
+    public int getToyId() {
+        return toyId;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setToyId(int toyId) {
+        this.toyId = toyId;
     }
 
-    public Date getCreateDate() {
-        return createDate;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
-    public int getVoucherId() {
-        return voucherId;
+    public double getAmount() {
+        return amount;
     }
 
-    public void setVoucherId(int voucherId) {
-        this.voucherId = voucherId;
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
 
-    public int getPayment_type() {
-        return payment_type;
+    public int getOrderId() {
+        return orderId;
     }
 
-    public void setPayment_type(int payment_type) {
-        this.payment_type = payment_type;
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
     }
-
 
 }

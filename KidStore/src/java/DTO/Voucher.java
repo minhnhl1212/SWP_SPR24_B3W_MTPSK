@@ -12,9 +12,7 @@ public class Voucher {
     private String voucherName;
     private int description;
     private Date dateExpiration;
-    private double discount;
-    private int limit;
-    private double limitPrice;
+
     public Voucher() {
     }
 
@@ -23,16 +21,6 @@ public class Voucher {
         this.voucherName = voucherName;
         this.description = description;
         this.dateExpiration = dateExpiration;
-    }
-
-    public Voucher(int voucherId, String voucherName, int description, Date dateExpiration, double discount, int limit, double limitPrice) {
-        this.voucherId = voucherId;
-        this.voucherName = voucherName;
-        this.description = description;
-        this.dateExpiration = dateExpiration;
-        this.discount = discount;
-        this.limit = limit;
-        this.limitPrice = limitPrice;
     }
 
     public int getVoucherId() {
@@ -65,30 +53,6 @@ public class Voucher {
 
     public void setDateExpiration(Date dateExpiration) {
         this.dateExpiration = dateExpiration;
-    }
-
-    public double getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(double discount) {
-        this.discount = discount;
-    }
-
-    public int getLimit() {
-        return limit;
-    }
-
-    public void setLimit(int limit) {
-        this.limit = limit;
-    }
-
-    public double getLimitPrice() {
-        return limitPrice;
-    }
-
-    public void setLimitPrice(double limitPrice) {
-        this.limitPrice = limitPrice;
     }
     
 }
