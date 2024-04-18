@@ -33,17 +33,18 @@
             </div>
         </header>
         <% Account a = (Account) session.getAttribute("acc");
-            int role =0;
-            if(a!=null){
-                role=a.getRoleId();
+            int role = 0;
+            if (a != null) {
+                role = a.getRoleId();
             }
         %>
-        <%if (role <= 2 && role!=0) {%>
+        <%if (role <= 2 && role != 0) {%>
         <a style="background-color: greenyellow; color: #664d03" class="btn btn-outline-dark mt-auto" href="ManagerCategory.jsp">Manager Category</a>
         <a style="background-color: paleturquoise; color: #664d03" class="btn btn-outline-dark mt-auto" href="ManagerProduct.jsp">Manager Product</a>
         <a style="background-color: wheat; color: #664d03" class="btn btn-outline-dark mt-auto" href="ManagerProduct.jsp">Manager Customer</a>
         <a style="background-color: #0d6efd; color: #664d03" class="btn btn-outline-dark mt-auto" href="ManagerProduct.jsp">Manager Other</a>
-        <%} if (role == 1) {%>
+        <%}
+            if (role == 1) {%>
         <a style="background-color: wheat; color: #664d03" class="btn btn-outline-dark mt-auto" href="ManagerProduct.jsp">Manager Customer</a>
         <a style="background-color: #0d6efd; color: #664d03" class="btn btn-outline-dark mt-auto" href="ManagerProduct.jsp">Manager Other</a>
         <%}%>
@@ -78,9 +79,9 @@
                         <h3>Danh mục sản phẩm</h3>
                         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 justify-content-center">
 
-                            <%                                
+                            <%
                                 ArrayList<Toy> toyList = (ArrayList<Toy>) session.getAttribute("TOY_LIST");
-                                ArrayList<Toy> toyCategoryList = (ArrayList<Toy>) session.getAttribute("TOY_CATEGORY_LIST");
+                                ArrayList<Toy> toyCategoryList = (ArrayList<Toy>) request.getAttribute("TOY_CATEGORY_LIST");
                                 if (toyList != null && toyCategoryList == null) {
                                     for (Toy toy : toyList) {
                             %>
@@ -102,9 +103,15 @@
                                                 <div class="bi-star-fill">5</div>
                                             </div>
                                             <!--                                            Discount-->
-                                            <span class="text-muted text-decoration-line-through"><%=toy.getPrice()%> Đ</span><br/> 
+                                            <span class="text-muted text-decoration-line-through"><%=toy.getPrice()%> VNĐ</span><br/> 
                                             <!--                                            Price-->
-                                            <span class="text-black" ><%=toy.getPrice() * 0.95%> Đ</span>        
+                                            <%
+                                                double price = toy.getPrice();
+                                                double discount = toy.getDiscount();
+                                                double discountedPrice = price * discount;
+                                            %>
+                                            <span class="text-black"><%= String.format("%.2f", discountedPrice)%> VNĐ</span>
+
 
                                         </div>
                                         <!--                                        Product actions-->

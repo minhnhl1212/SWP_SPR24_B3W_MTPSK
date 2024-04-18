@@ -21,10 +21,11 @@ public class Toy {
     public Toy() {
     }
 
-    public Toy(String toyName, String image, double price) {
+    public Toy(String toyName, String image, double price, double discount) {
         this.toyName = toyName;
         this.image = image;
         this.price = price;
+        this.discount = discount;
     } 
 
     public Toy(String toyName, String image, double price, String description, int approve, int categoryId, double discount, Date warranty_time) {

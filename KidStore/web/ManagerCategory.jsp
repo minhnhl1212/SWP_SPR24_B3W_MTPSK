@@ -49,8 +49,7 @@
                         <td><%=category.getCategoryId()%></td>
                         <td><%=category.getCategoryName()%></td>                    
                         <td class="col-2">
-                            <a href="">Edit</a>                       
-                            <a href="">Delete</a>
+                            <a href="DisableCategoryController">Disable</a>                       
                         </td>
                     </tr>
                     <%}

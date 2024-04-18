@@ -36,18 +36,17 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-            <form action="search" class="d-flex mx-auto">
-                <input
-                    value="${key}"
+            <form action="SearchController" class="d-flex mx-auto">
+                <input                    
                     class="form-control me-2"
                     type="search"
                     placeholder="Search"
                     aria-label="Search"
-                    name="keyword"
+                    name="nameSearch"
                     />
-                <button class="btn btn-outline-success ml-2" type="submit">
+                <input class="btn btn-outline-success ml-2" type="submit">
                     Search
-                </button>
+                </input>
             </form>
             
             <div class="d-flex my-4 mr-2">
