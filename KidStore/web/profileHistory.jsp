@@ -1,12 +1,7 @@
-<%-- 
-    Document   : profile
-    Created on : Apr 17, 2024, 10:52:45 PM
-    Author     : TUF
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Profile</title>
@@ -18,6 +13,20 @@
         <link href="css/footer.css" rel="stylesheet"/>
         <link href="css/profile.css" rel="stylesheet"/>
     </head>
+    <style>
+        .outer-box {
+            width: 120%;
+            height: auto;
+            margin-top: 20px;
+            border: 1px solid black;
+            border-radius: 5px;
+            padding: 20px;
+        }
+        .search-bar{
+            width: 120%;
+            height: auto;
+        }
+    </style>
     <body>
         <%@include file="components/navBarComponent.jsp" %>
         <div class="selection container row">
@@ -51,133 +60,130 @@
             <!-- SECTION RIGHT -->
 
             <div class="section_right col-md-12 col-lg-9">
-                <!-- Book Uploaded -->
-                <div>
-                    <div class="title-profile-cate">
-                        <h1>Lịch sử mua hàng</h1>
+                <div class="container" style="margin: 30px 20px; ">
+                    <div class="row">
+                        <h3>Lịch sử mua hàng</h3>
                     </div>
 
-                    <div class="toy-table">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Image</th>
-                                    <th>Toy Name</th>
-                                    <th>Quantity</th>
-                                    <th>Price</th>
-                                    <th>Total Price</th>
-                                    <th>Date of Purchase</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td><img src="img/people.jpg" alt="User Avt" class="toy-item-img"/></td>
-                                    <td>Thú bông</td>
-                                    <td>2</td>
-                                    <td>309.000đ</td>
-                                    <td>618.000đ</td>
-                                    <td>April 18, 2024</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td><img src="img/people.jpg" alt="User Avt" class="toy-item-img"/></td>
-                                    <td>Thú bông</td>
-                                    <td>2</td>
-                                    <td>309.000đ</td>
-                                    <td>618.000đ</td>
-                                    <td>April 18, 2024</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td><img src="img/people.jpg" alt="User Avt" class="toy-item-img"/></td>
-                                    <td>Thú bông</td>
-                                    <td>2</td>
-                                    <td>309.000đ</td>
-                                    <td>618.000đ</td>
-                                    <td>April 18, 2024</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td><img src="img/people.jpg" alt="User Avt" class="toy-item-img"/></td>
-                                    <td>Thú bông</td>
-                                    <td>2</td>
-                                    <td>309.000đ</td>
-                                    <td>618.000đ</td>
-                                    <td>April 18, 2024</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td><img src="img/people.jpg" alt="User Avt" class="toy-item-img"/></td>
-                                    <td>Thú bông</td>
-                                    <td>2</td>
-                                    <td>309.000đ</td>
-                                    <td>618.000đ</td>
-                                    <td>April 18, 2024</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td><img src="img/people.jpg" alt="User Avt" class="toy-item-img"/></td>
-                                    <td>Thú bông</td>
-                                    <td>2</td>
-                                    <td>309.000đ</td>
-                                    <td>618.000đ</td>
-                                    <td>April 18, 2024</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td><img src="img/people.jpg" alt="User Avt" class="toy-item-img"/></td>
-                                    <td>Thú bông</td>
-                                    <td>2</td>
-                                    <td>309.000đ</td>
-                                    <td>618.000đ</td>
-                                    <td>April 18, 2024</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td><img src="img/people.jpg" alt="User Avt" class="toy-item-img"/></td>
-                                    <td>Thú bông</td>
-                                    <td>2</td>
-                                    <td>309.000đ</td>
-                                    <td>618.000đ</td>
-                                    <td>April 18, 2024</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td><img src="img/people.jpg" alt="User Avt" class="toy-item-img"/></td>
-                                    <td>Thú bông</td>
-                                    <td>2</td>
-                                    <td>309.000đ</td>
-                                    <td>618.000đ</td>
-                                    <td>April 18, 2024</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td><img src="img/people.jpg" alt="User Avt" class="toy-item-img"/></td>
-                                    <td>Thú bông</td>
-                                    <td>2</td>
-                                    <td>309.000đ</td>
-                                    <td>618.000đ</td>
-                                    <td>April 18, 2024</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td><img src="img/people.jpg" alt="User Avt" class="toy-item-img"/></td>
-                                    <td>Thú bông</td>
-                                    <td>2</td>
-                                    <td>309.000đ</td>
-                                    <td>618.000đ</td>
-                                    <td>April 18, 2024</td>
-                                </tr>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="search-bar">
+                                <input type="text" class="form-control" placeholder="Nhập từ khóa tìm kiếm">
+                            </div>
+                        </div>
+                    </div>
 
-                            </tbody>
-                        </table>
+                    <!-- đơn thứ 1-->
+                    <div class="outer-box">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row" >
+                                    <div class="col-md-6">
+                                        <div class="product-name" style="justify-content: flex-start; display: flex;">&#128340; Ngày mua: 01/01/2024</div>
+                                    </div>
+                                    <div class="col-md-6" >
+                                        <div class="product-name" style="color: green; justify-content: flex-end; display: flex; font-weight: bold;">Hoàn Thành</div>
+                                    </div>
+                                </div>
+                                <hr style="margin: 5px 0;">
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="row" style="margin-top: 10px;">
+                                            <div class="col-md-2" >
+                                                <img src="https://vcdn-kinhdoanh.vnecdn.net/2023/06/07/CBNV-FPT-01-3113-1686139774.jpg" alt="Product Image" style="width: 100px; height: 100px; object-fit: cover; ">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="product-name">Mô Hình Universal Kung Fu Panda</div>
+                                                <div class="product-name">Số lượng: 1</div>
+                                                <div class="product-name">Danh mục: Đồ chơi sưu tầm</div>
+                                                <div class="product-name">Bộ sưu tập gồm 12 nhân vật thường và 1 nhân vật hiếm. Kích thước: 6-9cm Chất liệu: nhựa PVC/ABS</div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="product-price" style="display: flex; align-items: center; justify-content: flex-end; "><del>260.000 đ</del> -> 200.000 đ</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr style="margin: 10px 0;">
+                                <div class="row">
+                                    <div class="col-md-12" >
+                                        <div class="row">
+                                            <div class="product-name" style=" display: flex;justify-content: flex-end;">                                                  
+                                                <h5><i class='bx bx-money'></i> Thành tiền: 260.000 đ</h5>
+                                            </div>                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- đơn thứ 2-->
+                    <div class="outer-box">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row" >
+                                    <div class="col-md-6">
+                                        <div class="product-name" style="justify-content: flex-start; display: flex;">&#128340; Ngày mua: 01/01/2024</div>
+                                    </div>
+                                    <div class="col-md-6" >
+                                        <div class="product-name" style="color: green; justify-content: flex-end; display: flex; font-weight: bold;">Hoàn Thành</div>
+                                    </div>
+                                </div>
+                                <hr style="margin: 5px 0;">
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="row" style="margin-top: 10px;">
+                                            <div class="col-md-2" style="">
+                                                <img src="https://vcdn-kinhdoanh.vnecdn.net/2023/06/07/CBNV-FPT-01-3113-1686139774.jpg" alt="Product Image" style="width: 100px; height: 100px; object-fit: cover; ">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="product-name">Mô Hình Universal Kung Fu Panda</div>
+                                                <div class="product-name">Số lượng: 1</div>
+                                                <div class="product-name">Danh mục: Đồ chơi sưu tầm</div>
+                                                <div class="product-name">Bộ sưu tập gồm 12 nhân vật thường và 1 nhân vật hiếm. Kích thước: 6-9cm Chất liệu: nhựa PVC/ABS</div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="product-price" style="display: flex; align-items: center; justify-content: flex-end; "><del>260.000 đ</del> -> 200.000 đ</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row" style="margin-top: 10px;">
+                                            <div class="col-md-2" style="">
+                                                <img src="https://vcdn-kinhdoanh.vnecdn.net/2023/06/07/CBNV-FPT-01-3113-1686139774.jpg" alt="Product Image" style="width: 100px; height: 100px; object-fit: cover; ">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="product-name">Mô Hình Universal Kung Fu Panda</div>
+                                                <div class="product-name">Số lượng: 1</div>
+                                                <div class="product-name">Danh mục: Đồ chơi sưu tầm</div>
+                                                <div class="product-name">Bộ sưu tập gồm 12 nhân vật thường và 1 nhân vật hiếm. Kích thước: 6-9cm Chất liệu: nhựa PVC/ABS</div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="product-price" style="display: flex; align-items: center; justify-content: flex-end; "><del>260.000 đ</del> -> 200.000 đ</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr style="margin: 10px 0;">
+                                <div class="row">
+                                    <div class="col-md-12" >
+                                        <div class="">
+                                            <div class="product-name" style=" display: flex;justify-content: flex-end;">
+                                                <h5><i class='bx bx-money'></i> Thành tiền: 260.000 đ</h5>                           
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <%@include file="components/footerComponent.jsp" %>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/scripts.js"></script>
 </body>
 </html>
