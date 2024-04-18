@@ -54,7 +54,7 @@
             <!-- SECTION RIGHT -->
 
             <div class="section_right col-md-12 col-lg-9">
-                <!-- Book Uploaded -->
+                <!-- Danh sách đồ chơi bảo hành -->
                 <div>
                     <div class="title-profile-cate">
                         <h1>Danh sách đồ chơi bảo hành</h1>

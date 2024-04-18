@@ -51,7 +51,7 @@
             <!-- SECTION RIGHT -->
 
             <div class="section_right col-md-12 col-lg-9">
-                <!-- Book Uploaded -->
+                <!-- Lịch sử mua hàng -->
                 <div>
                     <div class="title-profile-cate">
                         <h1>Lịch sử mua hàng</h1>
