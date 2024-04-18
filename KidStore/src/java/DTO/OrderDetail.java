@@ -6,23 +6,40 @@ import java.util.Date;
  *
  * @author admin
  */
-public class Order {
-    
+public class OrderDetail {
+    private int id;
     private int userId;
     private int toyId;
     private int quantity;
     private double amount;
     private int orderId;
 
-    public Order() {
+    public OrderDetail() {
     }
 
-    public Order(int userId, int toyId, int quantity, double amount, int orderId) {
+    public OrderDetail(int userId, int toyId, int quantity, double amount, int orderId) {
         this.userId = userId;
         this.toyId = toyId;
         this.quantity = quantity;
         this.amount = amount;
         this.orderId = orderId;
+    }
+
+    public OrderDetail(int id, int userId, int toyId, int quantity, double amount, int orderId) {
+        this.id = id;
+        this.userId = userId;
+        this.toyId = toyId;
+        this.quantity = quantity;
+        this.amount = amount;
+        this.orderId = orderId;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getUserId() {

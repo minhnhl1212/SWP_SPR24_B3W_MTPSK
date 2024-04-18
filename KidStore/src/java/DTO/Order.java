@@ -6,28 +6,26 @@ import java.util.Date;
  *
  * @author trant
  */
-public class OrderDetail {
+public class Order {
     private int orderId;
     private int userId;
-    private int statusId;
+    private String status;
     private Date createDate;
     private int voucherId;
     private int cardId;
-    private int paymentId;
-    private int toyId;
+    private boolean paymentType;
 
-    public OrderDetail() {
+    public Order() {
     }
 
-    public OrderDetail(int orderId, int userId, int statusId, Date createDate, int voucherId, int cardId, int paymentId, int toyId) {
+    public Order(int orderId, int userId, String status, Date createDate, int voucherId, int cardId, boolean paymentType) {
         this.orderId = orderId;
         this.userId = userId;
-        this.statusId = statusId;
+        this.status = status;
         this.createDate = createDate;
         this.voucherId = voucherId;
         this.cardId = cardId;
-        this.paymentId = paymentId;
-        this.toyId = toyId;
+        this.paymentType = paymentType;
     }
 
     public int getOrderId() {
@@ -46,12 +44,12 @@ public class OrderDetail {
         this.userId = userId;
     }
 
-    public int getStatusId() {
-        return statusId;
+    public String getStatus() {
+        return status;
     }
 
-    public void setStatusId(int statusId) {
-        this.statusId = statusId;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Date getCreateDate() {
@@ -78,20 +76,13 @@ public class OrderDetail {
         this.cardId = cardId;
     }
 
-    public int getPaymentId() {
-        return paymentId;
+    public boolean isPaymentType() {
+        return paymentType;
     }
 
-    public void setPaymentId(int paymentId) {
-        this.paymentId = paymentId;
+    public void setPaymentType(boolean paymentType) {
+        this.paymentType = paymentType;
     }
 
-    public int getToyId() {
-        return toyId;
-    }
-
-    public void setToyId(int toyId) {
-        this.toyId = toyId;
-    }
-  
+    
 }
