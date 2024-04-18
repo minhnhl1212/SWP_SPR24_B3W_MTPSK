@@ -98,8 +98,12 @@
                                             <!--                                            Product name-->
                                             <h5 class="fw-bolder"><%=toy.getToyName()%></h5>
                                             <!--                                            Product reviews-->
-                                            <div class="d-flex justify-content-center small text-warning mb-2">
-                                                <div class="bi-star-fill">5</div>
+                                            <div class="d-flex justify-content-center small text-warning mb-2   ">
+                                                <div class="bi-star-fill"></div>
+                                                <div class="bi-star-fill"></div>
+                                                <div class="bi-star-fill"></div>
+                                                <div class="bi-star-fill"></div>
+                                                <div class="bi-star-fill"></div>
                                             </div>
                                             <!--                                            Discount-->
                                             <span class="text-muted text-decoration-line-through"><%=toy.getPrice()%> Đ</span><br/> 
