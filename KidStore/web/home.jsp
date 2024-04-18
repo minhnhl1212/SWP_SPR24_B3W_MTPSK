@@ -21,17 +21,47 @@
         <link href="css/styles.css" rel="stylesheet"/>
         <link href="css/footer.css" rel="stylesheet"/>
     </head>
+    <style>
+        .carousel-item img{
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+        }
+    </style>
     <body>
         <!-- Navbar-->
         <%@include file="components/navBarComponent.jsp" %>
         <!-- Header-->
-        <header class="py-5" style="background-image: url(img/background.png)">
-            <div class="container px-4 px-lg-5 my-5">
-                <div class="text-center text-primary">
-                    <h1 class="display-4 fw-bolder" style="font-family: cursive">Kids Store</h1>
-                    <p class="lead fw-normal text-dark-50 mb-0" style="font-family: Monospace">Yêu thương mong con tỏa sáng</p>
+        <header>
+
+            <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+                <div class="container px-4 px-lg-5 my-5" style="position: absolute; top: 35%; left: 50%; transform: translate(-50%, -50%); z-index: 3;">
+                    <div class="text-center text-primary">
+                        <h1 class="display-4 fw-bolder" style="font-family: cursive">Kids Store</h1>
+                        <p class="lead fw-normal text-dark-50 mb-0" style="font-family: Monospace">Yêu thương mong con tỏa sáng</p>
+                    </div>
                 </div>
+                <div class="carousel-inner" >
+                    <div class="carousel-item active img-fluid"  data-bs-interval="3000">
+                        <img src="img/background.png" class="d-block w-100" alt="background1">
+                    </div>
+                    <div class="carousel-item img-fluid" data-bs-interval="3000">
+                        <img src="img/background-1.png" class="d-block w-100" alt="background2">
+                    </div>
+                    <div class="carousel-item img-fluid" data-bs-interval="3000">
+                        <img src="img/background-2.png" class="d-block w-100" alt="background3">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
             </div>
+
         </header>
         <% Account a = (Account) session.getAttribute("acc");
             int role = 0;

@@ -9,7 +9,7 @@
 <!-- Icon -->
 <link href="assets/fontawesome-free-6.1.1-web/css/all.css" rel="stylesheet" type="text/css">
 <!-- Boxicons -->
-        <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 <!-- Navigation-->
 <script>
     function login() {
@@ -46,7 +46,7 @@
                     />
                 <input class="btn btn-outline-success ml-2" type="submit"></input>
             </form>
-            
+
             <div class="d-flex my-4 mr-2">
                 <a style="margin-right: 15px;"class="btn btn-outline-dark mt-auto" href="NewsController">Tin tức</a>
                 <a class="btn btn-outline-dark" href="cart.jsp">
@@ -58,7 +58,7 @@
                     <i class='bx bx-user'></i>
                     Thông tin
                 </a>
-              
+
             </div>
 
             <c:choose>
