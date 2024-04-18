@@ -6,18 +6,15 @@ package DTO;
  */
 public class Payment {
     private int paymentId;
-    private String fullName;
-    private String cardId;
-    private int userId;
+    private String bankName;
+
 
     public Payment() {
     }
 
-    public Payment(int paymentId, String fullName, String cardId, int userId) {
+    public Payment(int paymentId, String bankName) {
         this.paymentId = paymentId;
-        this.fullName = fullName;
-        this.cardId = cardId;
-        this.userId = userId;
+        this.bankName = bankName;
     }
 
     public int getPaymentId() {
@@ -28,28 +25,13 @@ public class Payment {
         this.paymentId = paymentId;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getBankName() {
+        return bankName;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setBankName(String bankName) {
+        this.bankName = bankName;
     }
 
-    public String getCardId() {
-        return cardId;
-    }
-
-    public void setCardId(String cardId) {
-        this.cardId = cardId;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
 
 }
