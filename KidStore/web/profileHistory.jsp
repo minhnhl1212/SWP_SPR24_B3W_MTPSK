@@ -11,12 +11,13 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Profile</title>
         <!-- Bootstrap icons-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet"/>
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         <%--Bootstrap 4.6.2--%>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
         <link href="css/styles.css" rel="stylesheet"/>
         <link href="css/footer.css" rel="stylesheet"/>
         <link href="css/profile.css" rel="stylesheet"/>
+
     </head>
     <style>
         .outer-box {
@@ -96,7 +97,7 @@
                                     <div class="col-md-12">
                                         <div class="row" style="margin-top: 10px;">
                                             <div class="col-md-2" style="">
-                                                <img src="https://vcdn-kinhdoanh.vnecdn.net/2023/06/07/CBNV-FPT-01-3113-1686139774.jpg" alt="Product Image" style="width: 100px; height: 100px; object-fit: cover; ">
+                                                <img src="https://www.mykingdom.com.vn/cdn/shop/files/6941848252470_1.jpg?v=1711526016&width=990" alt="Product Image" style="width: 100px; height: 100px; object-fit: cover; ">
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="product-name">Mô Hình Universal Kung Fu Panda</div>
@@ -114,7 +115,11 @@
                                 <div class="row">
                                     <div class="col-md-12" >
                                         <div class="">
-                                            <div class="product-name" style=" display: flex;justify-content: flex-end;"><h5>&#36; Thành tiền: 260.000 đ</h5></div>                            
+                                            <div class="product-name" style=" display: flex;justify-content: flex-end;">
+                                                <h5><i class='bx bx-money'></i>
+                                                    Thành tiền: 260.000 đ
+                                                </h5>
+                                            </div>                            
                                         </div>
                                     </div>
                                 </div>
@@ -140,7 +145,7 @@
                                     <div class="col-md-12">
                                         <div class="row" style="margin-top: 10px;">
                                             <div class="col-md-2" style="">
-                                                <img src="https://vcdn-kinhdoanh.vnecdn.net/2023/06/07/CBNV-FPT-01-3113-1686139774.jpg" alt="Product Image" style="width: 100px; height: 100px; object-fit: cover; ">
+                                                <img src="https://www.mykingdom.com.vn/cdn/shop/files/6941848252470_1.jpg?v=1711526016&width=990" alt="Product Image" style="width: 100px; height: 100px; object-fit: cover; ">
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="product-name">Mô Hình Universal Kung Fu Panda</div>
@@ -155,7 +160,7 @@
 
                                         <div class="row" style="margin-top: 10px;">
                                             <div class="col-md-2" style="">
-                                                <img src="https://vcdn-kinhdoanh.vnecdn.net/2023/06/07/CBNV-FPT-01-3113-1686139774.jpg" alt="Product Image" style="width: 100px; height: 100px; object-fit: cover; ">
+                                                <img src="https://www.mykingdom.com.vn/cdn/shop/files/6941848252470_1.jpg?v=1711526016&width=990" alt="Product Image" style="width: 100px; height: 100px; object-fit: cover; ">
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="product-name">Mô Hình Universal Kung Fu Panda</div>
@@ -170,7 +175,12 @@
                                 <div class="row">
                                     <div class="col-md-12" >
                                         <div class="">
-                                            <div class="product-name" style=" display: flex;justify-content: flex-end;"><h5>&#36; Thành tiền: 260.000 đ</h5></div>                            
+                                            <div class="product-name" style=" display: flex;justify-content: flex-end;">
+                                                <h5>
+                                                    <i class='bx bx-money'></i>
+                                                    Thành tiền: 260.000 đ
+                                                </h5>
+                                            </div>                            
                                         </div>
                                     </div>
                                 </div>
