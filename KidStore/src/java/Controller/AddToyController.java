@@ -38,9 +38,9 @@ public class AddToyController extends HttpServlet {
             String nameStaff = request.getParameter("nameStaff");
             Toy addToy = toyDAO.addToy(name, image, price, description, idCategory, discount, warrantyTime, nameStaff);
             if (addToy != null) {
-                request.setAttribute("ADD_TOY_SUCCESS", "Added Success");
+                request.setAttribute("ADD_TOY_SUCCESS", "Added " + addToy.getToyName() + " Success");
             } else {
-                request.setAttribute("ADD_TOY_FAILED", "Added Failed");
+                request.setAttribute("ADD_TOY_FAILED", "Added " + addToy.getToyName() + " Failed");
             }
                         
             ArrayList<Toy> toyList = toyDAO.toyList();

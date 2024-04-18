@@ -29,8 +29,8 @@
             </div>
 
             <button onclick="toggleAddCategoryForm()" class="add">Add New Category</button>
-            <p style="color: green">${ADD_CATEGORY_SUCCESS}</p>
-            <p style="color: red">${ADD_CATEGORY_FAILED}</p>
+            <h2 style="color: green">${ADD_CATEGORY_SUCCESS}</h2>
+            <h2 style="color: red">${ADD_CATEGORY_FAILED}</h2>
 
             <table class="table table-hover">
                 <thead>

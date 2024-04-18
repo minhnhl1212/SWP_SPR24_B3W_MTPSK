@@ -118,7 +118,19 @@
                                 ArrayList<Toy> toyList = (ArrayList<Toy>) session.getAttribute("TOY_LIST");
                                 ArrayList<Toy> toyCategoryList = (ArrayList<Toy>) request.getAttribute("TOY_CATEGORY_LIST");
                                 if (toyList != null && toyCategoryList == null) {
-                                    for (Toy toy : toyList) {
+                                    // Define the number of items to display per page
+                                    int itemsPerPage = 9;
+
+                                    // Get the current page number from the request parameter, default to 1 if not provided
+                                    int currentPage = (request.getParameter("page") != null) ? Integer.parseInt(request.getParameter("page")) : 1;
+
+                                    // Calculate the start and end index of items to display on the current page
+                                    int startIndex = (currentPage - 1) * itemsPerPage;
+                                    int endIndex = Math.min(startIndex + itemsPerPage, toyList.size());
+
+                                    // Iterate over the subset of toyList based on the current page
+                                    for (int i = startIndex; i < endIndex; i++) {
+                                        Toy toy = toyList.get(i);
                             %>
                             <div class="col mb-5">
 
@@ -180,11 +192,47 @@
 
                             </div>
 
+
+
+                            <%}
+                            %>
+
+                            <!-- Pagination Controls -->
+                            <div class="pagination">
+                                <% if (currentPage > 1) {%>
+                                <a href="?page=<%= currentPage - 1%>">&laquo; Previous</a>
+                                <% } %>
+
+                                <% int totalPages = (int) Math.ceil((double) toyList.size() / itemsPerPage); %>
+                                <% for (int i = 1; i <= totalPages; i++) { %>
+                                <% if (i == currentPage) {%>
+                                <span class="current-page"><%= i%></span>
+                                <% } else {%>
+                                <a href="?page=<%= i%>"><%= i%></a>
+                                <% } %>
+                                <% } %>
+
+                                <% if (currentPage < totalPages) {%>
+                                <a href="?page=<%= currentPage + 1%>">Next &raquo;</a>
+                                <% } %>
+                            </div>
 
                             <!-- Danh sách đồ chơi theo CategoryId -->
-                            <%}
-                            } else if (toyCategoryList != null) {
-                                for (Toy toy : toyCategoryList) {
+
+                            <%} else if (toyCategoryList != null) {
+                                // Define the number of items to display per page
+                                int itemsPerPage = 9;
+
+                                // Get the current page number from the request parameter, default to 1 if not provided
+                                int currentPage = (request.getParameter("page") != null) ? Integer.parseInt(request.getParameter("page")) : 1;
+
+                                // Calculate the start and end index of items to display on the current page
+                                int startIndex = (currentPage - 1) * itemsPerPage;
+                                int endIndex = Math.min(startIndex + itemsPerPage, toyList.size());
+
+                                // Iterate over the subset of toyList based on the current page
+                                for (int i = startIndex; i < endIndex; i++) {
+                                    Toy toy = toyCategoryList.get(i);
                             %>
                             <div class="col mb-5">
 
@@ -243,10 +291,33 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
+
                             <%}
-                            } else {
+                            %>
+
+                            <!-- Pagination Controls -->
+                            <div class="pagination">
+                                <% if (currentPage > 1) {%>
+                                <a href="?page=<%= currentPage - 1%>">&laquo; Previous</a>
+                                <% } %>
+
+                                <% int totalPages = (int) Math.ceil((double) toyList.size() / itemsPerPage); %>
+                                <% for (int i = 1; i <= totalPages; i++) { %>
+                                <% if (i == currentPage) {%>
+                                <span class="current-page"><%= i%></span>
+                                <% } else {%>
+                                <a href="?page=<%= i%>"><%= i%></a>
+                                <% } %>
+                                <% } %>
+
+                                <% if (currentPage < totalPages) {%>
+                                <a href="?page=<%= currentPage + 1%>">Next &raquo;</a>
+                                <% } %>
+                            </div>
+
+
+                            <%} else {
                             %>
                             <p>Không có đồ chơi nào</p>
                             <%

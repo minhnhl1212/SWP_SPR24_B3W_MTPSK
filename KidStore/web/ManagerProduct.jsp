@@ -29,8 +29,8 @@
         </div>
 
         <button onclick="toggleAddProductForm()" class="add">Add New Product</button>
-        <p style="color: red">${ADD_TOY_SUCCESS}</p>
-        <p style="color: red">${ADD_TOY_FAILED}</p>
+        <h2 style="color: greenyellow">${ADD_TOY_SUCCESS}</h2>
+        <h2 style="color: red">${ADD_TOY_FAILED}</h2>
 
 
 
@@ -83,7 +83,7 @@
                 <div>
                     <form action="AddToyController">
                         <h2>Add New Toy</h2>
-                        
+
                         <label for="productName">Name</label></br>
                         <input type="text" id="productName" name="productName" required></br>
 
@@ -113,9 +113,9 @@
                             <%
                                 }
                             %>
-                        </select>                        
+                        </select>                      
 
-
+                        </br>  
                         <label for="discount">Discount</label></br>
                         <input type="number" id="discount" name="discount" required></br>
 
