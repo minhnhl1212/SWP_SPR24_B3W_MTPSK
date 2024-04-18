@@ -33,9 +33,9 @@ public class AddCategoryController extends HttpServlet {
             CategoryDAO cagoryDAO = new CategoryDAO();
             Category addCategory = cagoryDAO.addCategory(nameCategory);
             if (addCategory != null) {
-                request.setAttribute("ADD_CATEGORY_SUCCESS", "Added Success");
+                request.setAttribute("ADD_CATEGORY_SUCCESS", "Added " + addCategory.getCategoryName() + " Success");
             } else {
-                request.setAttribute("ADD_CATEGORY_FAILED", "Added Failed");
+                request.setAttribute("ADD_CATEGORY_FAILED", "Added " + addCategory.getCategoryName() + " Failed");
             }
             RequestDispatcher rd = request.getRequestDispatcher("ManagerCategory.jsp");
             rd.forward(request, response);

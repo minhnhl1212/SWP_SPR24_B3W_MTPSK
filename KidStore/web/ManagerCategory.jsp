@@ -9,6 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>STAFF</title>
         <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="css/ManagerCategory.css">
 
     </head>
     <body>
@@ -22,56 +23,75 @@
 
         <div class="container">
 
-            <section id="product-list">
-                <h2>Category</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Category Name</th> 
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+            <div id="product-list">
+                <h2>Toy Category</h2>
+            </div>
 
-                        <%
-                            ArrayList<Category> productList = (ArrayList<Category>) request.getAttribute("categoryList");
-                            if (productList != null) {
-                                for (Category category : productList) {
-                        %>
-                        <tr>
-                            <td>${c.cid}</td>
-                            <td>${c.cname}</td>
-                            <td>
-                                <a href="edit_product.jsp?id=${c.cid}">Edit</a>
-                                <a href="delete_product.jsp?id=${c.cid}">Delete</a>
-                            </td>
-                        </tr>
-                        <% }
-                    } else { %>
-                        <tr><td colspan="5">No Category</td></tr>
-                        <% }%>
-                    </tbody>
-                </table>
-            </section>
+            <button onclick="toggleAddCategoryForm()" class="add">Add New Category</button>
+            <p style="color: green">${ADD_CATEGORY_SUCCESS}</p>
+            <p style="color: red">${ADD_CATEGORY_FAILED}</p>
 
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Category Name</th>                        
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%
+                        ArrayList<Category> categoryList = (ArrayList<Category>) session.getAttribute("CATEGORY_LIST_ALL");
+                        if (categoryList != null) {
+                            for (Category category : categoryList) {
+                    %>
+                    <tr>
+                        <td><%=category.getCategoryId()%></td>
+                        <td><%=category.getCategoryName()%></td>                    
+                        <td class="col-2">
+                            <a href="">Edit</a>                       
+                            <a href="">Delete</a>
+                        </td>
+                    </tr>
+                    <%}
+                    } else {
+                    %>
+                <p>Không có loại đồ chơi nào</p>
+                <%
+                    }
+                %>                
+                </tbody>
+            </table>
 
-            <section id="add-category-form">
-                <h2>Add Category</h2>
-                <form action="add_product.jsp" method="post">
-                    <label for="productName">Name:</label>
-                    <input type="text" id="categoryName" name="categoryName" required> 
+            <div class="wrap">
+                <div class="addCategory overlay">
+                    <div id="add-product-form">                    
+                        <div>
+                            <form class="form" action="AddCategoryController">
+                                <h2>Add New Toy Category</h2>
+                                <label for="nameCategory">Name Category</label></br>
+                                <input type="text" id="productName" name="nameCategory" required></br>                                            
+                                <button type="submit">Add</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                    <label for="categoryAction">Action:</label>
-                    <textarea id="categoryAction" name="categoryAction"></textarea>
-
-                    <button type="submit">Add new Category</button>
-                </form>
-            </section>
-        </div>
-
-        <script src="js/admin.js"></script>
+            <script src="js/admin.js"></script>
     </body>
+    <script>
+                function toggleAddCategoryForm() {
+                    var addCategoryForm = document.querySelector('.addCategory');
+                    if (addCategoryForm.style.display === 'none') {
+                        addCategoryForm.style.display = 'block';
+                        
+                    } else {
+                        addCategoryForm.style.display = 'none';
+                        
+                    }
+                }
+    </script>
 </html>
 
 

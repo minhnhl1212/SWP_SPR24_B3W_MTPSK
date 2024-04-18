@@ -38,6 +38,27 @@ public class CategoryDAO {
         try {
             con = DBUtils.getConnection();
             if (con != null) {
+                String sql = "select category_id ,category_name from Category where approve = 1";
+                ps = con.prepareStatement(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    Category list = new Category(rs.getInt("category_id"), rs.getString("category_name"));
+                    listCategory.add(list);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+        return listCategory;
+    }
+    
+    public ArrayList<Category> categoryListAll() throws SQLException, Exception {
+        ArrayList<Category> listCategory = new ArrayList<>();
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
                 String sql = "select category_id ,category_name from Category";
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
@@ -59,7 +80,7 @@ public class CategoryDAO {
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "insert into Category(category_name) values (?)";
+                String sql = "insert into Category(category_name, approve) values (?,0)";
                 ps = con.prepareStatement(sql);
                 ps.setString(1, nameCategory);
                 ps.executeUpdate();

@@ -1,3 +1,4 @@
+<%@page import="DTO.Category"%>
 <%@page import="DTO.Toy"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -27,8 +28,8 @@
         </div>
 
         <button onclick="toggleAddProductForm()" class="add">Add New Product</button>
-        <p style="color: red">${ADD_TOY_SUCCESS}</p>;
-        <p style="color: red">${ADD_TOY_FAILED}</p>;
+        <p style="color: red">${ADD_TOY_SUCCESS}</p>
+        <p style="color: red">${ADD_TOY_FAILED}</p>
 
 
 
@@ -73,11 +74,6 @@
             %>                
         </tbody>
     </table>
-    </br>
-    </br>
-    </br>
-    </br>
-    </br>
 
     <div class="wrap">
         <div class="addProduct overlay">
@@ -93,12 +89,29 @@
 
                         <label for="price">Price</label></br>
                         <input type="number" id="price" name="price" required></br>
-
+                        <%
+                            ArrayList<Category> categoryList = (ArrayList<Category>) session.getAttribute("CATEGORY_LIST");
+                            if (categoryList != null) {
+                        %>
                         <label for="description">Description</label></br>
                         <input type="text" id="description" name="description" required></br>                             
 
                         <label for="category">Category</label></br>
-                        <input type="text" id="category" name="category" required></br>
+
+                        <select name="idCategory" id="category">
+                            <%
+                                for (Category category : categoryList) {
+                            %>
+                            <option value="<%=category.getCategoryId()%>"><%=category.getCategoryName()%></option>
+                            <%}
+                            } else {
+                            %>
+                            <p>Không có loại đồ chơi nào</p>
+                            <%
+                                }
+                            %>
+                        </select>                        
+
 
                         <label for="discount">Discount</label></br>
                         <input type="number" id="discount" name="discount" required></br>
