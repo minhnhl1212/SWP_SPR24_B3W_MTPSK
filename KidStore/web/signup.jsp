@@ -64,7 +64,7 @@
             function checkPhone() {
                 var phone = document.getElementById("phone").value;
                 var phoneError = document.getElementById("phoneError");
-                if (phone.length < 10 && phone != "") {
+                if (phone.length < 10 && phone !== "") {
                     phoneError.innerHTML = "Số Điện Thoại Không Hợp Lệ";
                 } else {
                     phoneError.innerHTML = "";
@@ -151,7 +151,7 @@
 
             function isAlphabetKey(evt) {
                 var charCode = (evt.which) ? evt.which : event.keyCode;
-                if ((charCode >= 65 && charCode <= 90) || (charCode >= 97 && charCode <= 122) || charCode == 32) {
+                if ((charCode >= 65 && charCode <= 90) || (charCode >= 97 && charCode <= 122) || charCode === 32) {
                     return true;
                 } else {
                     return false;
