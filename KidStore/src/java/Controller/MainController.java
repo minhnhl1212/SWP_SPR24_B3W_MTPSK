@@ -80,12 +80,13 @@ public class MainController extends HttpServlet {
             session.setAttribute("TOY_LIST", toyList);
             session.setAttribute("CATEGORY_LIST", categoryList);
             
+            
+            url = HOMEPAGE;
+            }
             //Lấy danh sách News
             NewsDAO newsDAO = new NewsDAO();
             ArrayList<News> newsList = newsDAO.newsList();
             session.setAttribute("NEWS_LIST", newsList);
-            url = HOMEPAGE;
-            }
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
         } catch (Exception e) {

@@ -84,9 +84,7 @@ public class LoginController extends HttpServlet {
                     url = ADMIN;
                 } else if (acc.getRoleId() == 2) {
                     url = STAFF;
-                } else if (acc.getRoleId() == 3) {
-                    url = HOMEPAGE;
-                }
+                } 
             } //sai trả về login và báo lỗi
             else {
                 request.setAttribute("LOGIN_ERROR", "Username or password is incorrect");

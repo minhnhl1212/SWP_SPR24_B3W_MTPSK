@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -22,18 +23,18 @@ public class NewsController extends HttpServlet {
     private static final String NEWS = "news.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+            throws ServletException, IOException {        
         try {
             response.setContentType("text/html;charset=UTF-8");
+            HttpSession session = request.getSession();
             String url = NEWS;
             NewsDAO newsDAO = new NewsDAO();
             ArrayList<News> newsList = newsDAO.newsList();
             if (newsList != null){
-                request.setAttribute("NEWS_LIST", newsList);
+                session.setAttribute("NEWS_LIST", newsList);
                 
             } else {
-                request.setAttribute("NEWS_LIST_ERROR", "Error load news");
+                session.setAttribute("NEWS_LIST_ERROR", "Error load news");
             }
             
             RequestDispatcher rd = request.getRequestDispatcher(url);

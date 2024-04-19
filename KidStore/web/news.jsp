@@ -52,25 +52,29 @@
 
                         <%
                             Account acc = (Account) session.getAttribute("acc");
+                            if (acc != null) {
                         %>
 
                         <button class="btn-news"><h4>Thêm Tin Tức</h4></button>
                         <form action="AddNewsController">
                             <div class="new-containter">
-                                <label for="tittle">Tittle</label>
-                                <input type="text" name="tittle" id="tittle" required></br>
+                                <label for="title">Tittle</label>
+                                <input type="text" name="title" id="title" required></br>
                                 <label for="image">Image</label>
                                 <input type="text" name="image" id="image" required></br>
                                 <label for="date">Date</label>
                                 <input type="date" id="date" name="date" required></br>
-                                <input type="hidden" name="staff" value="<%=acc.getFullName()%>"></br>
                                 <label for="description">Description</label>
                                 <input type="text" id="description" name="description" required></br>
+                                <input type="hidden" name="userId" value="<%=acc.getUserId()%>">
                                 <input type="submit" value="Add">
                             </div>
                         </form>
                         <p style="color: green">${ADD_NEWS_SUCCESS}</p>
                         <p style="color: red">${ADD_NEWS_FAILED}</p>
+                        <%} else {%>
+                        <p>Khong Co Tai Khoan Dang Nhap</p>
+                        <%}%>
 
                         <%
                             ArrayList<News> newsList = (ArrayList<News>) session.getAttribute("NEWS_LIST");
@@ -86,10 +90,9 @@
                                     </div>
                                 </div>
                                 <div class="col-md-7">
-                                    <a href="#" class="fh5co_magna py-3"><%=news.getTittle()%></br></a> 
-                                    <a href="#" class="fh5co_mini_time py-2"> <%=news.getDate()%> <%=news.getStaff()%> </a>
-                                    <div class="fh5co_consectetur"> <%=news.getDescription()%></div>
-                                    <a href="#" class="xem-them">Xem thêm</a>
+                                    <a href="#" class="fh5co_magna py-3"><%=news.getTitle()%></br></a> 
+                                    <a href="#" class="fh5co_mini_time py-2"> <%=news.getDate()%> <%=news.getUserId()%> </a>
+                                    <div class="fh5co_consectetur"> <%=news.getDescription()%></div>   
                                 </div>
                             </div>
                         </div>
@@ -97,10 +100,11 @@
                         <%}
                         } else {
                         %>
-                        <p>${NEWS_LIST_ERROR}</p>
+                        <p>Khong co danh sach News</p>
                         <%
                             }
                         %>
+
 
                     </div>
                 </div>

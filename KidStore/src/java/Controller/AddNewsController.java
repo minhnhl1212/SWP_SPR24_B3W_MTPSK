@@ -29,16 +29,16 @@ public class AddNewsController extends HttpServlet {
             HttpSession session = request.getSession();
             response.setContentType("text/html;charset=UTF-8");
             String url = NEWS;
-            String tittle = request.getParameter("tittle");
+            String title = request.getParameter("title");
             String image = request.getParameter("image");
             String dateStr = request.getParameter("date");
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             java.util.Date utilDate = dateFormat.parse(dateStr);
             java.sql.Date date = new java.sql.Date(utilDate.getTime());
-            String staff = request.getParameter("staff");
+            int userId = Integer.parseInt(request.getParameter("userId"));
             String description = request.getParameter("description");
             NewsDAO newsDAO = new NewsDAO();
-            News addNews = newsDAO.addNews(tittle, image, date, staff, description);
+            News addNews = newsDAO.addNews(title, image, date, userId, description);
             
             if (addNews != null){
                 request.setAttribute("ADD_NEWS_SUCCESS", "Add News Failed");
