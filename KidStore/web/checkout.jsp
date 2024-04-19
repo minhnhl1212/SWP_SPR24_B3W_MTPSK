@@ -1,3 +1,4 @@
+<%@page import="DTO.Account"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="DTO.Toy"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -81,21 +82,24 @@
                     return true;
                 }
             </script>
-
+        <%  int i = 1;
+        double sum = 0, discount = 0;
+        HashMap<Toy, Integer> cartItems = (HashMap<Toy, Integer>) session.getAttribute("cartList");
+        Account a = (Account) session.getAttribute("acc");%>
             <div class="row">
                 <div class="container">
                     <div class="row">
 
                         <div class="col-md-6">
                             <h5>Billing Details</h5>
-                            <form class="checkout-form" action="checkout.jsp" method="post" onsubmit="return validateFormData()">
+                            <form class="checkout-form" action="MainController" method="post" onsubmit="return validateFormData()">
 
                                 <label>Tên</label>
-                                <input type="text" class="form-control" id="name" placeholder="Tên">
+                                <input type="text" class="form-control" id="name" placeholder="Tên" name="name">
                                 <label>Địa chỉ</label>
-                                <input type="text" class="form-control" id="address" placeholder="Địa chỉ">
+                                <input type="text" class="form-control" id="address" placeholder="Địa chỉ" name="address">
                                 <label>Số Điện Thoại</label>
-                                <input type="text" class="form-control" id="phone" placeholder="Số Điện Thoại">
+                                <input type="text" class="form-control" id="phone" placeholder="Số Điện Thoại" name="phone">
 
                                 <div><label>Phương thức thanh toán</label></div>
                                 <input type="radio" id="cashOnDelivery" name="paymentMethod" value="cashOnDelivery">
@@ -104,7 +108,7 @@
                                 <label for="bankTransfer">Thanh toán qua ngân hàng</label>
 
                                 <div id="errorMessages" style="color: red; margin-top: 10px;"></div>
-                                <input type="submit" class="btn btn-success btn-block" value="Xác nhận thanh toán">
+                                <input type="submit" class="btn btn-success btn-block" name="btAction" value="Create">
 
                             </form>
                         </div>
@@ -123,25 +127,28 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-
+                                            <%for (HashMap.Entry<Toy, Integer> c : cartItems.entrySet()) {
+                                                    double prices = c.getKey().getPrice() * c.getValue() * c.getKey().getDiscount();
+                                            %>
                                         <form action="CartController">
 
                                             <tr>
-                                                <td><img src="https://cdn-v2.kidsplaza.vn/media/catalog/product/d/o/do-choi-o-to-day-da-cy-7712-1.jpg" width="50" alt="Product Image"></td>
-                                                <td>Mô Hình Universal Kung Fu Panda</td>
-                                                <td>260.000 đ</td>
-                                                <td>SL: 1</td>
-                                                <td>260.000 đ</td>
+                                                <td><img src="<%=c.getKey().getImage()%>" width="50" alt="Product Image"></td>
+                                                <td><%=c.getKey().getToyName()%></td>
+                                                <td><%=c.getKey().getPrice()*c.getKey().getDiscount()%> đ</td>
+                                                <td>SL: <%=c.getValue()%></td>
+                                                <td><%sum+=prices;%><%=prices%> đ</td>
                                             </tr>
                                         </form>
+                                        <%}%>
                                         </tbody>
                                     </table>
                                 </div>
                                 <h5>Card Total</h5>
                                 <div class="card-body">
-                                    <p class="card-text">Subtotal: đ</p>
+                                    <p class="card-text">Subtotal:<%=sum%> đ</p>
                                     <p class="card-text">Discount: 0 đ</p>
-                                    <p class="card-text">Total:  đ</p>
+                                    <p class="card-text">Total: <%=sum%> đ</p>
                                 </div>
                             </div>
                         </div>
