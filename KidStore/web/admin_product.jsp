@@ -143,10 +143,10 @@
                                     <td><%=toy.getToyId()%></td>
                                     <td><%=toy.getToyName()%></td>
                                     <td><img src="<%=toy.getImage()%>" alt="Toy Image"></td>
-                                    <td><%=toy.getNameStaff()%></td>
+                                    <td><%=toy.getName_staff()%></td>
                                     <td><%=toy.getPrice()%> Đ</td>
                                     <td><a href="ApproveToyController?toyId=<%=toy.getToyId()%>"class="button-bordered" id="success">Approve</a></td> 
-                                    <td><a href="CancelToyController?toyId=<%=toy.getToyId()%>" class="button-bordered" id="error">Cancel</a></td>  
+                                    <td><a href="CancelToyController?toyId=<%=toy.getToyId()%>" class="button-bordered" id="error">Disable</a></td>  
                                     <td></td>
                                 </tr>
                                 <%}

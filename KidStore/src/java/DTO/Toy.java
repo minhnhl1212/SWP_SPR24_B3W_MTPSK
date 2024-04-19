@@ -1,94 +1,37 @@
 package DTO;
 
+import java.util.Date;
 
 /**
  *
  * @author admin
  */
 public class Toy {
+
     private int toyId;
     private String toyName;
     private int quantity;
     private String image;
     private double price;
     private String description;
-    private int approve;
     private int categoryId;
     private double discount;
-    private int warranty_time;
-    private String nameStaff;
-
-    public Toy() {
-    }
+    private Date warranty_time;
+    private int isActive;
+    private int isDisable;
+    private int userId;
+    private String name_staff;
 
     public Toy(int toyId) {
         this.toyId = toyId;
-    }        
+    }
 
     public Toy(String toyName, String image, double price, double discount) {
         this.toyName = toyName;
         this.image = image;
         this.price = price;
         this.discount = discount;
-    } 
-
-    public Toy(String toyName, String image, double price, String description, int approve, int categoryId, double discount, int warranty_time) {
-        this.toyName = toyName;
-        this.image = image;
-        this.price = price;
-        this.description = description;
-        this.approve = approve;
-        this.categoryId = categoryId;
-        this.discount = discount;
-        this.warranty_time = warranty_time;
-    }       
-
-    public Toy(String toyName, String image, double price, String description, int approve, int categoryId, double discount, int warranty_time, String nameStaff) {
-        this.toyName = toyName;
-        this.image = image;
-        this.price = price;
-        this.description = description;
-        this.approve = approve;
-        this.categoryId = categoryId;
-        this.discount = discount;
-        this.warranty_time = warranty_time;
-        this.nameStaff = nameStaff;
-    }
-    
-    
-
-    public Toy(String toyName, String image, double price, String description, int approve, int categoryId, double discount) {
-        this.toyName = toyName;
-        this.image = image;
-        this.price = price;
-        this.description = description;
-        this.approve = approve;
-        this.categoryId = categoryId;
-        this.discount = discount;
-    }
-
-    public Toy(int toyId, String toyName, int quantity, double price, String description, int categoryId, double discount) {
-        this.toyId = toyId;
-        this.toyName = toyName;
-        this.quantity = quantity;
-        this.price = price;
-        this.description = description;
-        this.categoryId = categoryId;
-        this.discount = discount;
-        
-    }
-
-    public Toy(int toyId, String toyName, int quantity, String image, double price, String description, int categoryId, int approve, double discount) {
-        this.toyId = toyId;
-        this.toyName = toyName;
-        this.quantity = quantity;
-        this.image = image;
-        this.price = price;
-        this.description = description;
-        this.categoryId = categoryId; 
-        this.approve = approve;
-        this.discount = discount;
-    }    
+    }        
 
     public Toy(int toyId, String toyName, int quantity, String image, double price, String description, int categoryId, double discount) {
         this.toyId = toyId;
@@ -100,35 +43,66 @@ public class Toy {
         this.categoryId = categoryId;
         this.discount = discount;
     }
-    
-    
 
-    public Toy(int toyId, String toyName, int quantity, String image, double price, String description, int approve, int categoryId, double discount, int warranty_time) {
+    public Toy(int toyId, String toyName, int quantity, String image, double price, String description, int categoryId, double discount, Date warranty_time, int isActive, int isDisable) {
         this.toyId = toyId;
         this.toyName = toyName;
         this.quantity = quantity;
         this.image = image;
         this.price = price;
         this.description = description;
-        this.approve = approve;
         this.categoryId = categoryId;
         this.discount = discount;
         this.warranty_time = warranty_time;
+        this.isActive = isActive;
+        this.isDisable = isDisable;
+    }
+    
+    
+
+    public Toy(String toyName, String image, double price, String description, int categoryId, double discount, Date warranty_time, int isActive, int isDisable, int userId) {
+        this.toyName = toyName;
+        this.image = image;
+        this.price = price;
+        this.description = description;
+        this.categoryId = categoryId;
+        this.discount = discount;
+        this.warranty_time = warranty_time;
+        this.isActive = isActive;
+        this.isDisable = isDisable;
+        this.userId = userId;
     }        
 
-    public Toy(int toyId, String toyName, int quantity, String image, double price, String description, int approve, int categoryId, double discount, int warranty_time, String nameStaff) {
+    public Toy(int toyId, String toyName, String image, double price, String description, int categoryId, double discount, Date warranty_time, int isActive, int isDisable, int userId, String name_staff) {
+        this.toyId = toyId;
+        this.toyName = toyName;
+        this.image = image;
+        this.price = price;
+        this.description = description;
+        this.categoryId = categoryId;
+        this.discount = discount;
+        this.warranty_time = warranty_time;
+        this.isActive = isActive;
+        this.isDisable = isDisable;
+        this.userId = userId;
+        this.name_staff = name_staff;
+    }    
+
+    public Toy(int toyId, String toyName, int quantity, String image, double price, String description, int categoryId, double discount, Date warranty_time, int isActive, int isDisable, int userId, String name_staff) {
         this.toyId = toyId;
         this.toyName = toyName;
         this.quantity = quantity;
         this.image = image;
         this.price = price;
         this.description = description;
-        this.approve = approve;
         this.categoryId = categoryId;
         this.discount = discount;
         this.warranty_time = warranty_time;
-        this.nameStaff = nameStaff;
-    }        
+        this.isActive = isActive;
+        this.isDisable = isDisable;
+        this.userId = userId;
+        this.name_staff = name_staff;
+    }    
 
     public int getToyId() {
         return toyId;
@@ -178,14 +152,6 @@ public class Toy {
         this.description = description;
     }
 
-    public int getApprove() {
-        return approve;
-    }
-
-    public void setApprove(int approve) {
-        this.approve = approve;
-    }
-
     public int getCategoryId() {
         return categoryId;
     }
@@ -202,26 +168,46 @@ public class Toy {
         this.discount = discount;
     }
 
-    public int getWarranty_time() {
+    public Date getWarranty_time() {
         return warranty_time;
     }
 
-    public void setWarranty_time(int warranty_time) {
+    public void setWarranty_time(Date warranty_time) {
         this.warranty_time = warranty_time;
     }
 
-    public String getNameStaff() {
-        return nameStaff;
+    public int getIsActive() {
+        return isActive;
     }
 
-    public void setNameStaff(String nameStaff) {
-        this.nameStaff = nameStaff;
+    public void setIsActive(int isActive) {
+        this.isActive = isActive;
+    }
+
+    public int getIsDisable() {
+        return isDisable;
+    }
+
+    public void setIsDisable(int isDisable) {
+        this.isDisable = isDisable;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public String getName_staff() {
+        return name_staff;
+    }
+
+    public void setName_staff(String name_staff) {
+        this.name_staff = name_staff;
     }
     
-    
-
-    
-
     @Override
     public int hashCode() {
         int hash = 5;
@@ -246,5 +232,5 @@ public class Toy {
         }
         return true;
     }
-    
+
 }

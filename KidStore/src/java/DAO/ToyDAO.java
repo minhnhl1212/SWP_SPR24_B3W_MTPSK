@@ -37,18 +37,19 @@ public class ToyDAO {
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "select Toy.toy_id, Toy.toy_name,Toy.quantity, Image.imageToy, Toy.price, Toy.description, Toy.category_id, Toy.discount, Toy.warranty_time, Toy.approve, Image.image_id, Image.main\n"
+                String sql = "select Toy.toy_id, Toy.toy_name,Toy.quantity, Image.image_toy, Toy.price, Toy.description, Toy.category_id, Toy.discount, Toy.warranty_time, Toy.isActive, Toy.isDisable, Image.image_id, Image.main\n"
                         + "from Image\n"
                         + "inner join Toy on Image.toy_id = Toy.toy_id\n"
-                        + "where approve = 1";
+                        + "where isActive = 1 and isDisable = 0 and Image.main = 1";
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
                     Toy list = new Toy(rs.getInt("toy_id"), rs.getString("toy_name"),
-                            rs.getInt("quantity"), rs.getString("imageToy"),
+                            rs.getInt("quantity"), rs.getString("image_toy"),
                             rs.getDouble("price"), rs.getString("description"),
-                            rs.getInt("approve"), rs.getInt("category_id"),
-                            rs.getDouble("discount"), rs.getInt("warranty_time"));
+                            rs.getInt("category_id"), rs.getDouble("discount"),
+                            rs.getDate("warranty_time"), rs.getInt("isActive"),
+                            rs.getInt("isDisable"));
                     listToy.add(list);
                 }
             }
@@ -92,15 +93,15 @@ public class ToyDAO {
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "select Toy.toy_name, Image.imageToy, Toy.price, Toy.discount, Toy.approve\n"
+                String sql = "select Toy.toy_name, Image.image_toy, Toy.price, Toy.discount, Toy.isActive\n"
                         + "from Image\n"
                         + "inner join Toy on Image.toy_id = Toy.toy_id\n"
-                        + "where Toy.category_id = ? and Toy.approve = 1";
+                        + "where Toy.category_id = ? and Toy.isActive = 1 and Toy.isDisable = 0";
                 ps = con.prepareStatement(sql);
                 ps.setInt(1, categoryId);
                 rs = ps.executeQuery();
                 while (rs.next()) {
-                    Toy list = new Toy(rs.getString("toy_name"), rs.getString("imageToy"), rs.getDouble("price"), rs.getDouble("discount"));
+                    Toy list = new Toy(rs.getString("toy_name"), rs.getString("image_toy"), rs.getDouble("price"), rs.getDouble("discount"));
                     listToy.add(list);
                 }
             }
@@ -112,25 +113,25 @@ public class ToyDAO {
         return listToy;
     }
 
-    public Toy addToy(String name, String image, double price, String description, int idCategory, double discount, int warrantyTime, String nameStaff) throws SQLException, Exception {
+    public Toy addToy(String name, String image, double price, String description, int idCategory, double discount, java.sql.Date warrantyTime, int userId) throws SQLException, Exception {
         Toy toy = null;
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "INSERT INTO Image (imageToy)\n"
+                String sql = "INSERT INTO Image (image_toy)\n"
                         + "VALUES (?)\n"
-                        + "    \n"
+                        + "         \n"
                         + "DECLARE @image_id INT\n"
                         + "SET @image_id = SCOPE_IDENTITY();\n"
-                        + "               \n"
-                        + "insert into Toy (toy_name, price, description, category_id, discount, warranty_time, approve, name_staff)\n"
-                        + "values (?,?,?,?,?,?,0,?)\n"
-                        + "                       \n"
+                        + "\n"
+                        + "insert into Toy (toy_name, price, description, category_id, discount, warranty_time, isActive, isDisable, user_id)\n"
+                        + "values (?,?,?,?,?,?,0,0,?)\n"
+                        + "\n"
                         + "DECLARE @toy_id INT;\n"
                         + "SET @toy_id = SCOPE_IDENTITY();\n"
-                        + "                    \n"
+                        + "                                     \n"
                         + "UPDATE Image\n"
-                        + "SET toy_id = @toy_id, main = @toy_id\n"
+                        + "SET toy_id = @toy_id, main = 1\n"
                         + "WHERE image_id = @image_id";
                 ps = con.prepareStatement(sql);
                 ps.setString(1, image);
@@ -139,10 +140,10 @@ public class ToyDAO {
                 ps.setString(4, description);
                 ps.setInt(5, idCategory);
                 ps.setDouble(6, discount);
-                ps.setInt(7, warrantyTime);
-                ps.setString(8, nameStaff);
+                ps.setDate(7, warrantyTime);
+                ps.setInt(8, userId);
                 ps.executeUpdate();
-                toy = new Toy(name, image, price, description, 0, idCategory, discount, warrantyTime, nameStaff);
+                toy = new Toy(name, image, price, description, idCategory, discount, warrantyTime, 0, 0, userId);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -152,31 +153,30 @@ public class ToyDAO {
         return toy;
     }
 
-    public Toy editToy(String name, String image, double price, String description, int idCategory) throws SQLException, Exception {
-        Toy toy = null;
-        try {
-            con = DBUtils.getConnection();
-            if (con != null) {
-                String sql = "update Toy\n"
-                        + "set toy_name = ?\n"
-                        + "where toy_id = ?";
-                ps = con.prepareStatement(sql);
-                ps.setInt(1, idCategory);
-                ps.setString(2, image);
-                ps.setString(3, name);
-                ps.setDouble(4, price);
-                ps.setString(5, description);
-                ps.executeUpdate();
-                toy = new Toy(name, image, price, description, 0, idCategory, 1);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            closeConnection();
-        }
-        return toy;
-    }
-
+//    public Toy editToy(String name, String image, double price, String description, int idCategory) throws SQLException, Exception {
+//        Toy toy = null;
+//        try {
+//            con = DBUtils.getConnection();
+//            if (con != null) {
+//                String sql = "update Toy\n"
+//                        + "set toy_name = ?\n"
+//                        + "where toy_id = ?";
+//                ps = con.prepareStatement(sql);
+//                ps.setInt(1, idCategory);
+//                ps.setString(2, image);
+//                ps.setString(3, name);
+//                ps.setDouble(4, price);
+//                ps.setString(5, description);
+//                ps.executeUpdate();
+//                toy = new Toy(name, image, price, description, 0, idCategory, 1);
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        } finally {
+//            closeConnection();
+//        }
+//        return toy;
+//    }
     public Toy deleteToy(int idToy) throws Exception {
         try {
             con = DBUtils.getConnection();
@@ -195,7 +195,8 @@ public class ToyDAO {
         }
         return null;
     }
-        public ArrayList<Toy> toySearchByName(String name) throws Exception {
+
+    public ArrayList<Toy> toySearchByName(String name) throws Exception {
         ArrayList<Toy> listToy = new ArrayList<>();
         try {
             con = DBUtils.getConnection();
@@ -205,7 +206,7 @@ public class ToyDAO {
                         + "inner join Toy on Image.toy_id = Toy.toy_id\n"
                         + "where Toy.toy_name LIKE ? and Toy.approve = 1";
                 ps = con.prepareStatement(sql);
-                ps.setString(1, "%" +name +"%");
+                ps.setString(1, "%" + name + "%");
                 rs = ps.executeQuery();
                 while (rs.next()) {
                     Toy list = new Toy(rs.getString("toy_name"), rs.getString("imageToy"), rs.getDouble("price"), rs.getDouble("discount"));
@@ -219,24 +220,26 @@ public class ToyDAO {
         }
         return listToy;
     }
-        
-        public ArrayList<Toy> toyListNotApprove() throws SQLException, Exception {
+
+    public ArrayList<Toy> toyListNotApprove() throws SQLException, Exception {
         ArrayList<Toy> listToy = new ArrayList<>();
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "select Toy.toy_id, Toy.toy_name,Toy.quantity, Image.imageToy, Toy.price, Toy.description, Toy.category_id, Toy.discount, Toy.warranty_time, Toy.approve, Image.image_id, Image.main, Toy.name_staff\n"
+                String sql = "select Toy.toy_id, Toy.toy_name, Toy.quantity, Image.image_toy, Toy.price, Toy.description, Toy.category_id, Toy.discount, Toy.warranty_time, Toy.isActive, Toy.isDisable, Image.main, Account.user_id, Account.full_name\n"
                         + "from Image\n"
                         + "inner join Toy on Image.toy_id = Toy.toy_id\n"
-                        + "where approve = 0";
+                        + "inner join Account on Account.user_id = Toy.user_id\n"
+                        + "where Toy.isActive = 0 and Toy.isDisable = 0";
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
                     Toy list = new Toy(rs.getInt("toy_id"), rs.getString("toy_name"),
-                            rs.getInt("quantity"), rs.getString("imageToy"),
-                            rs.getDouble("price"), rs.getString("description"),
-                            rs.getInt("approve"), rs.getInt("category_id"),
-                            rs.getDouble("discount"), rs.getInt("warranty_time"), rs.getString("name_staff"));
+                            rs.getString("image_toy"), rs.getDouble("price"),
+                            rs.getString("description"), rs.getInt("category_id"),
+                            rs.getDouble("discount"), rs.getDate("warranty_time"),
+                            rs.getInt("isActive"), rs.getInt("isDisable"),
+                            rs.getInt("user_id"), rs.getString("full_name"));
                     listToy.add(list);
                 }
             }
@@ -247,14 +250,14 @@ public class ToyDAO {
         }
         return listToy;
     }
-        
-        public Toy approveToy(int toyId) throws SQLException, Exception {
+
+    public Toy approveToy(int toyId) throws SQLException, Exception {
         Toy toy = null;
         try {
             con = DBUtils.getConnection();
             if (con != null) {
                 String sql = "update Toy\n"
-                        + "set approve = 1\n"
+                        + "set isActive = 1\n"
                         + "where toy_id = ?";
                 ps = con.prepareStatement(sql);
                 ps.setInt(1, toyId);
@@ -274,14 +277,11 @@ public class ToyDAO {
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "delete from Image\n"
-                        + "where toy_id = ?\n"
-                        + "\n"
-                        + "delete from Toy \n"
+                String sql = "update Toy\n"
+                        + "set isDisable = 1\n"
                         + "where toy_id = ?";
                 ps = con.prepareStatement(sql);
                 ps.setInt(1, toyId);
-                ps.setInt(2, toyId);
                 ps.executeUpdate();
                 toy = new Toy(toyId);
             }

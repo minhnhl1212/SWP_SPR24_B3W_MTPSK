@@ -80,6 +80,21 @@
 
             }
 
+            input{
+                color: black;
+            }
+
+            select{
+                color: black;
+            }
+            
+            textarea{
+                color: black;
+            }
+            textarea#description {
+                width: 90%;
+            }
+
         </style>
     </head>
     <body>
@@ -214,17 +229,14 @@
                             <div style="text-align: center; color: white; font-size: 24px; font-weight: 600; margin-top: -2%; background-color: darkkhaki; width: 350px; padding-bottom: 25px" id="add-product-form">                    
                                 <div>
                                     <form action="AddToyController">                                        
-                                        <button onclick="toggleAddProductForm()" class="close" style="text-align: right">X</button>
-                                        <label for="id">ID</label></br>
-                                        <input type="text" id="id" name="id" required></br>
+                                        <button onclick="toggleAddProductForm()" class="close" style="text-align: right">X</button>                                     
                                         <label for="productName">Name</label></br>
                                         <input type="text" id="productName" name="productName" required></br>
                                         <label for="image">Image</label></br>
                                         <input type="text" id="image" name="image" required></br>
                                         <label for="price">Price</label></br>
                                         <input type="number" id="price" name="price" required></br>                                                                  
-                                        <label for="category">Category</label></br>
-
+                                        <label for="category">Category</label></br>                                        
                                         <%
                                             ArrayList<Category> categoryList = (ArrayList<Category>) session.getAttribute("CATEGORY_LIST");
                                             if (categoryList != null) {
@@ -241,17 +253,15 @@
                                             <%
                                                 }
                                             %>
-                                        </select>
-
+                                        </select><br>
+                                        <label for="description">Description</label><br>
+                                        <textarea id="description" name="description" rows="4" cols="50"></textarea>
                                         </br>  
                                         <label for="discount">Discount</label></br>
-                                        <input type="number" id="discount" name="discount" required></br>
-
-                                        <label for="warranty">Warranty</label></br>
-                                        <input type="number" id="warranty" name="warranty" required></br>
-                                        <label for="action">Action</label></br>
-                                        <input type="text" id="action" name="action" required></br>
-                                        <input name="nameStaff" type="hidden" value="<%=acc.getFullName()%>">
+                                        <input type="number" id="discount" name="discount" step="0.01" required></br>
+                                        <label for="warrantyTime">Warranty Time</label></br>
+                                        <input type="date" id="warranty" name="warrantyTime" required></br>
+                                        <input name="userId" type="hidden" value="<%=acc.getUserId()%>">
                                         <button style="background-color: green; border-radius: 30px; padding: 3px 10px; margin-top: 15px" type="submit">Add New Product</button>
                                     </form>
                                 </div>
