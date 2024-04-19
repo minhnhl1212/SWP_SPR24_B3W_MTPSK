@@ -110,6 +110,8 @@
                     </div>
 
                     <!-- Section Right -->    
+                    
+                    <!-- Danh sách toàn bộ đồ chơi -->
                     <div class="col-md-9">
                         <h3>Danh mục sản phẩm</h3>
                         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 justify-content-center">
@@ -216,124 +218,131 @@
                                 <a href="?page=<%= currentPage + 1%>">Next &raquo;</a>
                                 <% } %>
                             </div>
+                        </div>
+                    </div>
+                            
+                            
+                    <!-- Danh sách đồ chơi theo CategoryId -->
+                    <div class="col-md-9">
 
-                            <!-- Danh sách đồ chơi theo CategoryId -->
+                        <%} else if (toyCategoryList != null) {
+                            // Define the number of items to display per page
+                            int itemsPerPage = 9;
 
-                            <%} else if (toyCategoryList != null) {
-                                // Define the number of items to display per page
-                                int itemsPerPage = 9;
+                            // Get the current page number from the request parameter, default to 1 if not provided
+                            int currentPage = (request.getParameter("page") != null) ? Integer.parseInt(request.getParameter("page")) : 1;
 
-                                // Get the current page number from the request parameter, default to 1 if not provided
-                                int currentPage = (request.getParameter("page") != null) ? Integer.parseInt(request.getParameter("page")) : 1;
+                            // Calculate the start and end index of items to display on the current page
+                            int startIndex = (currentPage - 1) * itemsPerPage;
+                            int endIndex = Math.min(startIndex + itemsPerPage, toyList.size());
 
-                                // Calculate the start and end index of items to display on the current page
-                                int startIndex = (currentPage - 1) * itemsPerPage;
-                                int endIndex = Math.min(startIndex + itemsPerPage, toyList.size());
+                            // Iterate over the subset of toyList based on the current page
+                            for (int i = startIndex; i < endIndex; i++) {
+                                Toy toy = toyCategoryList.get(i);
+                        %>
+                        <div class="col mb-5">
 
-                                // Iterate over the subset of toyList based on the current page
-                                for (int i = startIndex; i < endIndex; i++) {
-                                    Toy toy = toyCategoryList.get(i);
-                            %>
-                            <div class="col mb-5">
+                            <div class="card h-100">
 
-                                <div class="card h-100">
+                                <!--  Sale badge -->
+                                <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
+                                    Sale off
+                                </div>
 
-                                    <!--  Sale badge -->
-                                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
-                                        Sale off
+                                <!-- Product image -->
+                                <img class="card-img-top" src="<%=toy.getImage()%>" alt="..."/>
+
+
+                                <div class="card-body">
+                                    <div class="text-center">
+
+                                        <!-- Product name -->
+                                        <h5 class="fw-bolder"><%=toy.getToyName()%></h5> 
                                     </div>
-
-                                    <!-- Product image -->
-                                    <img class="card-img-top" src="<%=toy.getImage()%>" alt="..."/>
-
-
-                                    <div class="card-body">
-                                        <div class="text-center">
-
-                                            <!-- Product name -->
-                                            <h5 class="fw-bolder"><%=toy.getToyName()%></h5> 
-                                        </div>
+                                </div>
+                                <ul class="text-center list-group-item">
+                                    <!-- Product reviews -->
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
                                     </div>
-                                    <ul class="text-center list-group-item">
-                                        <!-- Product reviews -->
-                                        <div class="d-flex justify-content-center small text-warning mb-2">
-                                            <div class="bi-star-fill"></div>
-                                            <div class="bi-star-fill"></div>
-                                            <div class="bi-star-fill"></div>
-                                            <div class="bi-star-fill"></div>
-                                            <div class="bi-star-fill"></div>
-                                            <div class="bi-star-fill"></div>
-                                        </div>
-                                        <li class="text-center list-group-item">
-                                            <!-- Format VND -->
-                                            <%
-                                                double price = toy.getPrice();
-                                                double discount = toy.getDiscount();
-                                                double discountedPrice = price * discount;
+                                    <li class="text-center list-group-item">
+                                        <!-- Format VND -->
+                                        <%
+                                            double price = toy.getPrice();
+                                            double discount = toy.getDiscount();
+                                            double discountedPrice = price * discount;
 
-                                                DecimalFormat vnCurrencyFormat = new DecimalFormat("###,### VNĐ");
+                                            DecimalFormat vnCurrencyFormat = new DecimalFormat("###,### VNĐ");
 
-                                                // Định dạng giá giảm giá thành tiền tệ Việt Nam
-                                                String formattedPrice = vnCurrencyFormat.format(discountedPrice);
-                                                String priceBefore = vnCurrencyFormat.format(price);
-                                            %>
-                                            <!-- Discount -->
-                                            <span class="text-muted text-decoration-line-through"><%=priceBefore%></span><br/> 
-                                            <!-- Price -->
-                                            <span class="text-black"><%= formattedPrice%></span></li>
-                                    </ul>
-                                    <!-- Product actions -->
-                                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent ">
-                                        <div class="text-center">
-                                            <a class="btn btn-outline-dark mt-auto" href="MainController?btAction=Sell&toyId=<%=toy.getToyId()%>">
-                                                Thêm vào giỏ hàng
-                                            </a>
-                                        </div>
+                                            // Định dạng giá giảm giá thành tiền tệ Việt Nam
+                                            String formattedPrice = vnCurrencyFormat.format(discountedPrice);
+                                            String priceBefore = vnCurrencyFormat.format(price);
+                                        %>
+                                        <!-- Discount -->
+                                        <span class="text-muted text-decoration-line-through"><%=priceBefore%></span><br/> 
+                                        <!-- Price -->
+                                        <span class="text-black"><%= formattedPrice%></span></li>
+                                </ul>
+                                <!-- Product actions -->
+                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent ">
+                                    <div class="text-center">
+                                        <a class="btn btn-outline-dark mt-auto" href="MainController?btAction=Sell&toyId=<%=toy.getToyId()%>">
+                                            Thêm vào giỏ hàng
+                                        </a>
                                     </div>
                                 </div>
                             </div>
-
-                            <%}
-                            %>
-
-                            <!-- Pagination Controls -->
-                            <div class="pagination">
-                                <% if (currentPage > 1) {%>
-                                <a href="?page=<%= currentPage - 1%>">&laquo; Previous</a>
-                                <% } %>
-
-                                <% int totalPages = (int) Math.ceil((double) toyList.size() / itemsPerPage); %>
-                                <% for (int i = 1; i <= totalPages; i++) { %>
-                                <% if (i == currentPage) {%>
-                                <span class="current-page"><%= i%></span>
-                                <% } else {%>
-                                <a href="?page=<%= i%>"><%= i%></a>
-                                <% } %>
-                                <% } %>
-
-                                <% if (currentPage < totalPages) {%>
-                                <a href="?page=<%= currentPage + 1%>">Next &raquo;</a>
-                                <% } %>
-                            </div>
-
-
-                            <%} else {
-                            %>
-                            <p>Không có đồ chơi nào</p>
-                            <%
-                                }
-                            %>
-
                         </div>
+
+                        <%}
+                        %>
+
+                        <!-- Pagination Controls -->
+                        <div class="pagination">
+                            <% if (currentPage > 1) {%>
+                            <a href="?page=<%= currentPage - 1%>">&laquo; Previous</a>
+                            <% } %>
+
+                            <% int totalPages = (int) Math.ceil((double) toyList.size() / itemsPerPage); %>
+                            <% for (int i = 1; i <= totalPages; i++) { %>
+                            <% if (i == currentPage) {%>
+                            <span class="current-page"><%= i%></span>
+                            <% } else {%>
+                            <a href="?page=<%= i%>"><%= i%></a>
+                            <% } %>
+                            <% } %>
+
+                            <% if (currentPage < totalPages) {%>
+                            <a href="?page=<%= currentPage + 1%>">Next &raquo;</a>
+                            <% } %>
+                        </div>
+
+
+                        <%} else {
+                        %>
+                        <p>Không có đồ chơi nào</p>
+                        <%
+                            }
+                        %>
+
                     </div>
                 </div>
-        </section>   
+            </div>
+        </div>
+    </section>   
 
-        <!-- Footer-->
-        <%@include file="components/footerComponent.jsp" %>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
-    </body>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="js/scripts.js"></script>
+</body>
+<footer>
+    <!-- Footer-->
+    <%@include file="components/footerComponent.jsp" %>
+</footer>
 </html>
