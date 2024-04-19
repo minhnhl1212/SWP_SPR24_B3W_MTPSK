@@ -25,7 +25,7 @@
         .popup-form {
             display: none;
             width: 350px;
-            height: 650px;
+            height: 550px;
             position: absolute;
             top: 50%;
             left: 50%;
@@ -144,13 +144,10 @@
             <form>
                 <h4>Kiểm tra bảo hành</h4>
                 <div class="form-group">
-                    <label for="productSKU">Mã sản phẩm:</label>
+                    <label for="productSKU">Mã bảo hành:</label>
                     <input type="text" class="form-control" id="productSKU" name="productSKU" required>
                 </div>
-                <div class="form-group">
-                    <label for="customerName">Tên khách hàng:</label>
-                    <input type="text" class="form-control" id="customerName" name="customerName" required>
-                </div>
+
                 <div class="form-group">
                     <label for="customerAddress">Địa chỉ:</label>
                     <input type="text" class="form-control" id="customerAddress" name="customerAddress" required>
@@ -160,8 +157,7 @@
                     <input type="tel" class="form-control" id="customerPhone" name="customerPhone" required>
                 </div>
                 <div class="form-group">
-                    <label for="purchaseDate">Ngày mua hàng:</label>
-                    <input type="date" class="form-control" id="purchaseDate" name="purchaseDate" required>
+                    <label for="purchaseDate">Ngày mua hàng: data</label>
                 </div>
                 <div class="form-group">
                     <label for="issueDescription">Mô tả vấn đề:</label>

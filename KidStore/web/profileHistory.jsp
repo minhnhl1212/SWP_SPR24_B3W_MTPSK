@@ -37,7 +37,7 @@
                 <div class="profile-img">
                     <img src="img/people.jpg" alt="User Avt"/>
                 </div>
-                <div class="profile-name">Lê Minh</div>
+                <div class="profile-name">Customer</div>
                 <ul id="profile-function" class="list-group">
                     <li class="function-select list-group-item list-group-item-action" id="selected">
                         <a href="profileHistory.jsp" style="text-decoration: none">
