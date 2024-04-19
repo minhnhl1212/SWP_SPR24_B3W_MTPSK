@@ -7,9 +7,11 @@ package Controller;
 
 import DAO.CategoryDAO;
 import DAO.LoginDAO;
+import DAO.NewsDAO;
 import DAO.ToyDAO;
 import DTO.Account;
 import DTO.Category;
+import DTO.News;
 import DTO.Toy;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -52,7 +54,7 @@ public class LoginController extends HttpServlet {
             LoginDAO dao = new LoginDAO();
             //check có đúng tài khoản ko
             Account acc = dao.Login(username, password);
-            ToyDAO toyDAO = new ToyDAO();
+            ToyDAO toyDAO = new ToyDAO();            
             ArrayList<Toy> toyList = toyDAO.toyList();
             ArrayList<Toy> toyListNotApprove = toyDAO.toyListNotApprove();
             //Lấy danh sách Category approve
@@ -65,11 +67,16 @@ public class LoginController extends HttpServlet {
             //Lấy danh sách Category All
             ArrayList<Category> categoryListAll = categoryDAO.categoryListAll();
             
+            //Lấy danh sách News
+            NewsDAO newsDAO = new NewsDAO();
+            ArrayList<News> newsList = newsDAO.newsList();
+            
             session.setAttribute("TOY_LIST", toyList);
             session.setAttribute("CATEGORY_LIST", categoryList);
             session.setAttribute("CATEGORY_LIST_ALL", categoryListAll);
             session.setAttribute("CATEGORY_LIST_NOT_APPROVE", categoryListNotApprove);
             session.setAttribute("TOY_LIST_NOT_APPROVE", toyListNotApprove);
+            session.setAttribute("NEWS_LIST", newsList);
             //đúng trả về home
             if (acc != null) {
                 session.setAttribute("acc", acc);

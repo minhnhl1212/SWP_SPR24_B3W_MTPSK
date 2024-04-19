@@ -68,7 +68,7 @@
         <servlet-name>SearchController</servlet-name>
         <servlet-class>Controller.SearchController</servlet-class>
     </servlet>
-     <servlet>
+    <servlet>
         <servlet-name>ApproveCategoryController</servlet-name>
         <servlet-class>Controller.ApproveCategoryController</servlet-class>
     </servlet>
@@ -84,7 +84,10 @@
         <servlet-name>CancelToyController</servlet-name>
         <servlet-class>Controller.CancelToyController</servlet-class>
     </servlet>
-    
+    <servlet>
+        <servlet-name>AddNewsController</servlet-name>
+        <servlet-class>Controller.AddNewsController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -168,6 +171,10 @@
     <servlet-mapping>
         <servlet-name>CancelToyController</servlet-name>
         <url-pattern>/CancelToyController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddNewsController</servlet-name>
+        <url-pattern>/AddNewsController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 /**
@@ -36,11 +37,12 @@ public class NewsDAO {
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "select news_id, description, image, name from News";
+                String sql = "select tittle, image, date, staff, description\n"
+                        + "from News";
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
-                    News list = new News(rs.getInt("news_id"), rs.getString("description"), rs.getString("image"), rs.getString("name"));
+                    News list = new News(rs.getString("tittle"), rs.getString("image"), rs.getDate("date"), rs.getString("staff"), rs.getString("description"));
                     newsList.add(list);
                 }
             }
@@ -52,18 +54,21 @@ public class NewsDAO {
         return newsList;
     }
 
-    public News addNews(String description, String image, String name) throws SQLException, Exception {
+    public News addNews(String tittle, String image, java.sql.Date date, String staff, String description) throws SQLException, Exception {
         News user = null;
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "insert into News(description, image, name) values (?,?,?)";
+                String sql = "insert into News(tittle, image, date, staff, description) \n"
+                        + "values (?,?,?,?,?)";
                 ps = con.prepareStatement(sql);
-                ps.setString(1, description);
+                ps.setString(1, tittle);
                 ps.setString(2, image);
-                ps.setString(2, name);
+                ps.setDate(3, date);
+                ps.setString(4, staff);
+                ps.setString(5, description);
                 ps.executeUpdate();
-                user = new News(description, image, name);
+                user = new News(tittle, image, date, staff, description);
             }
         } catch (Exception e) {
             e.printStackTrace();

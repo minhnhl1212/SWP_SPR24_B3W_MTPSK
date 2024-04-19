@@ -1,30 +1,26 @@
 package DTO;
 
+import java.util.Date;
+
 /**
  *
  * @author trant
  */
 public class News {
-    
+
     private int newsId;
-    private String description;
+    private String tittle;
     private String image;
-    private String name;
+    private Date date;
+    private String staff;
+    private String description;
 
-    public News() {
-    }
-    
-    public News(String description, String image, String name) {
-        this.description = description;
+    public News(String tittle, String image, Date date, String staff, String description) {
+        this.tittle = tittle;
         this.image = image;
-        this.name = name;
-    }  
-
-    public News(int newsId, String description, String image, String name) {
-        this.newsId = newsId;
+        this.date = date;
+        this.staff = staff;
         this.description = description;
-        this.image = image;
-        this.name = name;
     }
 
     public int getNewsId() {
@@ -35,12 +31,12 @@ public class News {
         this.newsId = newsId;
     }
 
-    public String getDescription() {
-        return description;
+    public String getTittle() {
+        return tittle;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setTittle(String tittle) {
+        this.tittle = tittle;
     }
 
     public String getImage() {
@@ -51,12 +47,27 @@ public class News {
         this.image = image;
     }
 
-    public String getName() {
-        return name;
+    public Date getDate() {
+        return date;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDate(Date date) {
+        this.date = date;
     }
-    
+
+    public String getStaff() {
+        return staff;
+    }
+
+    public void setStaff(String staff) {
+        this.staff = staff;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }
