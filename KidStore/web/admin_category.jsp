@@ -140,9 +140,9 @@
                                 <tr>
                                     <td><%=category.getCategoryId()%></td>
                                     <td><%=category.getCategoryName()%></td>
-                                    <td><%=category.getNameStaff()%></td>
+                                    <td><%=category.getName_staff()%></td>
                                     <td><a href="ApproveCategoryController?categoryId=<%=category.getCategoryId()%>"class="button-bordered" id="success">Approve</a></td> 
-                                    <td><a href="CancelCategoryController?categoryId=<%=category.getCategoryId()%>" class="button-bordered" id="error">Cancel</a></td> 
+                                    <td><a href="CancelCategoryController?categoryId=<%=category.getCategoryId()%>" class="button-bordered" id="error">Disable</a></td> 
                                     <td></td>
                                 </tr>           
                                 <%}

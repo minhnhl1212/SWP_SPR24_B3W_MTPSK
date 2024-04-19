@@ -1,4 +1,6 @@
 
+<%@page import="DTO.Category"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="DTO.Account"%>
 <!DOCTYPE html>
 <html :class="{ 'theme-dark': dark }" x-data="data()" lang="en"
@@ -84,7 +86,6 @@
 
         <%
             Account acc = (Account) session.getAttribute("acc");
-
         %>
 
         <div>
@@ -223,7 +224,25 @@
                                         <label for="price">Price</label></br>
                                         <input type="number" id="price" name="price" required></br>                                                                  
                                         <label for="category">Category</label></br>
-                                        <input type="text" id="category" name="category" required></br>  
+
+                                        <%
+                                            ArrayList<Category> categoryList = (ArrayList<Category>) session.getAttribute("CATEGORY_LIST");
+                                            if (categoryList != null) {
+                                        %>
+                                        <select name="idCategory" id="category" required>
+                                            <%
+                                                for (Category category : categoryList) {
+                                            %>
+                                            <option value="<%=category.getCategoryId()%>"><%=category.getCategoryName()%></option>
+                                            <%}
+                                            } else {
+                                            %>
+                                            <p>Không có lo?i ?? ch?i nào</p>
+                                            <%
+                                                }
+                                            %>
+                                        </select>
+
                                         </br>  
                                         <label for="discount">Discount</label></br>
                                         <input type="number" id="discount" name="discount" required></br>

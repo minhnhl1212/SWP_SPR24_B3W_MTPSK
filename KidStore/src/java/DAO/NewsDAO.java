@@ -40,7 +40,7 @@ public class NewsDAO {
                 String sql = "select title, image, date, description\n"
                         + "from News";
                 ps = con.prepareStatement(sql);
-                rs = ps.executeQuery();
+                rs = ps.executeQuery(sql);
                 while (rs.next()) {
                     News list = new News(rs.getString("title"), rs.getString("image"), rs.getDate("date"), rs.getString("description"));
                     newsList.add(list);

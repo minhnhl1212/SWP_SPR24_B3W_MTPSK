@@ -30,9 +30,9 @@ public class AddCategoryController extends HttpServlet {
             session.setAttribute("CATEGORY_LIST", categoryList);
             
             String nameCategory = request.getParameter("nameCategory");
-            String nameStaff = request.getParameter("nameStaff");
+            int userId = Integer.parseInt(request.getParameter("userId"));
             CategoryDAO cagoryDAO = new CategoryDAO();
-            Category addCategory = cagoryDAO.addCategory(nameCategory, nameStaff);
+            Category addCategory = cagoryDAO.addCategory(nameCategory, userId);
             if (addCategory != null) {
                 request.setAttribute("ADD_CATEGORY_SUCCESS", "Added " + addCategory.getCategoryName() + " Success");
             } else {

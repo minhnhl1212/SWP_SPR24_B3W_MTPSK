@@ -3,32 +3,34 @@ package DTO;
 public class Category {
     private int categoryId;
     private String categoryName;
-    private String nameStaff;
-
-    public Category() {
-    }
+    private int userId;
+    private String name_staff;
 
     public Category(int categoryId) {
         this.categoryId = categoryId;
-    }    
+    }
 
-    public Category(String categoryName, String nameStaff) {
+    public Category(String categoryName, int userId) {
         this.categoryName = categoryName;
-        this.nameStaff = nameStaff;
-    }     
+        this.userId = userId;
+    }
 
     public Category(int categoryId, String categoryName) {
         this.categoryId = categoryId;
         this.categoryName = categoryName;
-    }
+    }        
 
-    public Category(int categoryId, String categoryName, String nameStaff) {
+    public Category(int categoryId, String categoryName, String name_staff) {
         this.categoryId = categoryId;
         this.categoryName = categoryName;
-        this.nameStaff = nameStaff;
+        this.name_staff = name_staff;
     }
     
-    
+    public Category(int categoryId, String categoryName, int userId) {
+        this.categoryId = categoryId;
+        this.categoryName = categoryName;
+        this.userId = userId;
+    }
 
     public int getCategoryId() {
         return categoryId;
@@ -46,11 +48,19 @@ public class Category {
         this.categoryName = categoryName;
     }
 
-    public String getNameStaff() {
-        return nameStaff;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setNameStaff(String nameStaff) {
-        this.nameStaff = nameStaff;
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public String getName_staff() {
+        return name_staff;
+    }
+
+    public void setName_staff(String name_staff) {
+        this.name_staff = name_staff;
     }
 }

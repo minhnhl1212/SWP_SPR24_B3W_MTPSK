@@ -38,7 +38,9 @@ public class CategoryDAO {
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "select category_id ,category_name from Category where approve = 1";
+                String sql = "select category_id ,category_name \n"
+                        + "from Category \n"
+                        + "where isActive = 1";
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -59,11 +61,14 @@ public class CategoryDAO {
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "select category_id ,category_name, name_staff from Category where approve = 0";
+                String sql = "select Category.category_id , Category.category_name, Account.full_name\n"
+                        + "from Category \n"
+                        + "inner join Account on Account.user_id = Category.user_id\n"
+                        + "where Category.isActive = 0 and Category.isDisable = 0";
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
-                    Category list = new Category(rs.getInt("category_id"), rs.getString("category_name"), rs.getString("name_staff"));
+                    Category list = new Category(rs.getInt("category_id"), rs.getString("category_name"), rs.getString("full_name"));
                     listCategory.add(list);
                 }
             }
@@ -96,17 +101,17 @@ public class CategoryDAO {
         return listCategory;
     }
 
-    public Category addCategory(String nameCategory, String nameStaff) throws SQLException, Exception {
+    public Category addCategory(String nameCategory, int userId) throws SQLException, Exception {
         Category category = null;
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "insert into Category(category_name, approve, name_staff) values (?,0,?)";
+                String sql = "insert into Category(category_name, user_id, isActive, isDisable) values (?,?,0,0)";
                 ps = con.prepareStatement(sql);
                 ps.setString(1, nameCategory);
-                ps.setString(2, nameStaff);
+                ps.setInt(2, userId);
                 ps.executeUpdate();
-                category = new Category(nameCategory, nameStaff);
+                category = new Category(nameCategory, userId);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -144,7 +149,7 @@ public class CategoryDAO {
             con = DBUtils.getConnection();
             if (con != null) {
                 String sql = "update Category\n"
-                        + "set approve = 1\n"
+                        + "set isActive = 1\n"
                         + "where category_id = ?";
                 ps = con.prepareStatement(sql);
                 ps.setInt(1, categoryId);
@@ -164,7 +169,8 @@ public class CategoryDAO {
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "delete from Category\n"
+                String sql = "update Category\n"
+                        + "set isDisable = 1\n"
                         + "where category_id = ?";
                 ps = con.prepareStatement(sql);
                 ps.setInt(1, categoryId);
