@@ -28,7 +28,9 @@
     </head>
     <body>
 
-       
+        <div>
+            <a href="logout.php" style="position: absolute; top: 20px; right: 30px">Logout</a>
+        </div>
         <div class="w-full overflow-hidden rounded-lg shadow-xs">
             <div class="w-full overflow-x-auto">
                 <table class="w-full whitespace-no-wrap">

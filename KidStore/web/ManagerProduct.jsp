@@ -28,7 +28,10 @@
     </head>
     <body>
 
-       
+        <div>
+            <a href="logout.php" style="position: absolute; top: 20px; right: 30px">Logout</a>
+        </div>
+
         <div class="w-full overflow-hidden rounded-lg shadow-xs">
             <div class="w-full overflow-x-auto">
                 <table class="w-full whitespace-no-wrap">
@@ -147,8 +150,9 @@
                             <!-- Your form fields here -->
                             <button type="submit" class="inline-flex items-center justify-center px-4 py-2 mt-4 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
                                 Add Product
-                            </button>
+                            </button>                            
                         </form>
-                    </section>    
+                    </section>
+
                     </body>
                     </html>
