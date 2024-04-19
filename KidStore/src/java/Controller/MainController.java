@@ -7,8 +7,10 @@ package Controller;
 
 import DAO.CategoryDAO;
 import DAO.LoginDAO;
+import DAO.NewsDAO;
 import DAO.ToyDAO;
 import DTO.Category;
+import DTO.News;
 import DTO.Toy;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -77,6 +79,11 @@ public class MainController extends HttpServlet {
             ArrayList<Category> categoryList = categeoryDAO.categoryList();
             session.setAttribute("TOY_LIST", toyList);
             session.setAttribute("CATEGORY_LIST", categoryList);
+            
+            //Lấy danh sách News
+            NewsDAO newsDAO = new NewsDAO();
+            ArrayList<News> newsList = newsDAO.newsList();
+            session.setAttribute("NEWS_LIST", newsList);
             url = HOMEPAGE;
             }
             RequestDispatcher rd = request.getRequestDispatcher(url);
