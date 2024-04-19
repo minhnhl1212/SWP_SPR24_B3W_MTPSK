@@ -54,23 +54,23 @@ public class LoginController extends HttpServlet {
             LoginDAO dao = new LoginDAO();
             //check có đúng tài khoản ko
             Account acc = dao.Login(username, password);
-            ToyDAO toyDAO = new ToyDAO();            
+            ToyDAO toyDAO = new ToyDAO();
             ArrayList<Toy> toyList = toyDAO.toyList();
             ArrayList<Toy> toyListNotApprove = toyDAO.toyListNotApprove();
             //Lấy danh sách Category approve
             CategoryDAO categoryDAO = new CategoryDAO();
             ArrayList<Category> categoryList = categoryDAO.categoryList();
-            
+
             //Lấy danh sách Category not approve
             ArrayList<Category> categoryListNotApprove = categoryDAO.categoryListNotApprove();
-            
+
             //Lấy danh sách Category All
             ArrayList<Category> categoryListAll = categoryDAO.categoryListAll();
-            
+
             //Lấy danh sách News
             NewsDAO newsDAO = new NewsDAO();
             ArrayList<News> newsList = newsDAO.newsList();
-            
+
             session.setAttribute("TOY_LIST", toyList);
             session.setAttribute("CATEGORY_LIST", categoryList);
             session.setAttribute("CATEGORY_LIST_ALL", categoryListAll);
@@ -84,6 +84,8 @@ public class LoginController extends HttpServlet {
                     url = ADMIN;
                 } else if (acc.getRoleId() == 2) {
                     url = STAFF;
+                } else if (acc.getRoleId() == 3) {
+                    url = HOMEPAGE;
                 }
             } //sai trả về login và báo lỗi
             else {

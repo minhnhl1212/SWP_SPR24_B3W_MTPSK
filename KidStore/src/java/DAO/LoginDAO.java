@@ -45,8 +45,8 @@ public class LoginDAO {
         int role, payment;
         try{  
             con = DBUtils.getConnection();
-            String sql = "Select user_id, full_name, phone, address, "
-                    + "active, role_id, payment_id from Account"
+            String sql = "Select user_id, username, full_name, phone, address, "
+                    + "isActive, role_id, payment_id from Account"
                     + " where [username]=? and [password]=?";
             ps = con.prepareStatement(sql);
             ps.setString(1, username);
@@ -54,12 +54,13 @@ public class LoginDAO {
             rs = ps.executeQuery();
             while (rs.next()){
                 userid = rs.getInt(1);
-                fullname = rs.getString(2);
-                phone = rs.getString(3);
-                address = rs.getString(4);
-                active = rs.getBoolean(5);
-                role = rs.getInt(6);
-                payment = rs.getInt(7);
+                username = rs.getString(2);
+                fullname = rs.getString(3);
+                phone = rs.getString(4);
+                address = rs.getString(5);
+                active = rs.getBoolean(6);
+                role = rs.getInt(7);
+                payment = rs.getInt(8);
                 account = new Account(userid, username, password, fullname, phone, address, active, role, payment);
             }
         }
