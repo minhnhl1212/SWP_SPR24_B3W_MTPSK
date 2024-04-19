@@ -1,4 +1,5 @@
 
+<%@page import="DTO.Account"%>
 <!DOCTYPE html>
 <html :class="{ 'theme-dark': dark }" x-data="data()" lang="en">
     <head>
@@ -25,12 +26,67 @@
         ></script>
         <script src="./assets/js/charts-lines.js" defer></script>
         <script src="./assets/js/charts-pie.js" defer></script>
+        <style>
+            label {
+                position: absolute;
+                width: 274px;
+                height: 47px;
+                text-align: left;
+                left: 14px;
+                padding-top: 10px;
+                color: white;
+                text-shadow: 2px 2px 5px black;
+            }
+            div#add-product-form {
+                position: absolute;
+                top: 6.5%;
+                left: 40%;
+                border-radius: 20px;
+            }
+            .overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5); 
+                display: none; 
+                z-index: 2;
+            }
+
+            .add {
+                color: white;
+                background-color: #7e3af2;
+                border: none;
+                padding: 10px 0px;
+                border-radius: 13px;
+                position: absolute;
+                top: 300px;
+                left: 284px;
+                z-index: 3;
+                width: 11%;
+            }
+            .close{
+                position: absolute;
+                top: 4px;
+                right: 18px;
+            }
+
+            span {
+
+            }
+
+        </style>
     </head>
     <body>
-        <div>
-            <a href="logout.php" style="position: absolute; top: 20px; right: 30px">Logout</a>
-        </div>
+        <%
+            Account acc = (Account) session.getAttribute("acc");
 
+        %>
+
+        <div>
+            <a href="LogoutController" style="position: absolute; top: 20px; right: 30px">Logout</a>
+        </div>
         <div class="w-full overflow-hidden rounded-lg shadow-xs">
             <div class="w-full overflow-x-auto">
                 <table class="w-full whitespace-no-wrap">
@@ -90,7 +146,7 @@
                                     <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                                     <path d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"></path>
                                     </svg>
-                                    <span class="ml-4">Add New</span>
+                                    <span class="ml-4">Add News</span>
                                 </a>
                             </li>
                         </ul>                        
@@ -139,17 +195,52 @@
                                 </div>
                             </td>
                         </tr>
-                        </div>
-                        </div>
+
                     <section class="my-8 mx-auto max-w-4xl">
-                        <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-300"></h2>
-                        <form class="mt-4" action="your_add_new_action" method="POST">
-                            <!-- Your form fields here -->
-                            <button type="submit" class="inline-flex items-center justify-center px-4 py-2 mt-4 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
-                                Add New
-                            </button>
-                        </form>
-                    </section>   
+                        <button onclick="toggleAddNewsForm()" class="add">Add News</button>
+                        <h2 style="color: greenyellow">${ADD_NEWS_SUCCESS}</h2>
+                        <h2 style="color: red">${ADD_NEWS_FAILED}</h2>
+                    </section>
+                    <div class="wrap">
+                        <div class="addNews overlay">
+                            <div style="text-align: center; color: white; font-size: 24px; font-weight: 600; margin-top: -2%; background-color: darkkhaki; width: 350px; padding-bottom: 25px" id="add-product-form">                    
+                                <div>
+                                    <form action="AddToyController">                                        
+                                        <button onclick="toggleAddNewsForm()" class="close" style="text-align: right">X</button>
+                                        <label for="id">ID</label></br>
+                                        <input type="text" id="id" name="id" required></br>
+                                        <label for="title">Title</label></br>
+                                        <input type="text" id="title" name="title" required></br>
+                                        <label for="productname">Name</label></br>
+                                        <input type="text" id="productname" name="productname" required></br>
+                                        <label for="image">Image</label></br>
+                                        <input type="number" id="image" name="image" required></br>                                                                  
+                                        <label for="date">Date</label></br>
+                                        <input type="text" id="date" name="date" required></br>  
+                                        </br>  
+                                        <label for="description">Description</label></br>
+                                        <input type="number" id="description" name="description" required></br>
+                                        <button style="background-color: green; border-radius: 30px; padding: 3px 10px; margin-top: 15px" type="submit">Add News</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>   
                     </body>
+                    <script>
+                        function toggleAddNewsForm() {
+                            var addNewsForm = document.querySelector('.addNews');
+                            var add = document.querySelector('.add');
+                            if (addNewsForm.style.display === 'none') {
+                                addNewsForm.style.display = 'block';
+                                add.style.display = 'none';
+                                addNewsForm.classList.add("overlay");
+                            } else {
+                                addNewsForm.style.display = 'none';
+                                addNewsForm.classList.remove("overlay");
+                                add.style.display = 'block';
+                            }
+                        }
+                    </script>
                     </html>
 
