@@ -43,7 +43,8 @@ public class OrderDAO {
         try {
             con = DBUtils.getConnection();
         if (con != null) {
-                String sql = "INSERT INTO Order (user_id, status, voucher_id, payment_type, name, phone, address) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                String sql = "INSERT INTO Order (user_id, status, voucher_id, payment_type, name, phone, address) "
+                        + "VALUES (?, ?, ?, ?, ?, ?, ?)";
                 ps = con.prepareStatement(sql);
                 ps.setInt(1, user_id);
                 ps.setString(2, status);
