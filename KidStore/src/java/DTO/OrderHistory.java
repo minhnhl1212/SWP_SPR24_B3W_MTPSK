@@ -8,7 +8,7 @@ import java.util.Date;
  */
 public class OrderHistory {
     
-    private int orderDetailId;
+    private int orderId;
     private Date orderDate;
     private String imageToy;
     private String toyName;
@@ -20,12 +20,12 @@ public class OrderHistory {
     private double orderPrice;
     private double orderAmount;
 
-    public OrderHistory(int orderDetailId) {
-        this.orderDetailId = orderDetailId;
+    public OrderHistory(int orderId) {
+        this.orderId = orderId;
     }
     
-    public OrderHistory(int orderDetailId, Date orderDate, String imageToy, String toyName, int quantity, String nameCategory, String description, String status, double price, double orderPrice, double orderAmount) {
-        this.orderDetailId = orderDetailId;
+    public OrderHistory(int orderId, Date orderDate, String imageToy, String toyName, int quantity, String nameCategory, String description, String status, double price, double orderPrice, double orderAmount) {
+        this.orderId = orderId;
         this.orderDate = orderDate;
         this.imageToy = imageToy;
         this.toyName = toyName;
@@ -38,12 +38,12 @@ public class OrderHistory {
         this.orderAmount = orderAmount;
     }
 
-    public int getOrderDetailId() {
-        return orderDetailId;
+    public int getOrderId() {
+        return orderId;
     }
 
-    public void setOrderDetailId(int orderDetailId) {
-        this.orderDetailId = orderDetailId;
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
     }
 
     public Date getOrderDate() {

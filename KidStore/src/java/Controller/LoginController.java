@@ -83,13 +83,14 @@ public class LoginController extends HttpServlet {
             session.setAttribute("CATEGORY_LIST_NOT_APPROVE", categoryListNotApprove);
             session.setAttribute("TOY_LIST_NOT_APPROVE", toyListNotApprove);
             session.setAttribute("NEWS_LIST", newsList);
-            session.setAttribute("ORDER_HISTORY", orderList);
+            
             //đúng trả về home
             if (acc != null && acc.isActive()) {
                 session.setAttribute("acc", acc);
                 if (acc.getRoleId() == 1) {
                     url = ADMIN;
                 } else if (acc.getRoleId() == 2) {
+                    session.setAttribute("ORDER_HISTORY", orderList);
                     url = STAFF;
                 } else if (acc.getRoleId() == 3) {
                     url = HOMEPAGE;

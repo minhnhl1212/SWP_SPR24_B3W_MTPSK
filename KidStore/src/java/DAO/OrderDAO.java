@@ -146,7 +146,7 @@ public class OrderDAO {
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "select OrderDetail.[order_detail_id], [Order].order_date, Image.image_toy, Toy.toy_name, OrderDetail.quantity, Category.category_name, Toy.description, OrderDetail.status, Toy.price, OrderDetail.OD_price, [Order].order_amount\n"
+                String sql = "select [Order].order_id, [Order].order_date, Image.image_toy, Toy.toy_name, OrderDetail.quantity, Category.category_name, Toy.description, [Order].status_order, Toy.price, OrderDetail.OD_price, [Order].order_amount\n"
                         + "from Toy \n"
                         + "inner join OrderDetail on Toy.toy_id = OrderDetail.toy_id\n"
                         + "inner join [Order] on OrderDetail.order_id = [Order].order_id\n"
@@ -156,7 +156,7 @@ public class OrderDAO {
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
-                    OrderHistory list = new OrderHistory(rs.getInt("order_detail_id"), rs.getDate("order_date"), rs.getString("image_toy"), rs.getString("toy_name"), rs.getInt("quantity"), rs.getString("category_name"), rs.getString("description"), rs.getString("status"), rs.getDouble("price"), rs.getDouble("OD_price"), rs.getDouble("order_amount"));
+                    OrderHistory list = new OrderHistory(rs.getInt("order_id"), rs.getDate("order_date"), rs.getString("image_toy"), rs.getString("toy_name"), rs.getInt("quantity"), rs.getString("category_name"), rs.getString("description"), rs.getString("status_order"), rs.getDouble("price"), rs.getDouble("OD_price"), rs.getDouble("order_amount"));
                     listOrder.add(list);
                 }
             }
@@ -173,7 +173,7 @@ public class OrderDAO {
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "select OrderDetail.[order_detail_id], [Order].order_date, Image.image_toy, Toy.toy_name, OrderDetail.quantity, Category.category_name, Toy.description, OrderDetail.status, Toy.price, OrderDetail.OD_price, [Order].order_amount\n"
+                String sql = "select [Order].order_id, [Order].order_date, Image.image_toy, Toy.toy_name, OrderDetail.quantity, Category.category_name, Toy.description, [Order].status_order, Toy.price, OrderDetail.OD_price, [Order].order_amount\n"
                         + "from Toy \n"
                         + "inner join OrderDetail on Toy.toy_id = OrderDetail.toy_id\n"
                         + "inner join [Order] on OrderDetail.order_id = [Order].order_id\n"
@@ -185,7 +185,7 @@ public class OrderDAO {
                 ps.setInt(1, userId);
                 rs = ps.executeQuery();
                 while (rs.next()) {
-                    OrderHistory list = new OrderHistory(rs.getInt("order_detail_id"), rs.getDate("order_date"), rs.getString("image_toy"), rs.getString("toy_name"), rs.getInt("quantity"), rs.getString("category_name"), rs.getString("description"), rs.getString("status"), rs.getDouble("price"), rs.getDouble("OD_price"), rs.getDouble("order_amount"));
+                    OrderHistory list = new OrderHistory(rs.getInt("order_id"), rs.getDate("order_date"), rs.getString("image_toy"), rs.getString("toy_name"), rs.getInt("quantity"), rs.getString("category_name"), rs.getString("description"), rs.getString("status_order"), rs.getDouble("price"), rs.getDouble("OD_price"), rs.getDouble("order_amount"));
                     listOrder.add(list);
                 }
             }
@@ -209,7 +209,7 @@ public class OrderDAO {
                         + "inner join Image on Toy.toy_id = Image.toy_id\n"
                         + "inner join Category on Toy.category_id = Category.category_id\n"
                         + "inner join Account on Account.user_id = [Order].user_id\n"
-                        + "where Toy.category_id = Category.category_id";
+                        + "where Toy.category_id = Category.category_id and [Order].status_order like N'Đã Giao Hàng'";
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -237,7 +237,7 @@ public class OrderDAO {
                         + "inner join Image on Toy.toy_id = Image.toy_id\n"
                         + "inner join Category on Toy.category_id = Category.category_id\n"
                         + "inner join Account on Account.user_id = [Order].user_id\n"
-                        + "where Toy.category_id = Category.category_id and Account.user_id = ?";
+                        + "where Toy.category_id = Category.category_id and Account.user_id = ? and [Order].status_order like N'Đã Giao Hàng'";
                 ps = con.prepareStatement(sql);
                 ps.setInt(1, userId);
                 rs = ps.executeQuery();
@@ -254,18 +254,18 @@ public class OrderDAO {
         return listWarranty;
     }
 
-    public OrderHistory processingOrder(int orderDetailId) throws SQLException, Exception {
+    public OrderHistory processingOrder(int orderId) throws SQLException, Exception {
         OrderHistory order = null;
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "update OrderDetail\n"
-                        + "set status = N'Đang Xử Lí'\n"
-                        + "where order_detail_id = ?";
+                String sql = "update [Order]\n"
+                        + "set status_order = N'Đang Xử Lí'\n"
+                        + "where order_id = ?";
                 ps = con.prepareStatement(sql);
-                ps.setInt(1, orderDetailId);
+                ps.setInt(1, orderId);
                 ps.executeUpdate();
-                order = new OrderHistory(orderDetailId);
+                order = new OrderHistory(orderId);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -275,18 +275,18 @@ public class OrderDAO {
         return order;
     }
 
-    public OrderHistory shippingOrder(int orderDetailId) throws SQLException, Exception {
+    public OrderHistory shippingOrder(int orderId) throws SQLException, Exception {
         OrderHistory order = null;
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "update OrderDetail\n"
-                        + "set status = N'Đang Giao Hàng'\n"
-                        + "where order_detail_id = ?";
+                String sql = "update [Order]\n"
+                        + "set status_order = N'Đang Giao Hàng'\n"
+                        + "where order_id = ?";
                 ps = con.prepareStatement(sql);
-                ps.setInt(1, orderDetailId);
+                ps.setInt(1, orderId);
                 ps.executeUpdate();
-                order = new OrderHistory(orderDetailId);
+                order = new OrderHistory(orderId);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -296,18 +296,18 @@ public class OrderDAO {
         return order;
     }
 
-    public OrderHistory deliveredOrder(int orderDetailId) throws SQLException, Exception {
+    public OrderHistory deliveredOrder(int orderId) throws SQLException, Exception {
         OrderHistory order = null;
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "update OrderDetail\n"
-                        + "set status = N'Đã Giao Hàng'\n"
-                        + "where order_detail_id = ?";
+                String sql = "update [Order]\n"
+                        + "set status_order = N'Đã Giao Hàng'\n"
+                        + "where order_id = ?";
                 ps = con.prepareStatement(sql);
-                ps.setInt(1, orderDetailId);
+                ps.setInt(1, orderId);
                 ps.executeUpdate();
-                order = new OrderHistory(orderDetailId);
+                order = new OrderHistory(orderId);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -317,18 +317,18 @@ public class OrderDAO {
         return order;
     }
 
-    public OrderHistory refuseOrder(int orderDetailId) throws SQLException, Exception {
+    public OrderHistory refuseOrder(int orderId) throws SQLException, Exception {
         OrderHistory order = null;
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "update OrderDetail\n"
-                        + "set status = N'Từ Chối Bán Hàng'\n"
-                        + "where order_detail_id = ?";
+                String sql = "update [Order]\n"
+                        + "set status_order = N'Từ Chối Bán Hàng'\n"
+                        + "where order_id = ?";
                 ps = con.prepareStatement(sql);
-                ps.setInt(1, orderDetailId);
+                ps.setInt(1, orderId);
                 ps.executeUpdate();
-                order = new OrderHistory(orderDetailId);
+                order = new OrderHistory(orderId);
             }
         } catch (Exception e) {
             e.printStackTrace();

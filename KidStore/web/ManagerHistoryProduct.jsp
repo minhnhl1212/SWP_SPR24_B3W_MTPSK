@@ -219,10 +219,10 @@
                                 <%=order.getStatus()%>
                             </td>
                             <td class="px-4 py-3">
-                                <button class="action-btn" style="color: black"><a href="ProcessingOrderController?orderDetailId=<%=order.getOrderDetailId()%>">Processing</a></button></br>                      
-                                <button class="action-btn" style="color: green"><a href="ShippingOrderController?orderDetailId=<%=order.getOrderDetailId()%>">Shipping</a></button></br>                        
-                                <button class="action-btn" style="color: blue"><a href="DeliveredOrderController?orderDetailId=<%=order.getOrderDetailId()%>">Delivered</a></button></br>                        
-                                <button class="action-btn" style="color: red"><a href="RefuseOrderController?orderDetailId=<%=order.getOrderDetailId()%>">Refuse</a></button>                    
+                                <button class="action-btn" style="color: black"><a href="ProcessingOrderController?orderDetailId=<%=order.getOrderId()%>">Processing</a></button></br>                      
+                                <button class="action-btn" style="color: green"><a href="ShippingOrderController?orderDetailId=<%=order.getOrderId()%>">Shipping</a></button></br>                        
+                                <button class="action-btn" style="color: blue"><a href="DeliveredOrderController?orderDetailId=<%=order.getOrderId()%>">Delivered</a></button></br>                        
+                                <button class="action-btn" style="color: red"><a href="RefuseOrderController?orderDetailId=<%=order.getOrderId()%>">Refuse</a></button>                    
                             </td>
                         </tr>
                         <%}

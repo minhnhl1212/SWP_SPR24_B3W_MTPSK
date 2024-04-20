@@ -360,7 +360,6 @@
         <servlet-name>LoadHistoryProductController</servlet-name>
         <url-pattern>/LoadHistoryProductController</url-pattern>
     </servlet-mapping>
-
     <session-config>
         <session-timeout>
             30
