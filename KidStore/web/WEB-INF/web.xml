@@ -113,12 +113,16 @@
         <servlet-class>Controller.LoadWarrantyController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>LoadOrderHistory</servlet-name>
-        <servlet-class>Controller.LoadOrderHistory</servlet-class>
+        <servlet-name>LoadOrderHistoryController</servlet-name>
+        <servlet-class>Controller.LoadOrderHistoryController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DetailsController</servlet-name>
         <servlet-class>Controller.DetailsController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>HistoryOrder</servlet-name>
+        <servlet-class>DTO.HistoryOrder</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
@@ -233,12 +237,16 @@
         <url-pattern>/LoadWarrantyController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>LoadOrderHistory</servlet-name>
-        <url-pattern>/LoadOrderHistory</url-pattern>
+        <servlet-name>LoadOrderHistoryController</servlet-name>
+        <url-pattern>/LoadOrderHistoryController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DetailsController</servlet-name>
         <url-pattern>/DetailsController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HistoryOrder</servlet-name>
+        <url-pattern>/HistoryOrder</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

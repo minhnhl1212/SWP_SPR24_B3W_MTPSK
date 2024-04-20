@@ -1,4 +1,6 @@
 
+<%@page import="DTO.OrderHistory"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,7 +42,7 @@
                 <div class="profile-name">Customer</div>
                 <ul id="profile-function" class="list-group">
                     <li class="function-select list-group-item list-group-item-action" id="selected">
-                        <a href="profileHistory.jsp" style="text-decoration: none">
+                        <a href="LoadOrderHistoryController" style="text-decoration: none">
                             <span class="text-profile">Lịch sử mua hàng</span>
                         </a>
                     </li>
@@ -73,16 +75,22 @@
                         </div>
                     </div>
 
+                    <%
+                        ArrayList<OrderHistory> orderList = (ArrayList<OrderHistory>) session.getAttribute("ORDER_HISTORY");
+                        if (orderList != null) {
+                            for (OrderHistory order : orderList) {
+                    %>
+
                     <!-- đơn thứ 1-->
                     <div class="outer-box">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="row" >
                                     <div class="col-md-6">
-                                        <div class="product-name" style="justify-content: flex-start; display: flex;">&#128340; Ngày mua: 01/01/2024</div>
+                                        <div class="product-name" style="justify-content: flex-start; display: flex;">&#128340; Ngày mua: <%=order.getOrderDate()%></div>
                                     </div>
                                     <div class="col-md-6" >
-                                        <div class="product-name" style="color: green; justify-content: flex-end; display: flex; font-weight: bold;">Hoàn Thành</div>
+                                        <div class="product-name" style="color: green; justify-content: flex-end; display: flex; font-weight: bold;"><%=order.getStatus()%></div>
                                     </div>
                                 </div>
                                 <hr style="margin: 5px 0;">
@@ -91,16 +99,16 @@
                                     <div class="col-md-12">
                                         <div class="row" style="margin-top: 10px;">
                                             <div class="col-md-2" >
-                                                <img src="https://vcdn-kinhdoanh.vnecdn.net/2023/06/07/CBNV-FPT-01-3113-1686139774.jpg" alt="Product Image" style="width: 100px; height: 100px; object-fit: cover; ">
+                                                <img src="<%=order.getImageToy()%>" alt="Product Image" style="width: 100px; height: 100px; object-fit: cover; ">
                                             </div>
                                             <div class="col-md-6">
-                                                <div class="product-name">Mô Hình Universal Kung Fu Panda</div>
-                                                <div class="product-name">Số lượng: 1</div>
-                                                <div class="product-name">Danh mục: Đồ chơi sưu tầm</div>
-                                                <div class="product-name">Bộ sưu tập gồm 12 nhân vật thường và 1 nhân vật hiếm. Kích thước: 6-9cm Chất liệu: nhựa PVC/ABS</div>
+                                                <div class="product-name"><%=order.getToyName()%></div>
+                                                <div class="product-name">Số lượng: <%=order.getQuantity()%></div>
+                                                <div class="product-name">Danh mục: <%=order.getNameCategory()%></div>
+                                                <div class="product-name"><%=order.getDescription()%></div>
                                             </div>
                                             <div class="col-md-4">
-                                                <div class="product-price" style="display: flex; align-items: center; justify-content: flex-end; "><del>260.000 đ</del> -> 200.000 đ</div>
+                                                <div class="product-price" style="display: flex; align-items: center; justify-content: flex-end; "><del><%=order.getPrice()%> VNĐ</del> -> <%=order.getOrderPrice()%> VNĐ</div>
                                             </div>
                                         </div>
                                     </div>
@@ -110,7 +118,7 @@
                                     <div class="col-md-12" >
                                         <div class="row">
                                             <div class="product-name" style=" display: flex;justify-content: flex-end;">                                                  
-                                                <h5><i class='bx bx-money'></i> Thành tiền: 260.000 đ</h5>
+                                                <h5><i class='bx bx-money'></i> Thành tiền: <%=order.getOrderAmount()%> VNĐ</h5>
                                             </div>                            
                                         </div>
                                     </div>
@@ -119,71 +127,19 @@
                         </div>
                     </div>
 
-                    <!-- đơn thứ 2-->
-                    <div class="outer-box">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="row" >
-                                    <div class="col-md-6">
-                                        <div class="product-name" style="justify-content: flex-start; display: flex;">&#128340; Ngày mua: 01/01/2024</div>
-                                    </div>
-                                    <div class="col-md-6" >
-                                        <div class="product-name" style="color: green; justify-content: flex-end; display: flex; font-weight: bold;">Hoàn Thành</div>
-                                    </div>
-                                </div>
-                                <hr style="margin: 5px 0;">
+                    <%}
+                    } else {
+                    %>
+                    <p>Không có đơn hàng nào</p>
+                    <%
+                        }
+                    %>
 
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="row" style="margin-top: 10px;">
-                                            <div class="col-md-2" style="">
-                                                <img src="https://vcdn-kinhdoanh.vnecdn.net/2023/06/07/CBNV-FPT-01-3113-1686139774.jpg" alt="Product Image" style="width: 100px; height: 100px; object-fit: cover; ">
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="product-name">Mô Hình Universal Kung Fu Panda</div>
-                                                <div class="product-name">Số lượng: 1</div>
-                                                <div class="product-name">Danh mục: Đồ chơi sưu tầm</div>
-                                                <div class="product-name">Bộ sưu tập gồm 12 nhân vật thường và 1 nhân vật hiếm. Kích thước: 6-9cm Chất liệu: nhựa PVC/ABS</div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="product-price" style="display: flex; align-items: center; justify-content: flex-end; "><del>260.000 đ</del> -> 200.000 đ</div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row" style="margin-top: 10px;">
-                                            <div class="col-md-2" style="">
-                                                <img src="https://vcdn-kinhdoanh.vnecdn.net/2023/06/07/CBNV-FPT-01-3113-1686139774.jpg" alt="Product Image" style="width: 100px; height: 100px; object-fit: cover; ">
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="product-name">Mô Hình Universal Kung Fu Panda</div>
-                                                <div class="product-name">Số lượng: 1</div>
-                                                <div class="product-name">Danh mục: Đồ chơi sưu tầm</div>
-                                                <div class="product-name">Bộ sưu tập gồm 12 nhân vật thường và 1 nhân vật hiếm. Kích thước: 6-9cm Chất liệu: nhựa PVC/ABS</div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="product-price" style="display: flex; align-items: center; justify-content: flex-end; "><del>260.000 đ</del> -> 200.000 đ</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr style="margin: 10px 0;">
-                                <div class="row">
-                                    <div class="col-md-12" >
-                                        <div class="">
-                                            <div class="product-name" style=" display: flex;justify-content: flex-end;">
-                                                <h5><i class='bx bx-money'></i> Thành tiền: 260.000 đ</h5>                           
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <%@include file="components/footerComponent.jsp" %>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/scripts.js"></script>
-</body>
+        <%@include file="components/footerComponent.jsp" %>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="js/scripts.js"></script>
+    </body>
 </html>

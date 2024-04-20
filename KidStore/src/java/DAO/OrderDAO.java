@@ -7,6 +7,7 @@ package DAO;
 
 import DTO.Order;
 import DTO.OrderDetail;
+import DTO.OrderHistory;
 import DTO.Toy;
 import Utils.DBUtils;
 import java.sql.Connection;
@@ -40,26 +41,26 @@ public class OrderDAO {
 
     public int CreateNewOrder(String name, String phone, String address,
             boolean paymentType, int voucher_id, int user_id, double order_amount) throws Exception {
-        int THEOrderId =-1;
+        int THEOrderId = -1;
         try {
             con = DBUtils.getConnection();
-        if (con != null) {
-                String sql = "INSERT INTO [dbo].[Order]\n" +
-"           ([user_id]\n" +
-"           ,[voucher_id]\n" +
-"           ,[payment_type]\n" +
-"           ,[order_amount]\n" +
-"           ,[name]\n" +
-"           ,[phone]\n" +
-"           ,[address])\n" +
-"     VALUES\n" +
-"           (?\n" +
-"           ,?\n" +
-"           ,?\n" +
-"           ,?\n" +
-"           ,?\n" +
-"           ,?\n" +
-"           ,?)";
+            if (con != null) {
+                String sql = "INSERT INTO [dbo].[Order]\n"
+                        + "           ([user_id]\n"
+                        + "           ,[voucher_id]\n"
+                        + "           ,[payment_type]\n"
+                        + "           ,[order_amount]\n"
+                        + "           ,[name]\n"
+                        + "           ,[phone]\n"
+                        + "           ,[address])\n"
+                        + "     VALUES\n"
+                        + "           (?\n"
+                        + "           ,?\n"
+                        + "           ,?\n"
+                        + "           ,?\n"
+                        + "           ,?\n"
+                        + "           ,?\n"
+                        + "           ,?)";
                 ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 ps.setInt(1, user_id);
                 ps.setInt(2, voucher_id);
@@ -73,24 +74,24 @@ public class OrderDAO {
                 if (rs.next()) {
                     THEOrderId = rs.getInt(1);
                     System.out.println("Newly created order ID (getGeneratedKeys): " + THEOrderId);
-            } else {
-                throw new SQLException("Failed to retrieve generated order ID");
+                } else {
+                    throw new SQLException("Failed to retrieve generated order ID");
+                }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
         }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            finally {
-                closeConnection();
-            } 
-    return THEOrderId;
-    
-}
-    public int CreateOrderDetail(int toyId, int quantity, double price, int orderId, String warrantyCode, String status) throws Exception{
+        return THEOrderId;
+
+    }
+
+    public int CreateOrderDetail(int toyId, int quantity, double price, int orderId, String warrantyCode, String status) throws Exception {
         int work = 0;
-         try {
+        try {
             con = DBUtils.getConnection();
-        if (con != null) {
+            if (con != null) {
                 String sql = "INSERT INTO OrderDetail (toy_id, quantity, OD_price, order_id, warranty_code, status) VALUES (?, ?, ?, ?, ?, ?)";
                 ps = con.prepareStatement(sql);
                 ps.setInt(1, toyId);
@@ -100,16 +101,16 @@ public class OrderDAO {
                 ps.setString(5, warrantyCode);
                 ps.setString(6, status);
                 work = ps.executeUpdate();
-        }
-            } catch (Exception e) {
-                e.printStackTrace();
             }
-            finally {
-                closeConnection();
-            } 
-         return work;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+        return work;
     }
-    public ArrayList<OrderDetail> getAllOrderDetail() throws Exception{
+
+    public ArrayList<OrderDetail> getAllOrderDetail() throws Exception {
         ArrayList<OrderDetail> detailList = new ArrayList<>();
         try {
             con = DBUtils.getConnection();
@@ -125,9 +126,9 @@ public class OrderDAO {
                 rs = ps.executeQuery();
                 while (rs.next()) {
                     OrderDetail list = new OrderDetail(rs.getInt("order_detail_id"),
-                            rs.getString("toy_name"),rs.getInt("quantity"),
-                            rs.getDouble("price"),rs.getInt("order_id"),
-                            rs.getDate("orderDate"),rs.getString("customerName"));
+                            rs.getString("toy_name"), rs.getInt("quantity"),
+                            rs.getDouble("price"), rs.getInt("order_id"),
+                            rs.getDate("orderDate"), rs.getString("customerName"));
                     detailList.add(list);
                 }
             }
@@ -138,5 +139,31 @@ public class OrderDAO {
         }
         return detailList;
     }
-    }
 
+    public ArrayList<OrderHistory> orderHistory() throws SQLException, Exception {
+        ArrayList<OrderHistory> listOrder = new ArrayList<>();
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "select OrderDetail.[order_detail_id], [Order].order_date, Image.image_toy, Toy.toy_name, OrderDetail.quantity, Category.category_name, Toy.description, OrderDetail.status, Toy.price, OrderDetail.OD_price, [Order].order_amount\n"
+                        + "from Toy \n"
+                        + "inner join OrderDetail on Toy.toy_id = OrderDetail.toy_id\n"
+                        + "inner join [Order] on OrderDetail.order_id = [Order].order_id\n"
+                        + "inner join Image on Toy.toy_id = Image.toy_id\n"
+                        + "inner join Category on Toy.category_id = Category.category_id\n"
+                        + "where Toy.category_id = Category.category_id";
+                ps = con.prepareStatement(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    OrderHistory list = new OrderHistory(rs.getInt("order_detail_id"), rs.getDate("order_date"), rs.getString("image_toy"), rs.getString("toy_name"), rs.getInt("quantity"), rs.getString("category_name"), rs.getString("description"), rs.getString("status"), rs.getDouble("price"), rs.getDouble("OD_price"), rs.getDouble("order_amount"));
+                    listOrder.add(list);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+        return listOrder;
+    }
+}

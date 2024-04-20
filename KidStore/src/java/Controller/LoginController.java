@@ -8,10 +8,12 @@ package Controller;
 import DAO.CategoryDAO;
 import DAO.LoginDAO;
 import DAO.NewsDAO;
+import DAO.OrderDAO;
 import DAO.ToyDAO;
 import DTO.Account;
 import DTO.Category;
 import DTO.News;
+import DTO.OrderHistory;
 import DTO.Toy;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -70,6 +72,10 @@ public class LoginController extends HttpServlet {
             //Lấy danh sách News
             NewsDAO newsDAO = new NewsDAO();
             ArrayList<News> newsList = newsDAO.newsList();
+            
+            //Lấy danh sách OrderHistory
+            OrderDAO orderDAO = new OrderDAO();
+            ArrayList<OrderHistory> orderList = orderDAO.orderHistory();
 
             session.setAttribute("TOY_LIST", toyList);
             session.setAttribute("CATEGORY_LIST", categoryList);
@@ -77,6 +83,7 @@ public class LoginController extends HttpServlet {
             session.setAttribute("CATEGORY_LIST_NOT_APPROVE", categoryListNotApprove);
             session.setAttribute("TOY_LIST_NOT_APPROVE", toyListNotApprove);
             session.setAttribute("NEWS_LIST", newsList);
+            session.setAttribute("ORDER_HISTORY", orderList);
             //đúng trả về home
             if (acc != null) {
                 session.setAttribute("acc", acc);
