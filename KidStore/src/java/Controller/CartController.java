@@ -49,14 +49,18 @@ public class CartController extends HttpServlet {
             Toy item = dao.getToyUsingID(id);
             System.out.println(item);
             cartList = (HashMap<Toy, Integer>) session.getAttribute("cartList");
-            String valueParam = (String)session.getAttribute("InputValue");
-            if(valueParam!=null){
+            String valueParam = request.getParameter("InputValue");
+            if (valueParam != null) {
                 value = Integer.parseInt(valueParam);
             }
             //không có List thì tạo cái mới
             if (cartList == null) {
                 cartList = new HashMap<>();
-                cartList.put(item, 1);
+                if (valueParam != null) {
+                    cartList.put(item, value);
+                } else {
+                    cartList.put(item, 1);
+                }
             } else {
                 //check xem đã có trong cart chưa, nếu có thì quantity +1
                 if (cartList.containsKey(item)) {

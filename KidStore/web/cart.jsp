@@ -53,12 +53,12 @@
                             %>
                         <form action="CartController">
                             <tr>
-                            <input type="hidden" name="productId" value="Id"/>
+                            <input type="hidden" name="toyId" value="<%=c.getKey().getToyId()%>"/>
                             <th scope="row"><%=i++%></th>
                             <td><img src="<%=c.getKey().getImage()%>" width="50"/></td>
                             <td><%=c.getKey().getToyName()%></td>
                             <td><%=c.getKey().getPrice() * c.getKey().getDiscount()%></td>
-                            <td><input onchange="this.form.submit()" type="number" name="value" value="<%=c.getValue()%>"/></td>
+                            <td><input onchange="this.form.submit()" type="number" name="InputValue" value="<%=c.getValue()%>"/></td>
                             <td><% sum += prices;%><%=prices%> Đ</td>
                             <td><a href="DeleteCartController?productId=<%=c.getKey().getToyId()%>" class="btn btn-outline-danger"><i class="bi bi-trash"></i>Delete</a></td>
                             </tr>

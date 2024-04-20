@@ -37,9 +37,10 @@ public class PictureDAO {
         try{
             con = DBUtils.getConnection();
             if(con!=null){
-                String sql = "select image_id, imageToy, main from Image\n"
+                String sql = "select image_id, image_toy, main from Image\n"
                         + "where toy_id = ?";
                 ps = con.prepareStatement(sql);
+                ps.setInt(1, id);
                 rs = ps.executeQuery();
                 while(rs.next()){
                     Image image = new Image(rs.getInt("image_id"),

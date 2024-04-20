@@ -5,15 +5,19 @@
  */
 package Controller;
 
+import DAO.PictureDAO;
 import DAO.ToyDAO;
+import DTO.Image;
 import DTO.Toy;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -35,11 +39,15 @@ public class DetailController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            int id = Integer.parseInt(request.getParameter("ToyId"));
+            HttpSession session = request.getSession();
+            int id = Integer.parseInt(request.getParameter("toyId"));
             ToyDAO dao = new ToyDAO();
+            PictureDAO Pdao = new PictureDAO();
             Toy toy = dao.getToyUsingID(id);
+            ArrayList<Image> Ilist = Pdao.getImageByToyId(id);
             if (toy != null) {
-                request.setAttribute("toy", toy);
+                session.setAttribute("toy", toy);
+                session.setAttribute("IMAGE_LIST", Ilist);
             }
             RequestDispatcher rd = request.getRequestDispatcher("detail.jsp");
             rd.forward(request, response);

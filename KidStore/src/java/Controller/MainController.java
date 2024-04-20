@@ -33,7 +33,7 @@ public class MainController extends HttpServlet {
     private final static String SIGNUP = "SignUpController";
     private final static String CART = "CartController";
     private final static String ORDER = "OrderController";
-    private final static String DETAIL = "DetailsController";
+    private final static String DETAIL = "DetailController";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
