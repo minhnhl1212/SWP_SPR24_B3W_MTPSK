@@ -22,48 +22,66 @@ import java.util.ArrayList;
  */
 public class VoucherDAO {
 
-    public class ToyDAO {
+    private Connection con = null;
+    private PreparedStatement ps = null;
+    private ResultSet rs = null;
 
-        private Connection con = null;
-        private PreparedStatement ps = null;
-        private ResultSet rs = null;
+    private void closeConnection() throws Exception {
+        if (rs != null) {
+            rs.close();
+        }
+        if (ps != null) {
+            ps.close();
+        }
+        if (con != null) {
+            con.close();
+        }
+    }
 
-        private void closeConnection() throws Exception {
-            if (rs != null) {
-                rs.close();
-            }
-            if (ps != null) {
-                ps.close();
-            }
+    public Voucher getVoucherByNameCode(String namecode) throws Exception {
+        Voucher voucher = null;
+        try {
+            con = DBUtils.getConnection();
             if (con != null) {
-                con.close();
-            }
-        }
-
-        public Voucher getVoucherByNameCode(String namecode) throws Exception {
-            Voucher voucher = null;
-            try {
-                con = DBUtils.getConnection();
-                if (con != null) {
-                    String sql = "select voucher_id, description, date_expiration, "
-                            + "voucher_discount, "
-                            + "voucher_limit,voucher_limit_price where voucher_name = ?";
-                    ps = con.prepareStatement(sql);
-                    ps.setString(1, namecode);
-                    rs = ps.executeQuery();
-                    while (rs.next()) {
-                        voucher = new Voucher(rs.getInt("voucher_id"), namecode,
-                                rs.getString("description"), rs.getDate("date_expiration"),
-                                rs.getDouble("voucher_discount"),
-                                rs.getInt("voucher_limit"), rs.getDouble("voucher_limit_price"));
-                    }
+                String sql = "select voucher_id, description, date_expiration, "
+                        + "voucher_discount, "
+                        + "voucher_limit,voucher_limit_price where voucher_name = ?";
+                ps = con.prepareStatement(sql);
+                ps.setString(1, namecode);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    voucher = new Voucher(rs.getInt("voucher_id"), namecode,
+                            rs.getString("description"), rs.getDate("date_expiration"),
+                            rs.getDouble("voucher_discount"),
+                            rs.getInt("voucher_limit"), rs.getDouble("voucher_limit_price"));
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                closeConnection();
             }
-            return voucher;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
         }
+        return voucher;
+    }
+
+    public double getVoucherValue(String namecode) throws Exception {
+        double discount = 1;
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "select voucher_discount from Voucher where voucher_name = ?";
+                ps = con.prepareStatement(sql);
+                ps.setString(1, namecode);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    discount = rs.getDouble("voucher_discount");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+        return discount;
     }
 }

@@ -5,6 +5,7 @@
  */
 package Controller;
 
+import DAO.VoucherDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -12,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -33,10 +35,16 @@ public class VoucherController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
+            HttpSession session = request.getSession();
             String voucher = request.getParameter("Voucher");
-            
+            voucher = voucher.trim().toLowerCase();
+            VoucherDAO dao = new VoucherDAO();
+            String discount = String.valueOf(dao.getVoucherValue(voucher));
+            session.setAttribute("discount", discount);
             RequestDispatcher rd = request.getRequestDispatcher("cart.jsp");
             rd.forward(request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

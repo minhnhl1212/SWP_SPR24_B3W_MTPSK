@@ -4,6 +4,10 @@
     Author     : TUF
 --%>
 
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
+<%@page import="DTO.OrderSold"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +23,9 @@
     </head>
     <body>
 
-
+        <%
+     String desiredFormat = "yyyy-MM-dd";
+     SimpleDateFormat sdf = new SimpleDateFormat(desiredFormat);%>
         <!-- SIDEBAR -->
         <section id="sidebar">
             <a href="#" class="brand">
@@ -46,7 +52,7 @@
                     </a>
                 </li>
                 <li class="active">
-                    <a href="admin_revenue.jsp">
+                    <a href="RevenueController">
                         <i class='bx bx-money'></i>
                         <span class="text">Revenue</span>
                     </a>
@@ -59,14 +65,14 @@
                         <span class="text">Logout</span>
                     </a>
 
-<!--                     Logout confirmation dialog 
+                    Logout confirmation dialog 
                     <div id="logoutConfirmationDialog" class="modal">
                         <div class="modal-content">
                             <p>Are you sure you want to logout?</p>
                             <button id="confirmLogout">Logout</button>
                             <button id="cancelButton">Cancel</button>
                         </div>
-                    </div>-->
+                    </div>
                 </li>
             </ul>
         </section>
@@ -94,7 +100,15 @@
                 </a>
             </nav>
             <!-- NAVBAR -->
-
+            <% ArrayList<OrderSold> orderList = (ArrayList<OrderSold>) session.getAttribute("ORDER_LIST");
+                double totalRevenue = 0;
+                int i = 1;
+                if(orderList!=null){
+                for (OrderSold o : orderList) {
+                    totalRevenue += o.getTotalPrice();
+                }
+                }
+            %>
             <!-- MAIN -->
             <main class="">
                 <div class="head-title">
@@ -107,7 +121,7 @@
                     <div class="order">
                         <div class="head">
                             <h3>Revenue Streams</h3>
-                            <h3 class="right">Total Revenue</h3>
+                            <h3 class="right">Total Revenue: <%=totalRevenue%> Đ</h3>
                         </div>
                         <table>
                             <thead>
@@ -122,54 +136,21 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <% if(orderList!=null){
+                                    for (OrderSold e : orderList) {
+                                        // Format the date using the SimpleDateFormat object
+                                        String formattedDate = sdf.format(e.getOrderDate());
+                                %>
                                 <tr>
-                                    <td>1</td>
-                                    <td>Hình ảnh</td>
-                                    <td>Xe Tải Công Trình</td>
-                                    <td>2</td>
-                                    <td>Minh Le</td>
-                                    <td>April 15, 2024</td>
-                                    <td>432.000 Đ</td>
+                                    <td><%=i++%></td>
+                                    <td><%=e.getImage()%></td>
+                                    <td><%=e.getToyName()%></td>
+                                    <td><%=e.getQuantity()%></td>
+                                    <td><%=e.getFullName()%></td>
+                                    <td><%=formattedDate%></td>
+                                    <td><%=e.getTotalPrice()%> Đ</td>
                                 </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Hình ảnh</td>
-                                    <td>Xe Tải Công Trình</td>
-                                    <td>2</td>
-                                    <td>Minh Le</td>
-                                    <td>April 15, 2024</td>
-                                    <td>432.000 Đ</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Hình ảnh</td>
-                                    <td>Xe Tải Công Trình</td>
-                                    <td>2</td>
-                                    <td>Minh Le</td>
-                                    <td>April 15, 2024</td>
-                                    <td>432.000 Đ</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Hình ảnh</td>
-                                    <td>Xe Tải Công Trình</td>
-                                    <td>2</td>
-                                    <td>Minh Le</td>
-                                    <td>April 15, 2024</td>
-                                    <td>432.000 Đ</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Hình ảnh</td>
-                                    <td>Xe Tải Công Trình</td>
-                                    <td>2</td>
-                                    <td>Minh Le</td>
-                                    <td>April 15, 2024</td>
-                                    <td>432.000 Đ</td>
-                                </tr>
-                                
-
-
+                                <%}}%>
                             </tbody>
                         </table>
                     </div>

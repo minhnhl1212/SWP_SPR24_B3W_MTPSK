@@ -180,6 +180,10 @@
         <servlet-name>LoadHistoryProductController</servlet-name>
         <servlet-class>Controller.LoadHistoryProductController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>VoucherController</servlet-name>
+        <servlet-class>Controller.VoucherController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -304,7 +308,7 @@
         <servlet-name>HistoryOrder</servlet-name>
         <url-pattern>/HistoryOrder</url-pattern>
     </servlet-mapping>
-        <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>RevenueController</servlet-name>
         <url-pattern>/RevenueController</url-pattern>
     </servlet-mapping>
@@ -359,6 +363,10 @@
     <servlet-mapping>
         <servlet-name>LoadHistoryProductController</servlet-name>
         <url-pattern>/LoadHistoryProductController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VoucherController</servlet-name>
+        <url-pattern>/VoucherController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

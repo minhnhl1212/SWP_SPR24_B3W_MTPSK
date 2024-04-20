@@ -7,9 +7,11 @@ package Controller;
 
 import DAO.OrderDAO;
 import DTO.Order;
+import DTO.OrderSold;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -38,8 +40,10 @@ public class RevenueController extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             HttpSession session = request.getSession();
             OrderDAO orderDAO = new OrderDAO();
-            ArrayList<Order> orderList = orderDAO.getAllFinishOrder();
-            session.setAttribute("ORDER_LIST", orderDAO);
+            ArrayList<OrderSold> orderList = orderDAO.getAllOrderSold();
+            session.setAttribute("ORDER_LIST", orderList);
+            RequestDispatcher rd = request.getRequestDispatcher("admin_revenue.jsp");
+            rd.forward(request, response);
         }
         catch (Exception e){
             e.printStackTrace();

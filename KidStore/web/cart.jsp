@@ -27,7 +27,8 @@
     </style>
     <%  int i = 1;
        double sum = 0, discount = 0;
-       HashMap<Toy, Integer> cartItems = (HashMap<Toy, Integer>) session.getAttribute("cartList");%>
+       HashMap<Toy, Integer> cartItems = (HashMap<Toy, Integer>) session.getAttribute("cartList");
+    %>
     <body>
         <%@include file="components/navBarComponent.jsp" %>
 
@@ -75,20 +76,26 @@
                 </div>
 
                 <div class="col-md-5">
-                    <form>
+                    <form action="VoucherController">
                     <div class="input-group mb-4">
-                        <input type="text" class="form-control" placeholder="Enter voucher code" name="voucher">
+                        <input type="text" class="form-control" placeholder="Enter voucher code" name="Voucher">
                         <div class="input-group-append">
                             <button class="btn btn-outline-danger" type="submit">Áp dụng</button>
                         </div>
                     </div>
                     </form>
+                    <%  double DiscountValue = 0;
+                    double Discount = 1;
+                         String DiscountParam = (String) session.getAttribute("discount");
+                         if(DiscountParam!=null){
+                             Discount = Double.parseDouble(DiscountParam);}%>
+                             
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Summary</h5>
                             <p class="card-text">Subtotal:<%=sum%> đ</p>
-                            <p class="card-text">Discount: 0 đ</p>
-                            <p class="card-text">Total: <%=sum%> đ</p>
+                            <p class="card-text">Discount:<%DiscountValue=sum-sum*Discount;%><%=DiscountValue%></p>
+                            <p class="card-text">Total: <%=sum-DiscountValue%> đ</p>
                         </div>
                     </div>
                     <a href="checkout.jsp" class="btn btn-success btn-block">Thanh Toán</a>

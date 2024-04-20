@@ -37,7 +37,7 @@ public class AccountDAO {
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "insert into Account (username, password, full_name, phone, address, isActive, role_id) values (?,?,?,?,?,0,3)";
+                String sql = "insert into Account (username, password, full_name, phone, address, isActive, role_id) values (?,?,?,?,?,1,3)";
                 ps = con.prepareStatement(sql);
                 ps.setString(1, userName);
                 ps.setString(2, password);

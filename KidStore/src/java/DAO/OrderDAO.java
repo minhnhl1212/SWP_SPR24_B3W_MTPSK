@@ -8,6 +8,7 @@ package DAO;
 import DTO.Order;
 import DTO.OrderDetail;
 import DTO.OrderHistory;
+import DTO.OrderSold;
 import DTO.OrderWarranty;
 import DTO.Toy;
 import Utils.DBUtils;
@@ -495,5 +496,35 @@ public class OrderDAO {
         }
         return warranty;
     }
-
+    public ArrayList<OrderSold> getAllOrderSold() throws Exception{
+        ArrayList<OrderSold> ordersold_list = new ArrayList<>();
+        try{
+            con = DBUtils.getConnection();
+            if(con!=null){
+                String sql = "select Image.image_toy, Toy.toy_name, OrderDetail.quantity, "
+                        + "Account.full_name, Order.order_date, OrderDetail.OD_price\n"
+                        + "from Toy \n"
+                        + "inner join OrderDetail on Toy.toy_id = OrderDetail.toy_id\n"
+                        + "inner join [Order] on OrderDetail.order_id = [Order].order_id\n"
+                        + "inner join Image on Toy.toy_id = Image.toy_id\n"
+                        + "where OrderDetail.status=N'Đã Giao Hàng'";
+                ps= con.prepareStatement(sql);
+                rs = ps.executeQuery();
+                while(rs.next()){
+                    OrderSold os = new OrderSold(rs.getString("image_toy"),
+                            rs.getString("toy_name"),
+                            rs.getInt("quantity"), rs.getString("full_name"),
+                            rs.getDate("order_date"),rs.getDouble("OD_price"));
+                    ordersold_list.add(os);
+                }
+            }
+    }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        finally{
+            closeConnection();
+        }
+        return ordersold_list;
+}
 }

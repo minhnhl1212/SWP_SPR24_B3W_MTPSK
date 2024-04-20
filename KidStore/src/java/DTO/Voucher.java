@@ -18,6 +18,11 @@ public class Voucher {
     public Voucher() {
     }
 
+    public Voucher(String voucherName, double discount) {
+        this.voucherName = voucherName;
+        this.discount = discount;
+    }
+
     public Voucher(int voucherId, String voucherName, String description, Date dateExpiration, double discount, int limit, double limitPrice) {
         this.voucherId = voucherId;
         this.voucherName = voucherName;
