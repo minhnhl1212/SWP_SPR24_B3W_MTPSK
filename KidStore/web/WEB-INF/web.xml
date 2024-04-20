@@ -124,6 +124,14 @@
         <servlet-name>HistoryOrder</servlet-name>
         <servlet-class>DTO.HistoryOrder</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RevenueController</servlet-name>
+        <servlet-class>Controller.RevenueController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AccountStatusController</servlet-name>
+        <servlet-class>Controller.AccountStatusController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -247,6 +255,14 @@
     <servlet-mapping>
         <servlet-name>HistoryOrder</servlet-name>
         <url-pattern>/HistoryOrder</url-pattern>
+    </servlet-mapping>
+        <servlet-mapping>
+        <servlet-name>RevenueController</servlet-name>
+        <url-pattern>/RevenueController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AccountStatusController</servlet-name>
+        <url-pattern>/AccountStatusController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

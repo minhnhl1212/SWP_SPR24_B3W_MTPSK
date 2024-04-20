@@ -38,7 +38,7 @@
             </a>
             <ul class="side-menu top">
                 <li>
-                    <a href="admin_account.jsp">
+                    <a href="AccountController">
                         <i class='bx bxs-group' ></i>
                         <span class="text">Account</span>
                     </a>

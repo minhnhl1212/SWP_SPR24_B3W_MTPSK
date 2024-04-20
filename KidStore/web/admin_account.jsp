@@ -30,7 +30,7 @@
             </a>
             <ul class="side-menu top">
                 <li class="active">
-                    <a href="admin_account.jsp">
+                    <a href="AccountController">
                         <i class='bx bxs-group' ></i>
                         <span class="text">Account</span>
                     </a>
@@ -182,7 +182,12 @@
                                     <td><%=a.getPhone()%></td>
                                     <td><%=a.getAddress()%></td>
                                     <td><%=a.getRole()%></td>
-                                    <td><button id="toggleButton" class="button-bordered">Active</button></td> 
+                                    <td><a href="AccountStatusController?id=<%=a.getUserId()%>&isActive=<%=a.isActive()%>"id="toggleButton" class="button-bordered">
+                                            <% if (a.isActive()) {%>
+                                            Active
+                                            <%} else {%>
+                                            Banned
+                                            <%}%>
                                 </tr>
                                 <%}
                                         }

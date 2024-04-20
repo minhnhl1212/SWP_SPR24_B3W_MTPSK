@@ -61,7 +61,7 @@ public class AccountDAO {
             con = DBUtils.getConnection();
             if (con != null) {
                 String sql = "Select Account.user_id, Account.username, Account.full_name, "
-                        + "Account.phone, Account.address, Account.active,Account.role_id, "
+                        + "Account.phone, Account.address, Account.isActive,Account.role_id, "
                         + "Role.role_name from Account\n"
                         + "left join Role on Account.role_id = Role.role_id";
                 ps = con.prepareStatement(sql);
@@ -69,7 +69,7 @@ public class AccountDAO {
                 while (rs.next()) {
                     Account acc = new Account(rs.getInt("user_id"), rs.getString("username"),
                             rs.getString("full_name"), rs.getString("phone"),
-                            rs.getString("address"), rs.getBoolean("active"),
+                            rs.getString("address"), rs.getBoolean("isActive"),
                             rs.getInt("role_id"), rs.getString("role_name"));
                     allAccount.add(acc);
                 }
@@ -83,13 +83,13 @@ public class AccountDAO {
         return allAccount;
     }
 
-    public void UpdateActiveAccount(int role_id, boolean active) throws Exception {
+    public void UpdateActiveAccount(int user_id, boolean active) throws Exception {
         try {
             con = DBUtils.getConnection();
-            String sql = "Update Account Set role_id=?, active=?";
+            String sql = "Update Account Set isActive=? where user_id=?";
             ps = con.prepareStatement(sql);
-            ps.setInt(1, role_id);
-            ps.setBoolean(2, active);
+            ps.setBoolean(1, active);
+            ps.setInt(2, user_id);
             ps.executeUpdate();
         } catch (Exception e) {
             throw e;

@@ -85,7 +85,7 @@ public class LoginController extends HttpServlet {
             session.setAttribute("NEWS_LIST", newsList);
             session.setAttribute("ORDER_HISTORY", orderList);
             //đúng trả về home
-            if (acc != null) {
+            if (acc != null && acc.isActive()) {
                 session.setAttribute("acc", acc);
                 if (acc.getRoleId() == 1) {
                     url = ADMIN;

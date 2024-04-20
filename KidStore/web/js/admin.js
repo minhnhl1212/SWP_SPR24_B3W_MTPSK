@@ -114,13 +114,12 @@ switchMode.addEventListener('change', toggleDarkMode);
 
 document.querySelectorAll("#toggleButton").forEach(function (button) {
     button.addEventListener("click", function () {
-        if (this.classList.contains("red")) {
+        if (this.textContent.trim()==="Banned") {
             this.classList.remove("red");
             this.style.background = "transparent";
             this.style.border = "2px solid #007bff";
             this.style.borderradius = "6px";
             this.style.color = "#007bff";
-            this.innerHTML = "Active";
             this.style.padding = "10px 20px"; // added padding
             this.style.cursor = "pointer"; // added cursor style
             this.style.fontSize = "16px"; // added font size
@@ -141,7 +140,6 @@ document.querySelectorAll("#toggleButton").forEach(function (button) {
             this.style.border = "2px solid #FF0000";
             this.style.borderradius = "6px";
             this.style.color = "#FF0000";
-            this.innerHTML = "Banned";
             this.style.padding = "10px 20px"; // added padding
             this.style.cursor = "pointer"; // added cursor style
             this.style.fontSize = "16px"; // added font size
