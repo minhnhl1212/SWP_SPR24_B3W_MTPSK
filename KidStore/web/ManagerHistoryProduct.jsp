@@ -1,5 +1,12 @@
+<%-- 
+    Document   : ManagerHistoryProduct
+    Created on : Apr 20, 2024, 11:02:27 AM
+    Author     : ADMIN
+--%>
 
-<%@page import="DTO.News"%>
+
+<%@page import="DTO.Toy"%>
+<%@page import="DTO.Category"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="DTO.Account"%>
 <!DOCTYPE html>
@@ -7,8 +14,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Staff Dashboard</title>        
-        <link rel="stylesheet" href="./assets/css/tailwind.output.css">                
+        <title>Staff Dashboard</title>     
+        <link rel="stylesheet" href="./assets/css/tailwind.output.css">
         <style>
             label {
                 position: absolute;
@@ -44,8 +51,8 @@
                 padding: 10px 0px;
                 border-radius: 13px;
                 position: absolute;
-                top: 67px;
-                right: 107px;
+                top: 300px;
+                left: 284px;
                 z-index: 3;
                 width: 11%;
             }
@@ -55,20 +62,34 @@
                 right: 18px;
             }
 
+            span {
+
+            }
+
             input{
                 color: black;
             }
-            .description {
-                max-height: 188px;
-                margin-top: -93px;
+
+            select{
+                color: black;
+            }
+
+            textarea{
+                color: black;
+            }
+            textarea#description {
+                width: 90%;
+            }
+            img {
+                max-width: 124px;
             }
 
         </style>
     </head>
     <body>
+
         <%
             Account acc = (Account) session.getAttribute("acc");
-
         %>
 
         <div>
@@ -76,7 +97,7 @@
         </div>
         <div class="py-4 text-gray-500 dark:text-gray-400">
             <a class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200" href="#">
-                STAFF 
+                STAFF
             </a>
             <ul class="mt-6" style="display: flex">
                 <li class="relative px-6 py-3">
@@ -86,7 +107,7 @@
                         </svg>
                         <span class="ml-4">ManagerProduct</span>
                     </a>
-                </li>
+                </li>            
                 <li class="relative px-6 py-3">
                     <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200" href="ManagerCategory.jsp">
                         <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -137,42 +158,46 @@
                     <thead>
                         <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                             <th class="px-4 py-3">ID</th>
-                            <th class="px-4 py-3">Title</th>            
+                            <th class="px-4 py-3">Product Name</th>
                             <th class="px-4 py-3">Image</th>
-                            <th class="px-4 py-3">Poster</th>
                             <th class="px-4 py-3">Date</th>
+                            <th class="px-4 py-3">Price</th>
+                            <th class="px-4 py-3">Category</th>
+                            <th class="px-4 py-3">Discount</th>
                             <th class="px-4 py-3">Description</th>
-                            <th class="px-4 py-3">Action</th>
+                            <th class="px-4 py-3">Status</th>
                         </tr>
                     </thead>
+
                     <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-                        <%                            ArrayList<News> newsList = (ArrayList<News>) session.getAttribute("NEWS_LIST");
-                            if (newsList != null) {
-                                for (News news : newsList) {
+                        <%
+                            ArrayList<Toy> toyList = (ArrayList<Toy>) session.getAttribute("TOY_LIST");
+                            if (toyList != null) {
+                                for (Toy toy : toyList) {
                         %>
                         <tr class="text-gray-700 dark:text-gray-400">
                             <td class="px-4 py-3">
-
-                                <p class="px-4 py-3 text-sm"><%=news.getNewsId()%></p>
-
+                                <%=toy.getToyId()%>
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                <%=news.getTitle()%>
+                                <%=toy.getToyName()%>
                             </td>
                             <td class="px-4 py-3 text-xs">
-                                <img src="<%=news.getImage()%>" alt="News Images"/>
+                                <img src="<%=toy.getImage()%>" alt="Toy Image">
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                <%=news.getName_staff()%>
+                                <%=toy.getPrice()%>
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                <%=news.getDate()%>
+                                <%=toy.getName_category()%>
                             </td>
-                            <td style="overflow-y: scroll; max-width: 100px;" class="px-4 py-3 text-sm">
-                                <div class="description" style="white-space: pre-wrap;">
-                                    <%=news.getDescription()%>
-                                </div>
+                            <td class="px-4 py-3 text-sm">
+                                <%=toy.getDiscount()%>
                             </td>
+                            <td class="px-4 py-3 text-sm">
+                                <%=toy.getWarranty_time()%>
+                            </td>
+
 
                             <td class="px-4 py-3">
                                 <div class="flex items-center space-x-7 text-sm">
@@ -189,57 +214,20 @@
                                 </div>
                             </td>
                         </tr>
-
                         <%}
                         } else {
                         %>
-                    <p>Khong co danh sach News</p>
+                    <p></p>
                     <%
                         }
-                    %>
+                    %>                
+                    </tbody>
+                </table>
 
-                    <section class="my-8 mx-auto max-w-4xl">
-                        <button onclick="toggleAddNewsForm()" class="add">Add News</button>
-                        <h2 style="color: greenyellow">${ADD_NEWS_SUCCESS}</h2>
-                        <h2 style="color: red">${ADD_NEWS_FAILED}</h2>
-                    </section>
-                    <div class="wrap">
-                        <div class="addNews overlay">
-                            <div style="text-align: center; color: white; font-size: 24px; font-weight: 600; margin-top: -2%; background-color: darkkhaki; width: 350px; padding-bottom: 25px" id="add-product-form">                    
-                                <div>
-                                    <form action="AddNewsController">                                        
-                                        <button onclick="toggleAddNewsForm()" class="close" style="text-align: right">X</button>
-                                        <label for="title">Title</label></br>
-                                        <input type="text" id="title" name="title" required></br>
-                                        <label for="image">Image</label></br>
-                                        <input type="text" id="image" name="image" required></br>
-                                        <label for="date">Date</label></br>
-                                        <input type="date" id="date" name="date" required></br>                                                                  
-                                        <label for="description">Description</label></br>
-                                        <input type="text" id="date" name="description" required></br>  
-                                        </br>  
-                                        <input type="hidden" name="userId" value="<%=acc.getUserId()%>">
-                                        <button style="background-color: green; border-radius: 30px; padding: 3px 10px; margin-top: 15px" type="submit">Add News</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>   
-                    </body>
-                    <script>
-                        function toggleAddNewsForm() {
-                            var addNewsForm = document.querySelector('.addNews');
-                            var add = document.querySelector('.add');
-                            if (addNewsForm.style.display === 'none') {
-                                addNewsForm.style.display = 'block';
-                                add.style.display = 'none';
-                                addNewsForm.classList.add("overlay");
-                            } else {
-                                addNewsForm.style.display = 'none';
-                                addNewsForm.classList.remove("overlay");
-                                add.style.display = 'block';
-                            }
-                        }
-                    </script>
-                    </html>
+                
+
+                </body>
+                
+                
+                </html>
 
