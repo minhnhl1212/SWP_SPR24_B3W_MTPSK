@@ -5,8 +5,8 @@
  */
 package Controller;
 
-import DAO.OrderDAO;
-import DTO.Account;
+import DAO.ToyDAO;
+import DTO.Toy;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -14,14 +14,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author admin
  */
-public class OrderController extends HttpServlet {
-private final static String DETAIL = "OrderDetailController";
+public class DetailController extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -34,28 +33,20 @@ private final static String DETAIL = "OrderDetailController";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        boolean type = true;
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            HttpSession session = request.getSession();
-            Account a = (Account) session.getAttribute("acc");   
-            String name = request.getParameter("name");
-            String phone = request.getParameter("phone");
-            String address = request.getParameter("address");
-            String paymentType = request.getParameter("paymentMethod");
-            if(paymentType.equals("cashOnDelivery")){
-                 type = false;
+            int id = Integer.parseInt(request.getParameter("ToyId"));
+            ToyDAO dao = new ToyDAO();
+            Toy toy = dao.getToyUsingID(id);
+            if(toy!=null){
+                request.setAttribute("toy", toy);
             }
-            int voucher_id = 1;
-            OrderDAO dao = new OrderDAO();
-            int OrderId = dao.CreateNewOrder(name, phone, address, type, voucher_id,a.getUserId() , "processing");
-            request.setAttribute("OrderID", OrderId);
-            RequestDispatcher rd = request.getRequestDispatcher(DETAIL);
+            RequestDispatcher rd = request.getRequestDispatcher("detail.jsp");
             rd.forward(request, response);
+            
         }
         catch (Exception e){
             e.printStackTrace();
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

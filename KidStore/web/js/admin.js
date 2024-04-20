@@ -178,7 +178,9 @@ function closeModal() {
 }
 
 // Event listeners
-logoutButton.addEventListener("click", showModal);
+logoutButton.addEventListener("click", function (){
+    window.location.href = "LogoutController";
+});
 
 // Event listener for Cancel button
 cancelButton.addEventListener("click", function () {

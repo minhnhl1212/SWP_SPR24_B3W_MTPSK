@@ -69,16 +69,6 @@
                 role = a.getRoleId();
             }
         %>
-        <%if (role <= 2 && role != 0) {%>
-        <a style="background-color: greenyellow; color: #664d03" class="btn btn-outline-dark mt-auto" href="ManagerCategory.jsp">Manager Category</a>
-        <a style="background-color: paleturquoise; color: #664d03" class="btn btn-outline-dark mt-auto" href="ManagerProduct.jsp">Manager Product</a>
-        <a style="background-color: wheat; color: #664d03" class="btn btn-outline-dark mt-auto" href="ManagerProduct.jsp">Manager Customer</a>
-        <a style="background-color: #0d6efd; color: #664d03" class="btn btn-outline-dark mt-auto" href="ManagerProduct.jsp">Manager Other</a>
-        <%}
-            if (role == 1) {%>
-        <a style="background-color: wheat; color: #664d03" class="btn btn-outline-dark mt-auto" href="ManagerProduct.jsp">Manager Customer</a>
-        <a style="background-color: #0d6efd; color: #664d03" class="btn btn-outline-dark mt-auto" href="ManagerProduct.jsp">Manager Other</a>
-        <%}%>
         <!-- Section-->
         <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
@@ -144,7 +134,7 @@
                                     </div>
 
                                     <!-- Product image -->
-                                    <a href="detail.jsp"><img class="card-img-top" src="<%=toy.getImage()%>" alt="..."/></a>
+                                    <a href="MainController?btAction=Detail&toyId=<%=toy.getToyId()%>"><img class="card-img-top" src="<%=toy.getImage()%>" alt="..."/></a>
 
 
                                     <div class="card-body">

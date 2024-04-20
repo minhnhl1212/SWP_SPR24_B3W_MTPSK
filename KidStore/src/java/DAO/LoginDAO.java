@@ -46,7 +46,7 @@ public class LoginDAO {
         try{  
             con = DBUtils.getConnection();
             String sql = "Select user_id, username, full_name, phone, address, "
-                    + "isActive, role_id, payment_id from Account"
+                    + "active, role_id, payment_id from Account"
                     + " where [username]=? and [password]=?";
             ps = con.prepareStatement(sql);
             ps.setString(1, username);

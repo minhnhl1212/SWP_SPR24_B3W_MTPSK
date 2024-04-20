@@ -7,8 +7,6 @@ package Controller;
 
 import DAO.Code;
 import DAO.OrderDAO;
-import DTO.Account;
-import DTO.OrderDetail;
 import DTO.Toy;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -24,7 +22,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author admin
  */
-public class CheckOutController extends HttpServlet {
+public class OrderDetailController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -46,7 +44,7 @@ public class CheckOutController extends HttpServlet {
         String warrantyCode;
         Code code = new Code();
         OrderDAO dao = new OrderDAO();
-        int orderId = Integer.parseInt(request.getParameter("OrderID"));
+        int orderId = (Integer)request.getAttribute("OrderID");
         HashMap<Toy,Integer> cartList = (HashMap<Toy,Integer>) session.getAttribute("cartList");
         for(HashMap.Entry<Toy, Integer> c : cartList.entrySet()){
             toyId = c.getKey().getToyId();

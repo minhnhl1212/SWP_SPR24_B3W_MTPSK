@@ -4,6 +4,7 @@ public class Image {
     private int imageId;
     private String image;
     private int toyId;
+    private boolean main;
 
     public Image() {
     }
@@ -13,6 +14,14 @@ public class Image {
         this.image = image;
         this.toyId = toyId;
     }
+
+    public Image(int imageId, String image, int toyId, boolean main) {
+        this.imageId = imageId;
+        this.image = image;
+        this.toyId = toyId;
+        this.main = main;
+    }
+    
 
     public int getImageId() {
         return imageId;
@@ -36,6 +45,14 @@ public class Image {
 
     public void setToyId(int toyId) {
         this.toyId = toyId;
+    }
+
+    public boolean isMain() {
+        return main;
+    }
+
+    public void setMain(boolean main) {
+        this.main = main;
     }
     
 }

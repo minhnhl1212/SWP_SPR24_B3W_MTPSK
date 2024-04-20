@@ -13,6 +13,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
@@ -43,9 +44,27 @@ public class OrderDAO {
         try {
             con = DBUtils.getConnection();
         if (con != null) {
-                String sql = "INSERT INTO Order (user_id, status, voucher_id, payment_type, name, phone, address) "
-                        + "VALUES (?, ?, ?, ?, ?, ?, ?)";
-                ps = con.prepareStatement(sql);
+                String sql = "INSERT INTO [dbo].[Order]\n" +
+"           ([user_id]\n" +
+"           ,[status]\n" +
+"           ,[create_date]\n" +
+"           ,[voucher_id]\n" +
+"           ,[payment_type]\n" +
+"           ,[total_amount]\n" +
+"           ,[name]\n" +
+"           ,[phone]\n" +
+"           ,[address])\n" +
+"     VALUES\n" +
+"           (?\n" +
+"           ,?\n" +
+"           ,'04-19-2024'\n" +
+"           ,?\n" +
+"           ,?\n" +
+"           ,50000\n" +
+"           ,?\n" +
+"           ,?\n" +
+"           ,?)";
+                ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 ps.setInt(1, user_id);
                 ps.setString(2, status);
                 ps.setInt(3, voucher_id);
