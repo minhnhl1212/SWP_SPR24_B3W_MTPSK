@@ -132,6 +132,54 @@
         <servlet-name>AccountStatusController</servlet-name>
         <servlet-class>Controller.AccountStatusController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ProcessingOrderController</servlet-name>
+        <servlet-class>Controller.ProcessingOrderController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShippingOrderController</servlet-name>
+        <servlet-class>Controller.ShippingOrderController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeliveredOrderController</servlet-name>
+        <servlet-class>Controller.DeliveredOrderController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RefuseOrderController</servlet-name>
+        <servlet-class>Controller.RefuseOrderController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProcessingWarrantyController</servlet-name>
+        <servlet-class>Controller.ProcessingWarrantyController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ReceivedWarrantyController</servlet-name>
+        <servlet-class>Controller.ReceivedWarrantyController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UnderWarrantyController</servlet-name>
+        <servlet-class>Controller.UnderWarrantyController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShippingWarrantyController</servlet-name>
+        <servlet-class>Controller.ShippingWarrantyController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeliveredWarrantyController</servlet-name>
+        <servlet-class>Controller.DeliveredWarrantyController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RefuseWarrantyController</servlet-name>
+        <servlet-class>Controller.RefuseWarrantyController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoadManagerOtherController</servlet-name>
+        <servlet-class>Controller.LoadManagerOtherController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoadHistoryProductController</servlet-name>
+        <servlet-class>Controller.LoadHistoryProductController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -264,6 +312,55 @@
         <servlet-name>AccountStatusController</servlet-name>
         <url-pattern>/AccountStatusController</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProcessingOrderController</servlet-name>
+        <url-pattern>/ProcessingOrderController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShippingOrderController</servlet-name>
+        <url-pattern>/ShippingOrderController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeliveredOrderController</servlet-name>
+        <url-pattern>/DeliveredOrderController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RefuseOrderController</servlet-name>
+        <url-pattern>/RefuseOrderController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProcessingWarrantyController</servlet-name>
+        <url-pattern>/ProcessingWarrantyController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReceivedWarrantyController</servlet-name>
+        <url-pattern>/ReceivedWarrantyController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UnderWarrantyController</servlet-name>
+        <url-pattern>/UnderWarrantyController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShippingWarrantyController</servlet-name>
+        <url-pattern>/ShippingWarrantyController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeliveredWarrantyController</servlet-name>
+        <url-pattern>/DeliveredWarrantyController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RefuseWarrantyController</servlet-name>
+        <url-pattern>/RefuseWarrantyController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadManagerOtherController</servlet-name>
+        <url-pattern>/LoadManagerOtherController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadHistoryProductController</servlet-name>
+        <url-pattern>/LoadHistoryProductController</url-pattern>
+    </servlet-mapping>
+
     <session-config>
         <session-timeout>
             30
