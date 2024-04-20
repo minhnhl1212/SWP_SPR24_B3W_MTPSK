@@ -26,6 +26,7 @@ public class SendRequestWarranty extends HttpServlet {
             String customerPhone = request.getParameter("customerPhone");
             String issueDescription = request.getParameter("issueDescription");
             int orderDetailId = Integer.parseInt(request.getParameter("orderDetailId"));
+            int userId = Integer.parseInt(request.getParameter("userId"));
             OrderDAO orderDAO = new OrderDAO();
             OrderWarranty sendRequestWarranty = orderDAO.sendRequestWarranty(orderDetailId, customerAddress, customerPhone, issueDescription);
             if (sendRequestWarranty != null) {
@@ -34,7 +35,7 @@ public class SendRequestWarranty extends HttpServlet {
                 request.setAttribute("SEND_REQUEST_FAILED", "Gửi Đơn Bảo Hành Thất Bại");
             }
             
-            RequestDispatcher rd = request.getRequestDispatcher("profileWarranty.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("LoadWarrantyController?userId=" + userId);
             rd.forward(request, response);
         } catch (Exception ex) {
             Logger.getLogger(SendRequestWarranty.class.getName()).log(Level.SEVERE, null, ex);

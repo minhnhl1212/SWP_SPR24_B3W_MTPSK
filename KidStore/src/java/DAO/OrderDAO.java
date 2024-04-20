@@ -477,8 +477,8 @@ public class OrderDAO {
                         + "WHERE OrderDetail.order_detail_id = ?\n"
                         + "\n"
                         + "UPDATE OrderDetail\n"
-                        + "SET description_warranty = ?\n"
-                        + "WHERE order_detail_id = ?;";
+                        + "SET status = N'Gửi Bảo Hành', description_warranty = ?\n"
+                        + "WHERE order_detail_id = ?";
                 ps = con.prepareStatement(sql);
                 ps.setString(1, customerPhone);
                 ps.setString(2, customerAddress);

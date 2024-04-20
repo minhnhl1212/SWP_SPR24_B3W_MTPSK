@@ -138,6 +138,7 @@
                                         <textarea class="form-control" id="issueDescription" name="issueDescription" rows="3"></textarea>
                                     </div>     
                                     <input type="hidden" name="orderDetailId" value="<%=warranty.getOrderDetailId()%>">
+                                    <input type="hidden" name="userId" value="<%=acc.getUserId()%>">
                                     <button type="submit" class="btn btn-primary d-block mx-auto" >Gửi yêu cầu</button>
                                 </form>
 
