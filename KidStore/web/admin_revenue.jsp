@@ -143,7 +143,7 @@
                                 %>
                                 <tr>
                                     <td><%=i++%></td>
-                                    <td><%=e.getImage()%></td>
+                                    <td><img src="<%=e.getImage()%>" alt ="Loading"></td>
                                     <td><%=e.getToyName()%></td>
                                     <td><%=e.getQuantity()%></td>
                                     <td><%=e.getFullName()%></td>

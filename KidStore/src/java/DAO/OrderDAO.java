@@ -147,7 +147,9 @@ public class OrderDAO {
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "select [Order].order_id, [Order].order_date, Image.image_toy, Toy.toy_name, OrderDetail.quantity, Category.category_name, Toy.description, [Order].status_order, Toy.price, OrderDetail.OD_price, [Order].order_amount\n"
+                String sql = "select [Order].order_id, [Order].order_date, Image.image_toy, "
+                        + "Toy.toy_name, OrderDetail.quantity, Category.category_name,"
+                        + " Toy.description, [Order].status_order, Toy.price, OrderDetail.OD_price, [Order].order_amount\n"
                         + "from Toy \n"
                         + "inner join OrderDetail on Toy.toy_id = OrderDetail.toy_id\n"
                         + "inner join [Order] on OrderDetail.order_id = [Order].order_id\n"
@@ -502,19 +504,20 @@ public class OrderDAO {
             con = DBUtils.getConnection();
             if(con!=null){
                 String sql = "select Image.image_toy, Toy.toy_name, OrderDetail.quantity, "
-                        + "Account.full_name, Order.order_date, OrderDetail.OD_price\n"
+                        + "Account.full_name, [Order].order_date, [Order].order_amount\n"
                         + "from Toy \n"
                         + "inner join OrderDetail on Toy.toy_id = OrderDetail.toy_id\n"
                         + "inner join [Order] on OrderDetail.order_id = [Order].order_id\n"
                         + "inner join Image on Toy.toy_id = Image.toy_id\n"
-                        + "where OrderDetail.status=N'Đã Giao Hàng'";
+                        + "inner join Account on [Order].user_id = Account.user_id\n"
+                        + "where [Order].status_order= N'Đã Giao Hàng'";
                 ps= con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while(rs.next()){
                     OrderSold os = new OrderSold(rs.getString("image_toy"),
                             rs.getString("toy_name"),
                             rs.getInt("quantity"), rs.getString("full_name"),
-                            rs.getDate("order_date"),rs.getDouble("OD_price"));
+                            rs.getDate("order_date"),rs.getDouble("order_amount"));
                     ordersold_list.add(os);
                 }
             }
