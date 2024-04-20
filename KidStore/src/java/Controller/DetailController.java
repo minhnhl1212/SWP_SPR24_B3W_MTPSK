@@ -38,15 +38,15 @@ public class DetailController extends HttpServlet {
             int id = Integer.parseInt(request.getParameter("ToyId"));
             ToyDAO dao = new ToyDAO();
             Toy toy = dao.getToyUsingID(id);
-            if(toy!=null){
+            if (toy != null) {
                 request.setAttribute("toy", toy);
             }
             RequestDispatcher rd = request.getRequestDispatcher("detail.jsp");
             rd.forward(request, response);
-            
-        }
-        catch (Exception e){
+
+        } catch (Exception e) {
             e.printStackTrace();
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

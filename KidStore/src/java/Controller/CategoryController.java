@@ -32,7 +32,12 @@ public class CategoryController extends HttpServlet {
             
             ToyDAO toyDAO = new ToyDAO();
             ArrayList<Toy> toyCategory = toyDAO.toyCategoryById(categoryId);
-            request.setAttribute("TOY_CATEGORY_LIST", toyCategory);
+            if(toyCategory != null){
+                request.setAttribute("TOY_CATEGORY_LIST", toyCategory);
+            } else {
+                request.setAttribute("TOY_CATEGORY_LIST_ERROR", "Toy Not Found");
+            }
+            
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
         } catch (Exception ex) {
