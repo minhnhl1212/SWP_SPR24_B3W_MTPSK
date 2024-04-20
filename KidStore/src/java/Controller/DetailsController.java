@@ -5,10 +5,13 @@
  */
 package Controller;
 
+import DAO.PictureDAO;
 import DAO.ToyDAO;
+import DTO.Image;
 import DTO.Toy;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -19,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author admin
  */
-public class DetailController extends HttpServlet {
+public class DetailsController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,13 +36,17 @@ public class DetailController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+                try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            int id = Integer.parseInt(request.getParameter("ToyId"));
+            int id = Integer.parseInt(request.getParameter("toyId"));
             ToyDAO dao = new ToyDAO();
+            PictureDAO Pdao = new PictureDAO();
             Toy toy = dao.getToyUsingID(id);
+            ArrayList<Image> Ilist = Pdao.getImageByToyId(id);
+                    System.out.println("e");
             if(toy!=null){
                 request.setAttribute("toy", toy);
+                request.setAttribute("IMAGE_LIST", Ilist);
             }
             RequestDispatcher rd = request.getRequestDispatcher("detail.jsp");
             rd.forward(request, response);
@@ -47,6 +54,7 @@ public class DetailController extends HttpServlet {
         }
         catch (Exception e){
             e.printStackTrace();
+    }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

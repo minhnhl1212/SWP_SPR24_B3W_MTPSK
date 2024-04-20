@@ -1,3 +1,7 @@
+<%@page import="java.util.HashMap"%>
+<%@page import="DTO.Toy"%>
+<%@page import="DTO.Image"%>
+<%@page import="java.util.ArrayList"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -75,22 +79,20 @@
                     <div class="col-md-6">
                         <div id="carouselExample" class="carousel slide">
                             <div class="carousel-inner">
+                                <% ArrayList<Image> imageList = (ArrayList<Image>) session.getAttribute("IMAGE_LIST");
+                                    for (Image image : imageList) {
+                                        if (image.isMain()) {
+                                            %>
                                 <div class="carousel-item active">
-                                    <img src="https://cdn-v2.kidsplaza.vn/media/catalog/product/d/o/do-choi-o-to-day-da-cy-7712-1.jpg" class="d-block w-100" alt="...">
+                                    <img src="<%=image.getImage()%>" class="d-block w-100" alt="...">
                                 </div>
+                                <%} else {%>   
                                 <div class="carousel-item">
-                                    <img src="https://sudospaces.com/babycuatoi/uploads/08092016/do-choi-mo-hinh-xe-tai-co-lon-wy301s-2.png" class="d-block w-100" alt="...">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="https://down-vn.img.susercontent.com/file/e9121b3318e52fb41deb5f656b927172" class="d-block w-100" alt="...">
-                                </div>
-                                <div class="carousel-item ">
-                                    <img src="https://dochoimohinh.vn/wp-content/uploads/2020/05/do-choi-tre-em-xe-tai-cho-hang-co-lon-mo-hinh-xe-cong-trinh-300x300.jpg" class="d-block w-100" alt="...">
-                                </div>
-                                <div class="carousel-item ">
-                                    <img src="https://down-vn.img.susercontent.com/file/5a4896e1bdbf36f13bd54fb49c8bbbb8" class="d-block w-100" alt="...">
+                                    <img src="<%=image.getImage()%>" class="d-block w-100" alt="...">
                                 </div>
                             </div>
+                            <%}
+                                    }%>
                             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="visually-hidden">Previous</span>
@@ -104,23 +106,24 @@
                     <div class="col-md-6">
 
                         <div class="product-details">
-                            <div class="product-name">Mô Hình Universal Kung Fu Panda</div>
+                            <% Toy toy = (Toy) session.getAttribute("toy");%>
+                            <div class="product-name"><%=toy.getToyName()%></div>
                             <div class="rating">
                                 &#9733; &#9733; &#9733; &#9733; &#9733;
                             </div>
-                            <div class="product-price">260.000</div>
+                            <div class="product-price"><%=toy.getPrice()%></div>
                             <div class="product-name"><p>&#10159; Bảo hành chính hãng</p></div>
                             <div class="product-name"><p>&#10159; Áp dụng nhiều voucher giảm giá</p></div>
                             <div class="product-name"><p>&#10159; Hoàn trả khi sản phẩm có lỗi</p></div>
 
                             <div class="quantity">
                                 <label for="quantity"></label>
-                                <input type="number" id="quantity" class="quantity-input" value="1">
+                                <input type="number" id="quantity" class="quantity-input" name="InputValue" value="1">
                             </div>  
 
-                            <div class="product-name">ID: A001</div>
-                            <div class="product-name">Danh mục: Đồ chơi sưu tập</div>
-                            <a href="cart.jsp"><button  style="margin-top: 50px;" class="btn btn-success btn-block">Thêm vào giỏ hàng</button></a>  
+                            <div class="product-name">ID: <%=toy.getToyId()%></div>
+                            <div class="product-name">Danh mục: <%=toy.getName_category()%></div>
+                            <a href="Cart_DetailController?toyId=<%=toy.getToyId()%>"><button style="margin-top: 50px;" class="btn btn-success btn-block">Thêm vào giỏ hàng</button></a> 
                         </div>                       
 
 
@@ -142,8 +145,8 @@
 
             </div>
         </div>
-            <%@include file="components/footerComponent.jsp" %>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-            <script src="js/scripts.js"></script>
+        <%@include file="components/footerComponent.jsp" %>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="js/scripts.js"></script>
     </body>
 </html>

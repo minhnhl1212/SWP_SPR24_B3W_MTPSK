@@ -91,7 +91,7 @@ public class OrderDAO {
          try {
             con = DBUtils.getConnection();
         if (con != null) {
-                String sql = "INSERT INTO OrderDetail (toy_id, quantity, price, order_id, warranty_code, status) VALUES (?, ?, ?, ?, ?, ?)";
+                String sql = "INSERT INTO OrderDetail (toy_id, quantity, OD_price, order_id, warranty_code, status) VALUES (?, ?, ?, ?, ?, ?)";
                 ps = con.prepareStatement(sql);
                 ps.setInt(1, toyId);
                 ps.setInt(2, quantity);
@@ -115,7 +115,7 @@ public class OrderDAO {
             con = DBUtils.getConnection();
             if (con != null) {
                 String sql = "select Toy.toy_name,OrderDetail.quantity,"
-                        + "OrderDetail.price, OrderDetail.order_detail_id,"
+                        + "OrderDetail.OD_price, OrderDetail.order_detail_id,"
                         + "OrderDetail.order_id, OrderDetail.warranty_code, Order.order_date"
                         + "from Toy\n"
                         + "inner join OrderDetail on Toy.toy_id = OrderDetail.toy_id\n"

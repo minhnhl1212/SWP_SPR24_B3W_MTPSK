@@ -96,7 +96,7 @@
         <servlet-name>ToyWarrantyController</servlet-name>
         <servlet-class>Controller.ToyWarrantyController</servlet-class>
     </servlet>
-        <servlet>
+    <servlet>
         <servlet-name>DetailController</servlet-name>
         <servlet-class>Controller.DetailController</servlet-class>
     </servlet>
@@ -115,6 +115,10 @@
     <servlet>
         <servlet-name>LoadOrderHistory</servlet-name>
         <servlet-class>Controller.LoadOrderHistory</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DetailsController</servlet-name>
+        <servlet-class>Controller.DetailsController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
@@ -212,7 +216,7 @@
         <servlet-name>ToyWarrantyController</servlet-name>
         <url-pattern>/ToyWarrantyController</url-pattern>
     </servlet-mapping>
-        <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>DetailController</servlet-name>
         <url-pattern>/DetailController</url-pattern>
     </servlet-mapping>
@@ -231,6 +235,10 @@
     <servlet-mapping>
         <servlet-name>LoadOrderHistory</servlet-name>
         <url-pattern>/LoadOrderHistory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DetailsController</servlet-name>
+        <url-pattern>/DetailsController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
