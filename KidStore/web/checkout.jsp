@@ -82,10 +82,10 @@
                     return true;
                 }
             </script>
-        <%  int i = 1;
-        double sum = 0, discount = 0;
-        HashMap<Toy, Integer> cartItems = (HashMap<Toy, Integer>) session.getAttribute("cartList");
-        Account a = (Account) session.getAttribute("acc");%>
+            <%  int i = 1;
+                double sum = 0, discount = 0;
+                HashMap<Toy, Integer> cartItems = (HashMap<Toy, Integer>) session.getAttribute("cartList");
+            Account a = (Account) session.getAttribute("acc");%>
             <div class="row">
                 <div class="container">
                     <div class="row">
@@ -135,9 +135,9 @@
                                             <tr>
                                                 <td><img src="<%=c.getKey().getImage()%>" width="50" alt="Product Image"></td>
                                                 <td><%=c.getKey().getToyName()%></td>
-                                                <td><%=c.getKey().getPrice()*c.getKey().getDiscount()%> đ</td>
+                                                <td><%=c.getKey().getPrice() * c.getKey().getDiscount()%> đ</td>
                                                 <td><%=c.getValue()%></td>
-                                                <td><%sum+=prices;%><%=prices%> đ</td>
+                                                <td><%sum += prices;%><%=prices%> đ</td>
                                             </tr>
                                         </form>
                                         <%}%>
@@ -145,22 +145,29 @@
                                     </table>
                                 </div>
                                 <h5>Card Total</h5>
+                                <%  double DiscountValue = 0;
+                                    double Discount = 1;
+                                    String DiscountParam = (String) session.getAttribute("discount");
+                                                     if (DiscountParam != null) {
+                                                         Discount = Double.parseDouble(DiscountParam);
+                                                     }%>
                                 <div class="card-body">
-                                    <p class="card-text">Subtotal: <%=sum%> đ</p>
-                                    <p class="card-text">Discount: 0 đ</p>
-                                    <p class="card-text">Total: <%=sum%> đ</p>
-                                    <%session.setAttribute("orderAmount", sum);
-                                    System.out.println(sum);%>
+                                    <h5 class="card-title">Summary</h5>
+                                    <p class="card-text">Subtotal:<%=sum%> đ</p>
+                                    <p class="card-text">Discount:<%DiscountValue = sum - sum * Discount;%><%=DiscountValue%></p>
+                                    <p class="card-text">Total: <%=sum - DiscountValue%> đ</p>
                                 </div>
-                                    
+                                <%session.setAttribute("orderAmount", sum-DiscountValue);%>
                             </div>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <%@include file="components/footerComponent.jsp" %>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="js/scripts.js"></script>
-    </body>
+    </div>
+    <%@include file="components/footerComponent.jsp" %>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/scripts.js"></script>
+</body>
 </html>
