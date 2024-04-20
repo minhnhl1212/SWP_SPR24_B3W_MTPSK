@@ -43,12 +43,13 @@ private final static String DETAIL = "OrderDetailController";
             String phone = request.getParameter("phone");
             String address = request.getParameter("address");
             String paymentType = request.getParameter("paymentMethod");
+            double amount = (Double)session.getAttribute("orderAmount");
             if(paymentType.equals("cashOnDelivery")){
                  type = false;
             }
             int voucher_id = 1;
             OrderDAO dao = new OrderDAO();
-            int OrderId = dao.CreateNewOrder(name, phone, address, type, voucher_id,a.getUserId() , "processing");
+            int OrderId = dao.CreateNewOrder(name, phone, address, type, voucher_id,a.getUserId(), amount);
             request.setAttribute("OrderID", OrderId);
             RequestDispatcher rd = request.getRequestDispatcher(DETAIL);
             rd.forward(request, response);

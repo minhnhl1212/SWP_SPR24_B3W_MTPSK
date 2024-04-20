@@ -205,7 +205,7 @@ public class ToyDAO {
                 String sql = "select Toy.toy_name, Image.imageToy, Toy.price, Toy.discount, Toy.approve\n"
                         + "from Image\n"
                         + "inner join Toy on Image.toy_id = Toy.toy_id\n"
-                        + "where Toy.toy_name LIKE ? and Toy.approve = 1";
+                        + "where Toy.toy_name LIKE ? and Toy.isActive = 1";
                 ps = con.prepareStatement(sql);
                 ps.setString(1, "%" + name + "%");
                 rs = ps.executeQuery();

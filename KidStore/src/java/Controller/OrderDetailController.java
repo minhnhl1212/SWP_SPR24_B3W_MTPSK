@@ -51,7 +51,7 @@ public class OrderDetailController extends HttpServlet {
             quantity = c.getValue();
             price = c.getKey().getPrice()*c.getKey().getDiscount();
             warrantyCode = code.Code();
-            int a = dao.CreateOrderDetail(toyId, quantity, price, orderId, warrantyCode);
+            int a = dao.CreateOrderDetail(toyId, quantity, price, orderId, warrantyCode, "Đang xử lý");
             System.out.println(a);
         }
         session.setAttribute("cartList", null);

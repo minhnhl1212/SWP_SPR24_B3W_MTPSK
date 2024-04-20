@@ -149,7 +149,10 @@
                                     <p class="card-text">Subtotal:<%=sum%> đ</p>
                                     <p class="card-text">Discount: 0 đ</p>
                                     <p class="card-text">Total: <%=sum%> đ</p>
+                                    <%session.setAttribute("orderAmount", sum);
+                                    System.out.println(sum);%>
                                 </div>
+                                    
                             </div>
                         </div>
                     </div>

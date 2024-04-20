@@ -39,36 +39,32 @@ public class OrderDAO {
     }
 
     public int CreateNewOrder(String name, String phone, String address,
-            boolean paymentType, int voucher_id, int user_id, String status) throws Exception {
+            boolean paymentType, int voucher_id, int user_id, double order_amount) throws Exception {
         int THEOrderId =-1;
         try {
             con = DBUtils.getConnection();
         if (con != null) {
                 String sql = "INSERT INTO [dbo].[Order]\n" +
 "           ([user_id]\n" +
-"           ,[status]\n" +
-"           ,[create_date]\n" +
 "           ,[voucher_id]\n" +
 "           ,[payment_type]\n" +
-"           ,[total_amount]\n" +
+"           ,[order_amount]\n" +
 "           ,[name]\n" +
 "           ,[phone]\n" +
 "           ,[address])\n" +
 "     VALUES\n" +
 "           (?\n" +
 "           ,?\n" +
-"           ,'04-19-2024'\n" +
 "           ,?\n" +
 "           ,?\n" +
-"           ,50000\n" +
 "           ,?\n" +
 "           ,?\n" +
 "           ,?)";
                 ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 ps.setInt(1, user_id);
-                ps.setString(2, status);
-                ps.setInt(3, voucher_id);
-                ps.setBoolean(4, paymentType);
+                ps.setInt(2, voucher_id);
+                ps.setBoolean(3, paymentType);
+                ps.setDouble(4, order_amount);
                 ps.setString(5, name);
                 ps.setString(6, phone);
                 ps.setString(7, address);
@@ -90,18 +86,19 @@ public class OrderDAO {
     return THEOrderId;
     
 }
-    public int CreateOrderDetail(int toyId, int quantity, double price, int orderId, String warrantyCode) throws Exception{
+    public int CreateOrderDetail(int toyId, int quantity, double price, int orderId, String warrantyCode, String status) throws Exception{
         int work = 0;
          try {
             con = DBUtils.getConnection();
         if (con != null) {
-                String sql = "INSERT INTO OrderDetail (toy_id, quantity, price, order_id, warranty_code) VALUES (?, ?, ?, ?, ?)";
+                String sql = "INSERT INTO OrderDetail (toy_id, quantity, price, order_id, warranty_code, status) VALUES (?, ?, ?, ?, ?, ?)";
                 ps = con.prepareStatement(sql);
                 ps.setInt(1, toyId);
                 ps.setInt(2, quantity);
                 ps.setDouble(3, price);
                 ps.setInt(4, orderId);
                 ps.setString(5, warrantyCode);
+                ps.setString(6, status);
                 work = ps.executeUpdate();
         }
             } catch (Exception e) {
