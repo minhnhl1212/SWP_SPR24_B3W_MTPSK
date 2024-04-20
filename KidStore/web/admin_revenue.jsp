@@ -59,14 +59,14 @@
                         <span class="text">Logout</span>
                     </a>
 
-                    <!-- Logout confirmation dialog -->
+<!--                     Logout confirmation dialog 
                     <div id="logoutConfirmationDialog" class="modal">
                         <div class="modal-content">
                             <p>Are you sure you want to logout?</p>
                             <button id="confirmLogout">Logout</button>
                             <button id="cancelButton">Cancel</button>
                         </div>
-                    </div>
+                    </div>-->
                 </li>
             </ul>
         </section>
@@ -81,8 +81,9 @@
                 <i class='bx bx-menu' ></i>
                 <a href="#" class="nav-link"></a>
                 <form action="#">
-                    <div class="form-input" hidden="">
-                        <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
+                    <div class="search">
+                        <input type="text" class="searchTerm" placeholder=" Search.....">
+                        <button type="submit" class="searchButton"><i class="bx bx-search"></i></button>
                     </div>
                 </form>
                 <input type="checkbox" id="switch-mode" hidden>
@@ -106,14 +107,16 @@
                     <div class="order">
                         <div class="head">
                             <h3>Revenue Streams</h3>
+                            <h3 class="right">Total Revenue</h3>
                         </div>
                         <table>
                             <thead>
                                 <tr>
                                     <th>No</th>
+                                    <th>Img</th>
                                     <th>Name</th>
+                                    <th>Quantity</th>
                                     <th>Customer Name</th>
-                                    <th>Staff Name</th>
                                     <th>Purchase Date</th>
                                     <th>Price</th>
                                 </tr>
@@ -121,52 +124,50 @@
                             <tbody>
                                 <tr>
                                     <td>1</td>
+                                    <td>Hình ảnh</td>
                                     <td>Xe Tải Công Trình</td>
-                                    <td>Minh Le</td>
-                                    <td>Nguyen Thanh Tien</td>
-                                    <td>April 15, 2024</td>
-                                    <td>216.000 Đ</td>
-                                </tr>
-                                <tr>
                                     <td>2</td>
-                                    <td>Siêu Rô Bốt</td>
                                     <td>Minh Le</td>
-                                    <td>Nguyen Thanh Tien</td>
                                     <td>April 15, 2024</td>
-                                    <td>209.000 Đ</td>
+                                    <td>432.000 Đ</td>
                                 </tr>
                                 <tr>
-                                    <td>3</td>
-                                    <td>Xe Cảnh Sát</td>
+                                    <td>1</td>
+                                    <td>Hình ảnh</td>
+                                    <td>Xe Tải Công Trình</td>
+                                    <td>2</td>
                                     <td>Minh Le</td>
-                                    <td>Nguyen Thanh Tien</td>
                                     <td>April 15, 2024</td>
-                                    <td>299.000 Đ</td>
+                                    <td>432.000 Đ</td>
                                 </tr>
                                 <tr>
-                                    <td>4</td>
-                                    <td>Kỳ Lân Sắc Màu</td>
+                                    <td>1</td>
+                                    <td>Hình ảnh</td>
+                                    <td>Xe Tải Công Trình</td>
+                                    <td>2</td>
                                     <td>Minh Le</td>
-                                    <td>Nguyen Thanh Tien</td>
                                     <td>April 15, 2024</td>
-                                    <td>216.000 Đ</td>
+                                    <td>432.000 Đ</td>
                                 </tr>
                                 <tr>
-                                    <td>5</td>
-                                    <td>Bó Hoa LEGO</td>
+                                    <td>1</td>
+                                    <td>Hình ảnh</td>
+                                    <td>Xe Tải Công Trình</td>
+                                    <td>2</td>
                                     <td>Minh Le</td>
-                                    <td>Nguyen Thanh Tien</td>
                                     <td>April 15, 2024</td>
-                                    <td>1.799.000 Đ</td>
+                                    <td>432.000 Đ</td>
                                 </tr>
                                 <tr>
-                                    <td>6</td>
-                                    <td>Đồ Chơi Lắp Ráp Trực Thăng Cứu Hỏa LEGO CITY 60411</td>
+                                    <td>1</td>
+                                    <td>Hình ảnh</td>
+                                    <td>Xe Tải Công Trình</td>
+                                    <td>2</td>
                                     <td>Minh Le</td>
-                                    <td>Nguyen Thanh Tien</td>
                                     <td>April 15, 2024</td>
-                                    <td>209.000 Đ</td>
+                                    <td>432.000 Đ</td>
                                 </tr>
+                                
 
 
                             </tbody>

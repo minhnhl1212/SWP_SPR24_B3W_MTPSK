@@ -61,15 +61,15 @@
                         <span class="text">Logout</span>
                     </a>
 
-                    <!-- Logout confirmation dialog -->
-                    <div id="logoutConfirmationDialog" class="modal">
-                        <div class="modal-content">
-                            <!-- Change class from "close" to "cancelButton" -->
-                            <p>Are you sure you want to logout?</p>
-                            <button id="confirmLogout" class="">Logout</button>
-                            <button id="cancelButton">Cancel</button>
-                        </div>
-                    </div>
+                    <!--                     Logout confirmation dialog 
+                                        <div id="logoutConfirmationDialog" class="modal">
+                                            <div class="modal-content">
+                                                 Change class from "close" to "cancelButton" 
+                                                <p>Are you sure you want to logout?</p>
+                                                <button id="confirmLogout" class="">Logout</button>
+                                                <button id="cancelButton">Cancel</button>
+                                            </div>
+                                        </div>-->
                 </li>
             </ul>
         </section>
@@ -84,8 +84,9 @@
                 <i class='bx bx-menu' ></i>
                 <a href="#" class="nav-link"></a>
                 <form action="#">
-                    <div class="form-input" hidden="">
-                        <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
+                    <div class="search">
+                        <input type="text" class="searchTerm" placeholder=" Search.....">
+                        <button type="submit" class="searchButton"><i class="bx bx-search"></i></button>
                     </div>
                 </form>
                 <input type="checkbox" id="switch-mode" hidden>
@@ -124,57 +125,57 @@
                             </thead>
                             <tbody>
                                 <%ArrayList<Account> accountList = (ArrayList<Account>) session.getAttribute("ACCOUNT_LIST");
-                                int i = 1;
-                                if(accountList!=null){
-                                for (Account a : accountList){
-                                    if(a.getRoleId()!=1){
+                                    int i = 1;
+                                    if (accountList != null) {
+                                        for (Account a : accountList) {
+                                            if (a.getRoleId() != 1) {
                                 %>
-<!--                                <tr>
-                                    <td>1</td>
-                                    <td>minhle</td>
-                                    <td>Nguyen Hoang Le Minh</td>
-                                    <td>0912345678</td>
-                                    <td>TPHCM</td>
-                                    <td>Admin</td>
-                                    <td><button id="toggleButton" class="button-bordered">Active</button></td>  
-                                </tr>
+                                <!--                                <tr>
+                                                                    <td>1</td>
+                                                                    <td>minhle</td>
+                                                                    <td>Nguyen Hoang Le Minh</td>
+                                                                    <td>0912345678</td>
+                                                                    <td>TPHCM</td>
+                                                                    <td>Admin</td>
+                                                                    <td><button id="toggleButton" class="button-bordered">Active</button></td>  
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>2</td>
+                                                                    <td>thaison</td>
+                                                                    <td>Tran Thai Son</td>
+                                                                    <td>0912345678</td>
+                                                                    <td>TPHCM</td>
+                                                                    <td>Admin</td>
+                                                                    <td><button id="toggleButton" class="button-bordered">Active</button></td> 
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>3</td>
+                                                                    <td>khoa</td>
+                                                                    <td>Le Nguyen Dang Khoa</td>
+                                                                    <td>0912345678</td>
+                                                                    <td>TPHCM</td>
+                                                                    <td>Admin</td>
+                                                                    <td><button id="toggleButton" class="button-bordered">Active</button></td> 
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>4</td>
+                                                                    <td>phucbh</td>
+                                                                    <td>Bui Hoang Phuc</td>
+                                                                    <td>0912345678</td>
+                                                                    <td>TPHCM</td>
+                                                                    <td>Staff</td>
+                                                                    <td><button id="toggleButton" class="button-bordered">Active</button></td> 
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>5</td>
+                                                                    <td>tien</td>
+                                                                    <td>Nguyen Thanh Tien</td>
+                                                                    <td>0912345678</td>
+                                                                    <td>TPHCM</td>
+                                                                    <td>Customer</td>
+                                                                    <td><button id="toggleButton" class="button-bordered">Active</button></td> 
+                                                                </tr>-->
                                 <tr>
-                                    <td>2</td>
-                                    <td>thaison</td>
-                                    <td>Tran Thai Son</td>
-                                    <td>0912345678</td>
-                                    <td>TPHCM</td>
-                                    <td>Admin</td>
-                                    <td><button id="toggleButton" class="button-bordered">Active</button></td> 
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>khoa</td>
-                                    <td>Le Nguyen Dang Khoa</td>
-                                    <td>0912345678</td>
-                                    <td>TPHCM</td>
-                                    <td>Admin</td>
-                                    <td><button id="toggleButton" class="button-bordered">Active</button></td> 
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>phucbh</td>
-                                    <td>Bui Hoang Phuc</td>
-                                    <td>0912345678</td>
-                                    <td>TPHCM</td>
-                                    <td>Staff</td>
-                                    <td><button id="toggleButton" class="button-bordered">Active</button></td> 
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>tien</td>
-                                    <td>Nguyen Thanh Tien</td>
-                                    <td>0912345678</td>
-                                    <td>TPHCM</td>
-                                    <td>Customer</td>
-                                    <td><button id="toggleButton" class="button-bordered">Active</button></td> 
-                                </tr>-->
-                                 <tr>
                                     <td><%=i++%></td>
                                     <td><%=a.getUserName()%></td>
                                     <td><%=a.getFullName()%></td>
@@ -184,8 +185,8 @@
                                     <td><button id="toggleButton" class="button-bordered">Active</button></td> 
                                 </tr>
                                 <%}
-}
-}%>
+                                        }
+                                    }%>
                             </tbody>
                         </table>
                     </div>

@@ -69,14 +69,14 @@
                         <span class="text">Logout</span>
                     </a>
 
-                    <!-- Logout confirmation dialog -->
+<!--                     Logout confirmation dialog 
                     <div id="logoutConfirmationDialog" class="modal">
                         <div class="modal-content">
                             <p>Are you sure you want to logout?</p>
                             <button id="confirmLogout">Logout</button>
                             <button id="cancelButton">Cancel</button>
                         </div>
-                    </div>
+                    </div>-->
                 </li>
             </ul>
         </section>
@@ -91,8 +91,9 @@
                 <i class='bx bx-menu' ></i>
                 <a href="#" class="nav-link"></a>
                 <form action="#">
-                    <div class="form-input" hidden="">
-                        <button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
+                    <div class="search">
+                        <input type="text" class="searchTerm" placeholder=" Search.....">
+                        <button type="submit" class="searchButton"><i class="bx bx-search"></i></button>
                     </div>
                 </form>
                 <input type="checkbox" id="switch-mode" hidden>
