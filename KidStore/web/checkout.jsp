@@ -75,8 +75,6 @@
                     }
                     if (paymentMethod.value === "cashOnDelivery") {
                         alert("Đơn hàng của bạn đã được xác nhận. Chúng tôi sẽ liên hệ với bạn để sắp xếp giao hàng.");
-                        var home = "home.jsp";
-                        window.open(home,"_blank");
                     } else if (paymentMethod.value === "bankTransfer") {
                         var vnpay = "vnpay.jsp";
                         window.open(vnpay, "_blank");
@@ -110,7 +108,7 @@
                                 <label for="bankTransfer">Thanh toán qua ngân hàng</label>
 
                                 <div id="errorMessages" style="color: red; margin-top: 10px;"></div>
-                                <input type="submit" class="btn btn-success btn-block" name="btAction" value="Xác nhận thanh toán">
+                                <input type="submit" class="btn btn-success btn-block" name="btAction" value="Create">
 
                             </form>
                         </div>
@@ -121,11 +119,11 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th scope="col"></th>
-                                                <th scope="col"></th>
-                                                <th scope="col"></th>
-                                                <th scope="col"></th>
-                                                <th scope="col"></th>
+                                                <th scope="col">Ảnh</th>
+                                                <th scope="col">Tên đồ chơi</th>
+                                                <th scope="col">Giá</th>
+                                                <th scope="col">Số lượng</th>
+                                                <th scope="col">Thành Tiền</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -138,7 +136,7 @@
                                                 <td><img src="<%=c.getKey().getImage()%>" width="50" alt="Product Image"></td>
                                                 <td><%=c.getKey().getToyName()%></td>
                                                 <td><%=c.getKey().getPrice()*c.getKey().getDiscount()%> đ</td>
-                                                <td>SL: <%=c.getValue()%></td>
+                                                <td><%=c.getValue()%></td>
                                                 <td><%sum+=prices;%><%=prices%> đ</td>
                                             </tr>
                                         </form>
