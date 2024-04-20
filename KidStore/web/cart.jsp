@@ -57,10 +57,10 @@
                             <th scope="row"><%=i++%></th>
                             <td><img src="<%=c.getKey().getImage()%>" width="50"/></td>
                             <td><%=c.getKey().getToyName()%></td>
-                            <td><%=c.getKey().getPrice() * c.getKey().getDiscount()%></td>
+                            <td><%=c.getKey().getPrice() * c.getKey().getDiscount()%> đ</td>
                             <td><input onchange="this.form.submit()" type="number" name="InputValue" value="<%=c.getValue()%>"/></td>
-                            <td><% sum += prices;%><%=prices%> Đ</td>
-                            <td><a href="DeleteCartController?productId=<%=c.getKey().getToyId()%>" class="btn btn-outline-danger"><i class="bi bi-trash"></i>Delete</a></td>
+                            <td><% sum += prices;%><%=prices%> đ</td>
+                            <td><a href="DeleteCartController?productId=<%=c.getKey().getToyId()%>" class="btn btn-outline-danger"><i class="bi bi-trash"></i></a></td>
                             </tr>
                         </form>
                         <%}%>

@@ -34,7 +34,7 @@
 
         .carousel-item img {
             width: 100%;
-            height: 400px; 
+            height: 500px; 
             object-fit: cover; 
         }
 
@@ -90,9 +90,10 @@
                                 <div class="carousel-item">
                                     <img src="<%=i.getImage()%>" class="d-block w-100" alt="...">
                                 </div>
+                                <%}
+                                    }%>
                             </div>
-                            <%}
-                                }%>
+
                             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="visually-hidden">Previous</span>
@@ -122,7 +123,7 @@
                                     <label for="quantity"></label>
                                     <input type="number" id="quantity" class="quantity-input" name="InputValue" value="1">
                                 </div>  
-                                    
+
                                 <div class="product-name">ID: <%=toy.getToyId()%></div>
                                 <div class="product-name">Danh mục: <%=toy.getName_category()%></div>
                                 <button type="submit"style="margin-top: 50px;" class="btn btn-success btn-block">Thêm vào giỏ hàng</button>

@@ -75,9 +75,11 @@
                     }
                     if (paymentMethod.value === "cashOnDelivery") {
                         alert("Đơn hàng của bạn đã được xác nhận. Chúng tôi sẽ liên hệ với bạn để sắp xếp giao hàng.");
+                        var home = "home.jsp";
+                        window.open(home,"_blank");
                     } else if (paymentMethod.value === "bankTransfer") {
-                        var vnpayUrl = "";
-                        window.open(vnpayUrl, "_blank");
+                        var vnpay = "vnpay.jsp";
+                        window.open(vnpay, "_blank");
                     }
                     return true;
                 }
@@ -108,7 +110,7 @@
                                 <label for="bankTransfer">Thanh toán qua ngân hàng</label>
 
                                 <div id="errorMessages" style="color: red; margin-top: 10px;"></div>
-                                <input type="submit" class="btn btn-success btn-block" name="btAction" value="Create">
+                                <input type="submit" class="btn btn-success btn-block" name="btAction" value="Xác nhận thanh toán">
 
                             </form>
                         </div>
@@ -146,7 +148,7 @@
                                 </div>
                                 <h5>Card Total</h5>
                                 <div class="card-body">
-                                    <p class="card-text">Subtotal:<%=sum%> đ</p>
+                                    <p class="card-text">Subtotal: <%=sum%> đ</p>
                                     <p class="card-text">Discount: 0 đ</p>
                                     <p class="card-text">Total: <%=sum%> đ</p>
                                     <%session.setAttribute("orderAmount", sum);
