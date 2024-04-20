@@ -4,6 +4,9 @@
     Author     : TUF
 --%>
 
+<%@page import="DTO.OrderWarranty"%>
+<%@page import="DTO.OrderWarranty"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
@@ -55,7 +58,7 @@
                         </a>
                     </li>
                     <li class="function-select list-group-item list-group-item-action" id="selected">
-                        <a href="profileWarranty.jsp" style="text-decoration: none">
+                        <a href="LoadWarrantyController?userId=<%=acc.getUserId()%>" style="text-decoration: none">
                             <span class="text-profile">Bảo hành sản phẩm</span>
                         </a>
                     </li>
@@ -91,53 +94,79 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <%
+                                    ArrayList<OrderWarranty> warrantyList = (ArrayList<OrderWarranty>) session.getAttribute("ORDER_WARRANTY");
+                                    if (warrantyList != null && acc != null) {
+                                        for (OrderWarranty warranty : warrantyList) {
+                                %>
                                 <tr>
-                                    <td>1</td>
-                                    <td><img src="img/people.jpg" alt="User Avt" class="toy-item-img"/></td>
-                                    <td>Thú bông</td>
-                                    <td>2</td>
-                                    <td>April 18, 2024</td>
-                                    <td>December 18, 2024</td>
-                                    <td>Processing</td>
+                                    <td><%=warranty.getOrderDetailId()%></td>
+                                    <td><img src="<%=warranty.getImageToy()%>" alt="Toy Image" class="toy-item-img"/></td>
+                                    <td><%=warranty.getToyName()%></td>
+                                    <td><%=warranty.getQuantity()%></td>
+                                    <td><%=warranty.getOrderDate()%></td>
+                                    <td><%=warranty.getWarrantyTime()%></td>
+                                    <td><%=warranty.getStatus()%></td>
                                     <td>
                                         <a href="#" style="text-decoration: none; color: black;" onclick="togglePopup()">
                                             <i class='bx bx-mail-send'></i>
                                         </a>
                                     </td>
-                                </tr>                                                               
+                                </tr> 
+                            <div class="popup-form" id="popupForm">
+                                <form action="SendRequestWarranty">
+                                    <h4>Kiểm tra bảo hành</h4>
+                                    <a class="close" href="#" style="text-decoration: none; color: black; margin-top: -14%;" onclick="togglePopup()">X</a>
+                                    <div class="form-group">
+                                        <label for="productSKU">Mã bảo hành: <%=warranty.getWarrantyCode()%></label>
+                                        <!--                                        <input type="text" class="form-control" id="productSKU" name="productSKU" value="" readonly>-->
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="purchaseDate">Ngày mua hàng: <%=warranty.getOrderDate()%></label>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="customerAddress">Địa chỉ:</label>
+                                        <input type="text" class="form-control" id="customerAddress" name="customerAddress" value="<%=warranty.getAddress()%>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="customerPhone">Số điện thoại:</label>
+                                        <input type="tel" class="form-control" id="customerPhone" name="customerPhone" value="<%=warranty.getPhone()%>">
+                                    </div>                                    
+                                    <div class="form-group">
+                                        <label for="issueDescription">Mô tả vấn đề:</label>
+                                        <textarea class="form-control" id="issueDescription" name="issueDescription" rows="3"></textarea>
+                                    </div>     
+                                    <input type="hidden" name="orderDetailId" value="<%=warranty.getOrderDetailId()%>">
+                                    <button type="submit" class="btn btn-primary d-block mx-auto" >Gửi yêu cầu</button>
+                                </form>
+
+                            </div>
+                            <%}
+                            } else {
+                            %>
+                            <p>${ORDER_WARRANTY_ERROR}</p>
+                            <%
+                                }
+                            %>
+                            <%
+                                OrderWarranty sendRequestWarranty = (OrderWarranty) request.getAttribute("SEND_REQUEST_SUCCESS");
+                                if (sendRequestWarranty != null) {
+                            %>
+                            <p style="color: green">${SEND_REQUEST_SUCCESS}</p>
+                            <%} else {
+                            %>
+                            <p style="color: red">${SEND_REQUEST_FAILED}</p>
+                            <%
+                                }
+                            %>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
-        
-        <div class="popup-form" id="popupForm">
-            <form >
-                <h4>Kiểm tra bảo hành</h4>
-                <a class="close" href="#" style="text-decoration: none; color: black; margin-top: -14%;" onclick="togglePopup()">X</a>
-                <div class="form-group">
-                    <label for="productSKU">Mã bảo hành:</label>
-                    <input type="text" class="form-control" id="productSKU" name="productSKU" required>
-                </div>
 
-                <div class="form-group">
-                    <label for="customerAddress">Địa chỉ:</label>
-                    <input type="text" class="form-control" id="customerAddress" name="customerAddress" required>
-                </div>
-                <div class="form-group">
-                    <label for="customerPhone">Số điện thoại:</label>
-                    <input type="tel" class="form-control" id="customerPhone" name="customerPhone" required>
-                </div>
-                <div class="form-group">
-                    <label for="purchaseDate">Ngày mua hàng: data</label>
-                </div>
-                <div class="form-group">
-                    <label for="issueDescription">Mô tả vấn đề:</label>
-                    <textarea class="form-control" id="issueDescription" name="issueDescription" rows="3"></textarea>
-                </div>                    
-                <button type="submit" class="btn btn-primary d-block mx-auto" >Gửi yêu cầu</button>
-            </form>
-        </div>
+
         </div>
         <%@include file="components/footerComponent.jsp" %>
         <script>

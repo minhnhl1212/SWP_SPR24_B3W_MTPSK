@@ -20,6 +20,10 @@ public class OrderHistory {
     private double orderPrice;
     private double orderAmount;
 
+    public OrderHistory(int orderDetailId) {
+        this.orderDetailId = orderDetailId;
+    }
+    
     public OrderHistory(int orderDetailId, Date orderDate, String imageToy, String toyName, int quantity, String nameCategory, String description, String status, double price, double orderPrice, double orderAmount) {
         this.orderDetailId = orderDetailId;
         this.orderDate = orderDate;

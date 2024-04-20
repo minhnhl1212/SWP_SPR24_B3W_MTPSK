@@ -1,4 +1,6 @@
 
+<%@page import="DTO.OrderWarranty"%>
+<%@page import="java.util.ArrayList"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -7,6 +9,22 @@
         <title>Staff Dashboard</title>
         <link rel="stylesheet" href="./assets/css/tailwind.output.css">
     </head>
+    <style>
+        .action-btn{
+            background-color: #e5e5e5;
+            padding: 10px 10px;
+            margin: 2px 2px;
+            border-radius: 30px;
+            font-weight: 600;
+        }
+        img {
+            max-width: 124px;
+        }
+        .description {
+            max-height: 188px;
+            margin-top: -93px;
+        }
+    </style>
     <body>
 
         <div>
@@ -25,7 +43,7 @@
                         <span class="ml-4">ManagerProduct</span>
                     </a>
                 </li>
-            
+
                 <li class="relative px-6 py-3">
                     <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200" href="ManagerCategory.jsp">
                         <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -43,7 +61,7 @@
                     </a>
                 </li>
                 <li class="relative px-6 py-3">
-                    <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200" href="ManagerOther.jsp">
+                    <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200" href="LoadManagerOtherController">
                         <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                         <path d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path>
                         <path d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
@@ -52,7 +70,7 @@
                     </a>
                 </li>
                 <li class="relative px-6 py-3">
-                    <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200" href="ManagerHistoryProduct.jsp">
+                    <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200" href="LoadHistoryProductController">
                         <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                         <path d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path>
                         <path d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
@@ -79,64 +97,71 @@
                             <th class="px-4 py-3">Product Name</th>
                             <th class="px-4 py-3">Quantity</th>
                             <th class="px-4 py-3">Image</th>
-                            <th class="px-4 py-3">Address</th>
+                            <th class="px-4 py-3">Name Customer</th>
                             <th class="px-4 py-3">Phone</th>
+                            <th class="px-4 py-3">Address</th>
                             <th class="px-4 py-3">Created Date</th>
-                            <th class="px-4 py-3">Status</th>
                             <th class="px-4 py-3">Warranty</th>
+                            <th class="px-4 py-3">Status</th>
                             <th class="px-4 py-3">Description</th>
                             <th class="px-4 py-3">Action</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+                        <%
+                            ArrayList<OrderWarranty> warrantyList = (ArrayList<OrderWarranty>) session.getAttribute("ORDER_WARRANTY");
+                            if (warrantyList != null) {
+                                for (OrderWarranty warranty : warrantyList) {
+                        %>
                         <tr class="text-gray-700 dark:text-gray-400">
                             <td class="px-4 py-3">
-                                <div class="flex items-center text-sm">
-                                    <!-- Avatar with inset shadow -->
-                                    <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
-                                        <img class="object-cover w-full h-full rounded-full" src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=200&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjE3Nzg0fQ" alt="" loading="lazy">
-                                        <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
-                                    </div>
-                                    <div>
-                                        <p class="font-semibold">Hans Burger</p>
-                                        <p class="text-xs text-gray-600 dark:text-gray-400">
-                                            10x Developer
-                                        </p>
-                                    </div>
-                                </div>
+                                <%=warranty.getWarrantyCode()%>
                             </td>
-                            <td class="px-4 py-3 text-sm">
-                                Product Name
-                            </td>
-                            <td>Quantity</td>                            
+                            <td><%=warranty.getToyName()%></td>
+                            <td><%=warranty.getQuantity()%></td>   
                             <td class="px-4 py-3 text-xs">
-                                <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
-                                    Image
-                                </span>
+                                <img src="<%=warranty.getImageToy()%>" alt="Toy Image">
                             </td>
-                            <td class="px-4 py-3 text-sm">
-                                Address
-                            </td>
-                            <td>Phone</td>
-                            <td>Date</td>
-                            <td>Status</td>
-                            <td>30</td>
-                            <td>Description</td>
-                            <td class="px-4 py-3">
-                                <div class="flex items-center space-x-7 text-sm">
-                                    <button class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray" aria-label="Edit">
-                                        <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
-                                        <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"></path>
-                                        </svg>
-                                    </button>
-                                    <button class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray" aria-label="Delete">
-                                        <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path>
-                                        </svg>
-                                    </button>
+                            <td><%=warranty.getNameUser()%></td>   
+
+
+                            <td><%=warranty.getPhone()%></td>
+                            <td><%=warranty.getAddress()%></td>
+                            <td><%=warranty.getOrderDate()%></td>
+                            <td><%=warranty.getWarrantyTime()%></td>
+                            <td><%=warranty.getStatus()%></td>
+                            <%
+                                if (warranty.getDescriptionWarranty() != null) {
+                            %>
+                            <td style="overflow-y: scroll; max-width: 100px;" class="px-4 py-3 text-sm">
+                                <div class="description" style="white-space: pre-wrap;">
+                                    <%=warranty.getDescriptionWarranty()%>
                                 </div>
+                            </td>
+                            <%
+                            } else {
+                            %>
+                            <td>No Description</td>
+                            <%
+                                }
+                            %>
+
+                            <td class="px-4 py-3">
+                                <button class="action-btn" style="color: black"><a href="ProcessingWarrantyController?orderDetailId=<%=warranty.getOrderDetailId()%>">Processing</a></button></br>                      
+                                <button class="action-btn" style="color: #0dcaf0"><a href="ReceivedWarrantyController?orderDetailId=<%=warranty.getOrderDetailId()%>">Received</a></button></br>                      
+                                <button class="action-btn" style="color: orange"><a href="UnderWarrantyController?orderDetailId=<%=warranty.getOrderDetailId()%>">Under Warranty</a></button></br>                      
+                                <button class="action-btn" style="color: green"><a href="ShippingWarrantyController?orderDetailId=<%=warranty.getOrderDetailId()%>">Shipping</a></button></br>                        
+                                <button class="action-btn" style="color: blue"><a href="DeliveredWarrantyController?orderDetailId=<%=warranty.getOrderDetailId()%>">Delivered</a></button></br>                        
+                                <button class="action-btn" style="color: red"><a href="RefuseWarrantyController?orderDetailId=<%=warranty.getOrderDetailId()%>">Refuse</a></button>                    
                             </td>
                         </tr>
+                        <%}
+                        } else {
+                        %>
+                    <p></p>
+                    <%
+                        }
+                    %>  
                     </tbody>
                 </table>
             </div>

@@ -18,22 +18,21 @@ import javax.servlet.http.HttpSession;
  *
  * @author trant
  */
-public class LoadOrderHistoryController extends HttpServlet {
+public class LoadHistoryProductController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
             response.setContentType("text/html;charset=UTF-8");
             HttpSession session = request.getSession();
-            int userId = Integer.parseInt(request.getParameter("userId"));
             OrderDAO orderDAO = new OrderDAO();
-            ArrayList<OrderHistory> orderList = orderDAO.orderHistoryByUserId(userId);
+            ArrayList<OrderHistory> orderList = orderDAO.orderHistory();
             if(orderList != null){
                 session.setAttribute("ORDER_HISTORY", orderList);
             } else {
                 request.setAttribute("ORDER_HISTORY_ERROR", "Not Foun List Order");
             }
-            RequestDispatcher rd = request.getRequestDispatcher("profileHistory.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("ManagerHistoryProduct.jsp");
             rd.forward(request, response);
         } catch (Exception ex) {
             Logger.getLogger(LoadOrderHistoryController.class.getName()).log(Level.SEVERE, null, ex);

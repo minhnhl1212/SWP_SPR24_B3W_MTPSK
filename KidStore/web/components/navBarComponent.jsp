@@ -4,6 +4,7 @@
     Author     : TUF
 --%>
 
+<%@page import="DTO.Account"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!-- Icon -->
@@ -49,15 +50,28 @@
 
             <div class="d-flex my-4 mr-2">
                 <a style="margin-right: 15px;"class="btn btn-outline-dark mt-auto" href="NewsController">Tin tức</a>
+                
+                <%
+                    Account acc = (Account) session.getAttribute("acc");
+                    if (acc != null) {
+                %>
                 <a class="btn btn-outline-dark" href="cart.jsp">
                     <i class="bi-cart-fill me-1"></i>
                     Giỏ hàng
                     <span class="badge bg-dark text-white ms-1 rounded-pill">${sessionScope.cartList.size()}</span>
                 </a>
-                <a style="margin-left: 15px;" class="btn btn-outline-dark" href="profileHistory.jsp">
+                <a style="margin-left: 15px;" class="btn btn-outline-dark" href="LoadOrderHistoryController?userId=<%=acc.getUserId()%>">
                     <i class='bx bx-user'></i>
                     Thông tin
                 </a>
+                <%
+                } else {
+
+                %>
+                <p></p>
+                <%    }
+                %>
+
 
             </div>
 

@@ -5,6 +5,7 @@
 --%>
 
 
+<%@page import="DTO.OrderHistory"%>
 <%@page import="DTO.Toy"%>
 <%@page import="DTO.Category"%>
 <%@page import="java.util.ArrayList"%>
@@ -83,6 +84,17 @@
             img {
                 max-width: 124px;
             }
+            .description {
+                max-height: 188px;
+                margin-top: -93px;
+            }
+            .action-btn{
+                background-color: #e5e5e5;
+                padding: 10px 10px;
+                margin: 2px 2px;
+                border-radius: 30px;
+                font-weight: 600;
+            }
 
         </style>
     </head>
@@ -125,7 +137,7 @@
                     </a>
                 </li>
                 <li class="relative px-6 py-3">
-                    <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200" href="ManagerOther.jsp">
+                    <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200" href="LoadManagerOtherController">
                         <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                         <path d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path>
                         <path d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
@@ -134,7 +146,7 @@
                     </a>
                 </li>
                 <li class="relative px-6 py-3">
-                    <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200" href="ManagerHistoryProduct.jsp">
+                    <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200" href="LoadHistoryProductController">
                         <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                         <path d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path>
                         <path d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
@@ -160,58 +172,57 @@
                             <th class="px-4 py-3">ID</th>
                             <th class="px-4 py-3">Product Name</th>
                             <th class="px-4 py-3">Image</th>
-                            <th class="px-4 py-3">Date</th>
-                            <th class="px-4 py-3">Price</th>
                             <th class="px-4 py-3">Category</th>
+                            <th class="px-4 py-3">Price</th>
                             <th class="px-4 py-3">Discount</th>
+                            <th class="px-4 py-3">Date</th>
                             <th class="px-4 py-3">Description</th>
                             <th class="px-4 py-3">Status</th>
+                            <th class="px-4 py-3">Action</th>
                         </tr>
                     </thead>
 
                     <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
                         <%
-                            ArrayList<Toy> toyList = (ArrayList<Toy>) session.getAttribute("TOY_LIST");
-                            if (toyList != null) {
-                                for (Toy toy : toyList) {
+                            ArrayList<OrderHistory> orderList = (ArrayList<OrderHistory>) session.getAttribute("ORDER_HISTORY");
+                            if (orderList != null) {
+                                for (OrderHistory order : orderList) {
                         %>
                         <tr class="text-gray-700 dark:text-gray-400">
                             <td class="px-4 py-3">
-                                <%=toy.getToyId()%>
+                                <%=order.getQuantity()%>
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                <%=toy.getToyName()%>
+                                <%=order.getToyName()%>
                             </td>
                             <td class="px-4 py-3 text-xs">
-                                <img src="<%=toy.getImage()%>" alt="Toy Image">
+                                <img src="<%=order.getImageToy()%>" alt="Toy Image">
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                <%=toy.getPrice()%>
+                                <%=order.getNameCategory()%>
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                <%=toy.getName_category()%>
+                                <%=order.getPrice()%>
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                <%=toy.getDiscount()%>
+                                <%=order.getOrderPrice()%>
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                <%=toy.getWarranty_time()%>
+                                <%=order.getOrderDate()%>
                             </td>
-
-
-                            <td class="px-4 py-3">
-                                <div class="flex items-center space-x-7 text-sm">
-                                    <button class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray" aria-label="Edit">
-                                        <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
-                                        <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"></path>
-                                        </svg>
-                                    </button>
-                                    <button class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray" aria-label="Delete">
-                                        <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path>
-                                        </svg>
-                                    </button>
+                            <td style="overflow-y: scroll; max-width: 100px;" class="px-4 py-3 text-sm">
+                                <div class="description" style="white-space: pre-wrap;">
+                                    <%=order.getDescription()%>
                                 </div>
+                            </td>
+                            <td class="px-4 py-3 text-sm">
+                                <%=order.getStatus()%>
+                            </td>
+                            <td class="px-4 py-3">
+                                <button class="action-btn" style="color: black"><a href="ProcessingOrderController?orderDetailId=<%=order.getOrderDetailId()%>">Processing</a></button></br>                      
+                                <button class="action-btn" style="color: green"><a href="ShippingOrderController?orderDetailId=<%=order.getOrderDetailId()%>">Shipping</a></button></br>                        
+                                <button class="action-btn" style="color: blue"><a href="DeliveredOrderController?orderDetailId=<%=order.getOrderDetailId()%>">Delivered</a></button></br>                        
+                                <button class="action-btn" style="color: red"><a href="RefuseOrderController?orderDetailId=<%=order.getOrderDetailId()%>">Refuse</a></button>                    
                             </td>
                         </tr>
                         <%}
@@ -224,10 +235,10 @@
                     </tbody>
                 </table>
 
-                
+
 
                 </body>
-                
-                
+
+
                 </html>
 

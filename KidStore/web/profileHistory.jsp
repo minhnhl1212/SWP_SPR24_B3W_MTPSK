@@ -1,4 +1,5 @@
 
+<%@page import="DTO.Account"%>
 <%@page import="DTO.OrderHistory"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -42,12 +43,12 @@
                 <div class="profile-name">Customer</div>
                 <ul id="profile-function" class="list-group">
                     <li class="function-select list-group-item list-group-item-action" id="selected">
-                        <a href="LoadOrderHistoryController" style="text-decoration: none">
+                        <a href="LoadOrderHistoryController?userId=<%=acc.getUserId()%>" style="text-decoration: none">
                             <span class="text-profile">Lịch sử mua hàng</span>
                         </a>
                     </li>
                     <li class="function-select list-group-item list-group-item-action">
-                        <a href="profileWarranty.jsp" style="text-decoration: none">
+                        <a href="LoadWarrantyController?userId=<%=acc.getUserId()%>" style="text-decoration: none">
                             <span class="text-profile">Bảo hành sản phẩm</span>
                         </a>
                     </li>
@@ -77,7 +78,7 @@
 
                     <%
                         ArrayList<OrderHistory> orderList = (ArrayList<OrderHistory>) session.getAttribute("ORDER_HISTORY");
-                        if (orderList != null) {
+                        if (orderList != null && acc != null) {
                             for (OrderHistory order : orderList) {
                     %>
 
@@ -108,7 +109,9 @@
                                                 <div class="product-name"><%=order.getDescription()%></div>
                                             </div>
                                             <div class="col-md-4">
-                                                <div class="product-price" style="display: flex; align-items: center; justify-content: flex-end; "><del><%=order.getPrice()%> VNĐ</del> -> <%=order.getOrderPrice()%> VNĐ</div>
+                                                <div class="product-price" style="display: flex; align-items: center; justify-content: flex-end; "><del><%=order.getPrice()%> VNĐ</del> </div></br>
+                                                <div class="product-price" style="display: flex; align-items: center; justify-content: flex-end; "><%=order.getOrderPrice()%> VNĐ</div></br>
+                                                <div class="product-price" style="display: flex; align-items: center; justify-content: flex-end; font-size: 16px;"><button class="sendFeedback"><a href="sendFeedbackController">Send Feedback</a></button></div>
                                             </div>
                                         </div>
                                     </div>
@@ -130,7 +133,7 @@
                     <%}
                     } else {
                     %>
-                    <p>Không có đơn hàng nào</p>
+                    <p>${ORDER_HISTORY_ERROR}</p>
                     <%
                         }
                     %>
