@@ -5,26 +5,24 @@
  */
 package Controller;
 
+import DAO.PictureDAO;
 import DAO.ToyDAO;
+import DTO.Image;
 import DTO.Toy;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author admin
  */
-public class CartController extends HttpServlet {
-
-    private static final String CARTPAGE = "cart.jsp";
+public class DetailsController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,44 +36,29 @@ public class CartController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = CARTPAGE;
-        int value = 0;
-        HashMap<Toy, Integer> cartList;
-        try (PrintWriter out = response.getWriter()) {
+                try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            HttpSession session = request.getSession();
             int id = Integer.parseInt(request.getParameter("toyId"));
             ToyDAO dao = new ToyDAO();
-            Toy item = dao.getToyUsingID(id);
-            System.out.println(item);
-            cartList = (HashMap<Toy, Integer>) session.getAttribute("cartList");
-            String valueParam = (String)session.getAttribute("InputValue");
-            if(valueParam!=null){
-                value = Integer.parseInt(valueParam);
+            PictureDAO Pdao = new PictureDAO();
+            Toy toy = dao.getToyUsingID(id);
+<<<<<<< HEAD:KidStore/src/java/Controller/DetailController.java
+            if (toy != null) {
+=======
+            ArrayList<Image> Ilist = Pdao.getImageByToyId(id);
+                    System.out.println("e");
+            if(toy!=null){
+>>>>>>> 81bcc01d5686e187732514c80615323b02b99e0b:KidStore/src/java/Controller/DetailsController.java
+                request.setAttribute("toy", toy);
+                request.setAttribute("IMAGE_LIST", Ilist);
             }
-            //không có List thì tạo cái mới
-            if (cartList == null) {
-                cartList = new HashMap<>();
-                cartList.put(item, 1);
-            } else {
-                //check xem đã có trong cart chưa, nếu có thì quantity +1
-                if (cartList.containsKey(item)) {
-                    int currentQuantity = cartList.get(item);
-                    if (value == 0) {
-                        value = currentQuantity + 1;
-                    }
-                    cartList.put(item, value);
-                } else {
-                    cartList.put(item, 1);
-                }
-            }
-
-            session.setAttribute("cartList", cartList);
-            RequestDispatcher rd = request.getRequestDispatcher(url);
+            RequestDispatcher rd = request.getRequestDispatcher("detail.jsp");
             rd.forward(request, response);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
