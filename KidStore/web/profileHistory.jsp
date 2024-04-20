@@ -50,7 +50,7 @@
                         </a>
                     </li>
                     <li class="function-select list-group-item list-group-item-action">
-                        <a href="#" style="text-decoration: none">
+                        <a href="LogoutController" style="text-decoration: none">
                             <span class="text-profile">Logout</span>
                         </a>
                     </li>

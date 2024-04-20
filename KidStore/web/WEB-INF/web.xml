@@ -104,6 +104,18 @@
         <servlet-name>OrderDetailController</servlet-name>
         <servlet-class>Controller.OrderDetailController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SendRequestWarranty</servlet-name>
+        <servlet-class>Controller.SendRequestWarranty</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoadWarrantyController</servlet-name>
+        <servlet-class>Controller.LoadWarrantyController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoadOrderHistory</servlet-name>
+        <servlet-class>Controller.LoadOrderHistory</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -207,6 +219,18 @@
     <servlet-mapping>
         <servlet-name>OrderDetailController</servlet-name>
         <url-pattern>/OrderDetailController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SendRequestWarranty</servlet-name>
+        <url-pattern>/SendRequestWarranty</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadWarrantyController</servlet-name>
+        <url-pattern>/LoadWarrantyController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadOrderHistory</servlet-name>
+        <url-pattern>/LoadOrderHistory</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

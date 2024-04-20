@@ -60,7 +60,7 @@
                         </a>
                     </li>
                     <li class="function-select list-group-item list-group-item-action">
-                        <a href="profileHistory.jsp" style="text-decoration: none">
+                        <a href="LogoutController" style="text-decoration: none">
                             <span class="text-profile">Logout</span>
                         </a>
                     </li>
@@ -104,36 +104,7 @@
                                             <i class='bx bx-mail-send'></i>
                                         </a>
                                     </td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td><img src="img/people.jpg" alt="User Avt" class="toy-item-img"/></td>
-                                    <td>Thú bông</td>
-                                    <td>2</td>
-                                    <td>April 18, 2024</td>
-                                    <td>December 18, 2024</td>
-                                    <td>Processing</td>
-                                    <td>
-                                        <a href="#" style="text-decoration: none; color: black;" onclick="togglePopup()">
-                                            <i class='bx bx-mail-send'></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td><img src="img/people.jpg" alt="User Avt" class="toy-item-img"/></td>
-                                    <td>Thú bông</td>
-                                    <td>2</td>
-                                    <td>April 18, 2024</td>
-                                    <td>December 18, 2024</td>
-                                    <td>Processing</td>
-                                    <td>
-                                        <a href="#" style="text-decoration: none; color: black;" onclick="togglePopup()">
-                                            <i class='bx bx-mail-send'></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                               
+                                </tr>                                                               
                             </tbody>
                         </table>
                     </div>
@@ -141,8 +112,9 @@
             </div>
         
         <div class="popup-form" id="popupForm">
-            <form>
+            <form >
                 <h4>Kiểm tra bảo hành</h4>
+                <a class="close" href="#" style="text-decoration: none; color: black; margin-top: -14%;" onclick="togglePopup()">X</a>
                 <div class="form-group">
                     <label for="productSKU">Mã bảo hành:</label>
                     <input type="text" class="form-control" id="productSKU" name="productSKU" required>
