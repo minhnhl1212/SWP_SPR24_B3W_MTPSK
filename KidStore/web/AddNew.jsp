@@ -1,4 +1,6 @@
 
+<%@page import="DTO.News"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="DTO.Account"%>
 <!DOCTYPE html>
 <html :class="{ 'theme-dark': dark }" x-data="data()" lang="en">
@@ -72,8 +74,12 @@
                 right: 18px;
             }
 
-            span {
-
+            input{
+                color: black;
+            }
+            .description {
+                max-height: 188px;
+                margin-top: -93px;
             }
 
         </style>
@@ -93,11 +99,12 @@
                     <thead>
                         <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                             <th class="px-4 py-3">ID</th>
-                            <th class="px-4 py-3">Title</th>
-                            <th class="px-4 py-3">Product Name</th>
+                            <th class="px-4 py-3">Title</th>            
                             <th class="px-4 py-3">Image</th>
+                            <th class="px-4 py-3">Poster</th>
                             <th class="px-4 py-3">Date</th>
                             <th class="px-4 py-3">Description</th>
+                            <th class="px-4 py-3">Action</th>
                         </tr>
                     </thead>
 
@@ -153,33 +160,34 @@
                     </div>
 
                     <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+                        <%                            ArrayList<News> newsList = (ArrayList<News>) session.getAttribute("NEWS_LIST");
+                            if (newsList != null) {
+                                for (News news : newsList) {
+                        %>
                         <tr class="text-gray-700 dark:text-gray-400">
                             <td class="px-4 py-3">
-                                <div class="flex items-center text-sm">
-                                    <!-- Avatar with inset shadow -->
-                                    <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
-                                        <img class="object-cover w-full h-full rounded-full" src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=200&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjE3Nzg0fQ" alt="" loading="lazy">
-                                        <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
-                                    </div>
-                                    <div>
-                                        <p class="font-semibold">Hans Burger</p>
-                                        <p class="text-xs text-gray-600 dark:text-gray-400">
-                                            10x Developer
-                                        </p>
-                                    </div>
-                                </div>
+
+                                <p class="px-4 py-3 text-sm"><%=news.getNewsId()%></p>
+
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                $ 863.45
+                                <%=news.getTitle()%>
                             </td>
                             <td class="px-4 py-3 text-xs">
-                                <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
-                                    Approved
-                                </span>
+                                <img src="<%=news.getImage()%>" alt="News Images"/>
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                6/10/2020
+                                <%=news.getName_staff()%>
                             </td>
+                            <td class="px-4 py-3 text-sm">
+                                <%=news.getDate()%>
+                            </td>
+                            <td style="overflow-y: scroll; max-width: 100px;" class="px-4 py-3 text-sm">
+                                <div class="description" style="white-space: pre-wrap;">
+                                    <%=news.getDescription()%>
+                                </div>
+                            </td>
+
                             <td class="px-4 py-3">
                                 <div class="flex items-center space-x-7 text-sm">
                                     <button class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray" aria-label="Edit">
@@ -196,6 +204,14 @@
                             </td>
                         </tr>
 
+                        <%}
+                        } else {
+                        %>
+                    <p>Khong co danh sach News</p>
+                    <%
+                        }
+                    %>
+
                     <section class="my-8 mx-auto max-w-4xl">
                         <button onclick="toggleAddNewsForm()" class="add">Add News</button>
                         <h2 style="color: greenyellow">${ADD_NEWS_SUCCESS}</h2>
@@ -205,21 +221,18 @@
                         <div class="addNews overlay">
                             <div style="text-align: center; color: white; font-size: 24px; font-weight: 600; margin-top: -2%; background-color: darkkhaki; width: 350px; padding-bottom: 25px" id="add-product-form">                    
                                 <div>
-                                    <form action="AddToyController">                                        
+                                    <form action="AddNewsController">                                        
                                         <button onclick="toggleAddNewsForm()" class="close" style="text-align: right">X</button>
-                                        <label for="id">ID</label></br>
-                                        <input type="text" id="id" name="id" required></br>
                                         <label for="title">Title</label></br>
                                         <input type="text" id="title" name="title" required></br>
-                                        <label for="productname">Name</label></br>
-                                        <input type="text" id="productname" name="productname" required></br>
                                         <label for="image">Image</label></br>
-                                        <input type="number" id="image" name="image" required></br>                                                                  
+                                        <input type="text" id="image" name="image" required></br>
                                         <label for="date">Date</label></br>
-                                        <input type="text" id="date" name="date" required></br>  
-                                        </br>  
+                                        <input type="date" id="date" name="date" required></br>                                                                  
                                         <label for="description">Description</label></br>
-                                        <input type="number" id="description" name="description" required></br>
+                                        <input type="text" id="date" name="description" required></br>  
+                                        </br>  
+                                        <input type="hidden" name="userId" value="<%=acc.getUserId()%>">
                                         <button style="background-color: green; border-radius: 30px; padding: 3px 10px; margin-top: 15px" type="submit">Add News</button>
                                     </form>
                                 </div>

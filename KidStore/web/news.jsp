@@ -51,32 +51,6 @@
                         </div>
 
                         <%
-                            Account acc = (Account) session.getAttribute("acc");
-                            if (acc != null) {
-                        %>
-
-                        <button class="btn-news"><h4>Thêm Tin Tức</h4></button>
-                        <form action="AddNewsController">
-                            <div class="new-containter">
-                                <label for="title">Tittle</label>
-                                <input type="text" name="title" id="title" required></br>
-                                <label for="image">Image</label>
-                                <input type="text" name="image" id="image" required></br>
-                                <label for="date">Date</label>
-                                <input type="date" id="date" name="date" required></br>
-                                <label for="description">Description</label>
-                                <input type="text" id="description" name="description" required></br>
-                                <input type="hidden" name="userId" value="<%=acc.getUserId()%>">
-                                <input type="submit" value="Add">
-                            </div>
-                        </form>
-                        <p style="color: green">${ADD_NEWS_SUCCESS}</p>
-                        <p style="color: red">${ADD_NEWS_FAILED}</p>
-                        <%} else {%>
-                        <p>Khong Co Tai Khoan Dang Nhap</p>
-                        <%}%>
-
-                        <%
                             ArrayList<News> newsList = (ArrayList<News>) session.getAttribute("NEWS_LIST");
                             if (newsList != null) {
                                 for (News news : newsList) {
@@ -86,12 +60,12 @@
                             <div class="row pb-4">
                                 <div class="col-md-5">
                                     <div class="fh5co_hover_news_img">
-                                        <div class="fh5co_news_img"><img src="<%=news.getImage()%>" alt=""/></div>
+                                        <div class="fh5co_news_img"><img src="<%=news.getImage()%>" alt="News Images"/></div>
                                     </div>
                                 </div>
                                 <div class="col-md-7">
                                     <a href="#" class="fh5co_magna py-3"><%=news.getTitle()%></br></a> 
-                                    <a href="#" class="fh5co_mini_time py-2"> <%=news.getDate()%> <%=news.getUserId()%> </a>
+                                    <a href="#" class="fh5co_mini_time py-2"> <%=news.getDate()%> <%=news.getName_staff()%> </a>
                                     <div class="fh5co_consectetur"> <%=news.getDescription()%></div>   
                                 </div>
                             </div>

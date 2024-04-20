@@ -1,4 +1,5 @@
 
+<%@page import="DTO.Toy"%>
 <%@page import="DTO.Category"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="DTO.Account"%>
@@ -87,12 +88,15 @@
             select{
                 color: black;
             }
-            
+
             textarea{
                 color: black;
             }
             textarea#description {
                 width: 90%;
+            }
+            img {
+                max-width: 124px;
             }
 
         </style>
@@ -113,7 +117,7 @@
                     <thead>
                         <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                             <th class="px-4 py-3">ID</th>
-                            <th class="px-4 py-3">Product Name</th>
+                            <th class="px-4 py-3">Name</th>
                             <th class="px-4 py-3">Image</th>
                             <th class="px-4 py-3">Price</th>
                             <th class="px-4 py-3">Category</th>
@@ -175,33 +179,35 @@
                     </div>
 
                     <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+                        <%
+                            ArrayList<Toy> toyList = (ArrayList<Toy>) session.getAttribute("TOY_LIST");
+                            if (toyList != null) {
+                                for (Toy toy : toyList) {
+                        %>
                         <tr class="text-gray-700 dark:text-gray-400">
                             <td class="px-4 py-3">
-                                <div class="flex items-center text-sm">
-                                    <!-- Avatar with inset shadow -->
-                                    <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
-                                        <img class="object-cover w-full h-full rounded-full" src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=200&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjE3Nzg0fQ" alt="" loading="lazy">
-                                        <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
-                                    </div>
-                                    <div>
-                                        <p class="font-semibold">Hans Burger</p>
-                                        <p class="text-xs text-gray-600 dark:text-gray-400">
-                                            10x Developer
-                                        </p>
-                                    </div>
-                                </div>
+                                <%=toy.getToyId()%>
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                $ 863.45
+                                <%=toy.getToyName()%>
                             </td>
                             <td class="px-4 py-3 text-xs">
-                                <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
-                                    Approved
-                                </span>
+                                <img src="<%=toy.getImage()%>" alt="Toy Image">
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                6/10/2020
+                                <%=toy.getPrice()%>
                             </td>
+                            <td class="px-4 py-3 text-sm">
+                                <%=toy.getName_category()%>
+                            </td>
+                            <td class="px-4 py-3 text-sm">
+                                <%=toy.getDiscount()%>
+                            </td>
+                            <td class="px-4 py-3 text-sm">
+                                <%=toy.getWarranty_time()%>
+                            </td>
+
+
                             <td class="px-4 py-3">
                                 <div class="flex items-center space-x-7 text-sm">
                                     <button class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray" aria-label="Edit">
@@ -217,72 +223,81 @@
                                 </div>
                             </td>
                         </tr>
+                        <%}
+                        } else {
+                        %>
+                    <p>Không có ?? ch?i nào</p>
+                    <%
+                        }
+                    %>                
+                    </tbody>
+                </table>
 
-                    <section class="my-8 mx-auto max-w-4xl">
-                        <button onclick="toggleAddProductForm()" class="add">Add New Product</button>
-                        <h2 style="color: greenyellow">${ADD_TOY_SUCCESS}</h2>
-                        <h2 style="color: red">${ADD_TOY_FAILED}</h2>
-                    </section>
+                <section class="my-8 mx-auto max-w-4xl">
+                    <button onclick="toggleAddProductForm()" class="add">Add New Product</button>
+                    <h2 style="color: greenyellow">${ADD_TOY_SUCCESS}</h2>
+                    <h2 style="color: red">${ADD_TOY_FAILED}</h2>
+                </section>
 
-                    <div class="wrap">
-                        <div class="addProduct overlay">
-                            <div style="text-align: center; color: white; font-size: 24px; font-weight: 600; margin-top: -2%; background-color: darkkhaki; width: 350px; padding-bottom: 25px" id="add-product-form">                    
-                                <div>
-                                    <form action="AddToyController">                                        
-                                        <button onclick="toggleAddProductForm()" class="close" style="text-align: right">X</button>                                     
-                                        <label for="productName">Name</label></br>
-                                        <input type="text" id="productName" name="productName" required></br>
-                                        <label for="image">Image</label></br>
-                                        <input type="text" id="image" name="image" required></br>
-                                        <label for="price">Price</label></br>
-                                        <input type="number" id="price" name="price" required></br>                                                                  
-                                        <label for="category">Category</label></br>                                        
+                <div class="wrap">
+                    <div class="addProduct overlay">
+                        <div style="text-align: center; color: white; font-size: 24px; font-weight: 600; margin-top: -2%; background-color: darkkhaki; width: 350px; padding-bottom: 25px" id="add-product-form">                    
+                            <div>
+                                <form action="AddToyController">                                        
+                                    <button onclick="toggleAddProductForm()" class="close" style="text-align: right">X</button>                                     
+                                    <label for="productName">Name</label></br>
+                                    <input type="text" id="productName" name="productName" required></br>
+                                    <label for="image">Image</label></br>
+                                    <input type="text" id="image" name="image" required></br>
+                                    <label for="price">Price</label></br>
+                                    <input type="number" id="price" name="price" required></br>                                                                  
+                                    <label for="category">Category</label></br>                                        
+                                    <%
+                                        ArrayList<Category> categoryList = (ArrayList<Category>) session.getAttribute("CATEGORY_LIST");
+                                        if (categoryList != null) {
+                                    %>
+                                    <select name="idCategory" id="category" required>
                                         <%
-                                            ArrayList<Category> categoryList = (ArrayList<Category>) session.getAttribute("CATEGORY_LIST");
-                                            if (categoryList != null) {
+                                            for (Category category : categoryList) {
                                         %>
-                                        <select name="idCategory" id="category" required>
-                                            <%
-                                                for (Category category : categoryList) {
-                                            %>
-                                            <option value="<%=category.getCategoryId()%>"><%=category.getCategoryName()%></option>
-                                            <%}
-                                            } else {
-                                            %>
-                                            <p>Không có lo?i ?? ch?i nào</p>
-                                            <%
-                                                }
-                                            %>
-                                        </select><br>
-                                        <label for="description">Description</label><br>
-                                        <textarea id="description" name="description" rows="4" cols="50"></textarea>
-                                        </br>  
-                                        <label for="discount">Discount</label></br>
-                                        <input type="number" id="discount" name="discount" step="0.01" required></br>
-                                        <label for="warrantyTime">Warranty Time</label></br>
-                                        <input type="date" id="warranty" name="warrantyTime" required></br>
-                                        <input name="userId" type="hidden" value="<%=acc.getUserId()%>">
-                                        <button style="background-color: green; border-radius: 30px; padding: 3px 10px; margin-top: 15px" type="submit">Add New Product</button>
-                                    </form>
-                                </div>
+                                        <option value="<%=category.getCategoryId()%>"><%=category.getCategoryName()%></option>
+                                        <%}
+                                        } else {
+                                        %>
+                                        <p>Không có lo?i ?? ch?i nào</p>
+                                        <%
+                                            }
+                                        %>
+                                    </select><br>
+                                    <label for="description">Description</label><br>
+                                    <textarea id="description" name="description" rows="4" cols="50"></textarea>
+                                    </br>  
+                                    <label for="discount">Discount</label></br>
+                                    <input type="number" id="discount" name="discount" step="0.01" required></br>
+                                    <label for="warrantyTime">Warranty Time</label></br>
+                                    <input type="date" id="warranty" name="warrantyTime" required></br>
+                                    <input name="userId" type="hidden" value="<%=acc.getUserId()%>">
+                                    <button style="background-color: green; border-radius: 30px; padding: 3px 10px; margin-top: 15px" type="submit">Add New Product</button>
+                                </form>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    </body>
-                    <script>
-                        function toggleAddProductForm() {
-                            var addProductForm = document.querySelector('.addProduct');
-                            var add = document.querySelector('.add');
-                            if (addProductForm.style.display === 'none') {
-                                addProductForm.style.display = 'block';
-                                add.style.display = 'none';
-                                addProductForm.classList.add("overlay");
-                            } else {
-                                addProductForm.style.display = 'none';
-                                addProductForm.classList.remove("overlay");
-                                add.style.display = 'block';
-                            }
+                </body>
+                <script>
+                    function toggleAddProductForm() {
+                        var addProductForm = document.querySelector('.addProduct');
+                        var add = document.querySelector('.add');
+                        if (addProductForm.style.display === 'none') {
+                            addProductForm.style.display = 'block';
+                            add.style.display = 'none';
+                            addProductForm.classList.add("overlay");
+                        } else {
+                            addProductForm.style.display = 'none';
+                            addProductForm.classList.remove("overlay");
+                            add.style.display = 'block';
                         }
-                    </script>
-                    </html>
+                    }
+                </script>
+                </html>

@@ -36,13 +36,14 @@ public class NewsDAO {
         ArrayList<News> newsList = new ArrayList<>();
         try {
             con = DBUtils.getConnection();
-            if (con == null) {
-                String sql = "select title, image, date, description\n"
-                        + "from News";
+            if (con != null) {
+                String sql = "select News.news_id , News.title, News.image, News.date, News.description, Account.full_name\n"
+                        + "from News \n"
+                        + "inner join Account on Account.user_id = News.user_id";
                 ps = con.prepareStatement(sql);
-                rs = ps.executeQuery(sql);
+                rs = ps.executeQuery();
                 while (rs.next()) {
-                    News list = new News(rs.getString("title"), rs.getString("image"), rs.getDate("date"), rs.getString("description"));
+                    News list = new News(rs.getInt("news_id"), rs.getString("title"), rs.getString("image"), rs.getDate("date"), rs.getString("description"), rs.getString("full_name"));
                     newsList.add(list);
                 }
             }

@@ -88,6 +88,14 @@
         <servlet-name>AddNewsController</servlet-name>
         <servlet-class>Controller.AddNewsController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>OrderHistoryController</servlet-name>
+        <servlet-class>Controller.OrderHistoryController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ToyWarrantyController</servlet-name>
+        <servlet-class>Controller.ToyWarrantyController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -175,6 +183,14 @@
     <servlet-mapping>
         <servlet-name>AddNewsController</servlet-name>
         <url-pattern>/AddNewsController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderHistoryController</servlet-name>
+        <url-pattern>/OrderHistoryController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ToyWarrantyController</servlet-name>
+        <url-pattern>/ToyWarrantyController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

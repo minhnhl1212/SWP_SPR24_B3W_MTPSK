@@ -14,12 +14,21 @@ public class News {
     private Date date;
     private String description;
     private int userId;
+    private String name_staff;
 
-    public News(String title, String image, Date date, String description) {
+    public News(String title, String image, String description) {
+        this.title = title;
+        this.image = image;
+        this.description = description;
+    }
+
+    public News(int newsId, String title, String image, Date date, String description, String name_staff) {
+        this.newsId = newsId;
         this.title = title;
         this.image = image;
         this.date = date;
         this.description = description;
+        this.name_staff = name_staff;
     }
 
     public News(String title, String image, Date date, String description, int userId) {
@@ -87,4 +96,11 @@ public class News {
         this.userId = userId;
     }
 
+    public String getName_staff() {
+        return name_staff;
+    }
+
+    public void setName_staff(String name_staff) {
+        this.name_staff = name_staff;
+    }
 }

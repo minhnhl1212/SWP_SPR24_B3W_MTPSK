@@ -87,6 +87,7 @@ public class MainController extends HttpServlet {
             NewsDAO newsDAO = new NewsDAO();
             ArrayList<News> newsList = newsDAO.newsList();
             session.setAttribute("NEWS_LIST", newsList);
+            
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
         } catch (Exception e) {

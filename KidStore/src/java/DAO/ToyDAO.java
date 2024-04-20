@@ -37,10 +37,11 @@ public class ToyDAO {
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "select Toy.toy_id, Toy.toy_name,Toy.quantity, Image.image_toy, Toy.price, Toy.description, Toy.category_id, Toy.discount, Toy.warranty_time, Toy.isActive, Toy.isDisable, Image.image_id, Image.main\n"
+                String sql = "select Toy.toy_id, Toy.toy_name,Toy.quantity, Image.image_toy, Toy.price, Toy.description, Toy.category_id, Toy.discount, Toy.warranty_time, Toy.isActive, Toy.isDisable, Image.image_id, Image.main, Category.category_name\n"
                         + "from Image\n"
                         + "inner join Toy on Image.toy_id = Toy.toy_id\n"
-                        + "where isActive = 1 and isDisable = 0 and Image.main = 1";
+                        + "inner join Category on Toy.category_id = Category.category_id\n"
+                        + "where Toy.isActive = 1 and Toy.isDisable = 0 and Image.main = 1";
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -49,7 +50,7 @@ public class ToyDAO {
                             rs.getDouble("price"), rs.getString("description"),
                             rs.getInt("category_id"), rs.getDouble("discount"),
                             rs.getDate("warranty_time"), rs.getInt("isActive"),
-                            rs.getInt("isDisable"));
+                            rs.getInt("isDisable"), rs.getString("category_name"));
                     listToy.add(list);
                 }
             }
@@ -66,7 +67,7 @@ public class ToyDAO {
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "select Toy.toy_name,Toy.quantity, Image.imageToy,"
+                String sql = "select Toy.toy_name,Toy.quantity, Image.image_toy,"
                         + " Toy.price, Toy.description, Toy.category_id, Toy.discount\n"
                         + "from Image\n"
                         + "inner join Toy on Image.toy_id = Toy.toy_id where Toy.toy_id = ?";
@@ -75,7 +76,7 @@ public class ToyDAO {
                 rs = ps.executeQuery();
                 while (rs.next()) {
                     toy = new Toy(toyId, rs.getString("toy_name"),
-                            rs.getInt("quantity"), rs.getString("imageToy"),
+                            rs.getInt("quantity"), rs.getString("image_toy"),
                             rs.getDouble("price"), rs.getString("description"),
                             rs.getInt("category_id"), rs.getDouble("discount"));
                 }

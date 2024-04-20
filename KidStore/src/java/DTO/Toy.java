@@ -21,6 +21,7 @@ public class Toy {
     private int isDisable;
     private int userId;
     private String name_staff;
+    private String name_category;
 
     public Toy(int toyId) {
         this.toyId = toyId;
@@ -56,8 +57,7 @@ public class Toy {
         this.warranty_time = warranty_time;
         this.isActive = isActive;
         this.isDisable = isDisable;
-    }
-    
+    }    
     
 
     public Toy(String toyName, String image, double price, String description, int categoryId, double discount, Date warranty_time, int isActive, int isDisable, int userId) {
@@ -87,6 +87,21 @@ public class Toy {
         this.userId = userId;
         this.name_staff = name_staff;
     }    
+
+    public Toy(int toyId, String toyName, int quantity, String image, double price, String description, int categoryId, double discount, Date warranty_time, int isActive, int isDisable, String name_category) {
+        this.toyId = toyId;
+        this.toyName = toyName;
+        this.quantity = quantity;
+        this.image = image;
+        this.price = price;
+        this.description = description;
+        this.categoryId = categoryId;
+        this.discount = discount;
+        this.warranty_time = warranty_time;
+        this.isActive = isActive;
+        this.isDisable = isDisable;
+        this.name_category = name_category;
+    }
 
     public Toy(int toyId, String toyName, int quantity, String image, double price, String description, int categoryId, double discount, Date warranty_time, int isActive, int isDisable, int userId, String name_staff) {
         this.toyId = toyId;
@@ -207,7 +222,15 @@ public class Toy {
     public void setName_staff(String name_staff) {
         this.name_staff = name_staff;
     }
-    
+
+    public String getName_category() {
+        return name_category;
+    }
+
+    public void setName_category(String name_category) {
+        this.name_category = name_category;
+    }
+  
     @Override
     public int hashCode() {
         int hash = 5;
