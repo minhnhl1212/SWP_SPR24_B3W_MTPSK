@@ -56,7 +56,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="admin_revenue.jsp">
+                    <a href="RevenueController">
                         <i class='bx bx-money'></i>
                         <span class="text">Revenue</span>
                     </a>
@@ -64,19 +64,19 @@
             </ul>
             <ul class="side-menu">
                 <li>
-                    <a href="#" id="logoutButton" class="menu_button">
+                    <a href="LogoutController" id="logoutButton" class="menu_button">
                         <i class='bx bxs-log-out-circle'></i>
                         <span class="text">Logout</span>
                     </a>
 
-<!--                     Logout confirmation dialog 
+<!--                     Logout confirmation dialog -->
                     <div id="logoutConfirmationDialog" class="modal">
                         <div class="modal-content">
                             <p>Are you sure you want to logout?</p>
                             <button id="confirmLogout">Logout</button>
                             <button id="cancelButton">Cancel</button>
                         </div>
-                    </div>-->
+                    </div>
                 </li>
             </ul>
         </section>

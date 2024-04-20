@@ -188,7 +188,7 @@ cancelButton.addEventListener("click", function () {
 // Event listener to close modal when clicking outside the modal content
 window.addEventListener("click", function (event) {
     if (event.target === modal) {
-        closeModal();
+        showModal();
     }
 });
 
