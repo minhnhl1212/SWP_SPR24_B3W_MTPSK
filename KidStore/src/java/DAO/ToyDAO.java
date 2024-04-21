@@ -68,9 +68,11 @@ public class ToyDAO {
             con = DBUtils.getConnection();
             if (con != null) {
                 String sql = "select Toy.toy_name,Toy.quantity, Image.image_toy,"
-                        + " Toy.price, Toy.description, Toy.category_id, Toy.discount\n"
+                        + " Toy.price, Toy.description, Category.category_name, Toy.discount\n"
                         + "from Image\n"
-                        + "inner join Toy on Image.toy_id = Toy.toy_id where Toy.toy_id = ?";
+                        + "inner join Toy on Image.toy_id = Toy.toy_id\n"
+                        + "inner join Category on Toy.category_id = Category.category_id\n"
+                        + "where Toy.toy_id = ?";
                 ps = con.prepareStatement(sql);
                 ps.setInt(1, toyId);
                 rs = ps.executeQuery();
@@ -78,7 +80,7 @@ public class ToyDAO {
                     toy = new Toy(toyId, rs.getString("toy_name"),
                             rs.getInt("quantity"), rs.getString("image_toy"),
                             rs.getDouble("price"), rs.getString("description"),
-                            rs.getInt("category_id"), rs.getDouble("discount"));
+                            rs.getString("category_name"), rs.getDouble("discount"));
                 }
             }
         } catch (Exception e) {

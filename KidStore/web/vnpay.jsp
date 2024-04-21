@@ -56,7 +56,7 @@
 
         <div class="text-center">
 
-            <a href="profileHistory.jsp" class="btn btn-success " style="margin-top: 20px;">Đã thanh toán</a>
+            <a href="OrderDetailController" class="btn btn-success " style="margin-top: 20px;">Đã thanh toán</a>
         </div>
     </form>
 </div>

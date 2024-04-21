@@ -35,6 +35,7 @@ private final static String DETAIL = "OrderDetailController";
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         boolean type = true;
+        String url = DETAIL;
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             HttpSession session = request.getSession();
@@ -47,11 +48,14 @@ private final static String DETAIL = "OrderDetailController";
             if(paymentType.equals("cashOnDelivery")){
                  type = false;
             }
+            if(type){
+                url = "vnpay.jsp";
+            }
             int voucher_id = 1;
             OrderDAO dao = new OrderDAO();
             int OrderId = dao.CreateNewOrder(name, phone, address, type, voucher_id,a.getUserId(), amount);
-            request.setAttribute("OrderID", OrderId);
-            RequestDispatcher rd = request.getRequestDispatcher(DETAIL);
+            session.setAttribute("OrderID", OrderId);
+            RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
         }
         catch (Exception e){

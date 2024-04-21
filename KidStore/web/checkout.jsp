@@ -75,10 +75,7 @@
                     }
                     if (paymentMethod.value === "cashOnDelivery") {
                         alert("Đơn hàng của bạn đã được xác nhận. Chúng tôi sẽ liên hệ với bạn để sắp xếp giao hàng.");
-                    } else if (paymentMethod.value === "bankTransfer") {
-                        var vnpay = "vnpay.jsp";
-                        window.open(vnpay, "_blank");
-                    }
+                    } 
                     return true;
                 }
             </script>

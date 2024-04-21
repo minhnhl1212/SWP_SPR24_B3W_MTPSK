@@ -54,7 +54,8 @@ public class OrderDAO {
                         + "           ,[order_amount]\n"
                         + "           ,[name]\n"
                         + "           ,[phone]\n"
-                        + "           ,[address])\n"
+                        + "           ,[address]\n"
+                        + "           ,[status_order])\n"
                         + "     VALUES\n"
                         + "           (?\n"
                         + "           ,?\n"
@@ -62,7 +63,8 @@ public class OrderDAO {
                         + "           ,?\n"
                         + "           ,?\n"
                         + "           ,?\n"
-                        + "           ,?)";
+                        + "           ,?\n"
+                        + "           ,N'Đã Mua')";
                 ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 ps.setInt(1, user_id);
                 ps.setInt(2, voucher_id);
@@ -94,7 +96,9 @@ public class OrderDAO {
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "INSERT INTO OrderDetail (toy_id, quantity, OD_price, order_id, warranty_code, status) VALUES (?, ?, ?, ?, ?, ?)";
+                String sql = "INSERT INTO OrderDetail "
+                        + "(toy_id, quantity, OD_price, order_id, warranty_code, status) "
+                        + "VALUES (?, ?, ?, ?, ?, ?)";
                 ps = con.prepareStatement(sql);
                 ps.setInt(1, toyId);
                 ps.setInt(2, quantity);

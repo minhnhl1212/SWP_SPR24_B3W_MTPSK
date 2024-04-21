@@ -210,7 +210,7 @@
                                 <% }%>
                             </div>
                         </div>
-                            
+
                         <%-- Danh sách đồ chơi theo CategoryId --%>
                         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 justify-content-center">
 
@@ -239,14 +239,16 @@
                                     </div>
 
                                     <!-- Product image -->
-                                    <img class="card-img-top" src="<%=toy.getImage()%>" alt="..."/>
+                                    <a href="MainController?btAction=Detail&toyId=<%=toy.getToyId()%>">
+                                        <img class="card-img-top" src="<%=toy.getImage()%>" alt="..."/></a>
 
 
                                     <div class="card-body">
                                         <div class="text-center">
 
                                             <!-- Product name -->
-                                            <h5 class="fw-bolder"><%=toy.getToyName()%></h5> 
+                                            <h5 class="fw-bolder">
+                                                <a href="detail.jsp" style="text-decoration: none; color: black;"><%=toy.getToyName()%></a></h5> 
                                         </div>
                                     </div>
                                     <ul class="text-center list-group-item">

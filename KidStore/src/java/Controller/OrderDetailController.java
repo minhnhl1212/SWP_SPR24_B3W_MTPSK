@@ -44,17 +44,18 @@ public class OrderDetailController extends HttpServlet {
         String warrantyCode;
         Code code = new Code();
         OrderDAO dao = new OrderDAO();
-        int orderId = (Integer)request.getAttribute("OrderID");
+        int orderId = (Integer)session.getAttribute("OrderID");
         HashMap<Toy,Integer> cartList = (HashMap<Toy,Integer>) session.getAttribute("cartList");
         for(HashMap.Entry<Toy, Integer> c : cartList.entrySet()){
             toyId = c.getKey().getToyId();
             quantity = c.getValue();
             price = c.getKey().getPrice()*c.getKey().getDiscount();
             warrantyCode = code.Code();
-            int a = dao.CreateOrderDetail(toyId, quantity, price, orderId, warrantyCode, "Đã Mua");
+            int a = dao.CreateOrderDetail(toyId, quantity, price, orderId, warrantyCode, "Đang xử lý");
             System.out.println(a);
         }
         session.setAttribute("cartList", null);
+        session.setAttribute("OrderID", null);
         RequestDispatcher rd = request.getRequestDispatcher("home.jsp");
         rd.forward(request, response);
         }

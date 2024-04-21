@@ -72,7 +72,7 @@
     </style>
     <body>
         <%@include file="components/navBarComponent.jsp" %>
-
+        <% Toy toy = (Toy) session.getAttribute("toy");%>
         <div class="container">
             <div class="product-container">
                 <div class="row">                   
@@ -108,7 +108,7 @@
                         <form action="CartController">
                             <div class="product-details">
 
-                                <% Toy toy = (Toy) session.getAttribute("toy");%>
+
                                 <input type="hidden" name="toyId" value="<%=toy.getToyId()%>">
                                 <div class="product-name"><%=toy.getToyName()%></div>
                                 <div class="rating">
@@ -138,9 +138,7 @@
                     </div>
                     <div class="product-details">
                         <div class="col-md-6">
-                            Bộ sưu tập gồm 12 nhân vật thường và 1 nhân vật hiếm.
-                            Kích thước: 6-9cm
-                            Chất liệu: nhựa PVC/ABS
+                            <%=toy.getDescription()%>
                         </div>                                                                
                     </div>
                 </div>
