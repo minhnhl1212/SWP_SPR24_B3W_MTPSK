@@ -12,7 +12,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <!-- Boxicons -->
@@ -120,8 +120,7 @@
                 <div class="table-data-revenue">
                     <div class="order">
                         <div class="head">
-                            <h3>Revenue Streams</h3>
-                            <h3 class="right">Total Revenue: <%=totalRevenue%> Đ</h3>
+                            <h3>Total Revenue: <%=totalRevenue%> Đ</h3>
                         </div>
                         <table>
                             <thead>

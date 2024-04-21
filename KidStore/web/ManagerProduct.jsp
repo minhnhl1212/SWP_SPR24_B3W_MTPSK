@@ -3,6 +3,7 @@
 <%@page import="DTO.Category"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="DTO.Account"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -210,7 +211,7 @@
                         <%}
                         } else {
                         %>
-                    <p>KhÙng cÛ ?? ch?i n‡o</p>
+                    <p>Kh√¥ng c√≥ ?? ch?i n√†o</p>
                     <%
                         }
                     %>                
@@ -248,7 +249,7 @@
                                         <%}
                                         } else {
                                         %>
-                                        <p>KhÙng cÛ lo?i ?? ch?i n‡o</p>
+                                        <p>Kh√¥ng c√≥ lo?i ?? ch?i n√†o</p>
                                         <%
                                             }
                                         %>

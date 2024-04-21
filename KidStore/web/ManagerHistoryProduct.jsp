@@ -10,6 +10,7 @@
 <%@page import="DTO.Category"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="DTO.Account"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
