@@ -96,12 +96,12 @@ public class LoginController extends HttpServlet {
                         url = HOMEPAGE;
                     }
                 } else {
-                    request.setAttribute("LOGIN_ERROR", "Tài Khoản của bạn đã bị vô hiệu hóa");
+                    request.setAttribute("LOGIN_ERROR", "Your Account has been banned");
                     url = LOGINPAGE;
                 }
             } //sai trả về login và báo lỗi
             else {
-                request.setAttribute("LOGIN_ERROR", "Username hoặc password của bạn đã sai");
+                request.setAttribute("LOGIN_ERROR", "Username or password is incorrect");
                 url = LOGINPAGE;
             }
             RequestDispatcher rd = request.getRequestDispatcher(url);
