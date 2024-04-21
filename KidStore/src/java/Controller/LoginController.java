@@ -32,7 +32,7 @@ import javax.servlet.http.HttpSession;
 public class LoginController extends HttpServlet {
 
     private final static String LOGINPAGE = "login.jsp";
-    private static final String HOMEPAGE = "home.jsp";
+    private static final String HOMEPAGE = "MainController";
     private static final String ADMIN = "AccountController";
     private static final String STAFF = "ManagerProduct.jsp";
 
@@ -72,7 +72,7 @@ public class LoginController extends HttpServlet {
             //Lấy danh sách News
             NewsDAO newsDAO = new NewsDAO();
             ArrayList<News> newsList = newsDAO.newsList();
-            
+
             //Lấy danh sách OrderHistory
             OrderDAO orderDAO = new OrderDAO();
             ArrayList<OrderHistory> orderList = orderDAO.orderHistory();
@@ -83,21 +83,25 @@ public class LoginController extends HttpServlet {
             session.setAttribute("CATEGORY_LIST_NOT_APPROVE", categoryListNotApprove);
             session.setAttribute("TOY_LIST_NOT_APPROVE", toyListNotApprove);
             session.setAttribute("NEWS_LIST", newsList);
-            
             //đúng trả về home
-            if (acc != null && acc.isActive()) {
+            if (acc != null) {
                 session.setAttribute("acc", acc);
-                if (acc.getRoleId() == 1) {
-                    url = ADMIN;
-                } else if (acc.getRoleId() == 2) {
-                    session.setAttribute("ORDER_HISTORY", orderList);
-                    url = STAFF;
-                } else if (acc.getRoleId() == 3) {
-                    url = HOMEPAGE;
+                if (acc.isActive()) {
+                    if (acc.getRoleId() == 1) {
+                        url = ADMIN;
+                    } else if (acc.getRoleId() == 2) {
+                        session.setAttribute("ORDER_HISTORY", orderList);
+                        url = STAFF;
+                    } else if (acc.getRoleId() == 3) {
+                        url = HOMEPAGE;
+                    }
+                } else {
+                    request.setAttribute("LOGIN_ERROR", "Tài Khoản của bạn đã bị vô hiệu hóa");
+                    url = LOGINPAGE;
                 }
             } //sai trả về login và báo lỗi
             else {
-                request.setAttribute("LOGIN_ERROR", "Username or password is incorrect");
+                request.setAttribute("LOGIN_ERROR", "Username hoặc password của bạn đã sai");
                 url = LOGINPAGE;
             }
             RequestDispatcher rd = request.getRequestDispatcher(url);

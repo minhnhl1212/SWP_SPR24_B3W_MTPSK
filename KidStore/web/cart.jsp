@@ -25,10 +25,7 @@
             margin-bottom: 20px;
         }
     </style>
-    <%  int i = 1;
-       double sum = 0, discount = 0;
-       HashMap<Toy, Integer> cartItems = (HashMap<Toy, Integer>) session.getAttribute("cartList");
-    %>
+
     <body>
         <%@include file="components/navBarComponent.jsp" %>
 
@@ -49,8 +46,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <%for (HashMap.Entry<Toy, Integer> c : cartItems.entrySet()) {
-                                    double prices = c.getKey().getPrice() * c.getValue() * c.getKey().getDiscount();
+                            <%  int i = 1;
+                                double sum = 0, discount = 0;
+                                HashMap<Toy, Integer> cartItems = (HashMap<Toy, Integer>) session.getAttribute("cartList");
+                                if (cartItems != null) {
+                                    for (HashMap.Entry<Toy, Integer> c : cartItems.entrySet()) {
+                                        double prices = c.getKey().getPrice() * c.getValue() * c.getKey().getDiscount();
                             %>
                         <form action="CartController">
                             <tr>
@@ -61,10 +62,10 @@
                             <td><%=c.getKey().getPrice() * c.getKey().getDiscount()%> đ</td>
                             <td><input onchange="this.form.submit()" type="number" name="InputValue" value="<%=c.getValue()%>"/></td>
                             <td><% sum += prices;%><%=prices%> đ</td>
-                            <td><a href="DeleteCartController?productId=<%=c.getKey().getToyId()%>" class="btn btn-outline-danger"><i class="bi bi-trash"></i></a></td>
+                            <td><a method="POST" href="DeleteCartController?productId=<%=c.getKey().getToyId()%>" class="btn btn-outline-danger"><i class="bi bi-trash"></i></a></td>
                             </tr>
                         </form>
-                        <%}%>
+                        <%}}%>
 
                         </tbody>
                     </table>
@@ -72,30 +73,31 @@
                 </div>
 
                 <div class="col-md-7">
-                    <a href="MainController" class="btn btn-light btn-block"><- Về Trang Chủ</a>
+                    <a href="MainController" class="btn btn-light btn-block" method="POST"><- Về Trang Chủ</a>
                 </div>
 
                 <div class="col-md-5">
                     <form action="VoucherController">
-                    <div class="input-group mb-4">
-                        <input type="text" class="form-control" placeholder="Enter voucher code" name="Voucher">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-danger" type="submit">Áp dụng</button>
+                        <div class="input-group mb-4">
+                            <input type="text" class="form-control" placeholder="Enter voucher code" name="Voucher">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-danger" type="submit">Áp dụng</button>
+                            </div>
                         </div>
-                    </div>
                     </form>
                     <%  double DiscountValue = 0;
-                    double Discount = 1;
-                         String DiscountParam = (String) session.getAttribute("discount");
-                         if(DiscountParam!=null){
-                             Discount = Double.parseDouble(DiscountParam);}%>
-                             
+                        double Discount = 1;
+                        String DiscountParam = (String) session.getAttribute("discount");
+                        if (DiscountParam != null) {
+                            Discount = Double.parseDouble(DiscountParam);
+                        }%>
+
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Summary</h5>
                             <p class="card-text">Subtotal:<%=sum%> đ</p>
-                            <p class="card-text">Discount:<%DiscountValue=sum-sum*Discount;%><%=DiscountValue%></p>
-                            <p class="card-text">Total: <%=sum-DiscountValue%> đ</p>
+                            <p class="card-text">Discount:<%DiscountValue = sum - sum * Discount;%><%=DiscountValue%></p>
+                            <p class="card-text">Total: <%=sum - DiscountValue%> đ</p>
                         </div>
                     </div>
                     <a href="checkout.jsp" class="btn btn-success btn-block">Thanh Toán</a>

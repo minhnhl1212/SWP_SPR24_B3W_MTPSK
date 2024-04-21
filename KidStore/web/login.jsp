@@ -33,7 +33,7 @@
                     <img src="img/background-register.jpg" style="max-width: 100%; height: 100vh; margin-left: -1vw">
                 </div>
                 <div class="col-md-5">
-                    <form id="loginForm" style="margin-top: 10%" action="LoginController" onsubmit="return validateForm()">
+                    <form id="loginForm" style="margin-top: 10%" action="LoginController" onsubmit="return validateForm()" method="POST">
                         <h1 style="text-align: center; font-weight: 800; color: #d8ffde; text-shadow: 4px 3px 10px #1a451b">LOGIN</h1>
                         <div style="margin-left: 3%">
                             <label for="fullname">User Name</label><br>
