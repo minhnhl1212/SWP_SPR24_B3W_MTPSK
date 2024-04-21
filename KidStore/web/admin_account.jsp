@@ -36,13 +36,13 @@
                     </a>
                 </li>
                 <li>
-                    <a href="admin_product.jsp">
+                    <a href="AdminProductController">
                         <i class='bx bxs-archive' ></i>
                         <span class="text">Product</span>
                     </a>
                 </li>
                 <li>
-                    <a href="admin_category.jsp">
+                    <a href="AdminCategoryController">
                         <i class='bx bx-add-to-queue'></i>
                         <span class="text">Category</span>
                     </a>

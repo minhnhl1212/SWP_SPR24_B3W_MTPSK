@@ -75,7 +75,7 @@
                     }
                     if (paymentMethod.value === "cashOnDelivery") {
                         alert("Đơn hàng của bạn đã được xác nhận. Chúng tôi sẽ liên hệ với bạn để sắp xếp giao hàng.");
-                    } 
+                    }
                     return true;
                 }
             </script>

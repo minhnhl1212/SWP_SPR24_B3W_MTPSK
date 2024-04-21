@@ -184,6 +184,14 @@
         <servlet-name>VoucherController</servlet-name>
         <servlet-class>Controller.VoucherController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminProductController</servlet-name>
+        <servlet-class>Controller.AdminProductController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminCategoryController</servlet-name>
+        <servlet-class>Controller.AdminCategoryController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -367,6 +375,14 @@
     <servlet-mapping>
         <servlet-name>VoucherController</servlet-name>
         <url-pattern>/VoucherController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminProductController</servlet-name>
+        <url-pattern>/AdminProductController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminCategoryController</servlet-name>
+        <url-pattern>/AdminCategoryController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
