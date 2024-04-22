@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="DTO.Account"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="DTO.Toy"%>
@@ -82,7 +83,7 @@
             <%  int i = 1;
                 double sum = 0, discount = 0;
                 HashMap<Toy, Integer> cartItems = (HashMap<Toy, Integer>) session.getAttribute("cartList");
-            Account a = (Account) session.getAttribute("acc");%>
+                Account a = (Account) session.getAttribute("acc");%>
             <div class="row">
                 <div class="container">
                     <div class="row">
@@ -124,17 +125,23 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <%for (HashMap.Entry<Toy, Integer> c : cartItems.entrySet()) {
+                                            <%
+                                                DecimalFormat vnCurrencyFormat = new DecimalFormat("###,### VNĐ");
+                                                for (HashMap.Entry<Toy, Integer> c : cartItems.entrySet()) {
                                                     double prices = c.getKey().getPrice() * c.getValue() * c.getKey().getDiscount();
+                                                    double eachPrice = c.getKey().getPrice() * c.getKey().getDiscount();
+
+                                                    String formatPrices = vnCurrencyFormat.format(prices);
+                                                    String formatEachPrices = vnCurrencyFormat.format(eachPrice);
                                             %>
                                         <form action="CartController">
 
                                             <tr>
                                                 <td><img src="<%=c.getKey().getImage()%>" width="50" alt="Product Image"></td>
                                                 <td><%=c.getKey().getToyName()%></td>
-                                                <td><%=c.getKey().getPrice() * c.getKey().getDiscount()%> đ</td>
+                                                <td><%=formatEachPrices%></td>
                                                 <td><%=c.getValue()%></td>
-                                                <td><%sum += prices;%><%=prices%> đ</td>
+                                                <td><%sum += prices;%><%=formatPrices%></td>
                                             </tr>
                                         </form>
                                         <%}%>
@@ -142,19 +149,27 @@
                                     </table>
                                 </div>
                                 <h5>Card Total</h5>
-                                <%  double DiscountValue = 0;
+                                <%
+                                    String formatSum = vnCurrencyFormat.format(sum);
+                                    double DiscountValue = 0;
                                     double Discount = 1;
+                                    double totalPrice = 0;
                                     String DiscountParam = (String) session.getAttribute("discount");
-                                                     if (DiscountParam != null) {
-                                                         Discount = Double.parseDouble(DiscountParam);
-                                                     }%>
+                                    if (DiscountParam != null) {
+                                        Discount = Double.parseDouble(DiscountParam);
+                                        DiscountValue = sum - sum * Discount;
+                                        totalPrice = sum - DiscountValue;
+                                    }
+                                    String formatDiscountValue = vnCurrencyFormat.format(DiscountValue);
+                                    String formatTotalPrice = vnCurrencyFormat.format(totalPrice);
+                                %>
                                 <div class="card-body">
                                     <h5 class="card-title">Summary</h5>
-                                    <p class="card-text">Subtotal:<%=sum%> đ</p>
-                                    <p class="card-text">Discount:<%DiscountValue = sum - sum * Discount;%><%=DiscountValue%></p>
-                                    <p class="card-text">Total: <%=sum - DiscountValue%> đ</p>
+                                    <p class="card-text">Subtotal: <%=formatSum%></p>
+                                    <p class="card-text">Discount: <%=formatDiscountValue%></p>
+                                    <p class="card-text">Total: <%=formatTotalPrice%></p>
                                 </div>
-                                <%session.setAttribute("orderAmount", sum-DiscountValue);%>
+                                <%session.setAttribute("orderAmount", sum - DiscountValue);%>
                             </div>
 
                         </div>
