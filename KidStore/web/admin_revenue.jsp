@@ -4,6 +4,7 @@
     Author     : TUF
 --%>
 
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <%@page import="DTO.OrderSold"%>
@@ -24,8 +25,8 @@
     <body>
 
         <%
-     String desiredFormat = "yyyy-MM-dd";
-     SimpleDateFormat sdf = new SimpleDateFormat(desiredFormat);%>
+            String desiredFormat = "yyyy-MM-dd";
+            SimpleDateFormat sdf = new SimpleDateFormat(desiredFormat);%>
         <!-- SIDEBAR -->
         <section id="sidebar">
             <a href="#" class="brand">
@@ -101,13 +102,17 @@
             </nav>
             <!-- NAVBAR -->
             <% ArrayList<OrderSold> orderList = (ArrayList<OrderSold>) session.getAttribute("ORDER_LIST");
+
+                DecimalFormat vnCurrencyFormat = new DecimalFormat("###,### VNĐ");
                 double totalRevenue = 0;
                 int i = 1;
-                if(orderList!=null){
-                for (OrderSold o : orderList) {
-                    totalRevenue += o.getTotalPrice();
+                if (orderList != null) {
+                    for (OrderSold o : orderList) {
+                        totalRevenue += o.getTotalPrice();
+                    }
                 }
-                }
+                
+                String formatTotalRevenue = vnCurrencyFormat.format(totalRevenue);
             %>
             <!-- MAIN -->
             <main class="">
@@ -120,7 +125,7 @@
                 <div class="table-data-revenue">
                     <div class="order">
                         <div class="head">
-                            <h3>Total Revenue: <%=totalRevenue%> Đ</h3>
+                            <h3>Total Revenue: <%=formatTotalRevenue%></h3>
                         </div>
                         <table>
                             <thead>
@@ -135,10 +140,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <% if(orderList!=null){
-                                    for (OrderSold e : orderList) {
-                                        // Format the date using the SimpleDateFormat object
-                                        String formattedDate = sdf.format(e.getOrderDate());
+                                <% if (orderList != null) {
+                                        for (OrderSold e : orderList) {
+                                            // Format the date using the SimpleDateFormat object
+                                            String formattedDate = sdf.format(e.getOrderDate());
+                                            String formatTotalPrice = vnCurrencyFormat.format(e.getTotalPrice());
                                 %>
                                 <tr>
                                     <td><%=i++%></td>
@@ -147,9 +153,10 @@
                                     <td><%=e.getQuantity()%></td>
                                     <td><%=e.getFullName()%></td>
                                     <td><%=formattedDate%></td>
-                                    <td><%=e.getTotalPrice()%> Đ</td>
+                                    <td><%=formatTotalPrice%></td>
                                 </tr>
-                                <%}}%>
+                                <%}
+                                    }%>
                             </tbody>
                         </table>
                     </div>
