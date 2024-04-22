@@ -19,10 +19,22 @@ public class OrderWarranty {
     private String warrantyCode;
     private String nameUser;
     private String descriptionWarranty;
+    private double price;
+    private String feedback;
 
     public OrderWarranty(int orderDetailId) {
         this.orderDetailId = orderDetailId;
     }
+
+    public OrderWarranty(int orderDetailId, String toyName, String nameUser, double price, String feedback) {
+        this.orderDetailId = orderDetailId;
+        this.toyName = toyName;
+        this.nameUser = nameUser;
+        this.price = price;
+        this.feedback = feedback;
+    }
+    
+    
 
     public OrderWarranty(int orderDetailId, String phone, String address, String descriptionWarranty) {
         this.orderDetailId = orderDetailId;
@@ -140,5 +152,21 @@ public class OrderWarranty {
 
     public void setDescriptionWarranty(String descriptionWarranty) {
         this.descriptionWarranty = descriptionWarranty;
+    }
+
+    public String getFeedback() {
+        return feedback;
+    }
+
+    public void setFeedback(String feedback) {
+        this.feedback = feedback;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 }

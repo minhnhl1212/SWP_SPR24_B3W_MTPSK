@@ -192,6 +192,10 @@
         <servlet-name>AdminCategoryController</servlet-name>
         <servlet-class>Controller.AdminCategoryController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoadOrderFeedback</servlet-name>
+        <servlet-class>Controller.LoadOrderFeedback</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -383,6 +387,10 @@
     <servlet-mapping>
         <servlet-name>AdminCategoryController</servlet-name>
         <url-pattern>/AdminCategoryController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadOrderFeedback</servlet-name>
+        <url-pattern>/LoadOrderFeedback</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

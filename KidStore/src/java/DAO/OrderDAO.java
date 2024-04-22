@@ -64,7 +64,7 @@ public class OrderDAO {
                         + "           ,?\n"
                         + "           ,?\n"
                         + "           ,?\n"
-                        + "           ,N'Đã Mua')";
+                        + "           ,N'Đang Xử Lí')";
                 ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 ps.setInt(1, user_id);
                 ps.setInt(2, voucher_id);
@@ -98,14 +98,13 @@ public class OrderDAO {
             if (con != null) {
                 String sql = "INSERT INTO OrderDetail "
                         + "(toy_id, quantity, OD_price, order_id, warranty_code, status) "
-                        + "VALUES (?, ?, ?, ?, ?, ?)";
+                        + "VALUES (?, ?, ?, ?, ?, N'Không Có Yêu Cầu Bảo Hành')";
                 ps = con.prepareStatement(sql);
                 ps.setInt(1, toyId);
                 ps.setInt(2, quantity);
                 ps.setDouble(3, price);
                 ps.setInt(4, orderId);
                 ps.setString(5, warrantyCode);
-                ps.setString(6, status);
                 work = ps.executeUpdate();
             }
         } catch (Exception e) {
@@ -202,6 +201,32 @@ public class OrderDAO {
             closeConnection();
         }
         return listOrder;
+    }
+
+    public ArrayList<OrderWarranty> orderFeedback() throws SQLException, Exception {
+        ArrayList<OrderWarranty> listFeedback = new ArrayList<>();
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "select OrderDetail.order_detail_id , Toy.toy_name, Category.category_name, OrderDetail.OD_price, OrderDetail.feedback\n"
+                        + "from Toy \n"
+                        + "inner join OrderDetail on Toy.toy_id = OrderDetail.toy_id\n"
+                        + "inner join [Order] on OrderDetail.order_id = [Order].order_id\n"
+                        + "inner join Category on Toy.category_id = Category.category_id\n"
+                        + "where Toy.category_id = Category.category_id and [Order].status_order like N'Đã Giao Hàng'";
+                ps = con.prepareStatement(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    OrderWarranty list = new OrderWarranty(rs.getInt("order_detail_id"), rs.getString("toy_name"), rs.getString("category_name"), rs.getDouble("OD_price"), rs.getString("feedback"));
+                    listFeedback.add(list);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+        return listFeedback;
     }
 
     public ArrayList<OrderWarranty> orderWarranty() throws SQLException, Exception {
@@ -502,11 +527,12 @@ public class OrderDAO {
         }
         return warranty;
     }
-    public ArrayList<OrderSold> getAllOrderSold() throws Exception{
+
+    public ArrayList<OrderSold> getAllOrderSold() throws Exception {
         ArrayList<OrderSold> ordersold_list = new ArrayList<>();
-        try{
+        try {
             con = DBUtils.getConnection();
-            if(con!=null){
+            if (con != null) {
                 String sql = "select Image.image_toy, Toy.toy_name, OrderDetail.quantity, "
                         + "Account.full_name, [Order].order_date, [Order].order_amount\n"
                         + "from Toy \n"
@@ -515,23 +541,21 @@ public class OrderDAO {
                         + "inner join Image on Toy.toy_id = Image.toy_id\n"
                         + "inner join Account on [Order].user_id = Account.user_id\n"
                         + "where [Order].status_order= N'Đã Giao Hàng'";
-                ps= con.prepareStatement(sql);
+                ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
-                while(rs.next()){
+                while (rs.next()) {
                     OrderSold os = new OrderSold(rs.getString("image_toy"),
                             rs.getString("toy_name"),
                             rs.getInt("quantity"), rs.getString("full_name"),
-                            rs.getDate("order_date"),rs.getDouble("order_amount"));
+                            rs.getDate("order_date"), rs.getDouble("order_amount"));
                     ordersold_list.add(os);
                 }
             }
-    }
-        catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        }
-        finally{
+        } finally {
             closeConnection();
         }
         return ordersold_list;
-}
+    }
 }
