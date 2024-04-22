@@ -41,6 +41,7 @@ public class VoucherController extends HttpServlet {
             VoucherDAO dao = new VoucherDAO();
             String discount = String.valueOf(dao.getVoucherValue(voucher));
             session.setAttribute("discount", discount);
+            session.setAttribute("vouchernamecode", voucher);
             RequestDispatcher rd = request.getRequestDispatcher("cart.jsp");
             rd.forward(request, response);
         } catch (Exception e) {

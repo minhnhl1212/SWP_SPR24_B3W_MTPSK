@@ -158,8 +158,8 @@
                                     if (DiscountParam != null) {
                                         Discount = Double.parseDouble(DiscountParam);
                                         DiscountValue = sum - sum * Discount;
-                                        totalPrice = sum - DiscountValue;
                                     }
+                                    totalPrice = sum - DiscountValue; 
                                     String formatDiscountValue = vnCurrencyFormat.format(DiscountValue);
                                     String formatTotalPrice = vnCurrencyFormat.format(totalPrice);
                                 %>

@@ -74,7 +74,8 @@
                             </tr>
                         </form>
                         <%}
-                            }%>
+                            }
+                        %>
 
                         </tbody>
                     </table>
@@ -88,13 +89,15 @@
                 <div class="col-md-5">
                     <form action="VoucherController">
                         <div class="input-group mb-4">
-                            <input type="text" class="form-control" placeholder="Enter voucher code" name="Voucher">
+                           <% String namecode = (String) session.getAttribute("vouchernamecode");
+                            if(namecode==null) namecode="";%>
+                            <input type="text" class="form-control" placeholder="Enter voucher code" name="Voucher" value="<%=namecode%>">
                             <div class="input-group-append">
                                 <button class="btn btn-outline-danger" type="submit">Áp dụng</button>
                             </div>
                         </div>
                     </form>
-                    <%
+                    <%  
                         String formatSum = vnCurrencyFormat.format(sum);
                         double DiscountValue = 0;
                         double Discount = 1;
@@ -102,10 +105,9 @@
                         String DiscountParam = (String) session.getAttribute("discount");
                         if (DiscountParam != null) {
                             Discount = Double.parseDouble(DiscountParam);
-                            
                             DiscountValue = sum - sum * Discount;
-                            totalPrice = sum - DiscountValue;
                         }
+                        totalPrice = sum - DiscountValue;
                         String formatDiscountValue = vnCurrencyFormat.format(DiscountValue);
                         String formatTotalPrice = vnCurrencyFormat.format(totalPrice);
                     %>
