@@ -1,4 +1,5 @@
 <%@page import="java.text.DecimalFormat"%>
+<%@page import="DTO.OrderWarranty"%>
 <%@page import="DTO.Account"%>
 <%@page import="DTO.OrderHistory"%>
 <%@page import="java.util.ArrayList"%>
@@ -28,6 +29,20 @@
         .search-bar{
             width: 120%;
             height: auto;
+        }
+        .popup-form {
+            display: none;
+            width: 350px;
+            height: 245px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #80dfff;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
     </style>
     <body>
@@ -82,9 +97,9 @@
                         DecimalFormat vnCurrencyFormat = new DecimalFormat("###,### VNĐ");
                         if (orderList != null && acc != null) {
                             for (OrderHistory order : orderList) {
-                        String formatPrice = vnCurrencyFormat.format(order.getPrice());
-                        String formatOrderPrice = vnCurrencyFormat.format(order.getOrderPrice());
-                        String formatOrderAmount = vnCurrencyFormat.format(order.getOrderAmount());
+                                String formatPrice = vnCurrencyFormat.format(order.getPrice());
+                                String formatOrderPrice = vnCurrencyFormat.format(order.getOrderPrice());
+                                String formatOrderAmount = vnCurrencyFormat.format(order.getOrderAmount());
                     %>
 
                     <!-- đơn thứ 1-->
@@ -114,10 +129,16 @@
                                                 <div class="product-name"><%=order.getDescription()%></div>
                                             </div>
                                             <div class="col-md-4">
-                                                <div class="product-price" style="display: flex; align-items: center; justify-content: flex-end; "><del><%= formatPrice %></del> </div></br>
+                                                <div class="product-price" style="display: flex; align-items: center; justify-content: flex-end; "><del><%= formatPrice%></del> </div></br>
                                                 <div class="product-price" style="display: flex; align-items: center; justify-content: flex-end; "><%=formatOrderPrice%></div></br>
-                                                <div hidden="" class="product-price" style="display: flex; align-items: center; justify-content: flex-end; font-size: 16px;"><button class="sendFeedback"><a href="sendFeedbackController">Send Feedback</a></button></div>
-                                            </div>
+                                                <div class="product-price" style="display: flex; align-items: center; justify-content: flex-end; font-size: 16px;">
+                                                    <button class="sendFeedback">
+                                                        <a href="#" style="text-decoration: none; color: black;" onclick="togglePopup()">Send Feedback<i class='bx bx-mail-send'></i></a>
+                                                    </button>
+                                                    </br>
+                                                    <p style="color: green">${SEND_FEEDBACK_SUCCESS}</p>
+                                                    <p style="color: red">${SEND_FEEDBACK_FAILED}</p>
+                                                </div>                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -131,10 +152,23 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="popup-form" id="popupForm">                    
+                                    <form action="SendFeedbackController">
+                                        <h4>Gửi Feedback</h4>
+                                        <a class="close" href="#" style="text-decoration: none; color: black; margin-top: -14%;" onclick="togglePopup()">X</a>                        
+                                        <div class="form-group">
+                                            <label for="issueDescription">Mô tả vấn đề:</label>
+                                            <textarea class="form-control" id="issueDescription" name="issueDescription" rows="3"></textarea>
+                                            <input type="hidden" name="userId" value="<%=acc.getUserId()%>">
+                                            <input type="hidden" name="orderId" value="<%=order.getOrderId()%>">
+                                        </div>     
+
+                                        <button type="submit" class="btn btn-primary d-block mx-auto" >Gửi yêu cầu</button>
+                                    </form>                    
+                                </div>
                             </div>
                         </div>
                     </div>
-
                     <%}
                     } else {
                     %>
@@ -142,7 +176,6 @@
                     <%
                         }
                     %>
-
                 </div>
             </div>
         </div>
@@ -150,4 +183,10 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src="js/scripts.js"></script>
     </body>
+    <script>
+                                                function togglePopup() {
+                                                    var popup = document.getElementById("popupForm");
+                                                    popup.style.display = (popup.style.display === "block") ? "none" : "block";
+                                                }
+    </script>
 </html>
