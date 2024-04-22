@@ -1,4 +1,4 @@
-
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="DTO.Account"%>
 <%@page import="DTO.OrderHistory"%>
 <%@page import="java.util.ArrayList"%>
@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">s
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Profile</title>
         <!-- Bootstrap icons-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet"/>
@@ -78,8 +78,13 @@
 
                     <%
                         ArrayList<OrderHistory> orderList = (ArrayList<OrderHistory>) session.getAttribute("ORDER_HISTORY");
+                        /* Format VND */
+                        DecimalFormat vnCurrencyFormat = new DecimalFormat("###,### VNĐ");
                         if (orderList != null && acc != null) {
                             for (OrderHistory order : orderList) {
+                        String formatPrice = vnCurrencyFormat.format(order.getPrice());
+                        String formatOrderPrice = vnCurrencyFormat.format(order.getOrderPrice());
+                        String formatOrderAmount = vnCurrencyFormat.format(order.getOrderAmount());
                     %>
 
                     <!-- đơn thứ 1-->
@@ -109,9 +114,9 @@
                                                 <div class="product-name"><%=order.getDescription()%></div>
                                             </div>
                                             <div class="col-md-4">
-                                                <div class="product-price" style="display: flex; align-items: center; justify-content: flex-end; "><del><%=order.getPrice()%> VNĐ</del> </div></br>
-                                                <div class="product-price" style="display: flex; align-items: center; justify-content: flex-end; "><%=order.getOrderPrice()%> VNĐ</div></br>
-                                                <div class="product-price" style="display: flex; align-items: center; justify-content: flex-end; font-size: 16px;"><button class="sendFeedback"><a href="sendFeedbackController">Send Feedback</a></button></div>
+                                                <div class="product-price" style="display: flex; align-items: center; justify-content: flex-end; "><del><%= formatPrice %></del> </div></br>
+                                                <div class="product-price" style="display: flex; align-items: center; justify-content: flex-end; "><%=formatOrderPrice%></div></br>
+                                                <div hidden="" class="product-price" style="display: flex; align-items: center; justify-content: flex-end; font-size: 16px;"><button class="sendFeedback"><a href="sendFeedbackController">Send Feedback</a></button></div>
                                             </div>
                                         </div>
                                     </div>
@@ -121,7 +126,7 @@
                                     <div class="col-md-12" >
                                         <div class="row">
                                             <div class="product-name" style=" display: flex;justify-content: flex-end;">                                                  
-                                                <h5><i class='bx bx-money'></i> Thành tiền: <%=order.getOrderAmount()%> VNĐ</h5>
+                                                <h5><i class='bx bx-money'></i> Thành tiền: <%=formatOrderAmount%></h5>
                                             </div>                            
                                         </div>
                                     </div>

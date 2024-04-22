@@ -56,6 +56,8 @@ public class OrderDetailController extends HttpServlet {
         }
         session.setAttribute("cartList", null);
         session.setAttribute("OrderID", null);
+        session.setAttribute("discount", null);
+        session.setAttribute("vouchernamecode", null);
         RequestDispatcher rd = request.getRequestDispatcher("home.jsp");
         rd.forward(request, response);
         }

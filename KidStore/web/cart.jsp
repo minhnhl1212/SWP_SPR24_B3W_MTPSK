@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="DTO.Toy"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -46,12 +47,19 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <%  int i = 1;
+                            <%                                /* Format VND */
+                                DecimalFormat vnCurrencyFormat = new DecimalFormat("###,### VNĐ");
+                                int i = 1;
                                 double sum = 0, discount = 0;
                                 HashMap<Toy, Integer> cartItems = (HashMap<Toy, Integer>) session.getAttribute("cartList");
                                 if (cartItems != null) {
                                     for (HashMap.Entry<Toy, Integer> c : cartItems.entrySet()) {
                                         double prices = c.getKey().getPrice() * c.getValue() * c.getKey().getDiscount();
+                                        double eachPrice = c.getKey().getPrice() * c.getKey().getDiscount();
+
+                                        String formatPrices = vnCurrencyFormat.format(prices);
+                                        String formatEachPrices = vnCurrencyFormat.format(eachPrice);
+
                             %>
                         <form action="CartController">
                             <tr>
@@ -59,14 +67,15 @@
                             <th scope="row"><%=i++%></th>
                             <td><img src="<%=c.getKey().getImage()%>" width="50"/></td>
                             <td><%=c.getKey().getToyName()%></td>
-                            <td><%=c.getKey().getPrice() * c.getKey().getDiscount()%> đ</td>
+                            <td><%=formatEachPrices%></td>
                             <td><input onchange="this.form.submit()" type="number" name="InputValue" value="<%=c.getValue()%>"/></td>
-                            <td><% sum += prices;%><%=prices%> đ</td>
+                            <td><% sum += prices;%><%=formatPrices%></td>
                             <td><a method="POST" href="DeleteCartController?productId=<%=c.getKey().getToyId()%>" class="btn btn-outline-danger"><i class="bi bi-trash"></i></a></td>
                             </tr>
                         </form>
                         <%}
-                            }%>
+                            }
+                        %>
 
                         </tbody>
                     </table>
@@ -80,25 +89,35 @@
                 <div class="col-md-5">
                     <form action="VoucherController">
                         <div class="input-group mb-4">
-                            <input type="text" class="form-control" placeholder="Enter voucher code" name="Voucher">
+                           <% String namecode = (String) session.getAttribute("vouchernamecode");
+                            if(namecode==null) namecode="";%>
+                            <input type="text" class="form-control" placeholder="Enter voucher code" name="Voucher" value="<%=namecode%>">
                             <div class="input-group-append">
                                 <button class="btn btn-outline-danger" type="submit">Áp dụng</button>
                             </div>
                         </div>
                     </form>
-                    <%  double DiscountValue = 0;
+                    <%  
+                        String formatSum = vnCurrencyFormat.format(sum);
+                        double DiscountValue = 0;
                         double Discount = 1;
+                        double totalPrice = 0;
                         String DiscountParam = (String) session.getAttribute("discount");
                         if (DiscountParam != null) {
                             Discount = Double.parseDouble(DiscountParam);
-                        }%>
+                            DiscountValue = sum - sum * Discount;
+                        }
+                        totalPrice = sum - DiscountValue;
+                        String formatDiscountValue = vnCurrencyFormat.format(DiscountValue);
+                        String formatTotalPrice = vnCurrencyFormat.format(totalPrice);
+                    %>
 
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Summary</h5>
-                            <p class="card-text">Subtotal:<%=sum%> đ</p>
-                            <p class="card-text">Discount:<%DiscountValue = sum - sum * Discount;%><%=DiscountValue%></p>
-                            <p class="card-text">Total: <%=sum - DiscountValue%> đ</p>
+                            <p class="card-text">Subtotal: <%=formatSum%></p>
+                            <p class="card-text">Discount: <%=formatDiscountValue%></p>
+                            <p class="card-text">Total: <%= formatTotalPrice%></p>
                         </div>
                     </div>
                     <a href="checkout.jsp" class="btn btn-success btn-block">Thanh Toán</a>
