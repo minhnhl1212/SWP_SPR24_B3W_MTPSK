@@ -141,7 +141,6 @@
                                     <input type="hidden" name="userId" value="<%=acc.getUserId()%>">
                                     <button type="submit" class="btn btn-primary d-block mx-auto" >Gửi yêu cầu</button>
                                 </form>
-
                             </div>
                             <%}
                             } else {
@@ -169,12 +168,12 @@
 
 
         </div>
-        <%@include file="components/footerComponent.jsp" %>
-        <script>
-            function togglePopup() {
-                var popup = document.getElementById("popupForm");
-                popup.style.display = (popup.style.display === "block") ? "none" : "block";
-            }
-        </script>
+        <%@include file="components/footerComponent.jsp" %>        
     </body>
+    <script>
+        function togglePopup() {
+            var popup = document.getElementById("popupForm");
+            popup.style.display = (popup.style.display === "block") ? "none" : "block";
+        }
+    </script>
 </html>

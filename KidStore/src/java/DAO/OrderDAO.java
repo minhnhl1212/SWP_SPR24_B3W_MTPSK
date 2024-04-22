@@ -229,6 +229,28 @@ public class OrderDAO {
         return listFeedback;
     }
 
+    public OrderWarranty sendFeedback(int orderDetailId, String feedback) throws SQLException, Exception {
+        OrderWarranty sendFeedback = null;
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "update OrderDetail\n"
+                        + "set feedback = ?\n"
+                        + "where order_id = ?";
+                ps = con.prepareStatement(sql);
+                ps.setString(1, feedback);
+                ps.setInt(2, orderDetailId);
+                ps.executeUpdate();
+                sendFeedback = new OrderWarranty(orderDetailId);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+        return sendFeedback;
+    }
+
     public ArrayList<OrderWarranty> orderWarranty() throws SQLException, Exception {
         ArrayList<OrderWarranty> listWarranty = new ArrayList<>();
         try {
