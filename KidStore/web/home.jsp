@@ -28,6 +28,43 @@
             height: 500px;
             object-fit: cover;
         }
+        .container{
+            max-width: 100%;
+        }
+        a.btn.btn-outline-dark.mt-auto {
+            background-color: orangered;
+        }
+        h3 {
+            color: orangered;
+            font-size: 36px;
+            font-weight: 600;
+        }
+        .text-black {
+            color: rgb(255 0 0) !important;
+        }
+        li a {
+            font-size: 20px;
+            font-weight: 600;
+        }
+        .col-md-2.mb-5 {
+            background-color: #f1f1f1;
+            border-radius: 20px;
+        }
+        .category_block li:hover {
+            background-color: #d9d9d9;
+        }
+
+        .category_block li a:hover {
+            color: white;
+            text-decoration: none;
+        }
+        h5, .h5 {
+            text-align: start;
+        }
+        a {
+            font-size: 16px;
+            
+        }
     </style>
     <body>
         <!-- Navbar-->
@@ -72,11 +109,11 @@
         %>
         <!-- Section-->
         <section class="py-5">
-            <div class="container px-4 px-lg-5 mt-5">
+            <div class="container mt-5">
                 <div class="row">
 
                     <!-- Section Left -->
-                    <div class="col-md-3 mb-5">
+                    <div class="col-md-2 mb-5">
 
                         <%
                             ArrayList<Category> categoryList = (ArrayList<Category>) session.getAttribute("CATEGORY_LIST");
@@ -101,18 +138,18 @@
                     </div>
 
                     <!-- Section Right -->             
-                    <div class="col-md-9">
+                    <div class="col-md-10">
                         <h3>Danh mục sản phẩm</h3>
 
                         <%-- Danh sách tất cả đồ chơi --%>
-                        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 justify-content-center">
+                        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-5 justify-content-center">
 
                             <%
                                 ArrayList<Toy> toyList = (ArrayList<Toy>) session.getAttribute("TOY_LIST");
                                 ArrayList<Toy> toyCategoryList = (ArrayList<Toy>) request.getAttribute("TOY_CATEGORY_LIST");
                                 if (toyList != null && toyCategoryList == null) {
                                     // Define the number of items to display per page
-                                    int itemsPerPage = 9;
+                                    int itemsPerPage = 15;
 
                                     // Get the current page number from the request parameter, default to 1 if not provided
                                     int currentPage = (request.getParameter("page") != null) ? Integer.parseInt(request.getParameter("page")) : 1;
@@ -142,7 +179,7 @@
                                         <div class="text-center">
 
                                             <!-- Product name -->
-                                            <h5 class="fw-bolder"><a href="detail.jsp" style="text-decoration: none; color: black;"><%=toy.getToyName()%></a></h5> 
+                                            <h5 class="fw-bolder"><a href="detail.jsp" style="text-decoration: none; color: #777676;"><%=toy.getToyName()%></a></h5> 
                                         </div>
                                     </div>
                                     <ul class="text-center list-group-item">
@@ -185,30 +222,29 @@
 
                             </div>
 
-
-
                             <%}
                             %>
 
                             <!-- Pagination Controls -->
-                            <div class="pagination">
-                                <% if (currentPage > 1) {%>
-                                <a href="?page=<%= currentPage - 1%>">&laquo; Previous</a>
-                                <% } %>
 
-                                <% int totalPages = (int) Math.ceil((double) toyList.size() / itemsPerPage); %>
-                                <% for (int i = 1; i <= totalPages; i++) { %>
-                                <% if (i == currentPage) {%>
-                                <span class="current-page"><%= i%></span>
-                                <% } else {%>
-                                <a href="?page=<%= i%>"><%= i%></a>
-                                <% } %>
-                                <% } %>
+                        </div>
+                        <div class="pagination">
+                            <% if (currentPage > 1) {%>
+                            <a href="?page=<%= currentPage - 1%>">&laquo; Previous</a>
+                            <% } %>
 
-                                <% if (currentPage < totalPages) {%>
-                                <a href="?page=<%= currentPage + 1%>">Next &raquo;</a>
-                                <% }%>
-                            </div>
+                            <% int totalPages = (int) Math.ceil((double) toyList.size() / itemsPerPage); %>
+                            <% for (int i = 1; i <= totalPages; i++) { %>
+                            <% if (i == currentPage) {%>
+                            <span class="current-page"><%= i%></span>
+                            <% } else {%>
+                            <a href="?page=<%= i%>"><%= i%></a>
+                            <% } %>
+                            <% } %>
+
+                            <% if (currentPage < totalPages) {%>
+                            <a href="?page=<%= currentPage + 1%>">Next &raquo;</a>
+                            <% }%>
                         </div>
 
                         <%-- Danh sách đồ chơi theo CategoryId --%>
@@ -216,14 +252,14 @@
 
                             <%} else if (toyCategoryList != null) {
                                 // Define the number of items to display per page
-                                int itemsPerPage = 9;
+                                int itemsPerPage = 15;
 
                                 // Get the current page number from the request parameter, default to 1 if not provided
                                 int currentPage = (request.getParameter("page") != null) ? Integer.parseInt(request.getParameter("page")) : 1;
 
                                 // Calculate the start and end index of items to display on the current page
                                 int startIndex = (currentPage - 1) * itemsPerPage;
-                                int endIndex = Math.min(startIndex + itemsPerPage, toyList.size());
+                                int endIndex = Math.min(startIndex + itemsPerPage, toyCategoryList.size());
 
                                 // Iterate over the subset of toyList based on the current page
                                 for (int i = startIndex; i < endIndex; i++) {
@@ -289,53 +325,46 @@
                                     </div>
                                 </div>
                             </div>
-
                             <%}
                             %>
+                        </div>
+                        <!-- Pagination Controls -->
+                        <div class="pagination">
+                            <% if (currentPage > 1) {%>
+                            <a href="?page=<%= currentPage - 1%>">&laquo; Previous</a>
+                            <% } %>
 
-                            <!-- Pagination Controls -->
-                            <div class="pagination">
-                                <% if (currentPage > 1) {%>
-                                <a href="?page=<%= currentPage - 1%>">&laquo; Previous</a>
-                                <% } %>
+                            <% int totalPages = (int) Math.ceil((double) toyList.size() / itemsPerPage); %>
+                            <% for (int i = 1; i <= totalPages; i++) { %>
+                            <% if (i == currentPage) {%>
+                            <span class="current-page"><%= i%></span>
+                            <% } else {%>
+                            <a href="?page=<%= i%>"><%= i%></a>
+                            <% } %>
+                            <% } %>
 
-                                <% int totalPages = (int) Math.ceil((double) toyList.size() / itemsPerPage); %>
-                                <% for (int i = 1; i <= totalPages; i++) { %>
-                                <% if (i == currentPage) {%>
-                                <span class="current-page"><%= i%></span>
-                                <% } else {%>
-                                <a href="?page=<%= i%>"><%= i%></a>
-                                <% } %>
-                                <% } %>
+                            <% if (currentPage < totalPages) {%>
+                            <a href="?page=<%= currentPage + 1%>">Next &raquo;</a>
+                            <% } %>
+                        </div>
 
-                                <% if (currentPage < totalPages) {%>
-                                <a href="?page=<%= currentPage + 1%>">Next &raquo;</a>
-                                <% } %>
-                            </div>
-
-
-                            <%} else {
-                            %>
-                            <p>Không có đồ chơi nào</p>
-                            <%
-                                }
-                            %>
-
-                        </div>   
-
-
-                    </div>
-
+                        <%} else {
+                        %>
+                        <p>Không có danh sách loại đồ chơi nào</p>
+                        <%
+                            }
+                        %>
+                    </div>   
                 </div>
+            </div>
+        </div>
+    </section>   
 
-
-        </section>   
-
-        <!-- Footer-->
-        <%@include file="components/footerComponent.jsp" %>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
-    </body>
+    <!-- Footer-->
+    <%@include file="components/footerComponent.jsp" %>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="js/scripts.js"></script>
+</body>
 </html>

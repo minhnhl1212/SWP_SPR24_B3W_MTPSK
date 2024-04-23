@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
  */
 public class AddNewsController extends HttpServlet {
     
-    private static final String NEWS = "news.jsp";
+    private static final String NEWS = "AddNew.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
