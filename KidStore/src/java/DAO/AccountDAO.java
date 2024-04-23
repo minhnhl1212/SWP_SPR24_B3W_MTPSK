@@ -97,4 +97,44 @@ public class AccountDAO {
             closeConnection();
         }
     }
+
+    public Account addNewAccount(String userName, String password, String fullName, String phone, String address, int roleId) throws SQLException, Exception {
+        Account user = null;
+        try {
+            System.out.println("addNewAccount");
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "insert into Account (username, password, full_name, phone, address, isActive, role_id) values (?,?,?,?,?,1,?)";
+                ps = con.prepareStatement(sql);
+                ps.setString(1, userName);
+                ps.setString(2, password);
+                ps.setString(3, fullName);
+                ps.setString(4, phone);
+                ps.setString(5, address);
+                ps.setInt(6, roleId);
+                ps.executeUpdate();
+                user = new Account(userName, password, fullName, phone, address, roleId);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+        return user;
+    }
+    
+    public void UpdateRoleAccount(int user_id, int role) throws Exception {
+        try {
+            con = DBUtils.getConnection();
+            String sql = "Update Account Set role_id=? where user_id=?";
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, role);
+            ps.setInt(2, user_id);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            closeConnection();
+        }
+    }
 }

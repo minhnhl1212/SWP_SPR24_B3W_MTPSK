@@ -424,6 +424,22 @@
         <servlet-name>SendFeedbackController</servlet-name>
         <url-pattern>/SendFeedbackController</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>AddNewAccountController</servlet-name>
+        <servlet-class>Controller.AddNewAccountController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditRoleAccountController</servlet-name>
+        <servlet-class>Controller.EditRoleAccountController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddNewAccountController</servlet-name>
+        <url-pattern>/AddNewAccount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditRoleAccountController</servlet-name>
+        <url-pattern>/EditRoleAccount</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

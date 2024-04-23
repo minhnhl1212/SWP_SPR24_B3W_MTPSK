@@ -23,18 +23,28 @@
     <style>
         .popup-form {
             display: none;
-            width: 350px;
-            height: 550px;
+            width: 700px;
+            height: 600px;
             position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            top: 10%;
+            left: 28%;
             background-color: whitesmoke;
             padding: 20px;
             border: 1px solid #ccc;
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
+
+        .close{
+            float: right;
+            font-size: 1.5rem;
+            font-weight: 700;
+            line-height: 1;
+            color: #000;
+            text-shadow: 0 1px 0 #fff;
+            opacity: .5;
+        }
+
     </style>
 
     <body>
@@ -131,14 +141,45 @@
                             <button type="button" class="button-add-account" onclick="togglePopup()">Add new account</button>
 
                             <!-- Thêm popup form -->
-                            
+
+
                             <div class="popup-form" id="popupForm">
-                                <form action="">
-                                    <h4>Add new account</h4>
+                                <form method="post" action="AddNewAccount">
+                                    <h3>Add new account</h3>
+                                    <a class="close" href="#" style="text-decoration: none; color: black; margin-top: -5%;" onclick="togglePopup()">X</a> 
+                                    <div class="form-add-account">
+                                        <label for="fullname">Full Name: </label>
+                                        <input style="border-style: none none solid; width: 100%; margin: 15px 0; background-color: whitesmoke;" type="text" id="fullName" name="full_name"><br>
+                                        <label for="phone">Phone: </label>
+                                        <input style="border-style: none none solid; width: 100%; margin: 15px 0; background-color: whitesmoke;" type="text" id="phone" name="phone"><br>
+                                        <label for="phone">Address: </label>
+                                        <input style="border-style: none none solid; width: 100%; margin: 15px 0; background-color: whitesmoke;" type="text" id="address" name="address"><br>
+                                        <label for="username">User Name: </label>
+                                        <input style="border-style: none none solid; width: 100%; margin: 15px 0; background-color: whitesmoke;" type="text" id="userName" name="user_name"><br>
+                                        <label for="password">Password: </label>
+                                        <input style="border-style: none none solid; width: 100%; margin: 15px 0; background-color: whitesmoke;" type="password" id="password" name="password"><br>
+                                        <label for="password">Confirm Password: </label>
+                                        <input style="border-style: none none solid; width: 100%; margin: 15px 0; background-color: whitesmoke;" type="password" id="confirmPassword" name="confirmPassword"><br>
+                                        <label for="username">Role</label>
+                                        <select name="roleId">
+                                            <option value="2">Staff</option>
+                                            <option value="3">Customer</option>
+                                        </select><br>
+
+                                        <div style="display: flex; justify-content: space-evenly;">
+                                            <button class="button-add" value="AddNewAccount" >Add</button>
+                                            <div>
+                                                <button type="button" class="button-add" onclick="togglePopup()" >Cancel</button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </form>
                             </div>
-                            
+
                         </div>
+                        <p style="color: green">${ADD_SUCCESS}</p>
+                        <p style="color: red">${ADD_FAIL}</p>
+                        <p style="color: red">${PASS_NOT_MATH}</p>
                         <table>
                             <thead>
                                 <tr>
@@ -211,10 +252,17 @@
                                     <td><%=a.getAddress()%></td>
                                     <!-- <td><%=a.getRole()%></td> -->
                                     <td>
-                                        <select>
-                                            <option>Staff</option>
-                                            <option>Customer</option>
+                                        <%=a.getRole()%>
+                                        <select form="changeRole<%=a.getUserId()%>" 
+                                                data-user-id="<%=a.getUserId()%>" 
+                                                onchange="changeRole(this.dataset.userId, this.value)">
+                                            <option value="2" <%=a.getRole().equals("Staff") ? "Staff": ""%>>Staff</option>
+                                            <option value="3" <%=a.getRole().equals("Customer") ? "Customer": ""%>>Customer</option>
                                         </select>
+                                        <form id="changeRole<%=a.getUserId()%>" action="EditRoleAccount" method="post">
+                                            <input type="hidden" name="user-id" value="<%=a.getUserId()%>">
+                                            <input type="hidden" name="role"> 
+                                        </form>
                                     </td>
                                     <td><a href="AccountStatusController?id=<%=a.getUserId()%>&isActive=<%=a.isActive()%>"id="toggleButton" class="button-bordered">
                                             <% if (a.isActive()) {%>
@@ -238,6 +286,11 @@
             function togglePopup() {
                 var popup = document.getElementById("popupForm");
                 popup.style.display = (popup.style.display === "block") ? "none" : "block";
+            }
+            function changeRole(userId, value) {
+                let form = document.querySelector(`#changeRole` + userId);
+                form.querySelector("input[name='role']").setAttribute('value', value);
+                form.submit();
             }
         </script>
         <script src="js/admin.js"></script>

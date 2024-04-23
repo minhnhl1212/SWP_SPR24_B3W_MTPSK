@@ -1066,3 +1066,14 @@ video {
   box-shadow: 0 0 0 0 rgb(218 103 68 / 0%);
  }
 }
+
+.popup-form form .button-add {
+    border: 1px solid;
+    color: black;
+    border-radius: 5px;
+    width: auto;
+    height: 50px;
+    font-size: 20px;
+    padding: 10px 15px;
+    cursor: pointer;
+}
