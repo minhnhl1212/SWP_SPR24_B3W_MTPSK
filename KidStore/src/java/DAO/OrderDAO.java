@@ -150,9 +150,11 @@ public class OrderDAO {
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "select [Order].order_id, [Order].order_date, Image.image_toy, "
+                String sql = "select [Order].order_id, "
+                        + "[Order].order_date, Image.image_toy, "
                         + "Toy.toy_name, OrderDetail.quantity, Category.category_name,"
-                        + " Toy.description, [Order].status_order, Toy.price, OrderDetail.OD_price, [Order].order_amount\n"
+                        + " Toy.description, [Order].status_order, "
+                        + "Toy.price, OrderDetail.OD_price, [Order].order_amount\n"
                         + "from Toy \n"
                         + "inner join OrderDetail on Toy.toy_id = OrderDetail.toy_id\n"
                         + "inner join [Order] on OrderDetail.order_id = [Order].order_id\n"
@@ -179,7 +181,11 @@ public class OrderDAO {
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "select [Order].order_id, [Order].order_date, Image.image_toy, Toy.toy_name, OrderDetail.quantity, Category.category_name, Toy.description, [Order].status_order, Toy.price, OrderDetail.OD_price, [Order].order_amount\n"
+                String sql = "select [Order].order_id, [Order].order_date, OrderDetail.order_detail_id,  "
+                        + "Image.image_toy, Toy.toy_name, OrderDetail.quantity,"
+                        + " Category.category_name, Toy.description, "
+                        + "[Order].status_order, Toy.price, OrderDetail.OD_price, "
+                        + "[Order].order_amount\n"
                         + "from Toy \n"
                         + "inner join OrderDetail on Toy.toy_id = OrderDetail.toy_id\n"
                         + "inner join [Order] on OrderDetail.order_id = [Order].order_id\n"
@@ -191,7 +197,12 @@ public class OrderDAO {
                 ps.setInt(1, userId);
                 rs = ps.executeQuery();
                 while (rs.next()) {
-                    OrderHistory list = new OrderHistory(rs.getInt("order_id"), rs.getDate("order_date"), rs.getString("image_toy"), rs.getString("toy_name"), rs.getInt("quantity"), rs.getString("category_name"), rs.getString("description"), rs.getString("status_order"), rs.getDouble("price"), rs.getDouble("OD_price"), rs.getDouble("order_amount"));
+                    OrderHistory list = new OrderHistory(rs.getInt("order_id"), rs.getInt("order_detail_id"),
+                            rs.getDate("order_date"), rs.getString("image_toy"),
+                            rs.getString("toy_name"), rs.getInt("quantity"), 
+                            rs.getString("category_name"), rs.getString("description"),
+                            rs.getString("status_order"), rs.getDouble("price"), 
+                            rs.getDouble("OD_price"), rs.getDouble("order_amount"));
                     listOrder.add(list);
                 }
             }
@@ -580,4 +591,33 @@ public class OrderDAO {
         }
         return ordersold_list;
     }
+    public ArrayList<OrderHistory> getAllOrderIDByUserID(int id) throws Exception{
+        ArrayList<OrderHistory> listOfOrderID = new ArrayList<>();
+        try{
+            con = DBUtils.getConnection();
+            if(con!=null){
+                String sql = "select [Order].order_id, [Order].status_order, "
+                        + "[Order].order_date, [Order].order_amount, "
+                        + "Voucher.voucher_discount from [Order] "
+                        + "inner join Voucher on [Order].voucher_id = Voucher.id "
+                        + "where [Order].user_id=?";
+                ps = con.prepareStatement(sql);
+                ps.setInt(1, id);
+                rs = ps.executeQuery();
+                while(rs.next()){
+                    OrderHistory oh = new OrderHistory(rs.getInt("order_id"),
+                            rs.getDate("order_date"), rs.getString("status_order"), 
+                            rs.getDouble("order_amount"),rs.getDouble("voucher_discount"));
+                    listOfOrderID.add(oh);
+                }
+            }
+    }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        finally{
+            closeConnection();
+        }
+        return listOfOrderID;
+}
 }

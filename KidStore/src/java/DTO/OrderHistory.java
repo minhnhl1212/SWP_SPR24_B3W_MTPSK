@@ -9,6 +9,7 @@ import java.util.Date;
 public class OrderHistory {
     
     private int orderId;
+    private int orderDetailId;
     private Date orderDate;
     private String imageToy;
     private String toyName;
@@ -19,6 +20,7 @@ public class OrderHistory {
     private double price;
     private double orderPrice;
     private double orderAmount;
+    private double discount;
 
     public OrderHistory(int orderId) {
         this.orderId = orderId;
@@ -38,6 +40,31 @@ public class OrderHistory {
         this.orderAmount = orderAmount;
     }
 
+    public OrderHistory(int orderId, int orderDetailId, Date orderDate, String imageToy, String toyName, int quantity, String nameCategory, String description, String status, double price, double orderPrice, double orderAmount) {
+        this.orderId = orderId;
+        this.orderDetailId = orderDetailId;
+        this.orderDate = orderDate;
+        this.imageToy = imageToy;
+        this.toyName = toyName;
+        this.quantity = quantity;
+        this.nameCategory = nameCategory;
+        this.description = description;
+        this.status = status;
+        this.price = price;
+        this.orderPrice = orderPrice;
+        this.orderAmount = orderAmount;
+    }
+
+    public OrderHistory(int orderId, Date orderDate, String status, double orderAmount, double discount) {
+        this.orderId = orderId;
+        this.orderDate = orderDate;
+        this.status = status;
+        this.orderAmount = orderAmount;
+        this.discount = discount;
+    }
+
+
+    
     public int getOrderId() {
         return orderId;
     }
@@ -46,8 +73,24 @@ public class OrderHistory {
         this.orderId = orderId;
     }
 
+    public int getOrderDetailId() {
+        return orderDetailId;
+    }
+
+    public void setOrderDetailId(int orderDetailId) {
+        this.orderDetailId = orderDetailId;
+    }
+
     public Date getOrderDate() {
         return orderDate;
+    }
+
+    public double getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(double discount) {
+        this.discount = discount;
     }
 
     public void setOrderDate(Date orderDate) {

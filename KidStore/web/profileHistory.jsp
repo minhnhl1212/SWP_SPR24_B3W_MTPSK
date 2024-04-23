@@ -83,16 +83,20 @@
                         <h3>Lịch sử mua hàng</h3>
                     </div>
 
-
+                    <!--bỏ script vào đây-->
                     <%
                         ArrayList<OrderHistory> orderList = (ArrayList<OrderHistory>) session.getAttribute("ORDER_HISTORY");
                         /* Format VND */
+                        ArrayList<OrderHistory> OrderIDList = (ArrayList<OrderHistory>) session.getAttribute("ORDERID_HISTORY");
                         DecimalFormat vnCurrencyFormat = new DecimalFormat("###,### VNĐ");
-                        if (orderList != null && acc != null) {
-                            for (OrderHistory order : orderList) {
-                                String formatPrice = vnCurrencyFormat.format(order.getPrice());
-                                String formatOrderPrice = vnCurrencyFormat.format(order.getOrderPrice());
-                                String formatOrderAmount = vnCurrencyFormat.format(order.getOrderAmount());
+                        if (orderList != null && acc != null && OrderIDList != null) {
+                            for (OrderHistory oid : OrderIDList) {
+                                String formatOrderAmount = vnCurrencyFormat.format(oid.getOrderAmount());
+                                double Discount = Math.round(oid.getOrderAmount()-oid.getOrderAmount()*oid.getDiscount());
+                                double OrderAmountAfterDiscount = Math.round(oid.getOrderAmount())-Discount;
+                                String formatDiscount = vnCurrencyFormat.format(Discount);
+                                String formatOrderAfterDiscount = vnCurrencyFormat.format(OrderAmountAfterDiscount);
+
                     %>
 
                     <!-- đơn thứ 1-->
@@ -101,10 +105,10 @@
                             <div class="col-md-12">
                                 <div class="row" >
                                     <div class="col-md-6">
-                                        <div class="product-name" style="justify-content: flex-start; display: flex;">&#128340; Ngày mua: <%=order.getOrderDate()%></div>
+                                        <div class="product-name" style="justify-content: flex-start; display: flex;">&#128340; Ngày mua: <%=oid.getOrderDate()%></div>
                                     </div>
                                     <div class="col-md-6" >
-                                        <div class="product-name" style="color: green; justify-content: flex-end; display: flex; font-weight: bold;"><%=order.getStatus()%></div>
+                                        <div class="product-name" style="color: green; justify-content: flex-end; display: flex; font-weight: bold;"><%=oid.getStatus()%></div>
                                     </div>
                                 </div>
 
@@ -121,23 +125,23 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                <%for (OrderHistory order : orderList) {
+                                                        if (order.getOrderId() == oid.getOrderId()) {
+                                                            String formatOrderPrice = vnCurrencyFormat.format(order.getOrderPrice());
+                                                            double TotalOrderDetail= order.getOrderPrice()*order.getQuantity();
+                                                            String formatTotalOrderDetail = vnCurrencyFormat.format(TotalOrderDetail);
+                                                            %>
                                             <form action="CartController">
                                                 <tr>
                                                     <td><img src="<%=order.getImageToy()%>" width="50" alt="Product Image"></td>
                                                     <td class="product-name"><%=order.getToyName()%></td>
-                                                    <td class="product-name"><%= formatPrice%></td>
-                                                    <td class="product-name"><%=order.getQuantity()%></td>
                                                     <td class="product-name"><%=formatOrderPrice%></td>
-                                                </tr>
-                                                
-                                                <tr>
-                                                    <td><img src="<%=order.getImageToy()%>" width="50" alt="Product Image"></td>
-                                                    <td class="product-name"><%=order.getToyName()%></td>
-                                                    <td class="product-name"><%= formatPrice%></td>
                                                     <td class="product-name"><%=order.getQuantity()%></td>
-                                                    <td class="product-name"><%=formatOrderPrice%></td>
+                                                    <td class="product-name"><%=formatTotalOrderDetail%></td>
                                                 </tr>
                                             </form>
+                                            <%}
+                                                    }%>
                                             </tbody>
                                         </table>
                                     </div>
@@ -154,13 +158,13 @@
                                             </div>
                                             <!-- bảng giá -->
                                             <div class="product-name" style=" display: flex;justify-content: flex-end;">
-                                                <h6>Subtotal: 000.000 </h6>
+                                                <h6>Subtotal: <%=formatOrderAmount%> </h6>
                                             </div> 
                                             <div class="product-name" style=" display: flex;justify-content: flex-end;">
-                                                <h6>Discount: 000.000</h6>
+                                                <h6>Discount: <%=formatDiscount%></h6>
                                             </div> 
                                             <div class="product-name" style=" display: flex;justify-content: flex-end;">
-                                                <h5><i class='bx bx-money'></i> Thành tiền: <%=formatOrderAmount%></h5>
+                                                <h5><i class='bx bx-money'></i> Thành tiền: <%=formatOrderAfterDiscount%></h5>
                                             </div>                            
                                         </div>
                                     </div>
@@ -173,7 +177,7 @@
                                             <label for="issueDescription">Mô tả vấn đề:</label>
                                             <textarea class="form-control" id="issueDescription" name="issueDescription" rows="3"></textarea>
                                             <input type="hidden" name="userId" value="<%=acc.getUserId()%>">
-                                            <input type="hidden" name="orderId" value="<%=order.getOrderId()%>">
+                                            <input type="hidden" name="orderId" value="">
                                         </div>     
 
                                         <button type="submit" class="btn btn-primary d-block mx-auto" >Gửi yêu cầu</button>
@@ -182,7 +186,9 @@
                             </div>
                         </div>
                     </div>
-                    <%}
+                    <%
+
+                        }
                     } else {
                     %>
                     <p>${ORDER_HISTORY_ERROR}</p>

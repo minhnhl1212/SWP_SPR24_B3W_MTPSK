@@ -28,8 +28,10 @@ public class LoadOrderHistoryController extends HttpServlet {
             int userId = Integer.parseInt(request.getParameter("userId"));
             OrderDAO orderDAO = new OrderDAO();
             ArrayList<OrderHistory> orderList = orderDAO.orderHistoryByUserId(userId);
+                            ArrayList<OrderHistory> ListOfOrderID = orderDAO.getAllOrderIDByUserID(userId);
             if(orderList != null){
                 session.setAttribute("ORDER_HISTORY", orderList);
+                session.setAttribute("ORDERID_HISTORY", ListOfOrderID);
             } else {
                 request.setAttribute("ORDER_HISTORY_ERROR", "Not Foun List Order");
             }
