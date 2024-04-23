@@ -125,7 +125,8 @@
                 <div class="table-data-revenue">
                     <div class="order">
                         <div class="head">
-                            <h3>Total Revenue: <%=formatTotalRevenue%></h3>
+                            <h3>Revenue Stream</h3>
+                            <h3 style="margin-left: 600px;">Total Revenue: &nbsp; <%=formatTotalRevenue%></h3>
                         </div>
                         <table>
                             <thead>

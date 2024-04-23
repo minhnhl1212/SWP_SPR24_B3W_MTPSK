@@ -19,6 +19,24 @@
         <link rel="stylesheet" href="css/admin.css">
         <title>AdminHub</title>
     </head>
+
+    <style>
+        .popup-form {
+            display: none;
+            width: 350px;
+            height: 550px;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: whitesmoke;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+
     <body>
 
 
@@ -110,6 +128,16 @@
                     <div class="order">
                         <div class="head">
                             <h3>Account List</h3>
+                            <button type="button" class="button-add-account" onclick="togglePopup()">Add new account</button>
+
+                            <!-- Thêm popup form -->
+                            
+                            <div class="popup-form" id="popupForm">
+                                <form action="">
+                                    <h4>Add new account</h4>
+                                </form>
+                            </div>
+                            
                         </div>
                         <table>
                             <thead>
@@ -181,7 +209,13 @@
                                     <td><%=a.getFullName()%></td>
                                     <td><%=a.getPhone()%></td>
                                     <td><%=a.getAddress()%></td>
-                                    <td><%=a.getRole()%></td>
+                                    <!-- <td><%=a.getRole()%></td> -->
+                                    <td>
+                                        <select>
+                                            <option>Staff</option>
+                                            <option>Customer</option>
+                                        </select>
+                                    </td>
                                     <td><a href="AccountStatusController?id=<%=a.getUserId()%>&isActive=<%=a.isActive()%>"id="toggleButton" class="button-bordered">
                                             <% if (a.isActive()) {%>
                                             Active
@@ -200,7 +234,12 @@
             <!-- MAIN -->
         </section>
         <!-- CONTENT -->
-
+        <script>
+            function togglePopup() {
+                var popup = document.getElementById("popupForm");
+                popup.style.display = (popup.style.display === "block") ? "none" : "block";
+            }
+        </script>
         <script src="js/admin.js"></script>
     </body>
 </html>
