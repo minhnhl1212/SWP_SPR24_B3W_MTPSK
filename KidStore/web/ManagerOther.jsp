@@ -148,22 +148,40 @@
                             %>
 
                             <td class="px-4 py-3">
-                                <button class="action-btn" style="color: black"><a href="ProcessingWarrantyController?orderDetailId=<%=warranty.getOrderDetailId()%>">Processing</a></button></br>                      
-                                <button class="action-btn" style="color: #0dcaf0"><a href="ReceivedWarrantyController?orderDetailId=<%=warranty.getOrderDetailId()%>">Received</a></button></br>                      
-                                <button class="action-btn" style="color: orange"><a href="UnderWarrantyController?orderDetailId=<%=warranty.getOrderDetailId()%>">Under Warranty</a></button></br>                      
-                                <button class="action-btn" style="color: green"><a href="ShippingWarrantyController?orderDetailId=<%=warranty.getOrderDetailId()%>">Shipping</a></button></br>                        
-                                <button class="action-btn" style="color: blue"><a href="DeliveredWarrantyController?orderDetailId=<%=warranty.getOrderDetailId()%>">Delivered</a></button></br>                        
-                                <button class="action-btn" style="color: red"><a href="RefuseWarrantyController?orderDetailId=<%=warranty.getOrderDetailId()%>">Refuse</a></button>                    
+
+                                <select id="statusSelect_<%=warranty.getOrderDetailId()%>">
+                                    <option value="default">Đặt Trạng Thái</option>
+                                    <option value="processing" data-action="ProcessingWarrantyController">Processing</option>
+                                    <option value="received" data-action="ReceivedWarrantyController">Received</option>
+                                    <option value="underwarranty" data-action="UnderWarrantyController">Under Warranty</option>
+                                    <option value="shipping" data-action="ShippingWarrantyController">Shipping</option>
+                                    <option value="delivered" data-action="DeliveredWarrantyController">Delivered</option>
+                                    <option value="refuse" data-action="RefuseWarrantyController">Refuse</option>
+                                </select>  
+
+
                             </td>
+
                         </tr>
-                        <%}
-                        } else {
-                        %>
+
+                    <script>
+                        document.getElementById('statusSelect_<%=warranty.getOrderDetailId()%>').addEventListener('change', function () {
+                            var selectedValue = this.value;
+                            var action = this.options[this.selectedIndex].getAttribute('data-action');
+                            if (selectedValue !== 'default' && action) {
+                                window.location.href = action + "?orderDetailId=<%=warranty.getOrderDetailId()%>";
+                            }
+                        });
+                    </script>
+                    <%}
+                    } else {
+                    %>
                     <p></p>
                     <%
                         }
                     %>  
                     </tbody>
+
                 </table>
             </div>
         </div>

@@ -220,26 +220,36 @@
                                 <%=order.getStatus()%>
                             </td>
                             <td class="px-4 py-3">
-                                <button class="action-btn" style="color: black"><a href="ProcessingOrderController?orderDetailId=<%=order.getOrderId()%>">Processing</a></button></br>                      
-                                <button class="action-btn" style="color: green"><a href="ShippingOrderController?orderDetailId=<%=order.getOrderId()%>">Shipping</a></button></br>                        
-                                <button class="action-btn" style="color: blue"><a href="DeliveredOrderController?orderDetailId=<%=order.getOrderId()%>">Delivered</a></button></br>                        
-                                <button class="action-btn" style="color: red"><a href="RefuseOrderController?orderDetailId=<%=order.getOrderId()%>">Refuse</a></button>                    
+
+                                <select id="statusSelect_<%=order.getOrderId()%>">
+                                    <option value="default">Đặt Trạng Thái</option>
+                                    <option value="processing" data-action="ProcessingOrderController">Processing</option>
+                                    <option value="shipping" data-action="ShippingOrderController">Shipping</option>
+                                    <option value="delivered" data-action="DeliveredOrderController">Delivered</option>
+                                    <option value="refuse" data-action="RefuseOrderController">Refuse</option>
+                                </select>                                                 
                             </td>
-                        </tr>
-                        <%}
-                        } else {
-                        %>
+                    <script>
+                        document.getElementById('statusSelect_<%=order.getOrderId()%>').addEventListener('change', function () {
+                            var selectedValue = this.value;
+                            var action = this.options[this.selectedIndex].getAttribute('data-action');
+                            if (selectedValue !== 'default' && action) {
+                                window.location.href = action + "?orderDetailId=<%=order.getOrderId()%>";
+                            }
+                        });
+                    </script>
+                    </tr>
+                    <%}
+                    } else {
+                    %>
                     <p></p>
                     <%
                         }
                     %>                
                     </tbody>
                 </table>
-
-
-
-                </body>
-
-
-                </html>
+            </div>
+        </div>
+    </body>
+</html>
 
