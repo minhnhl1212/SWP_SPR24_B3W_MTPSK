@@ -28,12 +28,12 @@
         .popup-form {
             display: none;
             width: 350px;
-            height: 550px;
+            height: 600px;
             position: absolute;
-            top: 50%;
+            top: 40%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background-color: #80dfff;
+            background-color: white;
             padding: 20px;
             border: 1px solid #ccc;
             border-radius: 5px;
@@ -74,94 +74,95 @@
 
             <div class="section_right col-md-12 col-lg-9">
 
-                <div class="container" style="margin: 30px 20px; ">
-                    <div class="title-profile-cate">
-                        <h1>Danh sách đồ chơi bảo hành</h1>
-                    </div>
+                <div class="container" style="margin: 30px 50px; ">
+                    <h1>Danh sách đồ chơi bảo hành</h1>
+                    <div class="row">
 
-                    <div class="toy-table">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Ảnh</th>
-                                    <th>Tên Đồ Chơi</th>
-                                    <th>Số Lượng</th>
-                                    <th>Ngày Mua</th>
-                                    <th>Hạn Bảo Hành</th>
-                                    <th>Trạng Thái</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <%
-                                    ArrayList<OrderWarranty> warrantyList = (ArrayList<OrderWarranty>) session.getAttribute("ORDER_WARRANTY");
-                                    if (warrantyList != null && acc != null) {
-                                        for (OrderWarranty warranty : warrantyList) {
+
+                        <div class="table" style="">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Ảnh</th>
+                                        <th>Tên Đồ Chơi</th>
+                                        <th>Số Lượng</th>
+                                        <th>Ngày Mua</th>
+                                        <th>Hạn Bảo Hành</th>
+                                        <th>Trạng Thái</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <%
+                                        ArrayList<OrderWarranty> warrantyList = (ArrayList<OrderWarranty>) session.getAttribute("ORDER_WARRANTY");
+                                        if (warrantyList != null && acc != null) {
+                                            for (OrderWarranty warranty : warrantyList) {
+                                    %>
+                                    <tr>
+                                        <td><%=warranty.getOrderDetailId()%></td>
+                                        <td><img src="<%=warranty.getImageToy()%>" width="60"  alt="Toy Image" class="toy-item-img"/></td>
+                                        <td><%=warranty.getToyName()%></td>
+                                        <td><%=warranty.getQuantity()%></td>
+                                        <td><%=warranty.getOrderDate()%></td>
+                                        <td><%=warranty.getWarrantyTime()%></td>
+                                        <td><%=warranty.getStatus()%></td>
+                                        <td>
+                                            <a href="#" style="text-decoration: none; color: black;" onclick="togglePopup()">
+                                                <i class='bx bx-mail-send'></i>
+                                            </a>
+                                        </td>
+                                    </tr> 
+                                <div class="popup-form" id="popupForm">
+                                    <form action="SendRequestWarranty">
+                                        <h4>Kiểm tra bảo hành</h4>
+                                        <a class="close" href="#" style="text-decoration: none; color: black; margin-top: -14%;" onclick="togglePopup()">x</a>
+                                        <div class="form-group">
+                                            <label for="productSKU">Mã bảo hành: <%=warranty.getWarrantyCode()%></label>
+                                            <!--                                        <input type="text" class="form-control" id="productSKU" name="productSKU" value="" readonly>-->
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="purchaseDate">Ngày mua hàng: <%=warranty.getOrderDate()%></label>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="customerAddress">Địa chỉ:</label>
+                                            <input type="text" class="form-control" id="customerAddress" name="customerAddress" value="<%=warranty.getAddress()%>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="customerPhone">Số điện thoại:</label>
+                                            <input type="tel" class="form-control" id="customerPhone" name="customerPhone" value="<%=warranty.getPhone()%>">
+                                        </div>                                    
+                                        <div class="form-group">
+                                            <label for="issueDescription">Mô tả vấn đề:</label>
+                                            <textarea class="form-control" id="issueDescription" name="issueDescription" rows="3"></textarea>
+                                        </div>     
+                                        <input type="hidden" name="orderDetailId" value="<%=warranty.getOrderDetailId()%>">
+                                        <input type="hidden" name="userId" value="<%=acc.getUserId()%>">
+                                        <button type="submit" class="btn btn-primary d-block mx-auto" >Gửi yêu cầu</button>
+                                    </form>
+                                </div>
+                                <%}
+                                } else {
                                 %>
-                                <tr>
-                                    <td><%=warranty.getOrderDetailId()%></td>
-                                    <td><img src="<%=warranty.getImageToy()%>" alt="Toy Image" class="toy-item-img"/></td>
-                                    <td><%=warranty.getToyName()%></td>
-                                    <td><%=warranty.getQuantity()%></td>
-                                    <td><%=warranty.getOrderDate()%></td>
-                                    <td><%=warranty.getWarrantyTime()%></td>
-                                    <td><%=warranty.getStatus()%></td>
-                                    <td>
-                                        <a href="#" style="text-decoration: none; color: black;" onclick="togglePopup()">
-                                            <i class='bx bx-mail-send'></i>
-                                        </a>
-                                    </td>
-                                </tr> 
-                            <div class="popup-form" id="popupForm">
-                                <form action="SendRequestWarranty">
-                                    <h4>Kiểm tra bảo hành</h4>
-                                    <a class="close" href="#" style="text-decoration: none; color: black; margin-top: -14%;" onclick="togglePopup()">X</a>
-                                    <div class="form-group">
-                                        <label for="productSKU">Mã bảo hành: <%=warranty.getWarrantyCode()%></label>
-                                        <!--                                        <input type="text" class="form-control" id="productSKU" name="productSKU" value="" readonly>-->
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="purchaseDate">Ngày mua hàng: <%=warranty.getOrderDate()%></label>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="customerAddress">Địa chỉ:</label>
-                                        <input type="text" class="form-control" id="customerAddress" name="customerAddress" value="<%=warranty.getAddress()%>">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="customerPhone">Số điện thoại:</label>
-                                        <input type="tel" class="form-control" id="customerPhone" name="customerPhone" value="<%=warranty.getPhone()%>">
-                                    </div>                                    
-                                    <div class="form-group">
-                                        <label for="issueDescription">Mô tả vấn đề:</label>
-                                        <textarea class="form-control" id="issueDescription" name="issueDescription" rows="3"></textarea>
-                                    </div>     
-                                    <input type="hidden" name="orderDetailId" value="<%=warranty.getOrderDetailId()%>">
-                                    <input type="hidden" name="userId" value="<%=acc.getUserId()%>">
-                                    <button type="submit" class="btn btn-primary d-block mx-auto" >Gửi yêu cầu</button>
-                                </form>
-                            </div>
-                            <%}
-                            } else {
-                            %>
-                            <p>${ORDER_WARRANTY_ERROR}</p>
-                            <%
-                                }
-                            %>
-                            <%
-                                OrderWarranty sendRequestWarranty = (OrderWarranty) request.getAttribute("SEND_REQUEST_SUCCESS");
-                                if (sendRequestWarranty != null) {
-                            %>
-                            <p style="color: green">${SEND_REQUEST_SUCCESS}</p>
-                            <%} else {
-                            %>
-                            <p style="color: red">${SEND_REQUEST_FAILED}</p>
-                            <%
-                                }
-                            %>
-                            </tbody>
-                        </table>
+                                <p>${ORDER_WARRANTY_ERROR}</p>
+                                <%
+                                    }
+                                %>
+                                <%
+                                    OrderWarranty sendRequestWarranty = (OrderWarranty) request.getAttribute("SEND_REQUEST_SUCCESS");
+                                    if (sendRequestWarranty != null) {
+                                %>
+                                <p style="color: green">${SEND_REQUEST_SUCCESS}</p>
+                                <%} else {
+                                %>
+                                <p style="color: red">${SEND_REQUEST_FAILED}</p>
+                                <%
+                                    }
+                                %>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
