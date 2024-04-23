@@ -20,59 +20,6 @@
         window.location.href = "LogoutController";
     }
 </script>
-<style>
-    a.btn.btn-outline-dark {
-        color: white;
-        font-weight: 600;
-        border: none;
-    }
-    button.btn.btn-outline-primary.ms-lg-2 {
-        color: white;
-        font-weight: 600;
-        border: none;
-    }
-    .news-btn {
-        background-color: gold;
-
-    }
-    .news-btn:hover {
-        background-color: #ffe764;
-
-    }
-    .info-btn {
-        background-color: cornflowerblue;
-    }
-    .info-btn:hover {
-        background-color: #8bb0f3;
-    }
-    .cart-btn {
-        background-color: chartreuse;
-    }
-    .cart-btn:hover {
-        background-color: #b6ff6e
-    }
-    .logout-btn {
-        background-color: orangered;
-    }
-    .logout-btn:hover {
-        background-color: #f97d4f;
-    }
-    .login-btn {
-        background-color: blue;
-    }
-    .login-btn:hover {
-        background-color: #7c7cff;
-    }
-    .search-btn {
-        background-color: white;
-        color: gray;
-        border: none;
-    }
-    .search-btn:hover {
-        background-color: #e9e9e9;
-        color: black;
-    }
-</style>
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #80dfff;">
     <div class="container px-4 px-lg-5">
         <a class="navbar-brand" href="MainController?TOY_LIST=ALL"><img src="img/logo-kids-new3.png" class="logo" alt="KidStore"></a>

@@ -258,7 +258,7 @@
                                     <textarea id="description" name="description" rows="4" cols="50"></textarea>
                                     </br>  
                                     <label for="discount">Discount</label></br>
-                                    <input type="number" id="discount" name="discount" step="0.01" required></br>
+                                    <input type="number" id="discount" name="discount" step="0.01" min="0" max="1" required></br>
                                     <label for="warrantyTime">Warranty Time</label></br>
                                     <input type="date" id="warranty" name="warrantyTime" required></br>
                                     <input name="userId" type="hidden" value="<%=acc.getUserId()%>">
