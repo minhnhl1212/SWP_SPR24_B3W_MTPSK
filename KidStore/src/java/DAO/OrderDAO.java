@@ -17,7 +17,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  *
@@ -29,6 +32,18 @@ public class OrderDAO {
     private PreparedStatement ps = null;
     private ResultSet rs = null;
 
+    private Date addTwoDays(Date date){ 
+        Date dateAfter = null;
+       try{ 
+        Calendar cal = Calendar.getInstance();  
+           cal.setTime(date);  
+        cal.add(Calendar.DAY_OF_MONTH, 2);  
+        dateAfter = cal.getTime();
+        }catch(Exception e){  
+            e.printStackTrace();  
+         }
+        return dateAfter;  
+    }  
     private void closeConnection() throws Exception {
         if (rs != null) {
             rs.close();
@@ -606,7 +621,7 @@ public class OrderDAO {
                 rs = ps.executeQuery();
                 while(rs.next()){
                     OrderHistory oh = new OrderHistory(rs.getInt("order_id"),
-                            rs.getDate("order_date"), rs.getString("status_order"), 
+                            addTwoDays(rs.getDate("order_date")), rs.getString("status_order"), 
                             rs.getDouble("order_amount"),rs.getDouble("voucher_discount"));
                     listOfOrderID.add(oh);
                 }

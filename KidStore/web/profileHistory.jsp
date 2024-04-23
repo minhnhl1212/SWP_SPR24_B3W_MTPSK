@@ -1,3 +1,4 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="DTO.OrderWarranty"%>
 <%@page import="DTO.Account"%>
@@ -89,6 +90,7 @@
                         /* Format VND */
                         ArrayList<OrderHistory> OrderIDList = (ArrayList<OrderHistory>) session.getAttribute("ORDERID_HISTORY");
                         DecimalFormat vnCurrencyFormat = new DecimalFormat("###,### VNĐ");
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                         if (orderList != null && acc != null && OrderIDList != null) {
                             for (OrderHistory oid : OrderIDList) {
                                 String formatOrderAmount = vnCurrencyFormat.format(oid.getOrderAmount());
@@ -96,6 +98,7 @@
                                 double OrderAmountAfterDiscount = Math.round(oid.getOrderAmount())-Discount;
                                 String formatDiscount = vnCurrencyFormat.format(Discount);
                                 String formatOrderAfterDiscount = vnCurrencyFormat.format(OrderAmountAfterDiscount);
+                                String orderDate = sdf.format(oid.getOrderDate());
 
                     %>
 
@@ -105,7 +108,7 @@
                             <div class="col-md-12">
                                 <div class="row" >
                                     <div class="col-md-6">
-                                        <div class="product-name" style="justify-content: flex-start; display: flex;">&#128340; Ngày mua: <%=oid.getOrderDate()%></div>
+                                        <div class="product-name" style="justify-content: flex-start; display: flex;">&#128340; Ngày mua: <%=orderDate%></div>
                                     </div>
                                     <div class="col-md-6" >
                                         <div class="product-name" style="color: green; justify-content: flex-end; display: flex; font-weight: bold;"><%=oid.getStatus()%></div>
