@@ -83,13 +83,6 @@
                         <h3>Lịch sử mua hàng</h3>
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="search-bar">
-                                <input type="text" class="form-control" placeholder="Nhập từ khóa tìm kiếm">
-                            </div>
-                        </div>
-                    </div>
 
                     <%
                         ArrayList<OrderHistory> orderList = (ArrayList<OrderHistory>) session.getAttribute("ORDER_HISTORY");
@@ -114,39 +107,59 @@
                                         <div class="product-name" style="color: green; justify-content: flex-end; display: flex; font-weight: bold;"><%=order.getStatus()%></div>
                                     </div>
                                 </div>
-                                <hr style="margin: 5px 0;">
 
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <div class="row" style="margin-top: 10px;">
-                                            <div class="col-md-2" >
-                                                <img src="<%=order.getImageToy()%>" alt="Product Image" style="width: 100px; height: 100px; object-fit: cover; ">
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="product-name"><%=order.getToyName()%></div>
-                                                <div class="product-name">Số lượng: <%=order.getQuantity()%></div>
-                                                <div class="product-name">Danh mục: <%=order.getNameCategory()%></div>
-                                                <div class="product-name"><%=order.getDescription()%></div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="product-price" style="display: flex; align-items: center; justify-content: flex-end; "><del><%= formatPrice%></del> </div></br>
-                                                <div class="product-price" style="display: flex; align-items: center; justify-content: flex-end; "><%=formatOrderPrice%></div></br>
-                                                <div class="product-price" style="display: flex; align-items: center; justify-content: flex-end; font-size: 16px;">
-                                                    <button class="sendFeedback">
-                                                        <a href="#" style="text-decoration: none; color: black;" onclick="togglePopup()">Send Feedback<i class='bx bx-mail-send'></i></a>
-                                                    </button>
-                                                    </br>
-                                                    <p style="color: green">${SEND_FEEDBACK_SUCCESS}</p>
-                                                    <p style="color: red">${SEND_FEEDBACK_FAILED}</p>
-                                                </div>                                            </div>
-                                        </div>
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Ảnh</th>
+                                                    <th scope="col">Tên đồ chơi</th>
+                                                    <th scope="col">Giá</th>
+                                                    <th scope="col">Số lượng</th>
+                                                    <th scope="col">Thành Tiền</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            <form action="CartController">
+                                                <tr>
+                                                    <td><img src="<%=order.getImageToy()%>" width="50" alt="Product Image"></td>
+                                                    <td class="product-name"><%=order.getToyName()%></td>
+                                                    <td class="product-name"><%= formatPrice%></td>
+                                                    <td class="product-name"><%=order.getQuantity()%></td>
+                                                    <td class="product-name"><%=formatOrderPrice%></td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td><img src="<%=order.getImageToy()%>" width="50" alt="Product Image"></td>
+                                                    <td class="product-name"><%=order.getToyName()%></td>
+                                                    <td class="product-name"><%= formatPrice%></td>
+                                                    <td class="product-name"><%=order.getQuantity()%></td>
+                                                    <td class="product-name"><%=formatOrderPrice%></td>
+                                                </tr>
+                                            </form>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
-                                <hr style="margin: 10px 0;">
                                 <div class="row">
                                     <div class="col-md-12" >
-                                        <div class="row">
-                                            <div class="product-name" style=" display: flex;justify-content: flex-end;">                                                  
+                                        <div class="row">                                           
+                                            <div class="product-price" style="display: flex; align-items: center; justify-content: flex-start; font-size: 16px;">
+                                                <button class="sendFeedback" hidden="">
+                                                    <a href="#" style="text-decoration: none; color: black;" onclick="togglePopup()">Send Feedback<i class='bx bx-mail-send'></i></a>
+                                                </button>
+                                                <p style="color: green">${SEND_FEEDBACK_SUCCESS}</p>
+                                                <p style="color: red">${SEND_FEEDBACK_FAILED}</p>
+                                            </div>
+                                            <!-- bảng giá -->
+                                            <div class="product-name" style=" display: flex;justify-content: flex-end;">
+                                                <h6>Subtotal: 000.000 </h6>
+                                            </div> 
+                                            <div class="product-name" style=" display: flex;justify-content: flex-end;">
+                                                <h6>Discount: 000.000</h6>
+                                            </div> 
+                                            <div class="product-name" style=" display: flex;justify-content: flex-end;">
                                                 <h5><i class='bx bx-money'></i> Thành tiền: <%=formatOrderAmount%></h5>
                                             </div>                            
                                         </div>
@@ -184,9 +197,9 @@
         <script src="js/scripts.js"></script>
     </body>
     <script>
-                                                function togglePopup() {
-                                                    var popup = document.getElementById("popupForm");
-                                                    popup.style.display = (popup.style.display === "block") ? "none" : "block";
-                                                }
+                                            function togglePopup() {
+                                                var popup = document.getElementById("popupForm");
+                                                popup.style.display = (popup.style.display === "block") ? "none" : "block";
+                                            }
     </script>
 </html>
