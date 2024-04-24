@@ -33,6 +33,14 @@ public class Toy {
         this.price = price;
         this.discount = discount;
     }        
+    
+    public Toy(int toyId, String toyName, String image, double price, double discount) {
+        this.toyId = toyId;
+        this.toyName = toyName;
+        this.image = image;
+        this.price = price;
+        this.discount = discount;
+    }
 
     public Toy(int toyId, String toyName, int quantity, String image, double price, String description,String name_category ,double discount) {
         this.toyId = toyId;

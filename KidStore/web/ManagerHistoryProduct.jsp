@@ -96,6 +96,24 @@
                 border-radius: 30px;
                 font-weight: 600;
             }
+            .py-4.text-gray-500.dark\:text-gray-400 {
+                background-color: #80DFFF;
+                text-align: center;
+            }
+            .mt-6 {
+                display: flex;
+                justify-content: center;
+            }
+            .text-gray-800 {
+                --text-opacity: 1;
+                color: #1a1c23;
+                font-family: serif;
+                font-size: 30px;
+            }
+            th:nth-child(2), td:nth-child(2) {
+                max-width: 200px;
+                text-wrap: wrap;
+            }
 
         </style>
     </head>
@@ -108,9 +126,10 @@
         <div>
             <a href="LogoutController" style="position: absolute; top: 20px; right: 30px">Logout</a>
         </div>
+        <a class="navbar-brand" href="MainController?TOY_LIST=ALL"><img src="img/logo-kids-new3.png" class="logo" alt="KidStore"></a>
         <div class="py-4 text-gray-500 dark:text-gray-400">
             <a class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200" href="#">
-                STAFF
+                STAFF DASHBOARD
             </a>
             <ul class="mt-6" style="display: flex">
                 <li class="relative px-6 py-3">
@@ -143,7 +162,7 @@
                         <path d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path>
                         <path d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
                         </svg>
-                        <span class="ml-4">ManagerOther</span>
+                        <span class="ml-4">ManagerWarranty</span>
                     </a>
                 </li>
                 <li class="relative px-6 py-3">
@@ -177,7 +196,6 @@
                             <th class="px-4 py-3">Price</th>
                             <th class="px-4 py-3">Discount</th>
                             <th class="px-4 py-3">Date</th>
-                            <th class="px-4 py-3">Description</th>
                             <th class="px-4 py-3">Status</th>
                             <th class="px-4 py-3">Action</th>
                         </tr>
@@ -211,23 +229,24 @@
                             <td class="px-4 py-3 text-sm">
                                 <%=order.getOrderDate()%>
                             </td>
-                            <td style="overflow-y: scroll; max-width: 100px;" class="px-4 py-3 text-sm">
-                                <div class="description" style="white-space: pre-wrap;">
-                                    <%=order.getDescription()%>
-                                </div>
-                            </td>
                             <td class="px-4 py-3 text-sm">
                                 <%=order.getStatus()%>
                             </td>
-                            <td class="px-4 py-3">
+                            <td class="px-4 py-3">                                                                       
 
-                                <select id="statusSelect_<%=order.getOrderId()%>">
+                                <select id="statusSelect_<%=order.getOrderId()%>" <% if (order.getStatus().equals("Đã Giao Hàng") || order.getStatus().equals("Từ Chối Bán Hàng")) { %> style="display: none;" <% } %>>
                                     <option value="default">Đặt Trạng Thái</option>
-                                    <option value="processing" data-action="ProcessingOrderController">Processing</option>
-                                    <option value="shipping" data-action="ShippingOrderController">Shipping</option>
+                                    <% if (order.getStatus().equals("Đang Xử Lí")) { %>
+                                    <option value="shipping" data-action="ShippingOrderController">Shipping</option>                                    
+                                    <option value="refuse" data-action="RefuseOrderController">Refuse</option>
+                                    <% } %>
+                                    <% if (order.getStatus().equals("Đang Giao Hàng")) { %>
                                     <option value="delivered" data-action="DeliveredOrderController">Delivered</option>
                                     <option value="refuse" data-action="RefuseOrderController">Refuse</option>
-                                </select>                                                 
+                                    <% }%>                         
+                                </select>
+
+
                             </td>
                     <script>
                         document.getElementById('statusSelect_<%=order.getOrderId()%>').addEventListener('change', function () {
