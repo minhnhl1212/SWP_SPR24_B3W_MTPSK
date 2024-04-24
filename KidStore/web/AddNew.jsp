@@ -74,7 +74,40 @@
                 display: flex;
                 justify-content: center;
             }
-            
+            .text-gray-800 {
+                --text-opacity: 1;
+                color: #1a1c23;
+                font-family: serif;
+                font-size: 30px;
+            }
+            th:nth-child(1), td:nth-child(1) {
+                max-width: 20px;
+                text-align: center;
+            }
+            th:nth-child(2), td:nth-child(2) {
+                max-width: 100px;
+                text-wrap: wrap;
+            }
+            th:nth-child(3), td:nth-child(3) {
+                max-width: 50px;
+            }
+            th:nth-child(4), td:nth-child(4) {
+                max-width: 40px;
+            }
+            th:nth-child(5), td:nth-child(5) {
+                max-width: 50px;
+            }
+            th{
+                text-align: center;
+            }
+            .center{
+                text-align: center;
+            }
+            th,
+            td{
+                border-bottom: 4px solid gainsboro;
+            }
+
         </style>
     </head>
     <body>
@@ -122,7 +155,7 @@
                         <path d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path>
                         <path d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
                         </svg>
-                        <span class="ml-4">ManagerOther</span>
+                        <span class="ml-4">ManagerWarranty</span>
                     </a>
                 </li>
                 <li class="relative px-6 py-3">
@@ -149,11 +182,11 @@
                 <table class="w-full whitespace-no-wrap">
                     <thead>
                         <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
-                            <th class="px-4 py-3">ID</th>
+                            <th class="py-3">ID</th>
                             <th class="px-4 py-3">Title</th>            
                             <th class="px-4 py-3">Image</th>
-                            <th class="px-4 py-3">Poster</th>
-                            <th class="px-4 py-3">Date</th>
+                            <th class="py-3">Poster</th>
+                            <th class="py-3">Date</th>
                             <th class="px-4 py-3">Description</th>
                         </tr>
                     </thead>
@@ -163,9 +196,9 @@
                                 for (News news : newsList) {
                         %>
                         <tr class="text-gray-700 dark:text-gray-400">
-                            <td class="px-4 py-3">
+                            <td class="py-3">
 
-                                <p class="px-4 py-3 text-sm"><%=news.getNewsId()%></p>
+                                <p><%=news.getNewsId()%></p>
 
                             </td>
                             <td class="px-4 py-3 text-sm">
@@ -174,10 +207,10 @@
                             <td class="px-4 py-3 text-xs">
                                 <img src="<%=news.getImage()%>" alt="News Images"/>
                             </td>
-                            <td class="px-4 py-3 text-sm">
+                            <td class="py-3 text-sm center">
                                 <%=news.getName_staff()%>
                             </td>
-                            <td class="px-4 py-3 text-sm">
+                            <td class="py-3 text-sm center">
                                 <%=news.getDate()%>
                             </td>
                             <td style="overflow-y: scroll; max-width: 100px;" class="px-4 py-3 text-sm">

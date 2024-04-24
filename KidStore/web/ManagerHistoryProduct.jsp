@@ -104,6 +104,16 @@
                 display: flex;
                 justify-content: center;
             }
+            .text-gray-800 {
+                --text-opacity: 1;
+                color: #1a1c23;
+                font-family: serif;
+                font-size: 30px;
+            }
+            th:nth-child(2), td:nth-child(2) {
+                max-width: 200px;
+                text-wrap: wrap;
+            }
 
         </style>
     </head>
@@ -152,7 +162,7 @@
                         <path d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path>
                         <path d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
                         </svg>
-                        <span class="ml-4">ManagerOther</span>
+                        <span class="ml-4">ManagerWarranty</span>
                     </a>
                 </li>
                 <li class="relative px-6 py-3">
@@ -233,7 +243,7 @@
                                     <% if (order.getStatus().equals("Đang Giao Hàng")) { %>
                                     <option value="delivered" data-action="DeliveredOrderController">Delivered</option>
                                     <option value="refuse" data-action="RefuseOrderController">Refuse</option>
-                                    <% } %>                         
+                                    <% }%>                         
                                 </select>
 
 

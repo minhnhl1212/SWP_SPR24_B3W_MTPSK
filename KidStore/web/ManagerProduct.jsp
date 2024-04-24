@@ -92,6 +92,22 @@
                 font-family: serif;
                 font-size: 30px;
             }
+            th{
+                text-align: center;
+            }
+            td.center{
+                text-align: center;
+            }
+            th:nth-child(1), td:nth-child(1) {
+                max-width: 20px;
+            }
+            th:nth-child(2), td:nth-child(2) {
+                max-width: 200px;
+                text-wrap: wrap;
+            }
+            th:nth-child(3), td:nth-child(3) {
+                max-width: 80px;
+            }
 
         </style>
     </head>
@@ -140,7 +156,7 @@
                         <path d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path>
                         <path d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
                         </svg>
-                        <span class="ml-4">ManagerOther</span>
+                        <span class="ml-4">ManagerWarranty</span>
                     </a>
                 </li>
                 <li class="relative px-6 py-3">
@@ -168,7 +184,7 @@
                     <thead>
                         <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                             <th class="px-4 py-3">ID</th>
-                            <th class="px-4 py-3" style="max-width: 200px">Name</th>
+                            <th class="px-4 py-3">Name</th>
                             <th class="px-4 py-3">Image</th>
                             <th class="px-4 py-3">Price</th>
                             <th class="px-4 py-3">Category</th>
@@ -184,30 +200,30 @@
                                 for (Toy toy : toyList) {
                         %>
                         <tr class="text-gray-700 dark:text-gray-400">
-                            <td class="px-4 py-3">
+                            <td class="px-4 py-3 center">
                                 <%=toy.getToyId()%>
                             </td>
-                            <td class="px-4 py-3 toy-name" style="max-width: 300px">
+                            <td class="px-4 py-3 toy-name">
                                 <%=toy.getToyName()%>
                             </td>
                             <td class="px-4 py-3 text-xs">
                                 <img src="<%=toy.getImage()%>" alt="Toy Image">
                             </td>
-                            <td class="px-4 py-3 get-price" style="width: 100px;">
+                            <td class="px-4 py-3 get-price center">
                                 <%=toy.getPrice()%>
                             </td>
-                            <td class="px-4 py-3 category" style="width: 120px;">
+                            <td class="px-4 py-3 category center">
                                 <%=toy.getName_category()%>
                             </td>
-                            <td class="px-4 py-3 get-discount" style="width: 80px;">
+                            <td class="px-4 py-3 get-discount center">
                                 <%=toy.getDiscount()%>
                             </td>
-                            <td class="px-4 py-3 warranty" style="width: 100px;">
+                            <td class="px-4 py-3 warranty center">
                                 <%=toy.getWarranty_time()%>
                             </td>
 
 
-                           
+
                         </tr>
                         <%}
                         } else {

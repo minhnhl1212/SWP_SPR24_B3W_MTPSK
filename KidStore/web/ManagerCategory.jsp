@@ -73,6 +73,19 @@
                 display: flex;
                 justify-content: center;
             }
+            .text-gray-800 {
+                --text-opacity: 1;
+                color: #1a1c23;
+                font-family: serif;
+                font-size: 30px;
+            }
+            th:nth-child(1), td:nth-child(1) {
+                max-width: 5px;
+            }
+            .px-4 {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
 
         </style>
     </head>
@@ -99,7 +112,7 @@
                         <span class="ml-4">ManagerProduct</span>
                     </a>
                 </li>
-            
+
                 <li class="relative px-6 py-3">
                     <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200" href="ManagerCategory.jsp">
                         <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -122,7 +135,7 @@
                         <path d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path>
                         <path d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
                         </svg>
-                        <span class="ml-4">ManagerOther</span>
+                        <span class="ml-4">ManagerWarranty</span>
                     </a>
                 </li>
                 <li class="relative px-6 py-3">
@@ -161,8 +174,8 @@
                         %>
 
                         <tr class="text-gray-700 dark:text-gray-400">
-                            <td><%=category.getCategoryId()%></td>
-                            <td><%=category.getCategoryName()%></td>
+                            <td class="px-4 py-3"><%=category.getCategoryId()%></td>
+                            <td class="px-4 py-3"><%=category.getCategoryName()%></td>
                             <td class="px-4 py-3">
                                 <div class="flex items-center space-x-7 text-sm">
                                     <button class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray" aria-label="Edit">
