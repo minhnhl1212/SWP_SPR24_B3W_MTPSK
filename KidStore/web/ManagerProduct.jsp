@@ -249,7 +249,7 @@
                                         <%}
                                         } else {
                                         %>
-                                        <p>Không có lo?i ?? ch?i nào</p>
+                                        <p>Không có loại đồ chơi nào</p>
                                         <%
                                             }
                                         %>
