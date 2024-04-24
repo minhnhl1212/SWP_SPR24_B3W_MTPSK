@@ -156,23 +156,44 @@
                                 }
                             %>
 
-                            <td class="px-4 py-3">
-
-                                <select id="statusSelect_<%=warranty.getOrderDetailId()%>">
+                            <td class="px-4 py-3">           
+                                <select id="statusSelect_<%=warranty.getOrderDetailId()%>" <% if (warranty.getStatus().equals("Đã Giao Hàng") || warranty.getStatus().equals("Từ Chối Bảo Hành") || warranty.getStatus().equals("Không Có Yêu Cầu Bảo Hành")) { %> style="display: none;" <% } %>>
                                     <option value="default">Đặt Trạng Thái</option>
-                                    <option value="processing" data-action="ProcessingWarrantyController">Processing</option>
+                                    <% if (warranty.getStatus().equals("Đang Xử Lí")) { %>
                                     <option value="received" data-action="ReceivedWarrantyController">Received</option>
                                     <option value="underwarranty" data-action="UnderWarrantyController">Under Warranty</option>
                                     <option value="shipping" data-action="ShippingWarrantyController">Shipping</option>
                                     <option value="delivered" data-action="DeliveredWarrantyController">Delivered</option>
                                     <option value="refuse" data-action="RefuseWarrantyController">Refuse</option>
-                                </select>  
-
-
+                                    <% } %>
+                                    <% if (warranty.getStatus().equals("Đang Xử Lí")) { %>
+                                    <option value="received" data-action="ReceivedWarrantyController">Received</option>
+                                    <option value="underwarranty" data-action="UnderWarrantyController">Under Warranty</option>
+                                    <option value="shipping" data-action="ShippingWarrantyController">Shipping</option>
+                                    <option value="delivered" data-action="DeliveredWarrantyController">Delivered</option>
+                                    <option value="refuse" data-action="RefuseWarrantyController">Refuse</option>
+                                    <% } %>
+                                    <% if (warranty.getStatus().equals("Đã Nhận Hàng")) { %>
+                                    <option value="underwarranty" data-action="UnderWarrantyController">Under Warranty</option>
+                                    <option value="shipping" data-action="ShippingWarrantyController">Shipping</option>
+                                    <option value="delivered" data-action="DeliveredWarrantyController">Delivered</option>
+                                    <option value="refuse" data-action="RefuseWarrantyController">Refuse</option>
+                                    <% }%>        
+                                    <% if (warranty.getStatus().equals("Đang Bảo Hành")) { %>                    
+                                    <option value="shipping" data-action="ShippingWarrantyController">Shipping</option>
+                                    <option value="delivered" data-action="DeliveredWarrantyController">Delivered</option>
+                                    <option value="refuse" data-action="RefuseWarrantyController">Refuse</option>
+                                    <% }%>    
+                                    <% if (warranty.getStatus().equals("Đang Giao Hàng")) { %>                           
+                                    <option value="delivered" data-action="DeliveredWarrantyController">Delivered</option>
+                                    <option value="refuse" data-action="RefuseWarrantyController">Refuse</option>
+                                    <% }%>  
+                                    <% if (warranty.getStatus().equals("Đã Giao Hàng")) { %>                           
+                                    <option value="delivered" data-action="DeliveredWarrantyController">Delivered</option>     
+                                    <% }%>  
+                                </select>
                             </td>
-
                         </tr>
-
                     <script>
                         document.getElementById('statusSelect_<%=warranty.getOrderDetailId()%>').addEventListener('change', function () {
                             var selectedValue = this.value;

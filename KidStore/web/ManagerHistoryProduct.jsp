@@ -222,15 +222,21 @@
                             <td class="px-4 py-3 text-sm">
                                 <%=order.getStatus()%>
                             </td>
-                            <td class="px-4 py-3">
+                            <td class="px-4 py-3">                                                                       
 
-                                <select id="statusSelect_<%=order.getOrderId()%>">
+                                <select id="statusSelect_<%=order.getOrderId()%>" <% if (order.getStatus().equals("Đã Giao Hàng") || order.getStatus().equals("Từ Chối Bán Hàng")) { %> style="display: none;" <% } %>>
                                     <option value="default">Đặt Trạng Thái</option>
-                                    <option value="processing" data-action="ProcessingOrderController">Processing</option>
-                                    <option value="shipping" data-action="ShippingOrderController">Shipping</option>
+                                    <% if (order.getStatus().equals("Đang Xử Lí")) { %>
+                                    <option value="shipping" data-action="ShippingOrderController">Shipping</option>                                    
+                                    <option value="refuse" data-action="RefuseOrderController">Refuse</option>
+                                    <% } %>
+                                    <% if (order.getStatus().equals("Đang Giao Hàng")) { %>
                                     <option value="delivered" data-action="DeliveredOrderController">Delivered</option>
                                     <option value="refuse" data-action="RefuseOrderController">Refuse</option>
-                                </select>                                                 
+                                    <% } %>                         
+                                </select>
+
+
                             </td>
                     <script>
                         document.getElementById('statusSelect_<%=order.getOrderId()%>').addEventListener('change', function () {
