@@ -96,6 +96,14 @@
                 border-radius: 30px;
                 font-weight: 600;
             }
+            .py-4.text-gray-500.dark\:text-gray-400 {
+                background-color: #80DFFF;
+                text-align: center;
+            }
+            .mt-6 {
+                display: flex;
+                justify-content: center;
+            }
 
         </style>
     </head>
@@ -108,9 +116,10 @@
         <div>
             <a href="LogoutController" style="position: absolute; top: 20px; right: 30px">Logout</a>
         </div>
+        <a class="navbar-brand" href="MainController?TOY_LIST=ALL"><img src="img/logo-kids-new3.png" class="logo" alt="KidStore"></a>
         <div class="py-4 text-gray-500 dark:text-gray-400">
             <a class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200" href="#">
-                STAFF
+                STAFF DASHBOARD
             </a>
             <ul class="mt-6" style="display: flex">
                 <li class="relative px-6 py-3">
@@ -177,7 +186,6 @@
                             <th class="px-4 py-3">Price</th>
                             <th class="px-4 py-3">Discount</th>
                             <th class="px-4 py-3">Date</th>
-                            <th class="px-4 py-3">Description</th>
                             <th class="px-4 py-3">Status</th>
                             <th class="px-4 py-3">Action</th>
                         </tr>
@@ -210,11 +218,6 @@
                             </td>
                             <td class="px-4 py-3 text-sm">
                                 <%=order.getOrderDate()%>
-                            </td>
-                            <td style="overflow-y: scroll; max-width: 100px;" class="px-4 py-3 text-sm">
-                                <div class="description" style="white-space: pre-wrap;">
-                                    <%=order.getDescription()%>
-                                </div>
                             </td>
                             <td class="px-4 py-3 text-sm">
                                 <%=order.getStatus()%>
