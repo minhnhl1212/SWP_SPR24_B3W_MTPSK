@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,7 +26,7 @@ public class AddToyController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            response.setContentType("text/html;charset=UTF-8"); 
+            response.setContentType("text/html;charset=UTF-8");
             HttpSession session = request.getSession();
             ToyDAO toyDAO = new ToyDAO();
             String name = request.getParameter("productName");
@@ -38,17 +39,22 @@ public class AddToyController extends HttpServlet {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             java.util.Date utilDate = dateFormat.parse(warrantyTimeStr);
             java.sql.Date warrantyTime = new java.sql.Date(utilDate.getTime());
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(warrantyTime);
+            calendar.add(Calendar.DAY_OF_MONTH, 2);
+            java.util.Date newWarrantyTime = calendar.getTime();
+            java.sql.Date newSqlWarrantyTime = new java.sql.Date(newWarrantyTime.getTime());
             int userId = Integer.parseInt(request.getParameter("userId"));
-            Toy addToy = toyDAO.addToy(name, image, price, description, idCategory, discount, warrantyTime, userId);
+            Toy addToy = toyDAO.addToy(name, image, price, description, idCategory, discount, newSqlWarrantyTime, userId);
             if (addToy != null) {
                 request.setAttribute("ADD_TOY_SUCCESS", "Added " + addToy.getToyName() + " Success");
             } else {
                 request.setAttribute("ADD_TOY_FAILED", "Added " + addToy.getToyName() + " Failed");
             }
-                        
+
             ArrayList<Toy> toyList = toyDAO.toyList();
             session.setAttribute("TOY_LIST", toyList);
-            
+
             RequestDispatcher rd = request.getRequestDispatcher("ManagerProduct.jsp");
             rd.forward(request, response);
         } catch (Exception ex) {

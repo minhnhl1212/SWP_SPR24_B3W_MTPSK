@@ -17,7 +17,7 @@
                 height: 47px;
                 text-align: left;
                 left: 14px;
-                padding-top: 10px;
+                padding-top: 0px;
                 color: white;
                 text-shadow: 2px 2px 5px black;
             }
