@@ -212,6 +212,10 @@
         <servlet-name>SendFeedbackController</servlet-name>
         <servlet-class>Controller.SendFeedbackController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AccountEditRoleController</servlet-name>
+        <servlet-class>Controller.AccountEditRoleController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -439,6 +443,10 @@
     <servlet-mapping>
         <servlet-name>EditRoleAccountController</servlet-name>
         <url-pattern>/EditRoleAccount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AccountEditRoleController</servlet-name>
+        <url-pattern>/AccountEditRoleController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

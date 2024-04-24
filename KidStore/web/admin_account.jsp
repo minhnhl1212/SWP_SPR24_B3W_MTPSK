@@ -16,7 +16,7 @@
         <!-- Boxicons -->
         <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
         <!-- My CSS -->
-        <link rel="stylesheet" href="css/admin.css">
+        <link href="css/admin.css" rel="stylesheet">
         <title>AdminHub</title>
     </head>
 
@@ -44,6 +44,7 @@
             text-shadow: 0 1px 0 #fff;
             opacity: .5;
         }
+        
 
     </style>
 
@@ -113,8 +114,8 @@
                 <a href="#" class="nav-link"></a>
                 <form action="#">
                     <div class="search">
-                        <input type="text" class="searchTerm" placeholder=" Search.....">
-                        <button type="submit" class="searchButton"><i class="bx bx-search"></i></button>
+                        <input type="text" class="searchTerm" placeholder=" Search....." hidden="">
+                        <button type="submit" class="searchButton" hidden=""><i class="bx bx-search"></i></button>
                     </div>
                 </form>
                 <input type="checkbox" id="switch-mode" hidden>
@@ -250,26 +251,24 @@
                                     <td><%=a.getFullName()%></td>
                                     <td><%=a.getPhone()%></td>
                                     <td><%=a.getAddress()%></td>
-                                    <!-- <td><%=a.getRole()%></td> -->
                                     <td>
-                                        <%=a.getRole()%>
-                                        <select form="changeRole<%=a.getUserId()%>" 
-                                                data-user-id="<%=a.getUserId()%>" 
-                                                onchange="changeRole(this.dataset.userId, this.value)">
-                                            <option value="2" <%=a.getRole().equals("Staff") ? "Staff": ""%>>Staff</option>
-                                            <option value="3" <%=a.getRole().equals("Customer") ? "Customer": ""%>>Customer</option>
-                                        </select>
-                                        <form id="changeRole<%=a.getUserId()%>" action="EditRoleAccount" method="post">
-                                            <input type="hidden" name="user-id" value="<%=a.getUserId()%>">
-                                            <input type="hidden" name="role"> 
-                                        </form>
+                                        <a href="AccountEditRoleController?id=<%=a.getUserId()%>&roleId=<%=a.getRoleId()%>" id="toggleButton" class="button-bordered">
+                                            <% if (a.getRoleId() == 2) {%>
+                                            Staff
+                                            <%} else {%>
+                                            Customer
+                                            <%}%>
+                                        </a>
                                     </td>
-                                    <td><a href="AccountStatusController?id=<%=a.getUserId()%>&isActive=<%=a.isActive()%>"id="toggleButton" class="button-bordered">
+                                    <td>
+                                        <a href="AccountStatusController?id=<%=a.getUserId()%>&isActive=<%=a.isActive()%>"id="toggleButton" class="button-bordered">
                                             <% if (a.isActive()) {%>
                                             Active
                                             <%} else {%>
                                             Banned
                                             <%}%>
+                                        </a>
+                                    </td>
                                 </tr>
                                 <%}
                                         }
@@ -286,11 +285,6 @@
             function togglePopup() {
                 var popup = document.getElementById("popupForm");
                 popup.style.display = (popup.style.display === "block") ? "none" : "block";
-            }
-            function changeRole(userId, value) {
-                let form = document.querySelector(`#changeRole` + userId);
-                form.querySelector("input[name='role']").setAttribute('value', value);
-                form.submit();
             }
         </script>
         <script src="js/admin.js"></script>

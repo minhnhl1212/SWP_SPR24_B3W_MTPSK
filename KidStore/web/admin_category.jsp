@@ -92,8 +92,8 @@
                 <a href="#" class="nav-link"></a>
                 <form action="#">
                     <div class="search">
-                        <input type="text" class="searchTerm" placeholder=" Search.....">
-                        <button type="submit" class="searchButton"><i class="bx bx-search"></i></button>
+                        <input type="text" class="searchTerm" placeholder=" Search....." hidden="">
+                        <button type="submit" class="searchButton" hidden=""><i class="bx bx-search"></i></button>
                     </div>
                 </form>
                 <input type="checkbox" id="switch-mode" hidden>
@@ -117,7 +117,7 @@
                     </div>
                 </div>
                 <ul class="notifications"></ul>
-                <div class="table-data-category">
+                <div class="table-data">
                     <div class="order">
                         <div class="head">
                             <h3>Category List</h3>

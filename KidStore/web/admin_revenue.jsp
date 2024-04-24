@@ -89,8 +89,8 @@
                 <a href="#" class="nav-link"></a>
                 <form action="#">
                     <div class="search">
-                        <input type="text" class="searchTerm" placeholder=" Search.....">
-                        <button type="submit" class="searchButton"><i class="bx bx-search"></i></button>
+                        <input type="text" class="searchTerm" placeholder=" Search....." hidden="">
+                        <button type="submit" class="searchButton" hidden=""><i class="bx bx-search"></i></button>
                     </div>
                 </form>
                 <input type="checkbox" id="switch-mode" hidden>
@@ -111,7 +111,7 @@
                         totalRevenue += o.getTotalPrice();
                     }
                 }
-                
+
                 String formatTotalRevenue = vnCurrencyFormat.format(totalRevenue);
             %>
             <!-- MAIN -->
@@ -122,11 +122,11 @@
                     </div>
                 </div>
 
-                <div class="table-data-revenue">
+                <div class="table-data">
                     <div class="order">
                         <div class="head">
                             <h3>Revenue Stream</h3>
-                            <h3 style="margin-left: 600px;">Total Revenue: &nbsp; <%=formatTotalRevenue%></h3>
+                            <h3 style="text-align: left; margin-left: 470px;">Total Revenue: &nbsp; <%=formatTotalRevenue%></h3>
                         </div>
                         <table>
                             <thead>
@@ -149,7 +149,7 @@
                                 %>
                                 <tr>
                                     <td><%=i++%></td>
-                                    <td><img src="<%=e.getImage()%>" alt ="Loading"></td>
+                                    <td><img src="<%=e.getImage()%>" alt ="Loading" style="width: 100px; height: 100px; margin-left: auto; margin-right: auto;"></td>
                                     <td><%=e.getToyName()%></td>
                                     <td><%=e.getQuantity()%></td>
                                     <td><%=e.getFullName()%></td>

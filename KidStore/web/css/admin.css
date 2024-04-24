@@ -427,8 +427,7 @@ sidebarsidebar {
 }
 #content main .table-data .head h3 {
     margin-right: auto;
-    font-size: 24px;
-    font-weight: 600;
+    font-size: 22px;
 }
 #content main .table-data .head .bx {
     cursor: pointer;
@@ -445,27 +444,24 @@ sidebarsidebar {
 #content main .table-data .order table th {
     padding-bottom: 12px;
     font-size: 13px;
-    text-align: left;
+    text-align: center;
     border-bottom: 1px solid var(--grey);
 }
 #content main .table-data .order table td {
     padding: 16px 0;
 }
-#content main .table-data .order table tr td:first-child {
-    display: flex;
-    align-items: center;
-    grid-gap: 12px;
-    padding-left: 8px;
+
+#content main .table-data .order table th {
+    padding: 12px;
+    font-size: 13px;
+    text-align: center;
+    border: 2px solid var(--grey);
 }
-#content main .table-data .order table tr td:nth-child(2){
-    width: 10%
+#content main .table-data .order table td {
+    text-align: center;
+    border: 2px solid var(--grey);
 }
-#content main .table-data .order table tr td:nth-child(3){
-    width: 24%
-}
-#content main .table-data .order table tr td:nth-child(7){
-    width: 12%
-}
+
 #content main .table-data .order table tr td .status {
     font-size: 10px;
     padding: 6px 16px;
@@ -508,35 +504,7 @@ sidebarsidebar {
     flex-grow: 1;
     flex-basis: 500px;
 }
-#content main .table-data-product .order table {
-    width: 100%;
-    border-collapse: collapse;
-}
-#content main .table-data-product .order table th {
-    padding-bottom: 12px;
-    font-size: 13px;
-    text-align: left;
-    border-bottom: 1px solid var(--grey);
-}
-#content main .table-data-product .order table td {
-    padding: 16px 0;
-}
-#content main .table-data-product .order table tr td:first-child {
-    display: flex;
-    align-items: center;
-    grid-gap: 12px;
-    padding-left: 8px;
-    padding-right: 14px;
-}
-#content main .table-data-product .order table tr td:nth-child(2){
-    width: 30%
-}
-#content main .table-data-product .order table tr td:nth-child(3){
-    width: 15%
-}
-#content main .table-data-product .order table tr td:nth-child(4){
-    width: 20%
-}
+
 #content main .table-data-product .order table tr td .status {
     font-size: 10px;
     padding: 6px 16px;
@@ -850,47 +818,47 @@ sidebarsidebar {
 .toast-all,
 .toast-all:before,
 .toast-all:after {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 .toast-all {
-  margin: 0;
-  padding: 0;
-  font: inherit;
+    margin: 0;
+    padding: 0;
+    font: inherit;
 }
 img,
 picture,
 svg,
 video {
-  display: block;
-  max-width: 100%;
+    display: block;
+    max-width: 100%;
 }
 :root {
-  --dark: #16213e;
-  --light: #fff;
-  --success: #00b894;
-  --error: #d63031;
-  --warning: #fdcb6e;
-  --info: #0984e3;
-  --gray: #cccccc;
+    --dark: #16213e;
+    --light: #fff;
+    --success: #00b894;
+    --error: #d63031;
+    --warning: #fdcb6e;
+    --info: #0984e3;
+    --gray: #cccccc;
 }
 .toast-all {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  background-color: var(--dark);
-  font-family: "Roboto", sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: var(--dark);
+    font-family: "Roboto", sans-serif;
 }
 .notifications {
-  position: fixed;
-  top: 30px;
-  right: 20px;
-  z-index: 1001;
+    position: fixed;
+    top: 30px;
+    right: 20px;
+    z-index: 1001;
 }
 .notifications .column,
 .toast {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 .dark .notifications .toast {
@@ -898,173 +866,173 @@ video {
     color: #333; 
 }
 .notifications .toast {
-  width: 400px;
-  position: relative;
-  list-style: none;
-  background: var(--light);
-  border-radius: 4px;
-  margin-bottom: 10px;
-  padding: 20px;
-  justify-content: space-between;
-  overflow: hidden;
-  animation: show_toast 0.3s ease forwards;
+    width: 400px;
+    position: relative;
+    list-style: none;
+    background: var(--light);
+    border-radius: 4px;
+    margin-bottom: 10px;
+    padding: 20px;
+    justify-content: space-between;
+    overflow: hidden;
+    animation: show_toast 0.3s ease forwards;
 }
 .notifications .toast.remove {
-  animation: hide_toast 0.3s ease forwards;
+    animation: hide_toast 0.3s ease forwards;
 }
 @keyframes hide_toast {
-  0% {
-    transform: translateX(0%);
-  }
-  40% {
-    transform: translateX(0%);
-  }
-  80% {
-    transform: translateX(-5%);
-  }
-  100% {
-    transform: translateX(calc(100% + 20px));
-  }
+    0% {
+        transform: translateX(0%);
+    }
+    40% {
+        transform: translateX(0%);
+    }
+    80% {
+        transform: translateX(-5%);
+    }
+    100% {
+        transform: translateX(calc(100% + 20px));
+    }
 }
 @keyframes show_toast {
-  0% {
-    transform: translateX(100%);
-  }
-  40% {
-    transform: translateX(-5%);
-  }
-  80% {
-    transform: translateX(0%);
-  }
-  100% {
-    transform: translateX(-10px);
-  }
+    0% {
+        transform: translateX(100%);
+    }
+    40% {
+        transform: translateX(-5%);
+    }
+    80% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-10px);
+    }
 }
 .toast::before {
-  content: "";
-  position: absolute;
-  height: 3px;
-  width: 100%;
-  bottom: 0;
-  left: 0;
-  animation: progress 3s linear forwards;
+    content: "";
+    position: absolute;
+    height: 3px;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    animation: progress 3s linear forwards;
 }
 @keyframes progress {
-  100% {
-    width: 0%;
-  }
+    100% {
+        width: 0%;
+    }
 }
 .toast.success::before,
 .btn#success {
-  background-color: var(--success);
+    background-color: var(--success);
 }
 .toast.error::before,
 .btn#error {
-  background-color: var(--error);
+    background-color: var(--error);
 }
 .toast.warning::before,
 .btn#warning {
-  background-color: var(--warning);
+    background-color: var(--warning);
 }
 .toast.info::before,
 .btn#info {
-  background-color: var(--info);
+    background-color: var(--info);
 }
 .toast .column i {
-  font-size: 1.5rem;
-  margin-right: 10px;
+    font-size: 1.5rem;
+    margin-right: 10px;
 }
 .toast.success .column i {
-  color: var(--success);
+    color: var(--success);
 }
 .toast.error .column i {
-  color: var(--error);
+    color: var(--error);
 }
 .toast.warning .column i {
-  color: var(--warning);
+    color: var(--warning);
 }
 .toast.info .column i {
-  color: var(--info);
+    color: var(--info);
 }
 .toast .column .span {
-  font-size: 1.2rem;
+    font-size: 1.2rem;
 }
 .toast i:last-child {
-  font-size: 1.2rem;
-  cursor: pointer;
-  color: var(--gray);
-  transition: all 0.2s ease-in-out;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: var(--gray);
+    transition: all 0.2s ease-in-out;
 }
 .toast i:last-child:hover {
-  color: var(--dark);
+    color: var(--dark);
 }
 
 /* Search bar */ 
 .search {
-  width: 100%;
-  position: relative;
-  display: flex;
+    width: 100%;
+    position: relative;
+    display: flex;
 }
 
 .searchTerm {
-  width: 100%;
-  border: 3px solid #00B4CC;
-  border-right: none;
-  padding: 5px;
-  height: 40px;
-  border-radius: 5px 0 0 5px;
-  outline: none;
-  color: #3c91e6;
-  border-radius: 15px 0px 0px 15px;
+    width: 100%;
+    border: 3px solid #00B4CC;
+    border-right: none;
+    padding: 5px;
+    height: 40px;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    color: #3c91e6;
+    border-radius: 15px 0px 0px 15px;
 }
 
 .searchTerm:focus{
-  color: #3c91e6;
+    color: #3c91e6;
 }
 
 .searchButton {
-  width: 40px;
-  height: 40px;
-  border: 1px solid #00B4CC;
-  background: #3c91e6   ;
-  text-align: center;
-  color: #fff;
-  border-radius: 0 15px 15px 0;
-  cursor: pointer;
-  font-size: 20px;
+    width: 40px;
+    height: 40px;
+    border: 1px solid #00B4CC;
+    background: #3c91e6   ;
+    text-align: center;
+    color: #fff;
+    border-radius: 0 15px 15px 0;
+    cursor: pointer;
+    font-size: 20px;
 }
 
 .button-add-account {
- border: none;
- color: #fff;
- background-image: linear-gradient(30deg, #0400ff, #4ce3f7);
- border-radius: 20px;
- background-size: 100% auto;
- font-family: inherit;
- font-size: 17px;
- padding: 0.6em 1.5em;
- margin-right: 30px;
+    border: none;
+    color: #fff;
+    background-image: linear-gradient(30deg, #0400ff, #4ce3f7);
+    border-radius: 20px;
+    background-size: 100% auto;
+    font-family: inherit;
+    font-size: 17px;
+    padding: 0.6em 1.5em;
+    margin-right: 30px;
 }
 
 .button-add-account:hover {
- background-position: right center;
- background-size: 200% auto;
- -webkit-animation: pulse 2s infinite;
- animation: pulse512 1.5s infinite;
+    background-position: right center;
+    background-size: 200% auto;
+    -webkit-animation: pulse 2s infinite;
+    animation: pulse512 1.5s infinite;
 }
 
 @keyframes pulse512 {
- 0% {
-  box-shadow: 0 0 0 0 #05bada66;
- }
+    0% {
+        box-shadow: 0 0 0 0 #05bada66;
+    }
 
- 70% {
-  box-shadow: 0 0 0 10px rgb(218 103 68 / 0%);
- }
+    70% {
+        box-shadow: 0 0 0 10px rgb(218 103 68 / 0%);
+    }
 
- 100% {
-  box-shadow: 0 0 0 0 rgb(218 103 68 / 0%);
- }
+    100% {
+        box-shadow: 0 0 0 0 rgb(218 103 68 / 0%);
+    }
 }
 
 .popup-form form .button-add {
