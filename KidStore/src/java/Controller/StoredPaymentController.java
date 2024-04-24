@@ -5,24 +5,18 @@
  */
 package Controller;
 
-import DAO.Code;
-import DAO.OrderDAO;
-import DTO.Toy;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author admin
  */
-public class OrderDetailController extends HttpServlet {
+public class StoredPaymentController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,33 +32,16 @@ public class OrderDetailController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-        HttpSession session = request.getSession();
-        int toyId, quantity;
-        double price;
-        String warrantyCode;
-        Code code = new Code();
-        OrderDAO dao = new OrderDAO();
-        int orderId = (Integer)session.getAttribute("OrderID");
-        HashMap<Toy,Integer> cartList = (HashMap<Toy,Integer>) session.getAttribute("cartList");
-        for(HashMap.Entry<Toy, Integer> c : cartList.entrySet()){
-            toyId = c.getKey().getToyId();
-            quantity = c.getValue();
-            price = c.getKey().getPrice()*c.getKey().getDiscount();
-            warrantyCode = code.Code();
-            int a = dao.CreateOrderDetail(toyId, quantity, price, orderId, warrantyCode, "Đang xử lý");
-            System.out.println(a);
-        }
-        session.setAttribute("cartList", null);
-        session.setAttribute("OrderID", null);
-        session.setAttribute("discount", null);
-        session.setAttribute("vouchernamecode", null);
-        session.setAttribute("DataStore", null);
-        RequestDispatcher rd = request.getRequestDispatcher("home.jsp");
-        rd.forward(request, response);
-        }
-        
-        catch(Exception e){
-            e.printStackTrace();
+            String amount = request.getParameter("vnp_Amount");
+            String bankCode = request.getParameter("vnp_BankCode");
+            String CardType = request.getParameter("vnp_CardType");
+            String orderInfo = request.getParameter("vnp_OrderInfo");
+            String payDate = request.getParameter("vnp_PayDate");
+            String responseCode = request.getParameter("vnp_ResponseCode");
+            String TransactionNo = request.getParameter("vnp_TransactionNo");
+            String TransactionStatus = request.getParameter("vnp_TransactionStatus");
+            String textReference = request.getParameter("vnp_TxnRef");
+            
         }
     }
 
