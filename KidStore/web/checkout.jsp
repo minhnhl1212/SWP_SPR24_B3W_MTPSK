@@ -43,6 +43,12 @@
         .confirmation p {
             margin: 5px 0;
         }
+        .hidden-form {
+            display: none;
+        }
+        input[type="radio"]#otherPayment:checked ~ #otherPaymentDetails {
+            display: block;
+        }
     </style>
     <body>
         <%@include file="components/navBarComponent.jsp" %>
@@ -57,16 +63,18 @@
                     var paymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
 
                     var errorMessage = "";
-                    if (name === "") {
-                        errorMessage += "Vui lòng nhập Tên.<br>";
-                    }
-                    if (address === "") {
-                        errorMessage += "Vui lòng nhập Địa chỉ.<br>";
-                    }
-                    if (phoneNumber === "") {
-                        errorMessage += "Vui lòng nhập Số Điện Thoại.<br>";
-                    } else if (!phoneNumber.match(/^\d{10,11}$/)) {
-                        errorMessage += "Số Điện Thoại không hợp lệ.<br>";
+                    if (document.getElementById("otherPayment").checked) {
+                        if (name === "") {
+                            errorMessage += "Vui lòng nhập Tên.<br>";
+                        }
+                        if (address === "") {
+                            errorMessage += "Vui lòng nhập Địa chỉ.<br>";
+                        }
+                        if (phoneNumber === "") {
+                            errorMessage += "Vui lòng nhập Số Điện Thoại.<br>";
+                        } else if (!phoneNumber.match(/^\d{10,11}$/)) {
+                            errorMessage += "Số Điện Thoại không hợp lệ.<br>";
+                        }
                     }
                     if (!paymentMethod) {
                         errorMessage += "Vui lòng chọn phương thức thanh toán.<br>";
@@ -93,12 +101,19 @@
                             <h5>Billing Details</h5>
                             <form class="checkout-form" action="MainController" method="post" onsubmit="return validateFormData()">
 
-                                <label>Tên</label>
-                                <input type="text" class="form-control" id="name" placeholder="Tên" name="name">
-                                <label>Địa chỉ</label>
-                                <input type="text" class="form-control" id="address" placeholder="Địa chỉ" name="address">
-                                <label>Số Điện Thoại</label>
-                                <input type="text" class="form-control" id="phone" placeholder="Số Điện Thoại" name="phone">
+                                <input type="radio" id="selfPayment" name="paymentType">
+                                <label for="thanhtoanchobanthan">Thanh toán cho bản thân</label><br>
+
+                                <input type="radio" id="otherPayment" name="paymentType">
+                                <label for="thanhtoanchonguoikhac">Thanh toán cho người khác</label><br>
+                                <div id="otherPaymentDetails" class="hidden-form">
+                                    <label>Tên</label>
+                                    <input type="text" class="form-control" id="name" placeholder="Tên" name="name">
+                                    <label>Địa chỉ</label>
+                                    <input type="text" class="form-control" id="address" placeholder="Địa chỉ" name="address">
+                                    <label>Số Điện Thoại</label>
+                                    <input type="text" class="form-control" id="phone" placeholder="Số Điện Thoại" name="phone">
+                                </div>
 
                                 <div><label>Phương thức thanh toán</label></div>
                                 <input type="radio" id="cashOnDelivery" name="paymentMethod" value="cashOnDelivery">
@@ -163,7 +178,7 @@
                                         Discount = Double.parseDouble(DiscountParam);
                                         DiscountValue = sum - sum * Discount;
                                     }
-                                    totalPrice = sum - DiscountValue; 
+                                    totalPrice = sum - DiscountValue;
                                     String formatDiscountValue = vnCurrencyFormat.format(DiscountValue);
                                     String formatTotalPrice = vnCurrencyFormat.format(totalPrice);
                                 %>

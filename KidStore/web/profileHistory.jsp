@@ -153,8 +153,9 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-12" >
-                                        <div class="row">                                           
+                                    <div class="col-md-3" style="margin-top: 70px;">Hình thức thanh toán: </div>
+                                    <div class="col-md-9" >
+                                        <div class="row">
                                             <div class="product-price" style="display: flex; align-items: center; justify-content: flex-start; font-size: 16px;">
                                                 <button class="sendFeedback" hidden="">
                                                     <a href="#" style="text-decoration: none; color: black;" onclick="togglePopup()">Send Feedback<i class='bx bx-mail-send'></i></a>
@@ -170,7 +171,7 @@
                                                 <h6>Discount: <%=formatDiscount%></h6>
                                             </div> 
                                             <div class="product-name" style=" display: flex;justify-content: flex-end;">
-                                                <h5><i class='bx bx-money'></i> Thành tiền: <%=formatOrderAfterDiscount%></h5>
+                                                <h5><i class='bx bx-money'></i> Total: <%=formatOrderAfterDiscount%></h5>
                                             </div>                            
                                         </div>
                                     </div>
