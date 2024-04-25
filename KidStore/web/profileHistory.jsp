@@ -93,8 +93,7 @@
                         DecimalFormat vnCurrencyFormat = new DecimalFormat("###,### VNĐ");
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                         if (orderList != null && acc != null && OrderIDList != null) {
-                            for (OrderHistory oid : OrderIDList) {
-                                
+                            for (OrderHistory oid : OrderIDList) { 
                                 String formatOrderAmount = vnCurrencyFormat.format(oid.getOrderAmount());
                                 double Discount = Math.round(oid.getOrderAmount() - oid.getOrderAmount() * oid.getDiscount());
                                 double OrderAmountAfterDiscount = Math.round(oid.getOrderAmount()) - Discount;
@@ -153,7 +152,13 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-3" style="margin-top: 70px;">Hình thức thanh toán: </div>
+                                    <div class="col-md-3" style="margin-top: 70px;">Hình thức thanh toán
+                                    <%if(!oid.isPaymentMethod()){%>
+                                    bằng tiền mặt
+                                    <%}else {%>
+                                    bằng banking
+                                    <%}%>
+                                        </div>
                                     <div class="col-md-9" >
                                         <div class="row">
                                             <div class="product-price" style="display: flex; align-items: center; justify-content: flex-start; font-size: 16px;">
