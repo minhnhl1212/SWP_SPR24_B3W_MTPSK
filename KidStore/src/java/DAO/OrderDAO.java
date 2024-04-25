@@ -612,6 +612,12 @@ public class OrderDAO {
         ArrayList<OrderHistory> listOfOrderID = new ArrayList<>();
         try {
             con = DBUtils.getConnection();
+
+            if(con!=null){
+                String sql = "select [Order].order_id, [Order].status_order, "
+                        + "[Order].order_date, [Order].order_amount, "
+                        + "Voucher.voucher_discount from [Order] "
+                        + "inner join Voucher on [Order].voucher_id = Voucher.id\n"
             if (con != null) {
                 String sql = "select [Order].order_id, [Order].status_order, "
                         + "[Order].order_date, [Order].order_amount, "
@@ -623,6 +629,8 @@ public class OrderDAO {
                 rs = ps.executeQuery();
                 while (rs.next()) {
                     OrderHistory oh = new OrderHistory(rs.getInt("order_id"),
+                            addTwoDays(rs.getDate("order_date")), rs.getString("status_order"), 
+                            rs.getDouble("order_amount"),rs.getDouble("voucher_discount"));
                             addTwoDays(rs.getDate("order_date")), rs.getString("status_order"),
                             rs.getDouble("order_amount"), rs.getDouble("voucher_discount"));
                     listOfOrderID.add(oh);

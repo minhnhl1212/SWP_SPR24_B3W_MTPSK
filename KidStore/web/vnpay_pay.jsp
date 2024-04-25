@@ -10,10 +10,10 @@
         <meta name="author" content="">
         <title>Tạo mới đơn hàng</title>
         <!-- Bootstrap core CSS -->
-        <link href="/vnpay_jsp/assets/bootstrap.min.css" rel="stylesheet"/>
+        <link href="assets_payment/bootstrap.min.css" rel="stylesheet"/>
         <!-- Custom styles for this template -->
-        <link href="/vnpay_jsp/assets/jumbotron-narrow.css" rel="stylesheet">      
-        <script src="/vnpay_jsp/assets/jquery-1.11.3.min.js"></script>
+        <link href="assets_payment/jumbotron-narrow.css" rel="stylesheet">      
+        <script src="assets_payment/jquery-1.11.3.min.js"></script>
     </head>
 
     <body>
@@ -36,7 +36,7 @@
                                data-val-number="The field Amount must be a number." 
                                data-val-required="The Amount field is required." 
                                id="amount" max="100000000" min="1" name="amount" type="number" value="<%=roundAmount%>"/>
-                        <%=roundAmount%>
+                        <%=roundAmount%> VNĐ
                     </div>
                      <h4>Chọn phương thức thanh toán</h4>
                     <div class="form-group">
