@@ -1,5 +1,6 @@
 package DTO;
 
+import java.io.InputStream;
 import java.util.Date;
 
 /**
@@ -11,7 +12,7 @@ public class Toy {
     private int toyId;
     private String toyName;
     private int quantity;
-    private String image;
+    private byte[] image;
     private double price;
     private String description;
     private int categoryId;
@@ -27,14 +28,18 @@ public class Toy {
         this.toyId = toyId;
     }
 
-    public Toy(String toyName, String image, double price, double discount) {
+    public Toy(String toyName) {
+        this.toyName = toyName;
+    }        
+
+    public Toy(String toyName, byte[] image, double price, double discount) {
         this.toyName = toyName;
         this.image = image;
         this.price = price;
         this.discount = discount;
     }        
-    
-    public Toy(int toyId, String toyName, String image, double price, double discount) {
+
+    public Toy(int toyId, String toyName, byte[] image, double price, double discount) {
         this.toyId = toyId;
         this.toyName = toyName;
         this.image = image;
@@ -42,7 +47,7 @@ public class Toy {
         this.discount = discount;
     }
 
-    public Toy(int toyId, String toyName, int quantity, String image, double price, String description,String name_category ,double discount) {
+    public Toy(int toyId, String toyName, int quantity, byte[] image, double price, String description, String name_category, double discount) {
         this.toyId = toyId;
         this.toyName = toyName;
         this.quantity = quantity;
@@ -54,7 +59,7 @@ public class Toy {
         
     }
 
-    public Toy(int toyId, String toyName, int quantity, String image, double price, String description, int categoryId, double discount) {
+    public Toy(int toyId, String toyName, int quantity, byte[] image, double price, String description, int categoryId, double discount) {
         this.toyId = toyId;
         this.toyName = toyName;
         this.quantity = quantity;
@@ -65,7 +70,19 @@ public class Toy {
         this.discount = discount;
     }
 
-    public Toy(int toyId, String toyName, int quantity, String image, double price, String description, int categoryId, double discount, Date warranty_time, int isActive, int isDisable) {
+    public Toy(String toyName, double price, String description, int categoryId, double discount, Date warranty_time, int isActive, int isDisable, int userId) {
+        this.toyName = toyName;
+        this.price = price;
+        this.description = description;
+        this.categoryId = categoryId;
+        this.discount = discount;
+        this.warranty_time = warranty_time;
+        this.isActive = isActive;
+        this.isDisable = isDisable;
+        this.userId = userId;
+    }        
+
+    public Toy(int toyId, String toyName, int quantity, byte[] image, double price, String description, int categoryId, double discount, Date warranty_time, int isActive, int isDisable) {
         this.toyId = toyId;
         this.toyName = toyName;
         this.quantity = quantity;
@@ -77,10 +94,9 @@ public class Toy {
         this.warranty_time = warranty_time;
         this.isActive = isActive;
         this.isDisable = isDisable;
-    }    
-    
+    }        
 
-    public Toy(String toyName, String image, double price, String description, int categoryId, double discount, Date warranty_time, int isActive, int isDisable, int userId) {
+    public Toy(String toyName, byte[] image, double price, String description, int categoryId, double discount, Date warranty_time, int isActive, int isDisable, int userId) {
         this.toyName = toyName;
         this.image = image;
         this.price = price;
@@ -91,9 +107,9 @@ public class Toy {
         this.isActive = isActive;
         this.isDisable = isDisable;
         this.userId = userId;
-    }        
+    }
 
-    public Toy(int toyId, String toyName, String image, double price, String description, int categoryId, double discount, Date warranty_time, int isActive, int isDisable, int userId, String name_staff) {
+    public Toy(int toyId, String toyName, byte[] image, double price, String description, int categoryId, double discount, Date warranty_time, int isActive, int isDisable, int userId, String name_staff) {
         this.toyId = toyId;
         this.toyName = toyName;
         this.image = image;
@@ -106,9 +122,9 @@ public class Toy {
         this.isDisable = isDisable;
         this.userId = userId;
         this.name_staff = name_staff;
-    }    
+    }
 
-    public Toy(int toyId, String toyName, int quantity, String image, double price, String description, int categoryId, double discount, Date warranty_time, int isActive, int isDisable, String name_category) {
+    public Toy(int toyId, String toyName, int quantity, byte[] image, double price, String description, int categoryId, double discount, Date warranty_time, int isActive, int isDisable, String name_category) {
         this.toyId = toyId;
         this.toyName = toyName;
         this.quantity = quantity;
@@ -121,9 +137,9 @@ public class Toy {
         this.isActive = isActive;
         this.isDisable = isDisable;
         this.name_category = name_category;
-    }
+    }            
 
-    public Toy(int toyId, String toyName, int quantity, String image, double price, String description, int categoryId, double discount, Date warranty_time, int isActive, int isDisable, int userId, String name_staff) {
+    public Toy(int toyId, String toyName, int quantity, byte[] image, double price, String description, int categoryId, double discount, Date warranty_time, int isActive, int isDisable, int userId, String name_staff) {
         this.toyId = toyId;
         this.toyName = toyName;
         this.quantity = quantity;
@@ -137,7 +153,21 @@ public class Toy {
         this.isDisable = isDisable;
         this.userId = userId;
         this.name_staff = name_staff;
-    }    
+    }   
+
+
+
+    public Toy(String name, InputStream image, double price, String description, int idCategory, double discount, java.sql.Date warrantyTime, int i, int i0, int userId) {
+        this.toyName = toyName;
+        this.price = price;
+        this.description = description;
+        this.categoryId = categoryId;
+        this.discount = discount;
+        this.warranty_time = warranty_time;
+        this.isActive = isActive;
+        this.isDisable = isDisable;
+        this.userId = userId;
+    }
 
     public int getToyId() {
         return toyId;
@@ -163,11 +193,11 @@ public class Toy {
         this.quantity = quantity;
     }
 
-    public String getImage() {
+    public byte[] getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(byte[] image) {
         this.image = image;
     }
 

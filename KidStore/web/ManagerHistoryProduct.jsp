@@ -5,6 +5,7 @@
 --%>
 
 
+<%@page import="java.util.Base64"%>
 <%@page import="DTO.OrderHistory"%>
 <%@page import="DTO.Toy"%>
 <%@page import="DTO.Category"%>
@@ -207,6 +208,8 @@
                             ArrayList<OrderHistory> orderList = (ArrayList<OrderHistory>) session.getAttribute("ORDER_HISTORY");
                             if (orderList != null) {
                                 for (OrderHistory order : orderList) {
+                                    String base64Image = Base64.getEncoder().encodeToString(order.getImageToy());
+
                         %>
                         <tr class="text-gray-700 dark:text-gray-400">
                             <td class="px-4 py-3">
@@ -216,7 +219,7 @@
                                 <%=order.getToyName()%>
                             </td>
                             <td class="px-4 py-3 text-xs">
-                                <img src="<%=order.getImageToy()%>" alt="Toy Image">
+                                <img src="data:image/jpeg;base64,<%= base64Image%>" alt="Toy Image">
                             </td>
                             <td class="px-4 py-3 text-sm">
                                 <%=order.getNameCategory()%>

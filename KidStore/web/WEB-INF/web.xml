@@ -43,6 +43,14 @@
     <servlet>
         <servlet-name>AddToyController</servlet-name>
         <servlet-class>Controller.AddToyController</servlet-class>
+        <multipart-config>
+            <max-file-size>1048576</max-file-size>
+            <!-- Maximum file size allowed (in bytes) -->
+            <max-request-size>2097152</max-request-size>
+            <!-- Maximum request size allowed (in bytes) -->
+            <file-size-threshold>0</file-size-threshold>
+            <!-- Size threshold after which files will be written to disk -->
+        </multipart-config>
     </servlet>
     <servlet>
         <servlet-name>DeleteToyController</servlet-name>
@@ -87,6 +95,14 @@
     <servlet>
         <servlet-name>AddNewsController</servlet-name>
         <servlet-class>Controller.AddNewsController</servlet-class>
+        <multipart-config>
+            <max-file-size>1048576</max-file-size>
+            <!-- Maximum file size allowed (in bytes) -->
+            <max-request-size>2097152</max-request-size>
+            <!-- Maximum request size allowed (in bytes) -->
+            <file-size-threshold>0</file-size-threshold>
+            <!-- Size threshold after which files will be written to disk -->
+        </multipart-config>
     </servlet>
     <servlet>
         <servlet-name>OrderHistoryController</servlet-name>

@@ -11,7 +11,7 @@ public class OrderHistory {
     private int orderId;
     private int orderDetailId;
     private Date orderDate;
-    private String imageToy;
+    private byte[] imageToy;
     private String toyName;
     private int quantity;
     private String nameCategory;
@@ -21,12 +21,30 @@ public class OrderHistory {
     private double orderPrice;
     private double orderAmount;
     private double discount;
+    private boolean paymentMethod;
 
     public OrderHistory(int orderId) {
         this.orderId = orderId;
     }
+
+    public OrderHistory(int orderId, Date orderDate, String status, double orderAmount, double discount) {
+        this.orderId = orderId;
+        this.orderDate = orderDate;
+        this.status = status;
+        this.orderAmount = orderAmount;
+        this.discount = discount;
+    }
+
+    public OrderHistory(int orderId, Date orderDate, String status, double orderAmount, double discount, boolean paymentMethod) {
+        this.orderId = orderId;
+        this.orderDate = orderDate;
+        this.status = status;
+        this.orderAmount = orderAmount;
+        this.discount = discount;
+        this.paymentMethod = paymentMethod;
+    }
     
-    public OrderHistory(int orderId, Date orderDate, String imageToy, String toyName, int quantity, String nameCategory, String description, String status, double price, double orderPrice, double orderAmount) {
+    public OrderHistory(int orderId, Date orderDate, byte[] imageToy, String toyName, int quantity, String nameCategory, String description, String status, double price, double orderPrice, double orderAmount) {
         this.orderId = orderId;
         this.orderDate = orderDate;
         this.imageToy = imageToy;
@@ -40,7 +58,7 @@ public class OrderHistory {
         this.orderAmount = orderAmount;
     }
 
-    public OrderHistory(int orderId, int orderDetailId, Date orderDate, String imageToy, String toyName, int quantity, String nameCategory, String description, String status, double price, double orderPrice, double orderAmount) {
+    public OrderHistory(int orderId, int orderDetailId, Date orderDate, byte[] imageToy, String toyName, int quantity, String nameCategory, String description, String status, double price, double orderPrice, double orderAmount) {
         this.orderId = orderId;
         this.orderDetailId = orderDetailId;
         this.orderDate = orderDate;
@@ -78,6 +96,14 @@ public class OrderHistory {
         return orderDetailId;
     }
 
+    public boolean isPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(boolean paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
     public void setOrderDetailId(int orderDetailId) {
         this.orderDetailId = orderDetailId;
     }
@@ -98,11 +124,11 @@ public class OrderHistory {
         this.orderDate = orderDate;
     }
 
-    public String getImageToy() {
+    public byte[] getImageToy() {
         return imageToy;
     }
 
-    public void setImageToy(String imageToy) {
+    public void setImageToy(byte[] imageToy) {
         this.imageToy = imageToy;
     }
 

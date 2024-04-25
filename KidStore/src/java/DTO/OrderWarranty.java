@@ -9,7 +9,7 @@ import java.util.Date;
 public class OrderWarranty {
     private int orderDetailId;
     private Date orderDate;
-    private String imageToy;
+    private byte[] imageToy;
     private String toyName;
     private int quantity;
     private String status;
@@ -43,7 +43,7 @@ public class OrderWarranty {
         this.descriptionWarranty = descriptionWarranty;
     }
     
-    public OrderWarranty(int orderDetailId, Date orderDate, String imageToy, String toyName, int quantity, String status, Date warrantyTime, String phone, String address, String warrantyCode, String nameUser, String descriptionWarranty) {
+    public OrderWarranty(int orderDetailId, Date orderDate, byte[] imageToy, String toyName, int quantity, String status, Date warrantyTime, String phone, String address, String warrantyCode, String nameUser, String descriptionWarranty) {
         this.orderDetailId = orderDetailId;
         this.orderDate = orderDate;
         this.imageToy = imageToy;
@@ -74,11 +74,11 @@ public class OrderWarranty {
         this.orderDate = orderDate;
     }
 
-    public String getImageToy() {
+    public byte[] getImageToy() {
         return imageToy;
     }
 
-    public void setImageToy(String imageToy) {
+    public void setImageToy(byte[] imageToy) {
         this.imageToy = imageToy;
     }
 

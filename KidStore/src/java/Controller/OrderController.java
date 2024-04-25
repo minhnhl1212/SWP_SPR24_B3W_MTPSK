@@ -42,47 +42,63 @@ public class OrderController extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             HttpSession session = request.getSession();
-            Account a = (Account) session.getAttribute("acc");
-            String name = request.getParameter("name");
-            String phone = request.getParameter("phone");
-            String address = request.getParameter("address");
-            String paymentType = request.getParameter("paymentMethod");
-            if(name!=null && phone!=null && address!=null && paymentType!=null){
-            DataStore ds = new DataStore(name,phone,address,paymentType);
-            session.setAttribute("DataStore", ds);
-                    }
-            DataStore data = (DataStore) session.getAttribute("DataStore");
-            if(name==null || phone==null || address==null || paymentType==null){
-                name = data.getName();
-                phone = data.getPhone();
-                address = data.getAddress();
-                paymentType = data.getPaymentType();
-            }
-            double amount = (Double) session.getAttribute("orderAmount");
-            String transaction_status = request.getParameter("vnp_ResponseCode");
             int voucher_id = 1;
-            if (paymentType.equals("cashOnDelivery")) {
-                type = false;
-                OrderDAO dao = new OrderDAO();
-                int OrderId = dao.CreateNewOrder(name, phone, address, type, voucher_id, a.getUserId(), amount);
-                session.setAttribute("OrderID", OrderId);
-                RequestDispatcher rd = request.getRequestDispatcher(url);
-                rd.forward(request, response);
-            } else if (type) {
-                if (transaction_status == null) {
-                    url = "vnpay_pay.jsp";
-                    RequestDispatcher rd = request.getRequestDispatcher(url);
+            Account a = (Account) session.getAttribute("acc");
+            if (a != null) {
+                String paymentType = request.getParameter("paymentType");
+                if(paymentType==null){
+                    request.setAttribute("ERROR_NOT_CHOOSING", "You didn't set your payment details");
+                    RequestDispatcher rd = request.getRequestDispatcher("checkout.jsp");
                     rd.forward(request, response);
-                } else if(transaction_status.equals("00")){
+                }
+                String name = request.getParameter("name");
+                String phone = request.getParameter("phone");
+                String address = request.getParameter("address");
+                String paymentMethod = request.getParameter("paymentMethod");
+                if (name != null && phone != null && address != null && paymentMethod != null) {
+                    DataStore ds = new DataStore(name, phone, address, paymentMethod);
+                    session.setAttribute("DataStore", ds);
+                }
+                DataStore data = (DataStore) session.getAttribute("DataStore");
+                if (name == null || phone == null || address == null || paymentMethod == null) {
+                    name = data.getName();
+                    phone = data.getPhone();
+                    address = data.getAddress();
+                    paymentMethod = data.getPaymentType();
+                }
+                double amount = (Double) session.getAttribute("orderAmount");
+                String transaction_status = request.getParameter("vnp_ResponseCode");
+                String voucher_idParam = (String) session.getAttribute("voucherID");
+                if (voucher_idParam != null) {
+                    voucher_id = Integer.parseInt(voucher_idParam);
+                }
+                if (paymentMethod.equals("cashOnDelivery")) {
+                    type = false;
                     OrderDAO dao = new OrderDAO();
                     int OrderId = dao.CreateNewOrder(name, phone, address, type, voucher_id, a.getUserId(), amount);
                     session.setAttribute("OrderID", OrderId);
                     RequestDispatcher rd = request.getRequestDispatcher(url);
                     rd.forward(request, response);
-                }
-                else{
-                    session.setAttribute("ERROR_MESSAGE", "Your Transaction wasn't completed");
-                }
+                } else if (type) {
+                    if (transaction_status == null) {
+                        url = "vnpay_pay.jsp";
+                        RequestDispatcher rd = request.getRequestDispatcher(url);
+                        rd.forward(request, response);
+                    } else if (transaction_status.equals("00")) {
+                        OrderDAO dao = new OrderDAO();
+                        int OrderId = dao.CreateNewOrder(name, phone, address, type, voucher_id, a.getUserId(), amount);
+                        session.setAttribute("OrderID", OrderId);
+                        RequestDispatcher rd = request.getRequestDispatcher(url);
+                        rd.forward(request, response);
+                    } else {
+                        session.setAttribute("ERROR_MESSAGE", "Your Transaction wasn't completed");
+                    }
+                }            
+            } else {
+                url = "login.jsp";
+                request.setAttribute("LOGIN_ERROR", "Login to use our cart");
+                RequestDispatcher rd = request.getRequestDispatcher(url);
+                rd.forward(request, response);
             }
 
         } catch (Exception e) {

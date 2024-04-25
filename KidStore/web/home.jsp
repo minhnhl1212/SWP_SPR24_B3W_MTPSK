@@ -3,6 +3,7 @@
     Created on : Apr 11, 2024, 9:49:30 PM
     Author     : TUF
 --%>
+<%@page import="java.util.Base64"%>
 <%@ page import="java.text.DecimalFormat" %>
 <%@page import="DTO.Account"%>
 <%@page import="DTO.Category"%>
@@ -37,10 +38,10 @@
             <!-- Header-->
             <header>
 
-                <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
-                    <div class="container px-4 px-lg-5 my-5" style="position: absolute; top: 35%; left: 50%; transform: translate(-50%, -50%); z-index: 3;">
-                        <div class="text-center text-primary">
-                            <h1 class="display-4 fw-bolder" style="font-family: cursive">Kids Store</h1>
+                    <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+                        <div class="container px-4 px-lg-5 my-5" style="position: absolute; top: 35%; left: 50%; transform: translate(-50%, -50%); z-index: 3;">
+                            <div class="text-center text-primary">
+                                <h1 class="display-4 fw-bolder" style="font-family: cursive">Kids Store</h1>
                                 <p class="lead fw-normal text-dark-50 mb-0" style="font-family: Monospace">Yêu thương mong con tỏa sáng</p>
                             </div>
                         </div>
@@ -126,6 +127,8 @@
                                             // Iterate over the subset of toyList based on the current page
                                             for (int i = startIndex; i < endIndex; i++) {
                                                 Toy toy = toyList.get(i);
+                                                String base64Image = Base64.getEncoder().encodeToString(toy.getImage());
+
                                     %>
                                     <div class="col mb-5">
 
@@ -137,7 +140,7 @@
                                             </div>
 
                                             <!-- Product image -->
-                                            <a href="MainController?btAction=Detail&toyId=<%=toy.getToyId()%>"><img class="card-img-top" src="<%=toy.getImage()%>" alt="..."/></a>
+                                            <a href="MainController?btAction=Detail&toyId=<%=toy.getToyId()%>"><img class="card-img-top" src="data:image/jpeg;base64,<%= base64Image%>" alt="Toy Image"></a>
 
 
                                             <div class="card-body">
@@ -228,6 +231,7 @@
                                     // Iterate over the subset of toyList based on the current page
                                     for (int i = startIndex; i < endIndex; i++) {
                                         Toy toy = toyCategoryList.get(i);
+                                        String base64Image = Base64.getEncoder().encodeToString(toy.getImage());
                                 %>
                                 <div class="col mb-5">
 
@@ -240,7 +244,7 @@
 
                                             <!-- Product image -->
                                             <a href="MainController?btAction=Detail&toyId=<%=toy.getToyId()%>">
-                                                <img class="card-img-top" src="<%=toy.getImage()%>" alt="..."/></a>
+                                                <img class="card-img-top" src="data:image/jpeg;base64,<%= base64Image%>" alt="Toy Image"></a>
 
 
                                             <div class="card-body">

@@ -4,6 +4,7 @@
     Author     : TUF
 --%>
 
+<%@page import="java.util.Base64"%>
 <%@page import="DTO.Toy"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -92,8 +93,8 @@
                 <a href="#" class="nav-link"></a>
                 <form action="#">
                     <div class="search">
-                        <input type="text" class="searchTerm" placeholder=" Search....." hidden="">
-                        <button type="submit" class="searchButton" hidden=""><i class="bx bx-search"></i></button>
+                        <input type="text" class="searchTerm" placeholder=" Search.....">
+                        <button type="submit" class="searchButton"><i class="bx bx-search"></i></button>
                     </div>
                 </form>
                 <input type="checkbox" id="switch-mode" hidden>
@@ -113,7 +114,7 @@
                     </div>
                 </div>
                 <ul class="notifications"></ul>
-                <div class="table-data">
+                <div class="table-data-product">
                     <div class="order">
                         <div class="head">
                             <h3>Product List</h3>
@@ -139,11 +140,13 @@
                                     ArrayList<Toy> toyList = (ArrayList<Toy>) session.getAttribute("TOY_LIST_NOT_APPROVE");
                                     if (toyList != null) {
                                         for (Toy toy : toyList) {
+                                            String base64Image = Base64.getEncoder().encodeToString(toy.getImage());
+
                                 %>
                                 <tr>
                                     <td><%=toy.getToyId()%></td>
                                     <td><%=toy.getToyName()%></td>
-                                    <td><img src="<%=toy.getImage()%>" alt="Toy Image" style="width: 100px; height: 100px; margin-right: auto; margin-left: auto;"></td>
+                                    <td><img src="data:image/jpeg;base64,<%= base64Image%>" alt="Toy Image"></td>
                                     <td><%=toy.getName_staff()%></td>
                                     <td><%=toy.getPrice()%> Đ</td>
                                     <td><a href="ApproveToyController?toyId=<%=toy.getToyId()%>"class="button-bordered" id="success">Approve</a></td> 

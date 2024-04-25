@@ -44,7 +44,7 @@ public class PictureDAO {
                 rs = ps.executeQuery();
                 while(rs.next()){
                     Image image = new Image(rs.getInt("image_id"),
-                            rs.getString("image_toy"), id, rs.getBoolean("main"));
+                            rs.getBytes("image_toy"), id, rs.getBoolean("main"));
                     list.add(image);
                 }
             }

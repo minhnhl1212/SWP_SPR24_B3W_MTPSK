@@ -1,4 +1,4 @@
-
+<%@page import="java.util.Base64"%>
 <%@page import="DTO.OrderWarranty"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -9,8 +9,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Staff Dashboard</title>
         <link rel="stylesheet" href="./assets/css/tailwind.output.css">
-
-
     </head>
     <style>
         .action-btn{
@@ -20,111 +18,12 @@
             border-radius: 30px;
             font-weight: 600;
         }
-        label {
-            position: absolute;
-            width: 274px;
-            height: 47px;
-            text-align: left;
-            left: 14px;
-            padding-top: 0px;
-            color: white;
-            text-shadow: 2px 2px 5px black;
-        }
-        div#add-product-form {
-            position: absolute;
-            top: 6.5%;
-            left: 40%;
-            border-radius: 20px;
-        }
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5); 
-            display: none; 
-            z-index: 2;
-        }
-
-        .add {
-            color: white;
-            background-color: #7e3af2;
-            border: none;
-            padding: 10px 0px;
-            border-radius: 13px;
-            position: absolute;
-            top: 67px;
-            right: 107px;
-            z-index: 3;
-            width: 11%;
-        }
-        .close{
-            position: absolute;
-            top: 4px;
-            right: 18px;
-        }
-
-        span {
-
-        }
-
-        input{
-            color: black;
-        }
-
-        select{
-            color: black;
-        }
-
-        textarea{
-            color: black;
-        }
-        textarea#description {
-            width: 90%;
-        }
         img {
             max-width: 124px;
         }
-        .py-4.text-gray-500.dark\:text-gray-400 {
-            background-color: #80DFFF;
-            text-align: center;
-        }
-        .mt-6 {
-            display: flex;
-            justify-content: center;
-        }
-        .text-gray-800 {
-            --text-opacity: 1;
-            color: #1a1c23;
-            font-family: serif;
-            font-size: 30px;
-        }
-        td {
-            text-wrap: wrap;
-        }
-        th{
-            text-align: center;
-        }
-        td.center{
-            text-align: center;
-        }
-        th:nth-child(1), td:nth-child(1) {
-
-            padding-left: 10px;
-        }
-        th:nth-child(3), td:nth-child(3) {
-            max-width: 80px;
-            padding: 0;
-        }
-        th:nth-child(9), td:nth-child(9) {
-            min-width: 120px;
-        }
-        th:nth-child(10), td:nth-child(10) {
-            min-width: 120px;
-        }
-        td{
-            font-size: 13px;
+        .description {
+            max-height: 188px;
+            margin-top: -93px;
         }
     </style>
     <body>
@@ -132,12 +31,9 @@
         <div>
             <a href="LogoutController" style="position: absolute; top: 20px; right: 30px">Logout</a>
         </div>
-        <a class="navbar-brand" href="MainController?TOY_LIST=ALL"><img src="img/logo-kids-new3.png" class="logo" alt="KidStore"></a>       
-
-
         <div class="py-4 text-gray-500 dark:text-gray-400">
             <a class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200" href="#">
-                STAFF DASHBOARD
+                STAFF
             </a>
             <ul class="mt-6" style="display: flex">
                 <li class="relative px-6 py-3">
@@ -172,7 +68,7 @@
                         <path d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path>
                         <path d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
                         </svg>
-                        <span class="ml-4">ManagerWarranty</span>
+                        <span class="ml-4">ManagerOther</span>
                     </a>
                 </li>
                 <li class="relative px-6 py-3">
@@ -199,17 +95,17 @@
                 <table class="w-full whitespace-no-wrap">
                     <thead>
                         <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
-                            <th class="py-3">ID Warranty</th>
+                            <th class="px-4 py-3">ID Warranty</th>
                             <th class="px-4 py-3">Product Name</th>
-                            <th class="py-3">Quantity</th>
-                            <th class="py-3">Image</th>
-                            <th class="py-3">Name Customer</th>
-                            <th class="px-2 py-3">Phone</th>
+                            <th class="px-4 py-3">Quantity</th>
+                            <th class="px-4 py-3">Image</th>
+                            <th class="px-4 py-3">Name Customer</th>
+                            <th class="px-4 py-3">Phone</th>
                             <th class="px-4 py-3">Address</th>
-                            <th class="py-3">Created Date</th>
-                            <th class="py-3">Warranty</th>
-                            <th class="py-3">Status</th>
-                            <th class="px-3 py-3">Description</th>
+                            <th class="px-4 py-3">Created Date</th>
+                            <th class="px-4 py-3">Warranty</th>
+                            <th class="px-4 py-3">Status</th>
+                            <th class="px-4 py-3">Description</th>
                             <th class="px-4 py-3">Action</th>
                         </tr>
                     </thead>
@@ -218,28 +114,30 @@
                             ArrayList<OrderWarranty> warrantyList = (ArrayList<OrderWarranty>) session.getAttribute("ORDER_WARRANTY");
                             if (warrantyList != null) {
                                 for (OrderWarranty warranty : warrantyList) {
+                                    String base64Image = Base64.getEncoder().encodeToString(warranty.getImageToy());
+
                         %>
-                        <tr class="text-gray-700 dark:text-gray-400 center">
-                            <td class="py-3">
+                        <tr class="text-gray-700 dark:text-gray-400">
+                            <td class="px-4 py-3">
                                 <%=warranty.getWarrantyCode()%>
                             </td>
-                            <td class="px-4 py-3"><%=warranty.getToyName()%></td>
-                            <td class="py-3 center"><%=warranty.getQuantity()%></td>   
-                            <td class="py-3 text-xs">
-                                <img src="<%=warranty.getImageToy()%>" alt="Toy Image">
+                            <td><%=warranty.getToyName()%></td>
+                            <td><%=warranty.getQuantity()%></td>   
+                            <td class="px-4 py-3 text-xs">
+                                <img src="data:image/jpeg;base64,<%= base64Image%>" alt="Toy Image">
                             </td>
-                            <td class="py-3 center"><%=warranty.getNameUser()%></td>   
+                            <td><%=warranty.getNameUser()%></td>   
 
 
-                            <td class="px-2 py-3 center"><%=warranty.getPhone()%></td>
-                            <td class="px-4 py-3"><%=warranty.getAddress()%></td>
-                            <td class="py-3 center"><%=warranty.getOrderDate()%></td>
-                            <td class="py-3 center"><%=warranty.getWarrantyTime()%></td>
-                            <td class="py-3 center"><%=warranty.getStatus()%></td>
+                            <td><%=warranty.getPhone()%></td>
+                            <td><%=warranty.getAddress()%></td>
+                            <td><%=warranty.getOrderDate()%></td>
+                            <td><%=warranty.getWarrantyTime()%></td>
+                            <td><%=warranty.getStatus()%></td>
                             <%
                                 if (warranty.getDescriptionWarranty() != null) {
                             %>
-                            <td style="overflow-y: scroll; max-width: 100px;" class="px-2 py-3 text-sm">
+                            <td style="overflow-y: scroll; max-width: 100px;" class="px-4 py-3 text-sm">
                                 <div class="description" style="white-space: pre-wrap;">
                                     <%=warranty.getDescriptionWarranty()%>
                                 </div>
@@ -256,7 +154,7 @@
                                 }
                             %>
 
-                            <td class="px-4 py-3 center">           
+                            <td class="px-4 py-3">           
                                 <select id="statusSelect_<%=warranty.getOrderDetailId()%>" <% if (warranty.getStatus().equals("Đã Giao Hàng") || warranty.getStatus().equals("Từ Chối Bảo Hành") || warranty.getStatus().equals("Không Có Yêu Cầu Bảo Hành")) { %> style="display: none;" <% } %>>
                                     <option value="default">Đặt Trạng Thái</option>
                                     <% if (warranty.getStatus().equals("Gửi Bảo Hành")) { %>
@@ -264,20 +162,39 @@
                                     <option value="refuse" data-action="RefuseWarrantyController">Refuse</option>
                                     <% } %>  
                                     <% if (warranty.getStatus().equals("Đang Xử Lí")) { %>
-                                    <option value="received" data-action="ReceivedWarrantyController">Received</option>          
+                                    <option value="received" data-action="ReceivedWarrantyController">Received</option>
+                                    <option value="underwarranty" data-action="UnderWarrantyController">Under Warranty</option>
+                                    <option value="shipping" data-action="ShippingWarrantyController">Shipping</option>
+                                    <option value="delivered" data-action="DeliveredWarrantyController">Delivered</option>
                                     <option value="refuse" data-action="RefuseWarrantyController">Refuse</option>
-                                    <% } %>                                                          
+                                    <% } %>
+                                    <% if (warranty.getStatus().equals("Đang Xử Lí")) { %>
+                                    <option value="received" data-action="ReceivedWarrantyController">Received</option>
+                                    <option value="underwarranty" data-action="UnderWarrantyController">Under Warranty</option>
+                                    <option value="shipping" data-action="ShippingWarrantyController">Shipping</option>
+                                    <option value="delivered" data-action="DeliveredWarrantyController">Delivered</option>
+                                    <option value="refuse" data-action="RefuseWarrantyController">Refuse</option>
+                                    <% } %>
                                     <% if (warranty.getStatus().equals("Đã Nhận Hàng")) { %>
                                     <option value="underwarranty" data-action="UnderWarrantyController">Under Warranty</option>
+                                    <option value="shipping" data-action="ShippingWarrantyController">Shipping</option>
+                                    <option value="delivered" data-action="DeliveredWarrantyController">Delivered</option>
                                     <option value="refuse" data-action="RefuseWarrantyController">Refuse</option>
                                     <% }%>        
                                     <% if (warranty.getStatus().equals("Đang Bảo Hành")) { %>                    
                                     <option value="shipping" data-action="ShippingWarrantyController">Shipping</option>
+                                    <option value="delivered" data-action="DeliveredWarrantyController">Delivered</option>
                                     <option value="refuse" data-action="RefuseWarrantyController">Refuse</option>
                                     <% }%>    
                                     <% if (warranty.getStatus().equals("Đang Giao Hàng")) { %>                           
                                     <option value="delivered" data-action="DeliveredWarrantyController">Delivered</option>
                                     <option value="refuse" data-action="RefuseWarrantyController">Refuse</option>
+                                    <% }%>  
+
+
+
+                                    <% if (warranty.getStatus().equals("Đã Giao Hàng")) { %>                           
+                                    <option value="delivered" data-action="DeliveredWarrantyController">Delivered</option>     
                                     <% }%>  
 
                                 </select>
@@ -303,6 +220,6 @@
 
                 </table>
             </div>
-        </div>                    
+        </div>
     </body>
 </html>

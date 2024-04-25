@@ -54,6 +54,7 @@
                             <p style="color: green">${SIGNUP_SUCCESS}</p>
                             <p style="color: red">${SIGNUP_ERROR}</p>
                             <p style="color: red">${PASS_NOT_MATH}</p>
+                            <p style="color: red">${USERNAME_HAVE_BEEN_USED}</p>
                             <a style="color: #007bff; font-size: 16px; margin-left: 1%;" href="login.jsp">Log in</a>
                         </div>
                     </form>

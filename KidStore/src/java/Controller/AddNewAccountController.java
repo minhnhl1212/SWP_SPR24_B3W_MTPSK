@@ -32,7 +32,7 @@ public class AddNewAccountController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-          response.sendRedirect("home.jsp");
+        response.sendRedirect("home.jsp");
     }
 
     @Override
@@ -50,25 +50,24 @@ public class AddNewAccountController extends HttpServlet {
             String confirmPassword = request.getParameter("confirmPassword");
             System.out.println("AddNewAccountController");
             AccountDAO accountDAO = new AccountDAO();
-            if (password.equals(confirmPassword)) {
-                Account addNewAccount = accountDAO.addNewAccount(userName, password, fullName, phone, address, roleId);    
-                if (addNewAccount != null) {
-                    
-                    url = SUCCESS;
-                    request.setAttribute("ADD_SUCCESS", "Add success");
-                    RequestDispatcher dispatcher = request.getRequestDispatcher(url);
-                    dispatcher.forward(request, response);
+            if (!accountDAO.checkUsername(userName)) {
+                if (password.equals(confirmPassword)) {
+                    Account addNewAccount = accountDAO.addNewAccount(userName, password, fullName, phone, address, roleId);
+                    if (addNewAccount != null) {
+
+                        url = SUCCESS;
+                        request.setAttribute("ADD_SUCCESS", "Add success");
+                    } else {
+                        request.setAttribute("ADD_FAIL", "Add Failed");
+                    }
                 } else {
-                    request.setAttribute("ADD_FAIL", "Add Failed");
-                    RequestDispatcher dispatcher = request.getRequestDispatcher(url);
-                    dispatcher.forward(request, response);
+                    request.setAttribute("PASS_NOT_MATH", "Password And Confirm Password Not Math");
                 }
             } else {
-                request.setAttribute("PASS_NOT_MATH", "Password And Confirm Password Not Math");
-                RequestDispatcher dispatcher = request.getRequestDispatcher(url);
-                dispatcher.forward(request, response);
+                request.setAttribute("USERNAME_HAVE_BEEN_USED", "Your username had already been taken");
             }
-
+            RequestDispatcher dispatcher = request.getRequestDispatcher(url);
+            dispatcher.forward(request, response);
         } catch (Exception ex) {
             Logger.getLogger(AddNewAccountController.class.getName()).log(Level.SEVERE, null, ex);
         }

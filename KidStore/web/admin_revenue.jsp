@@ -4,6 +4,7 @@
     Author     : TUF
 --%>
 
+<%@page import="java.util.Base64"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
@@ -146,10 +147,16 @@
                                             // Format the date using the SimpleDateFormat object
                                             String formattedDate = sdf.format(e.getOrderDate());
                                             String formatTotalPrice = vnCurrencyFormat.format(e.getTotalPrice());
+                                            String base64Image = Base64.getEncoder().encodeToString(e.getImage());
+
                                 %>
                                 <tr>
                                     <td><%=i++%></td>
+<<<<<<< HEAD
+                                    <td><td><img src="data:image/jpeg;base64,<%= base64Image%>" alt="Loading"></td></td>
+=======
                                     <td><img src="<%=e.getImage()%>" alt ="Loading" style="width: 100px; height: 100px; margin-left: auto; margin-right: auto;"></td>
+>>>>>>> 6b93900a1188fb4b02ca353dcdc6c2aa910108d3
                                     <td><%=e.getToyName()%></td>
                                     <td><%=e.getQuantity()%></td>
                                     <td><%=e.getFullName()%></td>

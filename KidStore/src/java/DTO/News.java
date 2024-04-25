@@ -10,19 +10,19 @@ public class News {
 
     private int newsId;
     private String title;
-    private String image;
+    private byte[] image;
     private Date date;
     private String description;
     private int userId;
     private String name_staff;
 
-    public News(String title, String image, String description) {
+    public News(String title, byte[] image, String description) {
         this.title = title;
         this.image = image;
         this.description = description;
     }
 
-    public News(int newsId, String title, String image, Date date, String description, String name_staff) {
+    public News(int newsId, String title, byte[] image, Date date, String description, String name_staff) {
         this.newsId = newsId;
         this.title = title;
         this.image = image;
@@ -30,8 +30,15 @@ public class News {
         this.description = description;
         this.name_staff = name_staff;
     }
+    
+    public News(String title, Date date, String description, int userId) {
+        this.title = title;
+        this.date = date;
+        this.description = description;
+        this.userId = userId;
+    }      
 
-    public News(String title, String image, Date date, String description, int userId) {
+    public News(String title, byte[] image, Date date, String description, int userId) {
         this.title = title;
         this.image = image;
         this.date = date;
@@ -39,7 +46,7 @@ public class News {
         this.userId = userId;
     }        
 
-    public News(int newsId, String title, String image, Date date, String description, int userId) {
+    public News(int newsId, String title, byte[] image, Date date, String description, int userId) {
         this.newsId = newsId;
         this.title = title;
         this.image = image;
@@ -64,11 +71,11 @@ public class News {
         this.title = title;
     }
 
-    public String getImage() {
+    public byte[] getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(byte[] image) {
         this.image = image;
     }
 

@@ -4,6 +4,7 @@
     Author     : TUF
 --%>
 
+<%@page import="java.util.Base64"%>
 <%@page import="DTO.OrderWarranty"%>
 <%@page import="DTO.OrderWarranty"%>
 <%@page import="java.util.ArrayList"%>
@@ -98,10 +99,12 @@
                                         ArrayList<OrderWarranty> warrantyList = (ArrayList<OrderWarranty>) session.getAttribute("ORDER_WARRANTY");
                                         if (warrantyList != null && acc != null) {
                                             for (OrderWarranty warranty : warrantyList) {
+                                                String base64Image = Base64.getEncoder().encodeToString(warranty.getImageToy());
+
                                     %>
                                     <tr>
                                         <td><%=warranty.getOrderDetailId()%></td>
-                                        <td><img src="<%=warranty.getImageToy()%>" width="60"  alt="Toy Image" class="toy-item-img"/></td>
+                                        <td><img src="data:image/jpeg;base64,<%= base64Image%>" alt="Toy Image" width="60" class="toy-item-img"/></td>
                                         <td><%=warranty.getToyName()%></td>
                                         <td><%=warranty.getQuantity()%></td>
                                         <td><%=warranty.getOrderDate()%></td>
@@ -150,11 +153,13 @@
                                     }
                                 %>
                                 <%
-                                    OrderWarranty sendRequestWarranty = (OrderWarranty) request.getAttribute("SEND_REQUEST_SUCCESS");
-                                    if (sendRequestWarranty != null) {
-                                %>
+                                    OrderWarranty sendRequestWarranty = (Ord                                            %>
                                 <p style="color: green">${SEND_REQUEST_SUCCESS}</p>
-                                <%} else {
+                                <%}
+
+                                    
+                                    
+                                else {
                                 %>
                                 <p style="color: red">${SEND_REQUEST_FAILED}</p>
                                 <%
