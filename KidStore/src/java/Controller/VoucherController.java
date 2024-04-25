@@ -6,6 +6,7 @@
 package Controller;
 
 import DAO.VoucherDAO;
+import DTO.Voucher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -39,7 +40,10 @@ public class VoucherController extends HttpServlet {
             String voucher = request.getParameter("Voucher");
             voucher = voucher.trim().toLowerCase();
             VoucherDAO dao = new VoucherDAO();
-            String discount = String.valueOf(dao.getVoucherValue(voucher));
+            Voucher v = dao.getVoucherValue(voucher);
+            String discount = String.valueOf(v.getDiscount());
+            int vId = v.getVoucherId();
+            session.setAttribute("voucherID", vId);
             session.setAttribute("discount", discount);
             session.setAttribute("vouchernamecode", voucher);
             RequestDispatcher rd = request.getRequestDispatcher("cart.jsp");

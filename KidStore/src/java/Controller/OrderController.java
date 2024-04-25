@@ -42,6 +42,7 @@ public class OrderController extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             HttpSession session = request.getSession();
+            int voucher_id =1;
             Account a = (Account) session.getAttribute("acc");
             String name = request.getParameter("name");
             String phone = request.getParameter("phone");
@@ -60,7 +61,10 @@ public class OrderController extends HttpServlet {
             }
             double amount = (Double) session.getAttribute("orderAmount");
             String transaction_status = request.getParameter("vnp_ResponseCode");
-            int voucher_id = 1;
+            String voucher_idParam = (String)session.getAttribute("voucherID");
+            if(voucher_idParam!=null){
+                voucher_id = Integer.parseInt(voucher_idParam);
+            }
             if (paymentType.equals("cashOnDelivery")) {
                 type = false;
                 OrderDAO dao = new OrderDAO();

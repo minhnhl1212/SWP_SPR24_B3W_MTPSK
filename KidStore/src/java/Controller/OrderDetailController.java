@@ -59,6 +59,7 @@ public class OrderDetailController extends HttpServlet {
         session.setAttribute("discount", null);
         session.setAttribute("vouchernamecode", null);
         session.setAttribute("DataStore", null);
+        session.setAttribute("voucherID", null);
         RequestDispatcher rd = request.getRequestDispatcher("home.jsp");
         rd.forward(request, response);
         }
