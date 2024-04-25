@@ -94,7 +94,7 @@
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                         if (orderList != null && acc != null && OrderIDList != null) {
                             for (OrderHistory oid : OrderIDList) {
-                                System.out.println(oid.getOrderId());
+                                
                                 String formatOrderAmount = vnCurrencyFormat.format(oid.getOrderAmount());
                                 double Discount = Math.round(oid.getOrderAmount() - oid.getOrderAmount() * oid.getDiscount());
                                 double OrderAmountAfterDiscount = Math.round(oid.getOrderAmount()) - Discount;

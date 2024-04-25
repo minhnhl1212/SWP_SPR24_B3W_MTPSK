@@ -41,11 +41,17 @@ public class VoucherController extends HttpServlet {
             voucher = voucher.trim().toLowerCase();
             VoucherDAO dao = new VoucherDAO();
             Voucher v = dao.getVoucherValue(voucher);
+            if(v.getDiscount() <=1 && v.getDiscount() >0){
             String discount = String.valueOf(v.getDiscount());
             String vId = String.valueOf(v.getVoucherId());
             session.setAttribute("voucherID", vId);
             session.setAttribute("discount", discount);
             session.setAttribute("vouchernamecode", voucher);
+            }
+            else
+            {
+                request.setAttribute("ERROR_SERVER_VOUCHER", "WHO CHANGE THE VOUCHER DISCOUNT NUMBER!??!?!?");
+            }
             RequestDispatcher rd = request.getRequestDispatcher("cart.jsp");
             rd.forward(request, response);
         } catch (Exception e) {

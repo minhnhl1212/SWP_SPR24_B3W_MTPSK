@@ -100,6 +100,7 @@
                                 <button class="btn btn-outline-danger" type="submit">Áp dụng</button>
                             </div>
                         </div>
+                            <p style="color: red">${ERROR_SERVER_VOUCHER}</p>
                     </form>
                     <%
                         String formatSum = vnCurrencyFormat.format(sum);

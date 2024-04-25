@@ -45,20 +45,26 @@ public class OrderController extends HttpServlet {
             int voucher_id = 1;
             Account a = (Account) session.getAttribute("acc");
             if (a != null) {
+                String paymentType = request.getParameter("paymentType");
+                if(paymentType==null){
+                    request.setAttribute("ERROR_NOT_CHOOSING", "You didn't set your payment details");
+                    RequestDispatcher rd = request.getRequestDispatcher("checkout.jsp");
+                    rd.forward(request, response);
+                }
                 String name = request.getParameter("name");
                 String phone = request.getParameter("phone");
                 String address = request.getParameter("address");
-                String paymentType = request.getParameter("paymentMethod");
-                if (name != null && phone != null && address != null && paymentType != null) {
-                    DataStore ds = new DataStore(name, phone, address, paymentType);
+                String paymentMethod = request.getParameter("paymentMethod");
+                if (name != null && phone != null && address != null && paymentMethod != null) {
+                    DataStore ds = new DataStore(name, phone, address, paymentMethod);
                     session.setAttribute("DataStore", ds);
                 }
                 DataStore data = (DataStore) session.getAttribute("DataStore");
-                if (name == null || phone == null || address == null || paymentType == null) {
+                if (name == null || phone == null || address == null || paymentMethod == null) {
                     name = data.getName();
                     phone = data.getPhone();
                     address = data.getAddress();
-                    paymentType = data.getPaymentType();
+                    paymentMethod = data.getPaymentType();
                 }
                 double amount = (Double) session.getAttribute("orderAmount");
                 String transaction_status = request.getParameter("vnp_ResponseCode");
@@ -66,7 +72,7 @@ public class OrderController extends HttpServlet {
                 if (voucher_idParam != null) {
                     voucher_id = Integer.parseInt(voucher_idParam);
                 }
-                if (paymentType.equals("cashOnDelivery")) {
+                if (paymentMethod.equals("cashOnDelivery")) {
                     type = false;
                     OrderDAO dao = new OrderDAO();
                     int OrderId = dao.CreateNewOrder(name, phone, address, type, voucher_id, a.getUserId(), amount);
@@ -87,7 +93,7 @@ public class OrderController extends HttpServlet {
                     } else {
                         session.setAttribute("ERROR_MESSAGE", "Your Transaction wasn't completed");
                     }
-                }
+                }            
             } else {
                 url = "login.jsp";
                 request.setAttribute("LOGIN_ERROR", "Login to use our cart");

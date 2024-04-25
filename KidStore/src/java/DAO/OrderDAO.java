@@ -617,7 +617,7 @@ public class OrderDAO {
                         + "[Order].order_date, [Order].order_amount, "
                         + "Voucher.voucher_discount from [Order] "
                         + "inner join Voucher on [Order].voucher_id = Voucher.id\n"
-                        + "where [Order].user_id=?";
+                        + "where [Order].user_id=? ORDER BY [Order].order_id DESC;";
                 ps = con.prepareStatement(sql);
                 ps.setInt(1, id);
                 rs = ps.executeQuery();

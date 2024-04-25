@@ -101,29 +101,26 @@
                             <h5>Billing Details</h5>
                             <form class="checkout-form" action="MainController" method="post" onsubmit="return validateFormData()">
 
-                                <input type="radio" id="selfPayment" name="paymentType">
+                                <input type="radio" id="selfPayment" value="selfPayment" name="paymentType">
                                 <label for="thanhtoanchobanthan">Thanh toán cho bản thân</label><br>
-
-                                <input type="radio" id="otherPayment" name="paymentType">
+                                <input type="radio" id="otherPayment" value="otherPayment" name="paymentType">
                                 <label for="thanhtoanchonguoikhac">Thanh toán cho người khác</label><br>
                                 <div id="otherPaymentDetails" class="hidden-form">
                                     <label>Tên</label>
-                                    <input type="text" class="form-control" id="name" placeholder="Tên" name="name">
+                                    <input type="text" class="form-control" id="name" placeholder="Tên" value="<%=a.getFullName()%>" name="name">
                                     <label>Địa chỉ</label>
-                                    <input type="text" class="form-control" id="address" placeholder="Địa chỉ" name="address">
+                                    <input type="text" class="form-control" id="address" placeholder="Địa chỉ" value="<%=a.getAddress()%>" name="address">
                                     <label>Số Điện Thoại</label>
-                                    <input type="text" class="form-control" id="phone" placeholder="Số Điện Thoại" name="phone">
+                                    <input type="text" class="form-control" id="phone" placeholder="Số Điện Thoại" value="<%=a.getPhone()%>" name="phone">
                                 </div>
-
                                 <div><label>Phương thức thanh toán</label></div>
                                 <input type="radio" id="cashOnDelivery" name="paymentMethod" value="cashOnDelivery">
                                 <label for="cashOnDelivery">Thanh toán khi nhận hàng</label><br>
                                 <input type="radio" id="bankTransfer" name="paymentMethod" value="bankTransfer">
                                 <label for="bankTransfer">Thanh toán qua ngân hàng</label>
-
                                 <div id="errorMessages" style="color: red; margin-top: 10px;"></div>
+                                <p style="color: red">${ERROR_NOT_CHOOSING}</p>
                                 <input type="submit" class="btn btn-success btn-block" name="btAction" value="Create">
-
                             </form>
                         </div>
                         <div class="col-md-6">
@@ -156,7 +153,7 @@
                                         <form action="CartController">
 
                                             <tr>
-                                                <td><img src="data:image/jpeg;base64,<%= base64Image%>" alt="Toy Image" width="50"></td>
+                                                <td><img src="data:image/jpeg;base64,<%=base64Image%>" alt="Toy Image" width="50"></td>
                                                 <td><%=c.getKey().getToyName()%></td>
                                                 <td><%=formatEachPrices%></td>
                                                 <td><%=c.getValue()%></td>

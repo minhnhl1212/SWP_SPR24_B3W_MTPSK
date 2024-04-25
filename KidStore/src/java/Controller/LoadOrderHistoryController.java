@@ -33,7 +33,7 @@ public class LoadOrderHistoryController extends HttpServlet {
                 session.setAttribute("ORDER_HISTORY", orderList);
                 session.setAttribute("ORDERID_HISTORY", ListOfOrderID);
             } else {
-                request.setAttribute("ORDER_HISTORY_ERROR", "Not Foun List Order");
+                request.setAttribute("ORDER_HISTORY_ERROR", "Not Found List Order");
             }
             RequestDispatcher rd = request.getRequestDispatcher("profileHistory.jsp");
             rd.forward(request, response);
