@@ -441,12 +441,6 @@ sidebarsidebar {
     width: 100%;
     border-collapse: collapse;
 }
-#content main .table-data .order table th {
-    padding-bottom: 12px;
-    font-size: 13px;
-    text-align: center;
-    border-bottom: 1px solid var(--grey);
-}
 #content main .table-data .order table td {
     padding: 16px 0;
 }
@@ -466,7 +460,6 @@ sidebarsidebar {
     font-size: 10px;
     padding: 6px 16px;
     color: var(--light);
-    border-radius: 20px;
     font-weight: 700;
 }
 

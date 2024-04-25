@@ -114,7 +114,7 @@ switchMode.addEventListener('change', toggleDarkMode);
 
 document.querySelectorAll("#toggleButton").forEach(function (button) {
     button.addEventListener("click", function () {
-        if (this.textContent.trim()==="Banned") {
+        if (this.textContent.trim() === "Banned") {
             this.classList.remove("red");
             this.style.background = "transparent";
             this.style.border = "2px solid #007bff";
@@ -176,7 +176,7 @@ function closeModal() {
 }
 
 // Event listeners
-logoutButton.addEventListener("click", function (){
+logoutButton.addEventListener("click", function () {
     window.location.href = "LogoutController";
 });
 
