@@ -144,7 +144,7 @@
                                         <input type="hidden" name="userId" value="<%=acc.getUserId()%>">
                                         <button type="submit" class="btn btn-primary d-block mx-auto" >Gửi yêu cầu</button>
                                     </form>
-                                </div>z
+                                </div>
                                 <%}
                                 } else {
                                 %>
@@ -152,19 +152,9 @@
                                 <%
                                     }
                                 %>
-                                <%
-                                    OrderWarranty sendRequestWarranty = (Ord                                            %>
                                 <p style="color: green">${SEND_REQUEST_SUCCESS}</p>
-                                <%}
-
-                                    
-                                    
-                                else {
-                                %>
                                 <p style="color: red">${SEND_REQUEST_FAILED}</p>
-                                <%
-                                    }
-                                %>
+
                                 </tbody>
                             </table>
                         </div>

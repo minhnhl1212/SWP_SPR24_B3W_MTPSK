@@ -31,7 +31,7 @@ public class LoadWarrantyController extends HttpServlet {
             if (warrantyList != null) {
                 session.setAttribute("ORDER_WARRANTY", warrantyList);
             } else {
-                request.setAttribute("ORDER_WARRANTY_ERROR", "Not Foun List Warranty Order");
+                request.setAttribute("ORDER_WARRANTY_ERROR", "Not Found List Warranty Order");
             }
             RequestDispatcher rd = request.getRequestDispatcher("profileWarranty.jsp");
             rd.forward(request, response);
