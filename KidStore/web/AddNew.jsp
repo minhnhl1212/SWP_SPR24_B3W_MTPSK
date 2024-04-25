@@ -221,19 +221,11 @@
                                         <label for="title">Title</label></br>
                                         <input type="text" id="title" style="width: 580px" name="title" required></br>
                                         <label for="image">Image</label></br>
-
-                                        <input type="text" id="image" style="width: 580px" name="image" required></br>
+                                        <input type="file" id="image" name="image" style="width: 580px" required accept="image/*"></br>  
                                         <label for="date">Date</label></br>
                                         <input type="date" id="date" name="date" required></br>                                                                  
                                         <label for="description">Description</label></br>
-                                        <textarea id="description" name="description" rows="4" cols="50" required></textarea>
-
-                                        <input type="file" id="image" name="image" required accept="image/*"></br>  
-                                        <label for="date">Date</label></br>
-                                        <input type="date" id="date" name="date" required></br>                                                                  
-                                        <label for="description">Description</label></br>
-                                        <input type="text" id="description" name="description" required></br>  
-
+                                        <textarea id="description" name="description" rows="4" cols="50" required></textarea>                      
                                         </br>  
                                         <input type="hidden" name="userId" value="<%=acc.getUserId()%>">
                                         <button style="background-color: green; border-radius: 30px; padding: 3px 10px; margin-top: 15px" type="button" onclick="submitForm()">Add News</button>

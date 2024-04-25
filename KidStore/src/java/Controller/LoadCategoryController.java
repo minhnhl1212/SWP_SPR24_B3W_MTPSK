@@ -1,7 +1,7 @@
 package Controller;
 
-import DAO.OrderDAO;
-import DTO.OrderHistory;
+import DAO.CategoryDAO;
+import DTO.Category;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -18,26 +18,20 @@ import javax.servlet.http.HttpSession;
  *
  * @author trant
  */
-public class LoadHistoryProductController extends HttpServlet {
+public class LoadCategoryController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
             response.setContentType("text/html;charset=UTF-8");
             HttpSession session = request.getSession();
-            OrderDAO orderDAO = new OrderDAO();
-            ArrayList<OrderHistory> idOrderList = orderDAO.idOrderList();
-            ArrayList<OrderHistory> orderList = orderDAO.orderHistory();
-            if(orderList != null){
-                session.setAttribute("ID_ORDER_LIST", idOrderList);
-                session.setAttribute("ORDER_HISTORY", orderList);
-            } else {
-                request.setAttribute("ORDER_HISTORY_ERROR", "Not Foun List Order");
-            }
-            RequestDispatcher rd = request.getRequestDispatcher("ManagerHistoryProduct.jsp");
+            CategoryDAO categoryDAO = new CategoryDAO();
+            ArrayList<Category> categoryListAll = categoryDAO.categoryListAll();
+            session.setAttribute("CATEGORY_LIST_ALL", categoryListAll);
+            RequestDispatcher rd = request.getRequestDispatcher("ManagerCategory.jsp");
             rd.forward(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(LoadOrderHistoryController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LoadCategoryController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

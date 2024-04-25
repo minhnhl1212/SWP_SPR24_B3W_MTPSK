@@ -232,9 +232,13 @@
         <servlet-name>AccountEditRoleController</servlet-name>
         <servlet-class>Controller.AccountEditRoleController</servlet-class>
     </servlet>
-        <servlet>
+    <servlet>
         <servlet-name>StoredPaymentController</servlet-name>
         <servlet-class>Controller.StoredPaymentController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoadCategoryController</servlet-name>
+        <servlet-class>Controller.LoadCategoryController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
@@ -468,9 +472,13 @@
         <servlet-name>AccountEditRoleController</servlet-name>
         <url-pattern>/AccountEditRoleController</url-pattern>
     </servlet-mapping>
-        <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>StoredPaymentController</servlet-name>
         <url-pattern>/StoredPaymentController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadCategoryController</servlet-name>
+        <url-pattern>/LoadCategoryController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

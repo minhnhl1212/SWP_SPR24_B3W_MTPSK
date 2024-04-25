@@ -160,6 +160,29 @@ public class OrderDAO {
         }
         return detailList;
     }
+    
+    public ArrayList<OrderHistory> idOrderList() throws SQLException, Exception {
+        ArrayList<OrderHistory> idOrderList = new ArrayList<>();
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "select [Order].order_id, [Order].order_date, [Order].status_order, [Order].order_amount, Account.full_name, Account.phone, Account.address, [Order].payment_type\n"
+                        + "from [Order]\n"
+                        + "inner join Account on [Order].user_id = Account.user_id";
+                ps = con.prepareStatement(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    OrderHistory list = new OrderHistory(rs.getInt("order_id"), rs.getDate("order_date"), rs.getString("status_order"), rs.getDouble("order_amount"), rs.getString("full_name"), rs.getString("phone"), rs.getString("address"), rs.getInt("payment_type"));
+                    idOrderList.add(list);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+        return idOrderList;
+    }
 
     public ArrayList<OrderHistory> orderHistory() throws SQLException, Exception {
         ArrayList<OrderHistory> listOrder = new ArrayList<>();

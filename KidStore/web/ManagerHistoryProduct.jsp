@@ -115,7 +115,14 @@
                 max-width: 200px;
                 text-wrap: wrap;
             }
-
+            .outer-box {
+                width: 120%;
+                height: auto;
+                margin-top: 20px;
+                border: 1px solid black;
+                border-radius: 5px;
+                padding: 20px;
+            }
         </style>
     </head>
     <body>
@@ -134,14 +141,6 @@
             </a>
             <ul class="mt-6" style="display: flex">
                 <li class="relative px-6 py-3">
-                    <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200" href="ManagerCategory.jsp">
-                        <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
-                        <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
-                        </svg>
-                        <span class="ml-4">ManagerCategory</span>
-                    </a>
-                </li>
-                <li class="relative px-6 py-3">
                     <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200" href="ManagerProduct.jsp">
                         <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                         <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
@@ -149,7 +148,14 @@
                         <span class="ml-4">ManagerProduct</span>
                     </a>
                 </li>            
-                
+                <li class="relative px-6 py-3">
+                    <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200" href="ManagerCategory.jsp">
+                        <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                        <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                        </svg>
+                        <span class="ml-4">ManagerCategory</span>
+                    </a>
+                </li>
                 <li class="relative px-6 py-3">
                     <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200" href="LoadOrderFeedback">
                         <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -185,10 +191,11 @@
                     </a>
                 </li>
             </ul>                        
-        </div>
+        </div>    
         <div class="w-full overflow-hidden rounded-lg shadow-xs">
             <div class="w-full overflow-x-auto">
                 <table class="w-full whitespace-no-wrap">
+
                     <thead>
                         <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                             <th class="px-4 py-3">ID</th>
@@ -197,79 +204,156 @@
                             <th class="px-4 py-3">Category</th>
                             <th class="px-4 py-3">Price</th>
                             <th class="px-4 py-3">Discount</th>
+                            <th class="px-4 py-3">Quantity</th>
+                            <th class="px-4 py-3">Total</th>
+                            <th class="px-4 py-3">Type Payment</th>
                             <th class="px-4 py-3">Date</th>
+                            <th class="px-4 py-3">Customer</th>
+                            <th class="px-4 py-3">Phone</th>
+                            <th class="px-4 py-3">Address</th>
                             <th class="px-4 py-3">Status</th>
                             <th class="px-4 py-3">Action</th>
                         </tr>
-                    </thead>
-
+                    </thead>                                     
+                    <%
+                        ArrayList<OrderHistory> orderList = (ArrayList<OrderHistory>) session.getAttribute("ORDER_HISTORY");
+                        ArrayList<OrderHistory> idOrderList = (ArrayList<OrderHistory>) session.getAttribute("ID_ORDER_LIST");
+                        if (orderList != null && idOrderList != null) {
+                            for (OrderHistory idOrder : idOrderList) {
+                    %>
                     <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-                        <%
-                            ArrayList<OrderHistory> orderList = (ArrayList<OrderHistory>) session.getAttribute("ORDER_HISTORY");
-                            if (orderList != null) {
-                                for (OrderHistory order : orderList) {
-                                    String base64Image = Base64.getEncoder().encodeToString(order.getImageToy());
-
-                        %>
                         <tr class="text-gray-700 dark:text-gray-400">
                             <td class="px-4 py-3">
-                                <%=order.getQuantity()%>
-                            </td>
+                                <%=idOrder.getOrderId()%>
+                            </td>                                        
+
                             <td class="px-4 py-3 text-sm">
-                                <%=order.getToyName()%>
+                                <%
+                                    for (OrderHistory order : orderList) {
+                                        if (order.getOrderId() == idOrder.getOrderId()) {
+                                %>
+                                <%=order.getToyName()%></br>
+                                <%}
+                                    }
+                                %>
                             </td>
                             <td class="px-4 py-3 text-xs">
+                                <%
+                                    for (OrderHistory order : orderList) {
+                                        if (order.getOrderId() == idOrder.getOrderId()) {
+                                            String base64Image = Base64.getEncoder().encodeToString(order.getImageToy());
+
+                                %>
                                 <img src="data:image/jpeg;base64,<%= base64Image%>" alt="Toy Image">
+                                <%}
+                                    }
+                                %>
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                <%=order.getNameCategory()%>
+                                <%
+                                    for (OrderHistory order : orderList) {
+                                        if (order.getOrderId() == idOrder.getOrderId()) {
+                                %>
+                                <%=order.getNameCategory()%></br>
+                                <%}
+                                    }
+                                %>
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                <%=order.getPrice()%>
+                                <%
+                                    for (OrderHistory order : orderList) {
+                                        if (order.getOrderId() == idOrder.getOrderId()) {
+                                %>
+                                <%=order.getPrice()%></br>
+                                <%}
+                                    }
+                                %>
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                <%=order.getOrderPrice()%>
+                                <%
+                                    for (OrderHistory order : orderList) {
+                                        if (order.getOrderId() == idOrder.getOrderId()) {
+                                %>
+                                <%=order.getOrderPrice()%>  VNĐ</br>
+                                <%}
+                                    }
+                                %>
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                <%=order.getOrderDate()%>
+                                <%
+                                    for (OrderHistory order : orderList) {
+                                        if (order.getOrderId() == idOrder.getOrderId()) {
+                                %>
+                                <%=order.getQuantity()%></br>
+                                <%}
+                                    }
+                                %>
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                <%=order.getStatus()%>
+                                <%=idOrder.getOrderAmount()%>  VNĐ
+                            </td>
+                            <td class="px-4 py-3 text-sm">
+                                <%
+                                    if (idOrder.getTypePayment() == 0) {
+                                %>
+                                <p>Thanh Toán Khi Nhận Hàng</p>
+                                <%
+                                } else {
+                                %>
+                                <p>Thanh Toán Qua Ngân Hàng</p>
+                                <%
+                                    }
+                                %>
+
+
+                            </td>
+                            <td class="px-4 py-3 text-sm">
+                                <%=idOrder.getOrderDate()%>
+                            </td>
+                            <td class="px-4 py-3 text-sm">
+                                <%=idOrder.getFullname()%>
+                            </td>
+                            <td class="px-4 py-3 text-sm">
+                                <%=idOrder.getPhone()%>
+                            </td>
+                            <td class="px-4 py-3 text-sm">
+                                <%=idOrder.getAddress()%>
+                            </td>
+                            <td class="px-4 py-3 text-sm">
+                                <%=idOrder.getStatus()%>
                             </td>
                             <td class="px-4 py-3">                                                                       
 
-                                <select id="statusSelect_<%=order.getOrderId()%>" <% if (order.getStatus().equals("Đã Giao Hàng") || order.getStatus().equals("Từ Chối Bán Hàng")) { %> style="display: none;" <% } %>>
+                                <select id="statusSelect_<%=idOrder.getOrderId()%>" <% if (idOrder.getStatus().equals("Đã Giao Hàng") || idOrder.getStatus().equals("Từ Chối Bán Hàng")) { %> style="display: none;" <% } %>>
                                     <option value="default">Đặt Trạng Thái</option>
-                                    <% if (order.getStatus().equals("Đang Xử Lí")) { %>
+                                    <% if (idOrder.getStatus().equals("Đang Xử Lí")) { %>
                                     <option value="shipping" data-action="ShippingOrderController">Shipping</option>                                    
                                     <option value="refuse" data-action="RefuseOrderController">Refuse</option>
                                     <% } %>
-                                    <% if (order.getStatus().equals("Đang Giao Hàng")) { %>
+                                    <% if (idOrder.getStatus().equals("Đang Giao Hàng")) { %>
                                     <option value="delivered" data-action="DeliveredOrderController">Delivered</option>
                                     <option value="refuse" data-action="RefuseOrderController">Refuse</option>
                                     <% }%>                         
                                 </select>
-
-
+                                <script>
+                                    document.getElementById('statusSelect_<%=idOrder.getOrderId()%>').addEventListener('change', function () {
+                                        var selectedValue = this.value;
+                                        var action = this.options[this.selectedIndex].getAttribute('data-action');
+                                        if (selectedValue !== 'default' && action) {
+                                            window.location.href = action + "?orderDetailId=<%=idOrder.getOrderId()%>";
+                                        }
+                                    });
+                                </script>
                             </td>
-                    <script>
-                        document.getElementById('statusSelect_<%=order.getOrderId()%>').addEventListener('change', function () {
-                            var selectedValue = this.value;
-                            var action = this.options[this.selectedIndex].getAttribute('data-action');
-                            if (selectedValue !== 'default' && action) {
-                                window.location.href = action + "?orderDetailId=<%=order.getOrderId()%>";
-                            }
-                        });
-                    </script>
-                    </tr>
+                        </tr>
+                    </tbody>
                     <%}
                     } else {
                     %>
                     <p></p>
                     <%
                         }
-                    %>                
-                    </tbody>
+                    %> 
                 </table>
             </div>
         </div>

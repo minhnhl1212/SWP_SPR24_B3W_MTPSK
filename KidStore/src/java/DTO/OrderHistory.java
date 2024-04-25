@@ -7,7 +7,7 @@ import java.util.Date;
  * @author trant
  */
 public class OrderHistory {
-    
+
     private int orderId;
     private int orderDetailId;
     private Date orderDate;
@@ -21,6 +21,10 @@ public class OrderHistory {
     private double orderPrice;
     private double orderAmount;
     private double discount;
+    private String fullname;
+    private String phone;
+    private String address;
+    private int typePayment;
     private boolean paymentMethod;
 
     public OrderHistory(int orderId) {
@@ -44,6 +48,17 @@ public class OrderHistory {
         this.paymentMethod = paymentMethod;
     }
     
+       public OrderHistory(int orderId, Date orderDate, String status, double orderAmount, String fullname, String phone, String address, int typePayment) {
+        this.orderId = orderId;
+        this.orderDate = orderDate;
+        this.status = status;
+        this.orderAmount = orderAmount;
+        this.fullname = fullname;
+        this.phone = phone;
+        this.address = address;
+        this.typePayment = typePayment;
+    }   
+
     public OrderHistory(int orderId, Date orderDate, byte[] imageToy, String toyName, int quantity, String nameCategory, String description, String status, double price, double orderPrice, double orderAmount) {
         this.orderId = orderId;
         this.orderDate = orderDate;
@@ -82,8 +97,6 @@ public class OrderHistory {
         this.orderDetailId = orderDetailId;
     }
 
-
-    
     public int getOrderId() {
         return orderId;
     }
@@ -195,4 +208,36 @@ public class OrderHistory {
     public void setNameCategory(String nameCategory) {
         this.nameCategory = nameCategory;
     }
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public int getTypePayment() {
+        return typePayment;
+    }
+
+    public void setTypePayment(int typePayment) {
+        this.typePayment = typePayment;
+    }       
 }
