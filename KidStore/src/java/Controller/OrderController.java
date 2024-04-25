@@ -7,6 +7,7 @@ package Controller;
 
 import DAO.OrderDAO;
 import DTO.Account;
+import DTO.DataStore;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -21,7 +22,9 @@ import javax.servlet.http.HttpSession;
  * @author admin
  */
 public class OrderController extends HttpServlet {
-private final static String DETAIL = "OrderDetailController";
+
+    private final static String DETAIL = "OrderDetailController";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -39,26 +42,54 @@ private final static String DETAIL = "OrderDetailController";
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             HttpSession session = request.getSession();
-            Account a = (Account) session.getAttribute("acc");   
+            int voucher_id =1;
+            Account a = (Account) session.getAttribute("acc");
             String name = request.getParameter("name");
             String phone = request.getParameter("phone");
             String address = request.getParameter("address");
             String paymentType = request.getParameter("paymentMethod");
-            double amount = (Double)session.getAttribute("orderAmount");
-            if(paymentType.equals("cashOnDelivery")){
-                 type = false;
+            if(name!=null && phone!=null && address!=null && paymentType!=null){
+            DataStore ds = new DataStore(name,phone,address,paymentType);
+            session.setAttribute("DataStore", ds);
+                    }
+            DataStore data = (DataStore) session.getAttribute("DataStore");
+            if(name==null || phone==null || address==null || paymentType==null){
+                name = data.getName();
+                phone = data.getPhone();
+                address = data.getAddress();
+                paymentType = data.getPaymentType();
             }
-            if(type){
-                url = "vnpay.jsp";
+            double amount = (Double) session.getAttribute("orderAmount");
+            String transaction_status = request.getParameter("vnp_ResponseCode");
+            String voucher_idParam = (String)session.getAttribute("voucherID");
+            if(voucher_idParam!=null){
+                voucher_id = Integer.parseInt(voucher_idParam);
             }
-            int voucher_id = 1;
-            OrderDAO dao = new OrderDAO();
-            int OrderId = dao.CreateNewOrder(name, phone, address, type, voucher_id,a.getUserId(), amount);
-            session.setAttribute("OrderID", OrderId);
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
-        }
-        catch (Exception e){
+            if (paymentType.equals("cashOnDelivery")) {
+                type = false;
+                OrderDAO dao = new OrderDAO();
+                int OrderId = dao.CreateNewOrder(name, phone, address, type, voucher_id, a.getUserId(), amount);
+                session.setAttribute("OrderID", OrderId);
+                RequestDispatcher rd = request.getRequestDispatcher(url);
+                rd.forward(request, response);
+            } else if (type) {
+                if (transaction_status == null) {
+                    url = "vnpay_pay.jsp";
+                    RequestDispatcher rd = request.getRequestDispatcher(url);
+                    rd.forward(request, response);
+                } else if(transaction_status.equals("00")){
+                    OrderDAO dao = new OrderDAO();
+                    int OrderId = dao.CreateNewOrder(name, phone, address, type, voucher_id, a.getUserId(), amount);
+                    session.setAttribute("OrderID", OrderId);
+                    RequestDispatcher rd = request.getRequestDispatcher(url);
+                    rd.forward(request, response);
+                }
+                else{
+                    session.setAttribute("ERROR_MESSAGE", "Your Transaction wasn't completed");
+                }
+            }
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

@@ -5,22 +5,22 @@
  */
 package Controller;
 
-import DAO.VoucherDAO;
-import DTO.Voucher;
+import DAO.AccountDAO;
+import DTO.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author admin
+ * @author chanh
  */
-public class VoucherController extends HttpServlet {
+public class AccountEditRoleController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,24 +36,23 @@ public class VoucherController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            HttpSession session = request.getSession();
-            String voucher = request.getParameter("Voucher");
-            voucher = voucher.trim().toLowerCase();
-            VoucherDAO dao = new VoucherDAO();
-            Voucher v = dao.getVoucherValue(voucher);
-            String discount = String.valueOf(v.getDiscount());
-            int vId = v.getVoucherId();
-            session.setAttribute("voucherID", vId);
-            session.setAttribute("discount", discount);
-            session.setAttribute("vouchernamecode", voucher);
-            RequestDispatcher rd = request.getRequestDispatcher("cart.jsp");
-            rd.forward(request, response);
-        } catch (Exception e) {
-            e.printStackTrace();
+            int userId = Integer.parseInt(request.getParameter("id"));
+            int roleId = Integer.parseInt(request.getParameter("roleId"));
+            AccountDAO dao = new AccountDAO();
+            if (roleId == 2) {
+                roleId = 3;
+            } else {
+                roleId = 2;
+            }
+            dao.UpdateRoleAccount(userId, roleId);
+            response.sendRedirect("AccountController");
+        } catch (Exception ex) {
+            Logger.getLogger(AccountEditRoleController.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

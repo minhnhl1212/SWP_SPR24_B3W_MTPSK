@@ -5,22 +5,18 @@
  */
 package Controller;
 
-import DAO.VoucherDAO;
-import DTO.Voucher;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author admin
  */
-public class VoucherController extends HttpServlet {
+public class StoredPaymentController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,20 +32,16 @@ public class VoucherController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            HttpSession session = request.getSession();
-            String voucher = request.getParameter("Voucher");
-            voucher = voucher.trim().toLowerCase();
-            VoucherDAO dao = new VoucherDAO();
-            Voucher v = dao.getVoucherValue(voucher);
-            String discount = String.valueOf(v.getDiscount());
-            int vId = v.getVoucherId();
-            session.setAttribute("voucherID", vId);
-            session.setAttribute("discount", discount);
-            session.setAttribute("vouchernamecode", voucher);
-            RequestDispatcher rd = request.getRequestDispatcher("cart.jsp");
-            rd.forward(request, response);
-        } catch (Exception e) {
-            e.printStackTrace();
+            String amount = request.getParameter("vnp_Amount");
+            String bankCode = request.getParameter("vnp_BankCode");
+            String CardType = request.getParameter("vnp_CardType");
+            String orderInfo = request.getParameter("vnp_OrderInfo");
+            String payDate = request.getParameter("vnp_PayDate");
+            String responseCode = request.getParameter("vnp_ResponseCode");
+            String TransactionNo = request.getParameter("vnp_TransactionNo");
+            String TransactionStatus = request.getParameter("vnp_TransactionStatus");
+            String textReference = request.getParameter("vnp_TxnRef");
+            
         }
     }
 

@@ -62,7 +62,7 @@
                 </div>    
                 <div class="form-group">
                     <label >Số tiền:</label>
-                    <label><%=request.getParameter("vnp_Amount")%></label>
+                    <label><%=Integer.parseInt(request.getParameter("vnp_Amount"))/100%></label>
                 </div>  
                 <div class="form-group">
                     <label >Mô tả giao dịch:</label>
@@ -90,7 +90,7 @@
                         <%
                             if (signValue.equals(vnp_SecureHash)) {
                                 if ("00".equals(request.getParameter("vnp_TransactionStatus"))) {
-                                    out.print("Thành công");
+                                    
                                 } else {
                                     out.print("Không thành công");
                                 }
@@ -100,6 +100,7 @@
                             }
                         %></label>
                 </div> 
+                <a href="MainController">Return to Home</a>
             </div>
             <p>
                 &nbsp;

@@ -33,6 +33,11 @@ public class Voucher {
         this.limitPrice = limitPrice;
     }
 
+    public Voucher(int voucherId, double discount) {
+        this.voucherId = voucherId;
+        this.discount = discount;
+    }
+
     public int getVoucherId() {
         return voucherId;
     }

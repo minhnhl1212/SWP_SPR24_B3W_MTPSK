@@ -64,24 +64,28 @@ public class VoucherDAO {
         return voucher;
     }
 
-    public double getVoucherValue(String namecode) throws Exception {
+    public Voucher getVoucherValue(String namecode) throws Exception {
         double discount = 1;
+        int id = 1;
+        Voucher v = null;
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "select voucher_discount from Voucher where voucher_name = ?";
+                String sql = "select id, voucher_discount from Voucher where voucher_name = ?";
                 ps = con.prepareStatement(sql);
                 ps.setString(1, namecode);
                 rs = ps.executeQuery();
                 while (rs.next()) {
                     discount = rs.getDouble("voucher_discount");
+                    id = rs.getInt("id");                
                 }
+                 v = new Voucher(id, discount);
             }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             closeConnection();
         }
-        return discount;
+        return v;
     }
 }
