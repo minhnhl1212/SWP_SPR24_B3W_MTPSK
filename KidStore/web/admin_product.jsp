@@ -4,6 +4,7 @@
     Author     : TUF
 --%>
 
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.Base64"%>
 <%@page import="DTO.Toy"%>
 <%@page import="java.util.ArrayList"%>
@@ -28,6 +29,15 @@
             />
         <title>AdminHub</title>
     </head>
+
+    <style>
+        #content main .table-data .order table td:nth-child(3) {
+            text-align: left;
+            border: 2px solid var(--grey);
+            padding-left: 0px;
+        }
+    </style>
+
     <body>
 
 
@@ -93,8 +103,8 @@
                 <a href="#" class="nav-link"></a>
                 <form action="#">
                     <div class="search">
-                        <input type="text" class="searchTerm" placeholder=" Search.....">
-                        <button type="submit" class="searchButton"><i class="bx bx-search"></i></button>
+                        <input hidden="" type="text" class="searchTerm" placeholder=" Search.....">
+                        <button hidden="" type="submit" class="searchButton"><i class="bx bx-search"></i></button>
                     </div>
                 </form>
                 <input type="checkbox" id="switch-mode" hidden>
@@ -114,7 +124,7 @@
                     </div>
                 </div>
                 <ul class="notifications"></ul>
-                <div class="table-data-product">
+                <div class="table-data">
                     <div class="order">
                         <div class="head">
                             <h3>Product List</h3>
@@ -138,17 +148,19 @@
                             <tbody>  
                                 <%
                                     ArrayList<Toy> toyList = (ArrayList<Toy>) session.getAttribute("TOY_LIST_NOT_APPROVE");
+                                    DecimalFormat vnCurrencyFormat = new DecimalFormat("###,### VNĐ");
                                     if (toyList != null) {
                                         for (Toy toy : toyList) {
                                             String base64Image = Base64.getEncoder().encodeToString(toy.getImage());
+                                            String formatPrice = vnCurrencyFormat.format(toy.getPrice());
 
                                 %>
                                 <tr>
                                     <td><%=toy.getToyId()%></td>
                                     <td><%=toy.getToyName()%></td>
-                                    <td><img src="data:image/jpeg;base64,<%= base64Image%>" alt="Toy Image"></td>
+                                    <td><img src="data:image/jpeg;base64,<%= base64Image%>" alt="Toy Image" style="width: 100px; height: 100px; margin-left: auto; margin-right: auto;"></td>
                                     <td><%=toy.getName_staff()%></td>
-                                    <td><%=toy.getPrice()%> Đ</td>
+                                    <td><%=formatPrice%></td>
                                     <td><a href="ApproveToyController?toyId=<%=toy.getToyId()%>"class="button-bordered" id="success">Approve</a></td> 
                                     <td><a href="CancelToyController?toyId=<%=toy.getToyId()%>" class="button-bordered" id="error">Disable</a></td>  
                                     <td></td>

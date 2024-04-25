@@ -1,4 +1,4 @@
-<%-- 
+    <%-- 
     Document   : admin_page
     Created on : Apr 15, 2024, 6:10:37 PM
     Author     : TUF
@@ -310,7 +310,7 @@
             function checkFullName() {
                 var fullName = document.getElementById("fullName").value;
                 var fullNameInvalid = document.getElementById("fullNameInvalid");
-                if (fullName.length < 2 && fullName != "") {
+                if (fullName.length < 2 || fullName == "") {
                     fullNameInvalid.innerHTML = "Invalid Value";
                 } else {
                     fullNameInvalid.innerHTML = "";
@@ -319,8 +319,8 @@
             function checkAddress() {
                 var address = document.getElementById("address").value;
                 var addressInvalid = document.getElementById("addressInvalid");
-                if (address.length != "") {
-                    addressInvalid.innerHTML = "Invalid Value"
+                if (address.length == "") {
+                    addressInvalid.innerHTML = "Invalid Value";
                 }else {
                     addressInvalid.innerHTML = "";
                 }
