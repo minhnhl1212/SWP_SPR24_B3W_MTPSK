@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 /**
  *
@@ -30,7 +31,7 @@ public class AddToyController extends HttpServlet {
             HttpSession session = request.getSession();
             ToyDAO toyDAO = new ToyDAO();
             String name = request.getParameter("productName");
-            String image = request.getParameter("image");
+            Part filePart = request.getPart("image");
             double price = Double.parseDouble(request.getParameter("price"));
             String description = request.getParameter("description");
             int idCategory = Integer.parseInt(request.getParameter("idCategory"));
@@ -45,7 +46,7 @@ public class AddToyController extends HttpServlet {
             java.util.Date newWarrantyTime = calendar.getTime();
             java.sql.Date newSqlWarrantyTime = new java.sql.Date(newWarrantyTime.getTime());
             int userId = Integer.parseInt(request.getParameter("userId"));
-            Toy addToy = toyDAO.addToy(name, image, price, description, idCategory, discount, newSqlWarrantyTime, userId);
+            Toy addToy = toyDAO.addToy(name, filePart.getInputStream(), price, description, idCategory, discount, newSqlWarrantyTime, userId);
             if (addToy != null) {
                 request.setAttribute("ADD_TOY_SUCCESS", "Added " + addToy.getToyName() + " Success");
             } else {

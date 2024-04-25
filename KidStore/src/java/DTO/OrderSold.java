@@ -12,14 +12,14 @@ import java.util.Date;
  * @author admin
  */
 public class OrderSold {
-    private String image;
+    private byte[] image;
     private String toyName;
     private int quantity;
     private String fullName;
     private Date orderDate;
     private double totalPrice;
 
-    public OrderSold(String image, String toyName, int quantity, String fullName, Date orderDate, double totalPrice) {
+    public OrderSold(byte[] image, String toyName, int quantity, String fullName, Date orderDate, double totalPrice) {
         this.image = image;
         this.toyName = toyName;
         this.quantity = quantity;
@@ -31,11 +31,11 @@ public class OrderSold {
     public OrderSold() {
     }
 
-    public String getImage() {
+    public byte[] getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(byte[] image) {
         this.image = image;
     }
 

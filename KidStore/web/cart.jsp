@@ -1,3 +1,4 @@
+<%@page import="java.util.Base64"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="DTO.Toy"%>
@@ -59,13 +60,14 @@
 
                                         String formatPrices = vnCurrencyFormat.format(prices);
                                         String formatEachPrices = vnCurrencyFormat.format(eachPrice);
+                                        String base64Image = Base64.getEncoder().encodeToString(c.getKey().getImage());
 
                             %>
                         <form action="CartController">
                             <tr>
                             <input type="hidden" name="toyId" value="<%=c.getKey().getToyId()%>"/>
                             <th scope="row"><%=i++%></th>
-                            <td><img src="<%=c.getKey().getImage()%>" width="50"/></td>
+                            <td><img src="data:image/jpeg;base64,<%= base64Image%>" alt="Toy Image" width="50"></td>
                             <td><%=c.getKey().getToyName()%></td>
                             <td><%=formatEachPrices%></td>
                             <td><input onchange="this.form.submit()" type="number" name="InputValue" value="<%=c.getValue()%>"/></td>
@@ -89,15 +91,17 @@
                 <div class="col-md-5">
                     <form action="VoucherController">
                         <div class="input-group mb-4">
-                           <% String namecode = (String) session.getAttribute("vouchernamecode");
-                            if(namecode==null) namecode="";%>
+                            <% String namecode = (String) session.getAttribute("vouchernamecode");
+                                if (namecode == null) {
+                                    namecode = "";
+                                }%>
                             <input type="text" class="form-control" placeholder="Enter voucher code" name="Voucher" value="<%=namecode%>">
                             <div class="input-group-append">
                                 <button class="btn btn-outline-danger" type="submit">Áp dụng</button>
                             </div>
                         </div>
                     </form>
-                    <%  
+                    <%
                         String formatSum = vnCurrencyFormat.format(sum);
                         double DiscountValue = 0;
                         double Discount = 1;

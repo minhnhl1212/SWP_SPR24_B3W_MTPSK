@@ -1,4 +1,5 @@
 
+<%@page import="java.util.Base64"%>
 <%@page import="DTO.News"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="DTO.Account"%>
@@ -62,6 +63,10 @@
             .description {
                 max-height: 188px;
                 margin-top: -93px;
+            }
+            input#image {
+                width: 273px;
+                text-wrap: wrap;
             }
 
         </style>
@@ -150,6 +155,8 @@
                         <%                            ArrayList<News> newsList = (ArrayList<News>) session.getAttribute("NEWS_LIST");
                             if (newsList != null) {
                                 for (News news : newsList) {
+                                    String base64Image = Base64.getEncoder().encodeToString(news.getImage());
+
                         %>
                         <tr class="text-gray-700 dark:text-gray-400">
                             <td class="px-4 py-3">
@@ -161,7 +168,7 @@
                                 <%=news.getTitle()%>
                             </td>
                             <td class="px-4 py-3 text-xs">
-                                <img src="<%=news.getImage()%>" alt="News Images"/>
+                                <img src="data:image/jpeg;base64,<%= base64Image%>" alt="News Image">
                             </td>
                             <td class="px-4 py-3 text-sm">
                                 <%=news.getName_staff()%>
@@ -208,19 +215,19 @@
                         <div class="addNews overlay">
                             <div style="text-align: center; color: white; font-size: 24px; font-weight: 600; margin-top: -2%; background-color: darkkhaki; width: 350px; padding-bottom: 25px" id="add-product-form">                    
                                 <div>
-                                    <form action="AddNewsController">                                        
+                                    <form id="addNewsForm" action="AddNewsController" method="post" enctype="multipart/form-data">                                     
                                         <button onclick="toggleAddNewsForm()" class="close" style="text-align: right">X</button>
                                         <label for="title">Title</label></br>
                                         <input type="text" id="title" name="title" required></br>
                                         <label for="image">Image</label></br>
-                                        <input type="text" id="image" name="image" required></br>
+                                        <input type="file" id="image" name="image" required accept="image/*"></br>  
                                         <label for="date">Date</label></br>
                                         <input type="date" id="date" name="date" required></br>                                                                  
                                         <label for="description">Description</label></br>
-                                        <input type="text" id="date" name="description" required></br>  
+                                        <input type="text" id="description" name="description" required></br>  
                                         </br>  
                                         <input type="hidden" name="userId" value="<%=acc.getUserId()%>">
-                                        <button style="background-color: green; border-radius: 30px; padding: 3px 10px; margin-top: 15px" type="submit">Add News</button>
+                                        <button style="background-color: green; border-radius: 30px; padding: 3px 10px; margin-top: 15px" type="button" onclick="submitForm()">Add News</button>
                                     </form>
                                 </div>
                             </div>
@@ -240,6 +247,53 @@
                                 addNewsForm.classList.remove("overlay");
                                 add.style.display = 'block';
                             }
+                        }
+
+                        function encodeVietnamese(text) {
+
+                            var vietnameseCharacters = {
+                                'á': '&#225;', 'à': '&#224;', 'ả': '&#7843;', 'ã': '&#227;', 'ạ': '&#7841;',
+                                'ă': '&#259;', 'ắ': '&#7855;', 'ằ': '&#7857;', 'ẳ': '&#7859;', 'ẵ': '&#7861;', 'ặ': '&#7863;',
+                                'â': '&#226;', 'ấ': '&#7845;', 'ầ': '&#7847;', 'ẩ': '&#7849;', 'ẫ': '&#7851;', 'ậ': '&#7853;',
+                                'đ': '&#273;',
+                                'é': '&#233;', 'è': '&#232;', 'ẻ': '&#7867;', 'ẽ': '&#7869;', 'ẹ': '&#7865;',
+                                'ê': '&#234;', 'ế': '&#7871;', 'ề': '&#7873;', 'ể': '&#7875;', 'ễ': '&#7877;', 'ệ': '&#7879;',
+                                'í': '&#237;', 'ì': '&#236;', 'ỉ': '&#7881;', 'ĩ': '&#297;', 'ị': '&#7883;',
+                                'ó': '&#243;', 'ò': '&#242;', 'ỏ': '&#7887;', 'õ': '&#245;', 'ọ': '&#7885;',
+                                'ô': '&#244;', 'ố': '&#7889;', 'ồ': '&#7891;', 'ổ': '&#7893;', 'ỗ': '&#7895;', 'ộ': '&#7897;',
+                                'ơ': '&#417;', 'ớ': '&#7899;', 'ờ': '&#7903;', 'ở': '&#7905;', 'ỡ': '&#7907;', 'ợ': '&#7907;',
+                                'ú': '&#250;', 'ù': '&#249;', 'ủ': '&#7911;', 'ũ': '&#361;', 'ụ': '&#7909;',
+                                'ư': '&#432;', 'ứ': '&#7913;', 'ừ': '&#7915;', 'ử': '&#7917;', 'ữ': '&#7919;', 'ự': '&#7921;',
+                                'ý': '&#253;', 'ỳ': '&#7923;', 'ỷ': '&#7925;', 'ỹ': '&#7927;', 'ỵ': '&#7929;',
+                                // Chữ hoa
+                                'Á': '&#193;', 'À': '&#192;', 'Ả': '&#7842;', 'Ã': '&#195;', 'Ạ': '&#7840;',
+                                'Ă': '&#258;', 'Ắ': '&#7854;', 'Ằ': '&#7856;', 'Ẳ': '&#7858;', 'Ẵ': '&#7860;', 'Ặ': '&#7862;',
+                                'Â': '&#194;', 'Ấ': '&#7844;', 'Ầ': '&#7846;', 'Ẩ': '&#7848;', 'Ẫ': '&#7850;', 'Ậ': '&#7852;',
+                                'Đ': '&#272;',
+                                'É': '&#201;', 'È': '&#200;', 'Ẻ': '&#7866;', 'Ẽ': '&#7868;', 'Ẹ': '&#7864;',
+                                'Ê': '&#202;', 'Ế': '&#7870;', 'Ề': '&#7872;', 'Ể': '&#7874;', 'Ễ': '&#7876;', 'Ệ': '&#7878;',
+                                'Í': '&#205;', 'Ì': '&#204;', 'Ỉ': '&#7880;', 'Ĩ': '&#296;', 'Ị': '&#7882;',
+                                'Ó': '&#211;', 'Ò': '&#210;', 'Ỏ': '&#7886;', 'Õ': '&#213;', 'Ọ': '&#7884;',
+                                'Ô': '&#212;', 'Ố': '&#7888;', 'Ồ': '&#7890;', 'Ổ': '&#7892;', 'Ỗ': '&#7894;', 'Ộ': '&#7896;',
+                                'Ơ': '&#416;', 'Ớ': '&#7898;', 'Ờ': '&#7902;', 'Ở': '&#7904;', 'Ỡ': '&#7906;', 'Ợ': '&#7906;',
+                                'Ú': '&#218;', 'Ù': '&#217;', 'Ủ': '&#7910;', 'Ũ': '&#360;', 'Ụ': '&#7908;',
+                                'Ư': '&#431;', 'Ứ': '&#7912;', 'Ừ': '&#7914;', 'Ử': '&#7916;', 'Ữ': '&#7918;', 'Ự': '&#7920;',
+                                'Ý': '&#221;', 'Ỳ': '&#7922;', 'Ỷ': '&#7924;', 'Ỹ': '&#7926;', 'Ỵ': '&#7928;'
+                            };
+
+                            return text.replace(/[^A-Za-z0-9\s]/g, function (char) {
+                                return vietnameseCharacters[char] || char;
+                            });
+                        }
+
+                        function submitForm() {
+                            var titleInput = document.getElementById('title');
+                            var descriptionInput = document.getElementById('description');
+
+                            titleInput.value = encodeVietnamese(titleInput.value);
+                            descriptionInput.value = encodeVietnamese(descriptionInput.value);
+
+                            document.getElementById('addNewsForm').submit();
                         }
                     </script>
                     </html>

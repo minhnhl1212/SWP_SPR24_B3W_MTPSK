@@ -4,6 +4,7 @@
     Author     : TUF
 --%>
 
+<%@page import="java.util.Base64"%>
 <%@page import="DTO.Toy"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -139,11 +140,13 @@
                                     ArrayList<Toy> toyList = (ArrayList<Toy>) session.getAttribute("TOY_LIST_NOT_APPROVE");
                                     if (toyList != null) {
                                         for (Toy toy : toyList) {
+                                            String base64Image = Base64.getEncoder().encodeToString(toy.getImage());
+
                                 %>
                                 <tr>
                                     <td><%=toy.getToyId()%></td>
                                     <td><%=toy.getToyName()%></td>
-                                    <td><img src="<%=toy.getImage()%>" alt="Toy Image"></td>
+                                    <td><img src="data:image/jpeg;base64,<%= base64Image%>" alt="Toy Image"></td>
                                     <td><%=toy.getName_staff()%></td>
                                     <td><%=toy.getPrice()%> Đ</td>
                                     <td><a href="ApproveToyController?toyId=<%=toy.getToyId()%>"class="button-bordered" id="success">Approve</a></td> 

@@ -1,3 +1,4 @@
+<%@page import="java.util.Base64"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="DTO.OrderWarranty"%>
@@ -94,8 +95,8 @@
                         if (orderList != null && acc != null && OrderIDList != null) {
                             for (OrderHistory oid : OrderIDList) {
                                 String formatOrderAmount = vnCurrencyFormat.format(oid.getOrderAmount());
-                                double Discount = Math.round(oid.getOrderAmount()-oid.getOrderAmount()*oid.getDiscount());
-                                double OrderAmountAfterDiscount = Math.round(oid.getOrderAmount())-Discount;
+                                double Discount = Math.round(oid.getOrderAmount() - oid.getOrderAmount() * oid.getDiscount());
+                                double OrderAmountAfterDiscount = Math.round(oid.getOrderAmount()) - Discount;
                                 String formatDiscount = vnCurrencyFormat.format(Discount);
                                 String formatOrderAfterDiscount = vnCurrencyFormat.format(OrderAmountAfterDiscount);
                                 String orderDate = sdf.format(oid.getOrderDate());
@@ -131,12 +132,13 @@
                                                 <%for (OrderHistory order : orderList) {
                                                         if (order.getOrderId() == oid.getOrderId()) {
                                                             String formatOrderPrice = vnCurrencyFormat.format(order.getOrderPrice());
-                                                            double TotalOrderDetail= order.getOrderPrice()*order.getQuantity();
+                                                            double TotalOrderDetail = order.getOrderPrice() * order.getQuantity();
                                                             String formatTotalOrderDetail = vnCurrencyFormat.format(TotalOrderDetail);
-                                                            %>
+                                                            String base64Image = Base64.getEncoder().encodeToString(order.getImageToy());
+                                                %>
                                             <form action="CartController">
                                                 <tr>
-                                                    <td><img src="<%=order.getImageToy()%>" width="50" alt="Product Image"></td>
+                                                    <td><img src="data:image/jpeg;base64,<%= base64Image%>" alt="Toy Image" width="50"></td>
                                                     <td class="product-name"><%=order.getToyName()%></td>
                                                     <td class="product-name"><%=formatOrderPrice%></td>
                                                     <td class="product-name"><%=order.getQuantity()%></td>
@@ -144,7 +146,7 @@
                                                 </tr>
                                             </form>
                                             <%}
-                                                    }%>
+                                                }%>
                                             </tbody>
                                         </table>
                                     </div>

@@ -1,4 +1,4 @@
-
+<%@page import="java.util.Base64"%>
 <%@page import="DTO.OrderWarranty"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -113,6 +113,8 @@
                             ArrayList<OrderWarranty> warrantyList = (ArrayList<OrderWarranty>) session.getAttribute("ORDER_WARRANTY");
                             if (warrantyList != null) {
                                 for (OrderWarranty warranty : warrantyList) {
+                                    String base64Image = Base64.getEncoder().encodeToString(warranty.getImageToy());
+
                         %>
                         <tr class="text-gray-700 dark:text-gray-400">
                             <td class="px-4 py-3">
@@ -121,7 +123,7 @@
                             <td><%=warranty.getToyName()%></td>
                             <td><%=warranty.getQuantity()%></td>   
                             <td class="px-4 py-3 text-xs">
-                                <img src="<%=warranty.getImageToy()%>" alt="Toy Image">
+                                <img src="data:image/jpeg;base64,<%= base64Image%>" alt="Toy Image">
                             </td>
                             <td><%=warranty.getNameUser()%></td>   
 
