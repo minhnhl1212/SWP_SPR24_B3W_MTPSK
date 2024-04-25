@@ -122,7 +122,7 @@ public class AccountDAO {
         }
         return user;
     }
-    
+
     public void UpdateRoleAccount(int user_id, int role) throws Exception {
         try {
             con = DBUtils.getConnection();
@@ -136,5 +136,28 @@ public class AccountDAO {
         } finally {
             closeConnection();
         }
+    }
+
+    public boolean checkUsername(String name) throws Exception {
+        boolean check = false;
+
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "select user_id from Account where username =?";
+                ps = con.prepareStatement(sql);
+                ps.setString(1, name);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    check = true;
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+        return check;
     }
 }

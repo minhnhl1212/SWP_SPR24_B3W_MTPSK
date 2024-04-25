@@ -49,20 +49,26 @@ public class SignUpController extends HttpServlet {
             String confirmPassword = request.getParameter("confirmPassword");
 
             AccountDAO accountDAO = new AccountDAO();
-            if (password.equals(confirmPassword)) {
-                Account signUp = accountDAO.signup(userName, password, fullName, phone, address);
-                if (signUp != null) {
-                    url = SUCCESS;
-                    request.setAttribute("SIGNUP_SUCCESS", "Sign Up Success");
-                    RequestDispatcher dispatcher = request.getRequestDispatcher(url);
-                    dispatcher.forward(request, response);
+            if (!accountDAO.checkUsername(userName)) {
+                if (password.equals(confirmPassword)) {
+                    Account signUp = accountDAO.signup(userName, password, fullName, phone, address);
+                    if (signUp != null) {
+                        url = SUCCESS;
+                        request.setAttribute("SIGNUP_SUCCESS", "Sign Up Success");
+                        RequestDispatcher dispatcher = request.getRequestDispatcher(url);
+                        dispatcher.forward(request, response);
+                    } else {
+                        request.setAttribute("SIGNUP_ERROR", "Sign Up Failed");
+                        RequestDispatcher dispatcher = request.getRequestDispatcher(url);
+                        dispatcher.forward(request, response);
+                    }
                 } else {
-                    request.setAttribute("SIGNUP_ERROR", "Sign Up Failed");
+                    request.setAttribute("PASS_NOT_MATH", "Password And Confirm Password Not Math");
                     RequestDispatcher dispatcher = request.getRequestDispatcher(url);
                     dispatcher.forward(request, response);
                 }
             } else {
-                request.setAttribute("PASS_NOT_MATH", "Password And Confirm Password Not Math");
+                request.setAttribute("USERNAME_HAVE_BEEN_USED", "Your username had already been taken");
                 RequestDispatcher dispatcher = request.getRequestDispatcher(url);
                 dispatcher.forward(request, response);
             }

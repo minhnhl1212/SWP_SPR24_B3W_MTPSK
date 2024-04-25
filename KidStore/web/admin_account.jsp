@@ -181,6 +181,7 @@
                         <p style="color: green">${ADD_SUCCESS}</p>
                         <p style="color: red">${ADD_FAIL}</p>
                         <p style="color: red">${PASS_NOT_MATH}</p>
+                        <p style="color: red">${USERNAME_HAVE_BEEN_USED}</p>
                         <table>
                             <thead>
                                 <tr>
