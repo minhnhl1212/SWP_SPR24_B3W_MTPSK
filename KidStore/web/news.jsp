@@ -4,6 +4,7 @@
     Author     : trant
 --%>
 
+<%@page import="java.util.Base64"%>
 <%@page import="DTO.Account"%>
 <%@page import="DTO.News"%>
 <%@page import="java.util.ArrayList"%>
@@ -50,17 +51,19 @@
                             <div class="fh5co_heading fh5co_heading_border_bottom py-2 mb-4">News</div>
                         </div>
 
-                        <%
+                        <%                            
                             ArrayList<News> newsList = (ArrayList<News>) session.getAttribute("NEWS_LIST");
-                            if (newsList != null) {
+                            if (newsList != null && !newsList.isEmpty()) {
                                 for (News news : newsList) {
+                                    String base64Image = Base64.getEncoder().encodeToString(news.getImage());
+
                         %>
 
                         <div class="news-element">
                             <div class="row pb-4">
                                 <div class="col-md-5">
                                     <div class="fh5co_hover_news_img">
-                                        <div class="fh5co_news_img"><img src="<%=news.getImage()%>" alt="News Images"/></div>
+                                        <div class="fh5co_news_img"><img src="data:image/jpeg;base64,<%= base64Image%>" alt="News Image"></div>
                                     </div>
                                 </div>
                                 <div class="col-md-7">

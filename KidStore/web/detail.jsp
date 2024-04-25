@@ -1,3 +1,4 @@
+<%@page import="java.util.Base64"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="DTO.Toy"%>
 <%@page import="DTO.Image"%>
@@ -82,13 +83,15 @@
                                 <% ArrayList<Image> imageList = (ArrayList<Image>) session.getAttribute("IMAGE_LIST");
                                     for (Image i : imageList) {
                                         if (i.isMain()) {
+                                            String base64Image = Base64.getEncoder().encodeToString(toy.getImage());
+
                                 %>
                                 <div class="carousel-item active">
-                                    <img src="<%=i.getImage()%>" class="d-block w-100" alt="...">
+                                    <img src="data:image/jpeg;base64,<%= base64Image%>" alt="Toy Image" class="d-block w-100">
                                 </div>
-                                <%} else {%>   
+                                <%} else { String base64Image = Base64.getEncoder().encodeToString(toy.getImage());%>   
                                 <div class="carousel-item">
-                                    <img src="<%=i.getImage()%>" class="d-block w-100" alt="...">
+                                    <img src="data:image/jpeg;base64,<%= base64Image%>" alt="Toy Image" class="d-block w-100">
                                 </div>
                                 <%}
                                     }%>

@@ -42,7 +42,7 @@ public class VoucherController extends HttpServlet {
             VoucherDAO dao = new VoucherDAO();
             Voucher v = dao.getVoucherValue(voucher);
             String discount = String.valueOf(v.getDiscount());
-            int vId = v.getVoucherId();
+            String vId = String.valueOf(v.getVoucherId());
             session.setAttribute("voucherID", vId);
             session.setAttribute("discount", discount);
             session.setAttribute("vouchernamecode", voucher);

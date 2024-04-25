@@ -3,6 +3,7 @@ package DAO;
 import DTO.Account;
 import DTO.News;
 import Utils.DBUtils;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -43,7 +44,7 @@ public class NewsDAO {
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
-                    News list = new News(rs.getInt("news_id"), rs.getString("title"), rs.getString("image"), rs.getDate("date"), rs.getString("description"), rs.getString("full_name"));
+                    News list = new News(rs.getInt("news_id"), rs.getString("title"), rs.getBytes("image"), rs.getDate("date"), rs.getString("description"), rs.getString("full_name"));
                     newsList.add(list);
                 }
             }
@@ -55,7 +56,7 @@ public class NewsDAO {
         return newsList;
     }
 
-    public News addNews(String title, String image, java.sql.Date date, int userId, String description) throws SQLException, Exception {
+    public News addNews(String title, InputStream image, java.sql.Date date, int userId, String description) throws SQLException, Exception {
         News user = null;
         try {
             con = DBUtils.getConnection();
@@ -64,12 +65,12 @@ public class NewsDAO {
                         + "values (?,?,?,?,?)";
                 ps = con.prepareStatement(sql);
                 ps.setString(1, title);
-                ps.setString(2, image);
+                ps.setBinaryStream(2, image);
                 ps.setDate(3, date);
                 ps.setString(4, description);
                 ps.setInt(5, userId);
                 ps.executeUpdate();
-                user = new News(title, image, date, description, userId);
+                user = new News(title, date, description, userId);
             }
         } catch (Exception e) {
             e.printStackTrace();

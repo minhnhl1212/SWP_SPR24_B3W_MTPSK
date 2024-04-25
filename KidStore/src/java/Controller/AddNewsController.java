@@ -15,13 +15,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 /**
  *
  * @author trant
  */
 public class AddNewsController extends HttpServlet {
-    
+
     private static final String NEWS = "AddNew.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -31,7 +32,7 @@ public class AddNewsController extends HttpServlet {
             response.setContentType("text/html;charset=UTF-8");
             String url = NEWS;
             String title = request.getParameter("title");
-            String image = request.getParameter("image");
+            Part filePart = request.getPart("image");
             String dateStr = request.getParameter("date");
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             java.util.Date utilDate = dateFormat.parse(dateStr);
@@ -44,23 +45,23 @@ public class AddNewsController extends HttpServlet {
             int userId = Integer.parseInt(request.getParameter("userId"));
             String description = request.getParameter("description");
             NewsDAO newsDAO = new NewsDAO();
-            News addNews = newsDAO.addNews(title, image, newSqlDate, userId, description);
-            
-            if (addNews != null){
+            News addNews = newsDAO.addNews(title, filePart.getInputStream(), newSqlDate, userId, description);
+
+            if (addNews != null) {
                 request.setAttribute("ADD_NEWS_SUCCESS", "Add News Failed");
-                
+
             } else {
                 request.setAttribute("ADD_NEWS_FAILED", "Add News Failed");
             }
-            
+
             ArrayList<News> newsList = newsDAO.newsList();
-            if (newsList != null){
+            if (newsList != null) {
                 session.setAttribute("NEWS_LIST", newsList);
-                
+
             } else {
                 request.setAttribute("NEWS_LIST_ERROR", "Error load news");
             }
-            
+
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
         } catch (Exception ex) {

@@ -1,3 +1,4 @@
+<%@page import="java.util.Base64"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="DTO.Account"%>
 <%@page import="java.util.HashMap"%>
@@ -133,11 +134,14 @@
 
                                                     String formatPrices = vnCurrencyFormat.format(prices);
                                                     String formatEachPrices = vnCurrencyFormat.format(eachPrice);
+
+                                                    String base64Image = Base64.getEncoder().encodeToString(c.getKey().getImage());
+
                                             %>
                                         <form action="CartController">
 
                                             <tr>
-                                                <td><img src="<%=c.getKey().getImage()%>" width="50" alt="Product Image"></td>
+                                                <td><img src="data:image/jpeg;base64,<%= base64Image%>" alt="Toy Image" width="50"></td>
                                                 <td><%=c.getKey().getToyName()%></td>
                                                 <td><%=formatEachPrices%></td>
                                                 <td><%=c.getValue()%></td>

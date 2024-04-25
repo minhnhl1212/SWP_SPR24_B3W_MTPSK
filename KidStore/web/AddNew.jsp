@@ -1,4 +1,5 @@
 
+<%@page import="java.util.Base64"%>
 <%@page import="DTO.News"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="DTO.Account"%>
@@ -63,49 +64,9 @@
                 max-height: 188px;
                 margin-top: -93px;
             }
-            img {
-                max-width: 124px;
-            }
-            .py-4.text-gray-500.dark\:text-gray-400 {
-                background-color: #80DFFF;
-                text-align: center;
-            }
-            .mt-6 {
-                display: flex;
-                justify-content: center;
-            }
-            .text-gray-800 {
-                --text-opacity: 1;
-                color: #1a1c23;
-                font-family: serif;
-                font-size: 30px;
-            }
-            th:nth-child(1), td:nth-child(1) {
-                max-width: 20px;
-                text-align: center;
-            }
-            th:nth-child(2), td:nth-child(2) {
-                max-width: 100px;
+            input#image {
+                width: 273px;
                 text-wrap: wrap;
-            }
-            th:nth-child(3), td:nth-child(3) {
-                max-width: 50px;
-            }
-            th:nth-child(4), td:nth-child(4) {
-                max-width: 40px;
-            }
-            th:nth-child(5), td:nth-child(5) {
-                max-width: 50px;
-            }
-            th{
-                text-align: center;
-            }
-            .center{
-                text-align: center;
-            }
-            th,
-            td{
-                border-bottom: 4px solid gainsboro;
             }
 
         </style>
@@ -119,10 +80,9 @@
         <div>
             <a href="LogoutController" style="position: absolute; top: 20px; right: 30px">Logout</a>
         </div>
-        <a class="navbar-brand" href="MainController?TOY_LIST=ALL"><img src="img/logo-kids-new3.png" class="logo" alt="KidStore"></a>
         <div class="py-4 text-gray-500 dark:text-gray-400">
             <a class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200" href="#">
-                STAFF DASHBOARD 
+                STAFF 
             </a>
             <ul class="mt-6" style="display: flex">
                 <li class="relative px-6 py-3">
@@ -155,7 +115,7 @@
                         <path d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path>
                         <path d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
                         </svg>
-                        <span class="ml-4">ManagerWarranty</span>
+                        <span class="ml-4">ManagerOther</span>
                     </a>
                 </li>
                 <li class="relative px-6 py-3">
@@ -182,40 +142,58 @@
                 <table class="w-full whitespace-no-wrap">
                     <thead>
                         <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
-                            <th class="py-3">ID</th>
+                            <th class="px-4 py-3">ID</th>
                             <th class="px-4 py-3">Title</th>            
                             <th class="px-4 py-3">Image</th>
-                            <th class="py-3">Poster</th>
-                            <th class="py-3">Date</th>
+                            <th class="px-4 py-3">Poster</th>
+                            <th class="px-4 py-3">Date</th>
                             <th class="px-4 py-3">Description</th>
+                            <th class="px-4 py-3">Action</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
                         <%                            ArrayList<News> newsList = (ArrayList<News>) session.getAttribute("NEWS_LIST");
                             if (newsList != null) {
                                 for (News news : newsList) {
+                                    String base64Image = Base64.getEncoder().encodeToString(news.getImage());
+
                         %>
                         <tr class="text-gray-700 dark:text-gray-400">
-                            <td class="py-3">
+                            <td class="px-4 py-3">
 
-                                <p><%=news.getNewsId()%></p>
+                                <p class="px-4 py-3 text-sm"><%=news.getNewsId()%></p>
 
                             </td>
                             <td class="px-4 py-3 text-sm">
                                 <%=news.getTitle()%>
                             </td>
                             <td class="px-4 py-3 text-xs">
-                                <img src="<%=news.getImage()%>" alt="News Images"/>
+                                <img src="data:image/jpeg;base64,<%= base64Image%>" alt="News Image">
                             </td>
-                            <td class="py-3 text-sm center">
+                            <td class="px-4 py-3 text-sm">
                                 <%=news.getName_staff()%>
                             </td>
-                            <td class="py-3 text-sm center">
+                            <td class="px-4 py-3 text-sm">
                                 <%=news.getDate()%>
                             </td>
                             <td style="overflow-y: scroll; max-width: 100px;" class="px-4 py-3 text-sm">
                                 <div class="description" style="white-space: pre-wrap;">
                                     <%=news.getDescription()%>
+                                </div>
+                            </td>
+
+                            <td class="px-4 py-3">
+                                <div class="flex items-center space-x-7 text-sm">
+                                    <button class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray" aria-label="Edit">
+                                        <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"></path>
+                                        </svg>
+                                    </button>
+                                    <button class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray" aria-label="Delete">
+                                        <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                                        </svg>
+                                    </button>
                                 </div>
                             </td>
                         </tr>
@@ -237,19 +215,19 @@
                         <div class="addNews overlay">
                             <div style="text-align: center; color: white; font-size: 24px; font-weight: 600; margin-top: -2%; background-color: darkkhaki; width: 350px; padding-bottom: 25px" id="add-product-form">                    
                                 <div>
-                                    <form action="AddNewsController">                                        
+                                    <form id="addNewsForm" action="AddNewsController" method="post" enctype="multipart/form-data">                                     
                                         <button onclick="toggleAddNewsForm()" class="close" style="text-align: right">X</button>
                                         <label for="title">Title</label></br>
                                         <input type="text" id="title" name="title" required></br>
                                         <label for="image">Image</label></br>
-                                        <input type="text" id="image" name="image" required></br>
+                                        <input type="file" id="image" name="image" required accept="image/*"></br>  
                                         <label for="date">Date</label></br>
                                         <input type="date" id="date" name="date" required></br>                                                                  
                                         <label for="description">Description</label></br>
-                                        <input type="text" id="date" name="description" required></br>  
+                                        <input type="text" id="description" name="description" required></br>  
                                         </br>  
                                         <input type="hidden" name="userId" value="<%=acc.getUserId()%>">
-                                        <button style="background-color: green; border-radius: 30px; padding: 3px 10px; margin-top: 15px" type="submit">Add News</button>
+                                        <button style="background-color: green; border-radius: 30px; padding: 3px 10px; margin-top: 15px" type="button" onclick="submitForm()">Add News</button>
                                     </form>
                                 </div>
                             </div>
@@ -269,6 +247,53 @@
                                 addNewsForm.classList.remove("overlay");
                                 add.style.display = 'block';
                             }
+                        }
+
+                        function encodeVietnamese(text) {
+
+                            var vietnameseCharacters = {
+                                'á': '&#225;', 'à': '&#224;', 'ả': '&#7843;', 'ã': '&#227;', 'ạ': '&#7841;',
+                                'ă': '&#259;', 'ắ': '&#7855;', 'ằ': '&#7857;', 'ẳ': '&#7859;', 'ẵ': '&#7861;', 'ặ': '&#7863;',
+                                'â': '&#226;', 'ấ': '&#7845;', 'ầ': '&#7847;', 'ẩ': '&#7849;', 'ẫ': '&#7851;', 'ậ': '&#7853;',
+                                'đ': '&#273;',
+                                'é': '&#233;', 'è': '&#232;', 'ẻ': '&#7867;', 'ẽ': '&#7869;', 'ẹ': '&#7865;',
+                                'ê': '&#234;', 'ế': '&#7871;', 'ề': '&#7873;', 'ể': '&#7875;', 'ễ': '&#7877;', 'ệ': '&#7879;',
+                                'í': '&#237;', 'ì': '&#236;', 'ỉ': '&#7881;', 'ĩ': '&#297;', 'ị': '&#7883;',
+                                'ó': '&#243;', 'ò': '&#242;', 'ỏ': '&#7887;', 'õ': '&#245;', 'ọ': '&#7885;',
+                                'ô': '&#244;', 'ố': '&#7889;', 'ồ': '&#7891;', 'ổ': '&#7893;', 'ỗ': '&#7895;', 'ộ': '&#7897;',
+                                'ơ': '&#417;', 'ớ': '&#7899;', 'ờ': '&#7903;', 'ở': '&#7905;', 'ỡ': '&#7907;', 'ợ': '&#7907;',
+                                'ú': '&#250;', 'ù': '&#249;', 'ủ': '&#7911;', 'ũ': '&#361;', 'ụ': '&#7909;',
+                                'ư': '&#432;', 'ứ': '&#7913;', 'ừ': '&#7915;', 'ử': '&#7917;', 'ữ': '&#7919;', 'ự': '&#7921;',
+                                'ý': '&#253;', 'ỳ': '&#7923;', 'ỷ': '&#7925;', 'ỹ': '&#7927;', 'ỵ': '&#7929;',
+                                // Chữ hoa
+                                'Á': '&#193;', 'À': '&#192;', 'Ả': '&#7842;', 'Ã': '&#195;', 'Ạ': '&#7840;',
+                                'Ă': '&#258;', 'Ắ': '&#7854;', 'Ằ': '&#7856;', 'Ẳ': '&#7858;', 'Ẵ': '&#7860;', 'Ặ': '&#7862;',
+                                'Â': '&#194;', 'Ấ': '&#7844;', 'Ầ': '&#7846;', 'Ẩ': '&#7848;', 'Ẫ': '&#7850;', 'Ậ': '&#7852;',
+                                'Đ': '&#272;',
+                                'É': '&#201;', 'È': '&#200;', 'Ẻ': '&#7866;', 'Ẽ': '&#7868;', 'Ẹ': '&#7864;',
+                                'Ê': '&#202;', 'Ế': '&#7870;', 'Ề': '&#7872;', 'Ể': '&#7874;', 'Ễ': '&#7876;', 'Ệ': '&#7878;',
+                                'Í': '&#205;', 'Ì': '&#204;', 'Ỉ': '&#7880;', 'Ĩ': '&#296;', 'Ị': '&#7882;',
+                                'Ó': '&#211;', 'Ò': '&#210;', 'Ỏ': '&#7886;', 'Õ': '&#213;', 'Ọ': '&#7884;',
+                                'Ô': '&#212;', 'Ố': '&#7888;', 'Ồ': '&#7890;', 'Ổ': '&#7892;', 'Ỗ': '&#7894;', 'Ộ': '&#7896;',
+                                'Ơ': '&#416;', 'Ớ': '&#7898;', 'Ờ': '&#7902;', 'Ở': '&#7904;', 'Ỡ': '&#7906;', 'Ợ': '&#7906;',
+                                'Ú': '&#218;', 'Ù': '&#217;', 'Ủ': '&#7910;', 'Ũ': '&#360;', 'Ụ': '&#7908;',
+                                'Ư': '&#431;', 'Ứ': '&#7912;', 'Ừ': '&#7914;', 'Ử': '&#7916;', 'Ữ': '&#7918;', 'Ự': '&#7920;',
+                                'Ý': '&#221;', 'Ỳ': '&#7922;', 'Ỷ': '&#7924;', 'Ỹ': '&#7926;', 'Ỵ': '&#7928;'
+                            };
+
+                            return text.replace(/[^A-Za-z0-9\s]/g, function (char) {
+                                return vietnameseCharacters[char] || char;
+                            });
+                        }
+
+                        function submitForm() {
+                            var titleInput = document.getElementById('title');
+                            var descriptionInput = document.getElementById('description');
+
+                            titleInput.value = encodeVietnamese(titleInput.value);
+                            descriptionInput.value = encodeVietnamese(descriptionInput.value);
+
+                            document.getElementById('addNewsForm').submit();
                         }
                     </script>
                     </html>

@@ -2,20 +2,20 @@ package DTO;
 
 public class Image {
     private int imageId;
-    private String image;
+    private byte[] image;
     private int toyId;
     private boolean main;
 
     public Image() {
     }
 
-    public Image(int imageId, String image, int toyId) {
+    public Image(int imageId, byte[] image, int toyId) {
         this.imageId = imageId;
         this.image = image;
         this.toyId = toyId;
     }
 
-    public Image(int imageId, String image, int toyId, boolean main) {
+    public Image(int imageId, byte[] image, int toyId, boolean main) {
         this.imageId = imageId;
         this.image = image;
         this.toyId = toyId;
@@ -31,11 +31,11 @@ public class Image {
         this.imageId = imageId;
     }
 
-    public String getImage() {
+    public byte[] getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(byte[] image) {
         this.image = image;
     }
 

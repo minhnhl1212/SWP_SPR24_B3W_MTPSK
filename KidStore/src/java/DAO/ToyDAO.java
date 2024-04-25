@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 import Utils.DBUtils;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 public class ToyDAO {
@@ -46,7 +47,7 @@ public class ToyDAO {
                 rs = ps.executeQuery();
                 while (rs.next()) {
                     Toy list = new Toy(rs.getInt("toy_id"), rs.getString("toy_name"),
-                            rs.getInt("quantity"), rs.getString("image_toy"),
+                            rs.getInt("quantity"), rs.getBytes("image_toy"),
                             rs.getDouble("price"), rs.getString("description"),
                             rs.getInt("category_id"), rs.getDouble("discount"),
                             rs.getDate("warranty_time"), rs.getInt("isActive"),
@@ -78,7 +79,7 @@ public class ToyDAO {
                 rs = ps.executeQuery();
                 while (rs.next()) {
                     toy = new Toy(toyId, rs.getString("toy_name"),
-                            rs.getInt("quantity"), rs.getString("image_toy"),
+                            rs.getInt("quantity"), rs.getBytes("image_toy"),
                             rs.getDouble("price"), rs.getString("description"),
                             rs.getString("category_name"), rs.getDouble("discount"));
                 }
@@ -104,7 +105,7 @@ public class ToyDAO {
                 ps.setInt(1, categoryId);
                 rs = ps.executeQuery();
                 while (rs.next()) {
-                    Toy list = new Toy(rs.getInt("toy_id"), rs.getString("toy_name"), rs.getString("image_toy"), rs.getDouble("price"), rs.getDouble("discount"));
+                    Toy list = new Toy(rs.getInt("toy_id"), rs.getString("toy_name"), rs.getBytes("image_toy"), rs.getDouble("price"), rs.getDouble("discount"));
                     listToy.add(list);
                 }
             }
@@ -116,7 +117,7 @@ public class ToyDAO {
         return listToy;
     }
 
-    public Toy addToy(String name, String image, double price, String description, int idCategory, double discount, java.sql.Date warrantyTime, int userId) throws SQLException, Exception {
+    public Toy addToy(String name, InputStream image, double price, String description, int idCategory, double discount, java.sql.Date warrantyTime, int userId) throws SQLException, Exception {
         Toy toy = null;
         try {
             con = DBUtils.getConnection();
@@ -137,7 +138,7 @@ public class ToyDAO {
                         + "SET toy_id = @toy_id, main = 1\n"
                         + "WHERE image_id = @image_id";
                 ps = con.prepareStatement(sql);
-                ps.setString(1, image);
+                ps.setBinaryStream(1, image);
                 ps.setString(2, name);
                 ps.setDouble(3, price);
                 ps.setString(4, description);
@@ -146,7 +147,7 @@ public class ToyDAO {
                 ps.setDate(7, warrantyTime);
                 ps.setInt(8, userId);
                 ps.executeUpdate();
-                toy = new Toy(name, image, price, description, idCategory, discount, warrantyTime, 0, 0, userId);
+                toy = new Toy(name);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -212,7 +213,7 @@ public class ToyDAO {
                 ps.setString(1, "%" + name + "%");
                 rs = ps.executeQuery();
                 while (rs.next()) {
-                    Toy list = new Toy(rs.getString("toy_name"), rs.getString("image_toy"), rs.getDouble("price"), rs.getDouble("discount"));
+                    Toy list = new Toy(rs.getString("toy_name"), rs.getBytes("image_toy"), rs.getDouble("price"), rs.getDouble("discount"));
                     listToy.add(list);
                 }
             }
@@ -238,7 +239,7 @@ public class ToyDAO {
                 rs = ps.executeQuery();
                 while (rs.next()) {
                     Toy list = new Toy(rs.getInt("toy_id"), rs.getString("toy_name"),
-                            rs.getString("image_toy"), rs.getDouble("price"),
+                            rs.getBytes("image_toy"), rs.getDouble("price"),
                             rs.getString("description"), rs.getInt("category_id"),
                             rs.getDouble("discount"), rs.getDate("warranty_time"),
                             rs.getInt("isActive"), rs.getInt("isDisable"),
