@@ -55,6 +55,9 @@
 
         <div class="container">
             <h1>Thanh Toán</h1>
+            <div id="successMessage" style="display: none; margin-top: 10px; padding: 10px; background-color: #d4edda; border: 1px solid #c3e6cb; color: #155724; border-radius: 5px; font-size: xx-large;">
+                Đơn hàng của bạn đã đặt thành công
+            </div>
             <script>
                 function validateFormData() {
                     var name = document.getElementById("name").value.trim();
@@ -84,7 +87,8 @@
                         return false;
                     }
                     if (paymentMethod.value === "cashOnDelivery") {
-                        alert("Đơn hàng của bạn đã được xác nhận. Chúng tôi sẽ liên hệ với bạn để sắp xếp giao hàng.");
+                        document.getElementById("successMessage").style.display = "block";
+                        return true;
                     }
                     return true;
                 }

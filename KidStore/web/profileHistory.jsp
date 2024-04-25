@@ -46,6 +46,20 @@
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
+        #popup {
+            display: none;
+            width: 350px;
+            height: 315px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 50px;
+            border: 1px solid black;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
     </style>
     <body>
         <%@include file="components/navBarComponent.jsp" %>
@@ -93,7 +107,7 @@
                         DecimalFormat vnCurrencyFormat = new DecimalFormat("###,### VNĐ");
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                         if (orderList != null && acc != null && OrderIDList != null) {
-                            for (OrderHistory oid : OrderIDList) { 
+                            for (OrderHistory oid : OrderIDList) {
                                 String formatOrderAmount = vnCurrencyFormat.format(oid.getOrderAmount());
                                 double Discount = Math.round(oid.getOrderAmount() - oid.getOrderAmount() * oid.getDiscount());
                                 double OrderAmountAfterDiscount = Math.round(oid.getOrderAmount()) - Discount;
@@ -112,7 +126,10 @@
                                         <div class="product-name" style="justify-content: flex-start; display: flex;">&#128340; Ngày mua: <%=orderDate%></div>
                                     </div>
                                     <div class="col-md-6" >
-                                        <div class="product-name" style="color: green; justify-content: flex-end; display: flex; font-weight: bold;"><%=oid.getStatus()%></div>
+                                        <div class="product-name" style="color: green; justify-content: flex-end; display: flex; font-weight: bold;"
+                                             color: <%= oid.getStatus().equals("Đã Giao Hàng") ? "green" :
+                                                      oid.getStatus().equals("Đang Xử Lí") ? "black" :
+                                                      oid.getStatus().equals("Từ Chối Bán Hàng") ? "red" : "black"%>;"><%=oid.getStatus()%></div>
                                     </div>
                                 </div>
 
@@ -151,14 +168,29 @@
                                         </table>
                                     </div>
                                 </div>
+
+
                                 <div class="row">
-                                    <div class="col-md-3" style="margin-top: 70px;">Hình thức thanh toán
-                                    <%if(!oid.isPaymentMethod()){%>
-                                    bằng tiền mặt
-                                    <%}else {%>
-                                    bằng banking
-                                    <%}%>
-                                        </div>
+                                    <div class="col-md-3">
+                                        <p style="margin-top: 20px;">Hình thức thanh toán
+                                            <%if (!oid.isPaymentMethod()) {%>
+                                            bằng tiền mặt
+                                            <%} else {%>
+                                            bằng banking
+                                            <%}%></p>
+                                        <div><button id="cancel" style="color:black; background-color: #ffcccc;">Hủy đơn hàng</button></div>
+                                    </div>
+                                    <div id="popup" >
+                                        <form id="cancelForm">
+                                            <h4>Lí do hủy đơn</h4>
+                                            <div class="form-group">
+                                                <textarea class="form-control" id="issueDescription" name="issueDescription" rows="5"></textarea>
+                                            </div>  
+                                            <button type="submit" class="btn btn-primary d-block mx-auto" >Gửi</button>
+                                            <button type="button" class="btn btn-secondary d-block mx-auto" id="closePopup" onclick="closePopup">Đóng</button>
+                                        </form>
+                                    </div>
+
                                     <div class="col-md-9" >
                                         <div class="row">
                                             <div class="product-price" style="display: flex; align-items: center; justify-content: flex-start; font-size: 16px;">
@@ -181,6 +213,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="popup-form" id="popupForm">                    
                                     <form action="SendFeedbackController">
                                         <h4>Gửi Feedback</h4>
@@ -198,7 +231,7 @@
                             </div>
                         </div>
                     </div>
-                    <%                           
+                    <%
                         }
                     } else {
                     %>
@@ -214,9 +247,14 @@
         <script src="js/scripts.js"></script>
     </body>
     <script>
-                                            function togglePopup() {
-                                                var popup = document.getElementById("popupForm");
-                                                popup.style.display = (popup.style.display === "block") ? "none" : "block";
-                                            }
+                                            document.getElementById("cancel").addEventListener("click", function () {
+                                                document.getElementById("popup").style.display = "block";
+                                            });
+    </script>
+    <script>
+        function togglePopup() {
+            var popup = document.getElementById("popupForm");
+            popup.style.display = (popup.style.display === "block") ? "none" : "block";
+        }
     </script>
 </html>
