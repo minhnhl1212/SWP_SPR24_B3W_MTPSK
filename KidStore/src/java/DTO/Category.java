@@ -5,6 +5,9 @@ public class Category {
     private String categoryName;
     private int userId;
     private String name_staff;
+    private int isActive;
+    private int isDisable;
+    
 
     public Category(int categoryId) {
         this.categoryId = categoryId;
@@ -18,8 +21,8 @@ public class Category {
     public Category(int categoryId, String categoryName) {
         this.categoryId = categoryId;
         this.categoryName = categoryName;
-    }        
-
+    }           
+    
     public Category(int categoryId, String categoryName, String name_staff) {
         this.categoryId = categoryId;
         this.categoryName = categoryName;
@@ -30,6 +33,13 @@ public class Category {
         this.categoryId = categoryId;
         this.categoryName = categoryName;
         this.userId = userId;
+    }
+    
+    public Category(int categoryId, String categoryName, int isActive, int isDisable) {
+        this.categoryId = categoryId;
+        this.categoryName = categoryName;
+        this.isActive = isActive;
+        this.isDisable = isDisable;
     }
 
     public int getCategoryId() {
@@ -63,4 +73,21 @@ public class Category {
     public void setName_staff(String name_staff) {
         this.name_staff = name_staff;
     }
+
+    public int getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(int isActive) {
+        this.isActive = isActive;
+    }
+
+    public int getIsDisable() {
+        return isDisable;
+    }
+
+    public void setIsDisable(int isDisable) {
+        this.isDisable = isDisable;
+    }
+    
 }

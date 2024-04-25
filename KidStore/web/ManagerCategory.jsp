@@ -105,6 +105,14 @@
             </a>
             <ul class="mt-6" style="display: flex">
                 <li class="relative px-6 py-3">
+                    <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200" href="ManagerCategory.jsp">
+                        <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                        <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                        </svg>
+                        <span class="ml-4">ManagerCategory</span>
+                    </a>
+                </li>
+                <li class="relative px-6 py-3">
                     <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200" href="ManagerProduct.jsp">
                         <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                         <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
@@ -113,14 +121,7 @@
                     </a>
                 </li>
 
-                <li class="relative px-6 py-3">
-                    <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200" href="ManagerCategory.jsp">
-                        <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
-                        <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
-                        </svg>
-                        <span class="ml-4">ManagerCategory</span>
-                    </a>
-                </li>
+                
                 <li class="relative px-6 py-3">
                     <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200" href="LoadOrderFeedback">
                         <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -153,6 +154,8 @@
                         <path d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"></path>
                         </svg>
                         <span class="ml-4">Add News</span>
+                        <h2 style="color: greenyellow">${ADD_CATEGORY_SUCCESS}</h2>
+                        <h2 style="color: red">${ADD_CATEGORY_FAILED}</h2>
                     </a>
                 </li>
             </ul>                        
@@ -163,19 +166,35 @@
                     <thead>
                         <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                             <th class="px-4 py-3">ID</th>
-                            <th class="px-4 py-3">Category Name</th>                           
+                            <th class="px-4 py-3">Category Name</th>  
+                            <th class="px-4 py-3">Status</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
                         <%
-                            ArrayList<Category> categoryList = (ArrayList<Category>) session.getAttribute("CATEGORY_LIST");
+                            ArrayList<Category> categoryList = (ArrayList<Category>) session.getAttribute("CATEGORY_LIST_ALL");
                             if (categoryList != null) {
                                 for (Category category : categoryList) {
                         %>
 
                         <tr class="text-gray-700 dark:text-gray-400">
                             <td class="px-4 py-3"><%=category.getCategoryId()%></td>
-                            <td class="px-4 py-3"><%=category.getCategoryName()%></td>
+                            <td class="px-4 py-3">
+                                <%=category.getCategoryName()%>
+                            </td>
+                            <td class="px-4 py-3">
+                                <%
+                                    if (category.getIsActive() == 1) {
+                                %>
+                                <p>Approved</p>
+                                <%
+                                } else {
+                                %>
+                                <p>No Process</p>
+                                <%
+                                    }
+                                %>
+                            </td>
                             <td class="px-4 py-3">
                                 <div class="flex items-center space-x-7 text-sm">
                                     <button class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray" aria-label="Edit">
@@ -196,16 +215,15 @@
                     <p>Không có loại đồ chơi nào</p>
                     <%
                         }
-                    %>   
+                    %>
+
                     </tbody>
                 </table>
             </div>
         </div>
 
         <section class="my-8 mx-auto max-w-4xl">
-            <button onclick="toggleAddCategoryForm()" class="add">Add New Category</button>
-            <h2 style="color: greenyellow">${ADD_CATEGORY_SUCCESS}</h2>
-            <h2 style="color: red">${ADD_CATEGORY_FAILED}</h2>
+            <button onclick="toggleAddCategoryForm()" class="add">Add New Category</button>            
         </section>
         <div class="wrap">
             <div class="addCategory overlay">

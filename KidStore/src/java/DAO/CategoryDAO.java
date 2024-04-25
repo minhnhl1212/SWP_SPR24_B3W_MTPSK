@@ -85,11 +85,11 @@ public class CategoryDAO {
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "select category_id ,category_name from Category";
+                String sql = "select category_id ,category_name, isActive from Category where isDisable = 0";
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
-                    Category list = new Category(rs.getInt("category_id"), rs.getString("category_name"));
+                    Category list = new Category(rs.getInt("category_id"), rs.getString("category_name"), rs.getInt("isActive"),0);
                     listCategory.add(list);
                 }
             }

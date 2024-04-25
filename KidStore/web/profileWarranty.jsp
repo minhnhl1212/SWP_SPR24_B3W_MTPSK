@@ -90,7 +90,7 @@
                                         <th>Ngày Mua</th>
                                         <th>Hạn Bảo Hành</th>
                                         <th>Trạng Thái</th>
-                                        <th></th>
+                                        <th>Bảo hành</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -108,8 +108,8 @@
                                         <td><%=warranty.getWarrantyTime()%></td>
                                         <td><%=warranty.getStatus()%></td>
                                         <td>
-                                            <a href="#" style="text-decoration: none; color: black;" onclick="togglePopup()">
-                                                <i class='bx bx-mail-send'></i>
+                                            <a href="#" style=" color: blue;" onclick="togglePopup()">
+                                                Gửi yêu cầu
                                             </a>
                                         </td>
                                     </tr> 
@@ -141,7 +141,7 @@
                                         <input type="hidden" name="userId" value="<%=acc.getUserId()%>">
                                         <button type="submit" class="btn btn-primary d-block mx-auto" >Gửi yêu cầu</button>
                                     </form>
-                                </div>
+                                </div>z
                                 <%}
                                 } else {
                                 %>
