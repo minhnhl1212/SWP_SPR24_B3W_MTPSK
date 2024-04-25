@@ -24,15 +24,16 @@
         .popup-form {
             display: none;
             width: 700px;
-            height: 600px;
+            height: 670px;
             position: fixed;
-            top: 10%;
+            top: 2%;
             left: 28%;
             background-color: whitesmoke;
             padding: 20px;
             border: 1px solid #ccc;
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 3000;
         }
 
         .close{
@@ -44,7 +45,7 @@
             text-shadow: 0 1px 0 #fff;
             opacity: .5;
         }
-        
+
 
     </style>
 
@@ -150,17 +151,27 @@
                                     <a class="close" href="#" style="text-decoration: none; color: black; margin-top: -5%;" onclick="togglePopup()">X</a> 
                                     <div class="form-add-account">
                                         <label for="fullname">Full Name: </label>
-                                        <input style="border-style: none none solid; width: 100%; margin: 15px 0; background-color: whitesmoke;" type="text" id="fullName" name="full_name"><br>
+                                        <input onkeyup="checkFullName()" style="border-style: none none solid; width: 100%; margin: 15px 0; background-color: whitesmoke;" type="text" id="fullName" name="full_name"><br>
+                                        <span id="fullNameInvalid" style="color: red;"></span><br>
+
                                         <label for="phone">Phone: </label>
-                                        <input style="border-style: none none solid; width: 100%; margin: 15px 0; background-color: whitesmoke;" type="text" id="phone" name="phone"><br>
+                                        <input onkeyup="checkPhone()" style="border-style: none none solid; width: 100%; margin: 15px 0; background-color: whitesmoke;" type="text" id="phone" name="phone"><br>
+                                        <span id="phoneInvalid" style="color: red;"></span><br>
+
                                         <label for="phone">Address: </label>
-                                        <input style="border-style: none none solid; width: 100%; margin: 15px 0; background-color: whitesmoke;" type="text" id="address" name="address"><br>
+                                        <input onkeyup="checkAddress()" style="border-style: none none solid; width: 100%; margin: 15px 0; background-color: whitesmoke;" type="text" id="address" name="address"><br>
+                                        <span id="addressInvalid" style="color: red;"></span><br>
+
                                         <label for="username">User Name: </label>
-                                        <input style="border-style: none none solid; width: 100%; margin: 15px 0; background-color: whitesmoke;" type="text" id="userName" name="user_name"><br>
+                                        <input onkeyup="checkUsername()" style="border-style: none none solid; width: 100%; margin: 15px 0; background-color: whitesmoke;" type="text" id="userName" name="user_name"><br>
+                                        
+
                                         <label for="password">Password: </label>
                                         <input style="border-style: none none solid; width: 100%; margin: 15px 0; background-color: whitesmoke;" type="password" id="password" name="password"><br>
+
                                         <label for="password">Confirm Password: </label>
                                         <input style="border-style: none none solid; width: 100%; margin: 15px 0; background-color: whitesmoke;" type="password" id="confirmPassword" name="confirmPassword"><br>
+
                                         <label for="username">Role</label>
                                         <select name="roleId">
                                             <option value="2">Staff</option>
@@ -287,6 +298,34 @@
                 var popup = document.getElementById("popupForm");
                 popup.style.display = (popup.style.display === "block") ? "none" : "block";
             }
+            function checkPhone() {
+                var phone = document.getElementById("phone").value;
+                var phoneInvalid = document.getElementById("phoneInvalid");
+                if (phone.length < 10 && phone != "") {
+                    phoneInvalid.innerHTML = "Invalid Value"
+                } else {
+                    phoneInvalid.innerHTML = "";
+                }
+            }
+            function checkFullName() {
+                var fullName = document.getElementById("fullName").value;
+                var fullNameInvalid = document.getElementById("fullNameInvalid");
+                if (fullName.length < 2 && fullName != "") {
+                    fullNameInvalid.innerHTML = "Invalid Value";
+                } else {
+                    fullNameInvalid.innerHTML = "";
+                }
+            }
+            function checkAddress() {
+                var address = document.getElementById("address").value;
+                var addressInvalid = document.getElementById("addressInvalid");
+                if (address.length != "") {
+                    addressInvalid.innerHTML = "Invalid Value"
+                }else {
+                    addressInvalid.innerHTML = "";
+                }
+            }
+            
         </script>
         <script src="js/admin.js"></script>
     </body>

@@ -37,10 +37,10 @@
             <!-- Header-->
             <header>
 
-                <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
-                    <div class="container px-4 px-lg-5 my-5" style="position: absolute; top: 35%; left: 50%; transform: translate(-50%, -50%); z-index: 3;">
-                        <div class="text-center text-primary">
-                            <h1 class="display-4 fw-bolder" style="font-family: cursive">Kids Store</h1>
+                    <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+                        <div class="container px-4 px-lg-5 my-5" style="position: absolute; top: 35%; left: 50%; transform: translate(-50%, -50%); z-index: 3;">
+                            <div class="text-center text-primary">
+                                <h1 class="display-4 fw-bolder" style="font-family: cursive">Kids Store</h1>
                                 <p class="lead fw-normal text-dark-50 mb-0" style="font-family: Monospace">Yêu thương mong con tỏa sáng</p>
                             </div>
                         </div>
