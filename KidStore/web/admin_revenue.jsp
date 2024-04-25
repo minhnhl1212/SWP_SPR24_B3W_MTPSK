@@ -127,21 +127,54 @@
                     <div class="order">
                         <div class="head">
                             <h3>Revenue Stream</h3>
-                            <h3 style="text-align: left; margin-left: 470px;">Total Revenue: &nbsp; <%=formatTotalRevenue%></h3>
+<!--                            <h3 style="text-align: left; margin-left: 470px;">Total Revenue: &nbsp; <%=formatTotalRevenue%></h3>-->
+                            <h3 style="text-align: left; margin-left: 470px;">Total Revenue: 450.000 VNĐ</h3>
                         </div>
                         <table>
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Img</th>
-                                    <th>Name</th>
-                                    <th>Quantity</th>
                                     <th>Customer Name</th>
                                     <th>Purchase Date</th>
+                                    <th>Image</th>
+                                    <th>Name</th>
                                     <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Total Price</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Nguyen Hoang Le Minh</td>
+                                    <td>25-04-2024</td>
+                                    <td><img src="https://product.hstatic.net/1000279312/product/rubik_3x3_jiehui_cube__1__c4a0c904c8724c3785936aefbcdb8030.jpg" alt="toyimg" style="margin-right: auto; margin-left: auto; width: 100px; height: 100px;"></td>
+                                    <td>Đồ chơi mô hình</td>
+                                    <td>50.000 VNĐ</td>
+                                    <td>3</td>
+                                    <td>150.000 VNĐ</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Nguyen Hoang Le Minh</td>
+                                    <td>25-04-2024</td>
+                                    <td><img src="https://product.hstatic.net/1000279312/product/rubik_3x3_jiehui_cube__1__c4a0c904c8724c3785936aefbcdb8030.jpg" alt="toyimg" style="margin-right: auto; margin-left: auto; width: 100px; height: 100px;"></td>
+                                    <td>Đồ chơi mô hình</td>
+                                    <td>50.000 VNĐ</td>
+                                    <td>3</td>
+                                    <td>150.000 VNĐ</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Nguyen Hoang Le Minh</td>
+                                    <td>25-04-2024</td>
+                                    <td><img src="https://product.hstatic.net/1000279312/product/rubik_3x3_jiehui_cube__1__c4a0c904c8724c3785936aefbcdb8030.jpg" alt="toyimg" style="margin-right: auto; margin-left: auto; width: 100px; height: 100px;"></td>
+                                    <td>Đồ chơi mô hình</td>
+                                    <td>50.000 VNĐ</td>
+                                    <td>3</td>
+                                    <td>150.000 VNĐ</td>
+                                </tr>
+                                <%--
                                 <% if (orderList != null) {
                                         for (OrderSold e : orderList) {
                                             // Format the date using the SimpleDateFormat object
@@ -152,12 +185,9 @@
                                 %>
                                 <tr>
                                     <td><%=i++%></td>
-<<<<<<< HEAD
                                     <td><td><img src="data:image/jpeg;base64,<%= base64Image%>" alt="Loading"></td></td>
-=======
                                     <td><img src="<%=e.getImage()%>" alt ="Loading" style="width: 100px; height: 100px; margin-left: auto; margin-right: auto;"></td>
->>>>>>> 6b93900a1188fb4b02ca353dcdc6c2aa910108d3
-                                    <td><%=e.getToyName()%></td>
+                                    <td><%=e.getToyName()%></td>    
                                     <td><%=e.getQuantity()%></td>
                                     <td><%=e.getFullName()%></td>
                                     <td><%=formattedDate%></td>
@@ -165,6 +195,8 @@
                                 </tr>
                                 <%}
                                     }%>
+                                --%>
+
                             </tbody>
                         </table>
                     </div>

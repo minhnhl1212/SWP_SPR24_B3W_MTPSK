@@ -51,8 +51,7 @@
                             <div class="fh5co_heading fh5co_heading_border_bottom py-2 mb-4">News</div>
                         </div>
 
-                        <%                            
-                            ArrayList<News> newsList = (ArrayList<News>) session.getAttribute("NEWS_LIST");
+                        <%                            ArrayList<News> newsList = (ArrayList<News>) session.getAttribute("NEWS_LIST");
                             if (newsList != null && !newsList.isEmpty()) {
                                 for (News news : newsList) {
                                     String base64Image = Base64.getEncoder().encodeToString(news.getImage());
@@ -63,13 +62,17 @@
                             <div class="row pb-4">
                                 <div class="col-md-5">
                                     <div class="fh5co_hover_news_img">
-                                        <div class="fh5co_news_img"><img src="data:image/jpeg;base64,<%= base64Image%>" alt="News Image"></div>
+                                        <a href="news_detail.jsp">
+<!--                                            <div class="fh5co_news_img"><img src="data:image/jpeg;base64,<%= base64Image%>" alt="News Image"></div>-->
+                                            <div class="fh5co_news_img"><img src="https://www.mykingdom.com.vn/cdn/shop/articles/hot-wheels-tang-toc-rinh-qua-sieu-soc_thumbnail_384x.jpg?v=1713927223" alt="News Image"></div>
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="col-md-7">
-                                    <a href="#" class="fh5co_magna py-3"><%=news.getTitle()%></br></a> 
+                                    <a href="news_detail.jsp" class="fh5co_magna py-3"><%=news.getTitle()%></br></a> 
                                     <a href="#" class="fh5co_mini_time py-2"> <%=news.getDate()%> <%=news.getName_staff()%> </a>
                                     <div class="fh5co_consectetur"> <%=news.getDescription()%></div>   
+                                    <a href="news_detail.jsp" style="padding-left: 665px;">Xem thêm</a>
                                 </div>
                             </div>
                         </div>
