@@ -144,7 +144,7 @@
                                         <input type="hidden" name="userId" value="<%=acc.getUserId()%>">
                                         <button type="submit" class="btn btn-primary d-block mx-auto" >Gửi yêu cầu</button>
                                     </form>
-                                </div>z
+                                </div>
                                 <%}
                                 } else {
                                 %>
@@ -152,6 +152,7 @@
                                 <%
                                     }
                                 %>
+<<<<<<< HEAD
                                 <%
                                     OrderWarranty sendRequestWarranty = (OrderWarranty) request.getAttribute("SEND_REQUEST_SUCCESS");
                                     if (sendRequestWarranty != null) {
@@ -159,10 +160,11 @@
                                 <p style="color: green">${SEND_REQUEST_SUCCESS}</p>
                                 <%} else {
                                 %>
+=======
+                                <p style="color: green">${SEND_REQUEST_SUCCESS}</p>
+>>>>>>> e4f663d9ec65c7441af34c52159206f937807a63
                                 <p style="color: red">${SEND_REQUEST_FAILED}</p>
-                                <%
-                                    }
-                                %>
+
                                 </tbody>
                             </table>
                         </div>
