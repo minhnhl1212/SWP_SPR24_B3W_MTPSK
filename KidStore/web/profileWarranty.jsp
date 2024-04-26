@@ -29,7 +29,7 @@
         .popup-form {
             display: none;
             width: 350px;
-            height: 600px;
+            height: 650px;
             position: absolute;
             top: 40%;
             left: 50%;
@@ -83,18 +83,18 @@
                     <div class="row">
 
 
-                        <div class="table" style="">
+                        <div class="table" style="text-align: center;">
                             <table>
                                 <thead>
                                     <tr>
                                         <th>No</th>
                                         <th>Ảnh</th>
-                                        <th>Tên Đồ Chơi</th>
+                                        <th style="width: 25%;">Tên Đồ Chơi</th>
                                         <th>Số Lượng</th>
                                         <th>Ngày Mua</th>
                                         <th>Hạn Bảo Hành</th>
                                         <th>Trạng Thái</th>
-                                        <th>Bảo hành</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -114,15 +114,15 @@
                                         <td><%=warranty.getWarrantyTime()%></td>
                                         <td><%=warranty.getStatus()%></td>
                                         <td>
-                                            <div style="color: blue; cursor: pointer;" onclick="togglePopup('popupForm_<%= warranty.getOrderDetailId()%>')">
-                                                Gửi yêu cầu
-                                            </div>                              
+                                            <a href="#" style="text-decoration: none; color: black;" onclick="togglePopup('<%= "popupForm_" + warranty.getOrderDetailId()%>')">  
+                                                <i class='bx bx-mail-send'></i>
+                                            </a>
                                         </td>
                                     </tr>
-                                <div class="popupForm" id="popupForm_<%= warranty.getOrderDetailId()%>">
+                                <div class="popup-form" id="popupForm_<%= warranty.getOrderDetailId()%>" style="text-align: left;">
                                     <form action="SendRequestWarranty">
                                         <h4>Kiểm tra bảo hành</h4>
-                                        <h4>Id : <%=warranty.getOrderDetailId()%></h4>
+                                        <h4 hidden="">Id : <%=warranty.getOrderDetailId()%></h4>
                                         <a class="close" href="#" style="text-decoration: none; color: black; margin-top: -14%;" onclick="togglePopup('popupForm_<%= warranty.getOrderDetailId()%>')">x</a>
                                         <div class="form-group">
                                             <label for="productSKU">Mã bảo hành: <%=warranty.getWarrantyCode()%></label>
@@ -179,7 +179,9 @@
             <script>
                 function togglePopup(popupId) {
                     var popup = document.getElementById(popupId);
-                    popup.style.display = (popup.style.display === "block") ? "none" : "block";
+                    if (popup) {
+                        popup.style.display = (popup.style.display === "block") ? "none" : "block";
+                    }
                 }
 
             </script>
