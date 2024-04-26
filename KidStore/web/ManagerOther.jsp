@@ -26,38 +26,36 @@
             margin-top: -93px;
         }
         img {
-                max-width: 124px;
-            }
-            input#image {
-                width: 273px;
-                text-wrap: wrap;
-            }
+            max-width: 124px;
+        }
+        input#image {
+            width: 273px;
+            text-wrap: wrap;
+        }
 
-            th:nth-child(3), td:nth-child(3) {
-                max-width: 80px;
-            }
-
-            .py-4.text-gray-500.dark\:text-gray-400 {
-                text-align: center;
-                background-color: #80DFFF;
-            }
-            .mt-6 {
-                display: flex;
-                justify-content: center;
-            }
-            .text-gray-800 {
-                --text-opacity: 1;
-                color: #1a1c23;
-                font-family: serif;
-                font-size: 30px;
-            }
-            th:nth-child(1), td:nth-child(1) {
-                max-width: 5px;
-            }
-            .px-4 {
-                padding-left: 1rem;
-                padding-right: 1rem;
-            }
+        th:nth-child(3), td:nth-child(3) {
+            max-width: 100px;;
+        }
+        th:nth-child(6), td:nth-child(6) {
+            max-width: 100px;;
+        }
+        .py-4.text-gray-500.dark\:text-gray-400 {
+            text-align: center;
+            background-color: #80DFFF;
+        }
+        .mt-6 {
+            display: flex;
+            justify-content: center;
+        }
+        .text-gray-800 {
+            --text-opacity: 1;
+            color: #1a1c23;
+            font-family: serif;
+            font-size: 30px;
+        }
+        th:nth-child(1), td:nth-child(1) {
+            max-width: 20%;
+        }
     </style>
     <body>
 
@@ -87,7 +85,7 @@
                     </a>
                 </li>
 
-                
+
                 <li class="relative px-6 py-3">
                     <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200" href="LoadOrderFeedback">
                         <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -126,21 +124,21 @@
         </div>
         <div class="w-full overflow-hidden rounded-lg shadow-xs">
             <div class="w-full overflow-x-auto">
-                <table class="w-full whitespace-no-wrap">
+                <table class="w-full whitespace-no-wrap" style="text-align: center;">
                     <thead>
-                        <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
-                            <th class="px-4 py-3">ID Warranty</th>
-                            <th class="px-4 py-3">Product Name</th>
-                            <th class="px-4 py-3">Quantity</th>
-                            <th class="px-4 py-3">Image</th>
-                            <th class="px-4 py-3">Name Customer</th>
-                            <th class="px-4 py-3">Phone</th>
-                            <th class="px-4 py-3">Address</th>
-                            <th class="px-4 py-3">Created Date</th>
-                            <th class="px-4 py-3">Warranty</th>
-                            <th class="px-4 py-3">Status</th>
-                            <th class="px-4 py-3">Description</th>
-                            <th class="px-4 py-3">Action</th>
+                        <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800" style="text-align: center;">
+                            <th class="py-3" style="padding-left: 3rem; padding-right: 3rem;">ID Warranty</th>
+                            <th class="py-3" style="padding-left: 3rem; padding-right: 3rem;">Product Name</th>
+                            <th class="py-3" style="padding-left: 3rem; padding-right: 3rem;">Quantity</th>
+                            <th class="py-3" style="padding-left: 3rem; padding-right: 3rem;">Image</th>
+                            <th class="py-3" style="padding-left: 3rem; padding-right: 3rem;">Name Customer</th>
+                            <th class="py-3" style="padding-left: 3rem; padding-right: 3rem;">Phone</th>
+                            <th class="py-3" style="padding-left: 3rem; padding-right: 3rem;">Address</th>
+                            <th class="py-3" style="padding-left: 3rem; padding-right: 3rem;">Created Date</th>
+                            <th class="py-3" style="padding-left: 3rem; padding-right: 3rem;">Warranty</th>
+                            <th class="py-3" style="padding-left: 3rem; padding-right: 3rem;">Status</th>
+                            <th class="py-3" style="width: 100px;" style="padding-left: 5rem; padding-right: 5rem;">Description</th>
+                            <th class="py-3" style="padding-left: 3rem; padding-right: 3rem;">Action</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
