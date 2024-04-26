@@ -40,6 +40,9 @@
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
+        .popupForm {
+            display: none;
+        }
     </style>
     <body>
         <%@include file="components/navBarComponent.jsp" %>
@@ -54,7 +57,7 @@
                 <div class="profile-name">Customer</div>
                 <ul id="profile-function" class="list-group">
                     <li class="function-select list-group-item list-group-item-action">
-                        <a href="profileHistory.jsp" style="text-decoration: none">
+                        <a href="LoadOrderHistoryController?userId=<%=acc.getUserId()%>" style="text-decoration: none">
                             <span class="text-profile">Lịch sử mua hàng</span>
                         </a>
                     </li>
@@ -111,15 +114,16 @@
                                         <td><%=warranty.getWarrantyTime()%></td>
                                         <td><%=warranty.getStatus()%></td>
                                         <td>
-                                            <a href="#" style=" color: blue;" onclick="togglePopup()">
+                                            <div style="color: blue; cursor: pointer;" onclick="togglePopup('popupForm_<%= warranty.getOrderDetailId()%>')">
                                                 Gửi yêu cầu
-                                            </a>
+                                            </div>                              
                                         </td>
-                                    </tr> 
-                                <div class="popup-form" id="popupForm">
+                                    </tr>
+                                <div class="popupForm" id="popupForm_<%= warranty.getOrderDetailId()%>">
                                     <form action="SendRequestWarranty">
                                         <h4>Kiểm tra bảo hành</h4>
-                                        <a class="close" href="#" style="text-decoration: none; color: black; margin-top: -14%;" onclick="togglePopup()">x</a>
+                                        <h4>Id : <%=warranty.getOrderDetailId()%></h4>
+                                        <a class="close" href="#" style="text-decoration: none; color: black; margin-top: -14%;" onclick="togglePopup('popupForm_<%= warranty.getOrderDetailId()%>')">x</a>
                                         <div class="form-group">
                                             <label for="productSKU">Mã bảo hành: <%=warranty.getWarrantyCode()%></label>
                                             <!--                                        <input type="text" class="form-control" id="productSKU" name="productSKU" value="" readonly>-->
@@ -145,6 +149,7 @@
                                         <button type="submit" class="btn btn-primary d-block mx-auto" >Gửi yêu cầu</button>
                                     </form>
                                 </div>
+
                                 <%}
                                 } else {
                                 %>
@@ -163,6 +168,7 @@
                                 <%
                                     }
                                 %>
+
                                 </tbody>
                             </table>
                         </div>
@@ -170,14 +176,14 @@
                 </div>
             </div>
 
+            <script>
+                function togglePopup(popupId) {
+                    var popup = document.getElementById(popupId);
+                    popup.style.display = (popup.style.display === "block") ? "none" : "block";
+                }
 
+            </script>
         </div>
         <%@include file="components/footerComponent.jsp" %>        
     </body>
-    <script>
-        function togglePopup() {
-            var popup = document.getElementById("popupForm");
-            popup.style.display = (popup.style.display === "block") ? "none" : "block";
-        }
-    </script>
 </html>

@@ -50,8 +50,7 @@
                             <input onkeyup="checkConfirmPassword(); checkMathPassword();" style="outline: none; border-style: none none solid none; margin-bottom: 0%; width: 93%" type="password" id="confirmpassword" name="confirmPassword" required></br>
                             <span id="confirmPasswordError" style="color: red"></span><br>
                             <span id="mathPasswordError" style="color: red"></span><br>
-                            <input style="border-radius: 40px; font-size: 24px; font-weight: 800; color: white; margin: 0% 19%; padding: 2% 25%; background: linear-gradient(90deg, rgba(58,116,180,1) 0%, rgba(29,161,253,1) 50%, rgba(192,196,19,1) 100%);; border: none" type="submit" value="Register">
-                            <p style="color: green">${SIGNUP_SUCCESS}</p>
+                            <input style="border-radius: 40px; font-size: 24px; font-weight: 800; color: white; margin: 0% 19%; padding: 2% 25%; background: linear-gradient(90deg, rgba(58,116,180,1) 0%, rgba(29,161,253,1) 50%, rgba(192,196,19,1) 100%);; border: none" type="submit" value="Register">                            
                             <p style="color: red">${SIGNUP_ERROR}</p>
                             <p style="color: red">${PASS_NOT_MATH}</p>
                             <p style="color: red">${USERNAME_HAVE_BEEN_USED}</p>

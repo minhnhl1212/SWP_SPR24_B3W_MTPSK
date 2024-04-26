@@ -46,6 +46,7 @@
                             <p style="color: red">${LOGIN_ERROR}</p>
                             <a style="color: #007bff; font-size: 16px; margin-left: 1%;" href="signup.jsp">Register an account ?</a>
                         </div>
+                        <p style="color: green">${SIGNUP_SUCCESS}</p>
                     </form>
                 </div>
             </div>
