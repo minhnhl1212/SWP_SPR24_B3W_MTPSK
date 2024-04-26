@@ -23,6 +23,34 @@
         <link rel="stylesheet" href="css/admin.css">
         <title>AdminHub</title>
     </head>
+    <style>
+        .popup-form {
+                display: none;
+                width: 400px;
+                height: 580px;
+                position: fixed;
+                top: 10%;
+                left: 40%;
+                background-color: whitesmoke;
+                padding: 20px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                z-index: 3000;
+            }
+
+            .close{
+                float: right;
+                font-size: 1.5rem;
+                font-weight: 700;
+                line-height: 1;
+                color: #000;
+                text-shadow: 0 1px 0 #fff;
+                opacity: .5;
+            }
+
+
+    </style>
     <body>
 
         <%
@@ -104,12 +132,12 @@
             <!-- NAVBAR -->
             <% ArrayList<OrderSold> orderList = (ArrayList<OrderSold>) session.getAttribute("ORDER_LIST");
 
-                DecimalFormat vnCurrencyFormat = new DecimalFormat("###,### VNĐ");
+                DecimalFormat vnCurrencyFormat = new DecimalFormat("###,### đ");
                 double totalRevenue = 0;
                 int i = 1;
                 if (orderList != null) {
                     for (OrderSold o : orderList) {
-                        totalRevenue += o.getTotalPrice()*o.getDiscount();
+                        totalRevenue += o.getTotalPrice() * o.getDiscount();
                     }
                 }
 
@@ -134,7 +162,6 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Customer Name</th>
                                     <th>Purchase Date</th>
                                     <th>Image</th>
                                     <th>Name</th>
@@ -142,63 +169,80 @@
                                     <th>Quantity</th>
                                     <th>Discount</th>
                                     <th>Total Price</th>
+                                    <th>Detail</th>
                                 </tr>
                             </thead>
                             <tbody>
-<!--                                <tr>
-                                    <td>1</td>
-                                    <td>Nguyen Hoang Le Minh</td>
-                                    <td>25-04-2024</td>
-                                    <td><img src="https://product.hstatic.net/1000279312/product/rubik_3x3_jiehui_cube__1__c4a0c904c8724c3785936aefbcdb8030.jpg" alt="toyimg" style="margin-right: auto; margin-left: auto; width: 100px; height: 100px;"></td>
-                                    <td>Đồ chơi mô hình</td>
-                                    <td>50.000 VNĐ</td>
-                                    <td>3</td>
-                                    <td>0.85</td>
-                                    <td>382.500 VNĐ</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Nguyen Hoang Le Minh</td>
-                                    <td>25-04-2024</td>
-                                    <td><img src="https://product.hstatic.net/1000279312/product/rubik_3x3_jiehui_cube__1__c4a0c904c8724c3785936aefbcdb8030.jpg" alt="toyimg" style="margin-right: auto; margin-left: auto; width: 100px; height: 100px;"></td>
-                                    <td>Đồ chơi mô hình</td>
-                                    <td>50.000 VNĐ</td>
-                                    <td>3</td>
-                                    <td>0.85</td>
-                                    <td>382.500 VNĐ</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Nguyen Hoang Le Minh</td>
-                                    <td>25-04-2024</td>
-                                    <td><img src="https://product.hstatic.net/1000279312/product/rubik_3x3_jiehui_cube__1__c4a0c904c8724c3785936aefbcdb8030.jpg" alt="toyimg" style="margin-right: auto; margin-left: auto; width: 100px; height: 100px;"></td>
-                                    <td>Đồ chơi mô hình</td>
-                                    <td>50.000 VNĐ</td>
-                                    <td>3</td>
-                                    <td>0.85</td>
-                                    <td>382.500 VNĐ</td>
-                                </tr>-->
+                                <!--                                <tr>
+                                                                    <td>1</td>
+                                                                    <td>Nguyen Hoang Le Minh</td>
+                                                                    <td>25-04-2024</td>
+                                                                    <td><img src="https://product.hstatic.net/1000279312/product/rubik_3x3_jiehui_cube__1__c4a0c904c8724c3785936aefbcdb8030.jpg" alt="toyimg" style="margin-right: auto; margin-left: auto; width: 100px; height: 100px;"></td>
+                                                                    <td>Đồ chơi mô hình</td>
+                                                                    <td>50.000 VNĐ</td>
+                                                                    <td>3</td>
+                                                                    <td>0.85</td>
+                                                                    <td>382.500 VNĐ</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>2</td>
+                                                                    <td>Nguyen Hoang Le Minh</td>
+                                                                    <td>25-04-2024</td>
+                                                                    <td><img src="https://product.hstatic.net/1000279312/product/rubik_3x3_jiehui_cube__1__c4a0c904c8724c3785936aefbcdb8030.jpg" alt="toyimg" style="margin-right: auto; margin-left: auto; width: 100px; height: 100px;"></td>
+                                                                    <td>Đồ chơi mô hình</td>
+                                                                    <td>50.000 VNĐ</td>
+                                                                    <td>3</td>
+                                                                    <td>0.85</td>
+                                                                    <td>382.500 VNĐ</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>3</td>
+                                                                    <td>Nguyen Hoang Le Minh</td>
+                                                                    <td>25-04-2024</td>
+                                                                    <td><img src="https://product.hstatic.net/1000279312/product/rubik_3x3_jiehui_cube__1__c4a0c904c8724c3785936aefbcdb8030.jpg" alt="toyimg" style="margin-right: auto; margin-left: auto; width: 100px; height: 100px;"></td>
+                                                                    <td>Đồ chơi mô hình</td>
+                                                                    <td>50.000 VNĐ</td>
+                                                                    <td>3</td>
+                                                                    <td>0.85</td>
+                                                                    <td>382.500 VNĐ</td>
+                                                                </tr>-->
                                 <% if (orderList != null) {
                                         for (OrderSold e : orderList) {
                                             // Format the date using the SimpleDateFormat object
                                             String formattedDate = sdf.format(e.getOrderDate());
-                                            String formatTotalPrice = vnCurrencyFormat.format(e.getTotalPrice()*e.getDiscount());
+                                            String formatPrice = vnCurrencyFormat.format(e.getToyPrice());
+                                            String formatTotalPrice = vnCurrencyFormat.format(e.getTotalPrice() * e.getDiscount());
                                             String base64Image = Base64.getEncoder().encodeToString(e.getImage());
 
                                 %>
                                 <tr>
                                     <td><%=i++%></td>
-                                    <td><%=e.getFullName()%></td>
                                     <td><%=formattedDate%></td>
-                                    <td><img src="data:image/jpeg;base64,<%=base64Image%>" alt="Loading"></td>
-                                    <td><%=e.getToyName()%></td>   
-                                    <td><%=e.getToyPrice()%></td>
+                                    <td style="padding: 2px;"><img src="data:image/jpeg;base64,<%=base64Image%>" alt="Loading" style="width: 100px; height: 100px; margin-right: auto; margin-left: auto;"></td>
+                                    <td style="text-align: left; font-size: 15px;"><%=e.getToyName()%></td>   
+                                    <td><%=formatPrice%></td>
                                     <td><%=e.getQuantity()%></td>
                                     <td><%=e.getDiscount()%></td>
                                     <td><%=formatTotalPrice%></td>
+                                    <td>
+                                        <a href="#" onclick="togglePopup()" style="color: black;"><i class='bx bxs-detail'></i>Detail</a>
+                                    </td>
                                 </tr>
-                                <%}
-                                    }%>
+                            <div class="popup-form" id="popupForm">  
+
+                                <a class="close" href="#" style="text-decoration: none; color: black; margin-top: 2%;" onclick="togglePopup()">X</a> 
+                                <div class="form-detail">
+                                    <p style="font-size: 40px; font-weight: bold; font-style: italic; text-align: center;">Detail</p>
+                                    <p style="font-size:15px; padding-top:50px;">Order ID: 1</p>
+                                    <p style="font-size:15px; padding-top:50px;">Staff Name: Staff</p>
+                                    <p style="font-size:15px; padding-top:50px;">Customer Name: Minh</p>
+                                    <p style="font-size:15px; padding-top:50px;">Phone: 012931212</p>
+                                    <p style="font-size:15px; padding-top:50px;">Address: TPHCM</p>
+                                    <p style="font-size:15px; padding-top:50px;">Payments: Thanh toán bằng ngân hàng</p>
+                                </div>   
+                            </div>
+                            <%}
+                                }%>
 
                             </tbody>
                         </table>
@@ -208,7 +252,12 @@
             <!-- MAIN -->
         </section>
         <!-- CONTENT -->
-
+        <script>
+            function togglePopup() {
+                var popup = document.getElementById("popupForm");
+                popup.style.display = (popup.style.display === "block") ? "none" : "block";
+            }
+        </script>
         <script src="js/admin.js"></script>
     </body>
 </html>
