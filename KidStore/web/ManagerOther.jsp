@@ -25,15 +25,49 @@
             max-height: 188px;
             margin-top: -93px;
         }
+        img {
+                max-width: 124px;
+            }
+            input#image {
+                width: 273px;
+                text-wrap: wrap;
+            }
+
+            th:nth-child(3), td:nth-child(3) {
+                max-width: 80px;
+            }
+
+            .py-4.text-gray-500.dark\:text-gray-400 {
+                text-align: center;
+                background-color: #80DFFF;
+            }
+            .mt-6 {
+                display: flex;
+                justify-content: center;
+            }
+            .text-gray-800 {
+                --text-opacity: 1;
+                color: #1a1c23;
+                font-family: serif;
+                font-size: 30px;
+            }
+            th:nth-child(1), td:nth-child(1) {
+                max-width: 5px;
+            }
+            .px-4 {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
     </style>
     <body>
 
         <div>
             <a href="LogoutController" style="position: absolute; top: 20px; right: 30px">Logout</a>
         </div>
+        <a class="navbar-brand" href="MainController?TOY_LIST=ALL"><img src="img/logo-kids-new3.png" class="logo" alt="KidStore"></a>
         <div class="py-4 text-gray-500 dark:text-gray-400">
             <a class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200" href="#">
-                STAFF
+                STAFF DASHBOARD
             </a>
             <ul class="mt-6" style="display: flex">
                 <li class="relative px-6 py-3">
@@ -68,7 +102,7 @@
                         <path d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path>
                         <path d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
                         </svg>
-                        <span class="ml-4">ManagerOther</span>
+                        <span class="ml-4">ManagerWarranty</span>
                     </a>
                 </li>
                 <li class="relative px-6 py-3">

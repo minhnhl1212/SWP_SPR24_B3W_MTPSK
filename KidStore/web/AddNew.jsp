@@ -25,7 +25,7 @@
             div#add-product-form {
                 position: absolute;
                 top: 19.5%;
-                left: 28%;
+                left: 32%;
                 border-radius: 20px;
             }
             .overlay {
@@ -61,12 +61,66 @@
                 color: black;
             }
             .description {
-                max-height: 188px;
-                margin-top: -93px;
+                white-space: normal;
+                color: black;
             }
             input#image {
                 width: 273px;
                 text-wrap: wrap;
+            }
+            img {
+                max-width: 80%;
+            }
+            .logo{
+                max-width: 124px;
+            }
+            input#image {
+                width: 273px;
+                text-wrap: wrap;
+            }
+
+            th:nth-child(3), td:nth-child(3) {
+                max-width: 80px;
+            }
+
+            .py-4.text-gray-500.dark\:text-gray-400 {
+                text-align: center;
+                background-color: #80DFFF;
+            }
+            .mt-6 {
+                display: flex;
+                justify-content: center;
+            }
+            .text-gray-800 {
+                --text-opacity: 1;
+                color: #1a1c23;
+                font-family: serif;
+                font-size: 30px;
+            }
+            th:nth-child(1), td:nth-child(1) {
+                max-width: 5px;
+            }
+            th:nth-child(2), td:nth-child(2) {
+                max-width: 100px;
+                text-wrap: wrap;
+            }
+            th:nth-child(4), td:nth-child(4) {
+                max-width: 50px;
+                text-wrap: wrap;
+            }
+            th:nth-child(5), td:nth-child(5) {
+                max-width: 50px;
+                text-wrap: wrap;
+            }
+            .px-4 {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            th{
+                text-align: center;
+            }
+            td:nth-child(1), td:nth-child(3), td:nth-child(4), td:nth-child(5){
+                text-align: center;
             }
 
         </style>
@@ -80,9 +134,10 @@
         <div>
             <a href="LogoutController" style="position: absolute; top: 20px; right: 30px">Logout</a>
         </div>
+        <a class="navbar-brand" href="MainController?TOY_LIST=ALL"><img src="img/logo-kids-new3.png" class="logo" alt="KidStore"></a>
         <div class="py-4 text-gray-500 dark:text-gray-400">
             <a class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200" href="#">
-                STAFF 
+                STAFF DASHBOARD
             </a>
             <ul class="mt-6" style="display: flex">
                 <li class="relative px-6 py-3">
@@ -149,7 +204,6 @@
                             <th class="px-4 py-3">Poster</th>
                             <th class="px-4 py-3">Date</th>
                             <th class="px-4 py-3">Description</th>
-                            <th class="px-4 py-3">Action</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
@@ -178,25 +232,12 @@
                                 <%=news.getDate()%>
                             </td>
                             <td style="overflow-y: scroll; max-width: 100px;" class="px-4 py-3 text-sm">
-                                <div class="description" style="white-space: pre-wrap;">
+                                <div class="description">
                                     <%=news.getDescription()%>
                                 </div>
                             </td>
 
-                            <td class="px-4 py-3">
-                                <div class="flex items-center space-x-7 text-sm">
-                                    <button class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray" aria-label="Edit">
-                                        <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
-                                        <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"></path>
-                                        </svg>
-                                    </button>
-                                    <button class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray" aria-label="Delete">
-                                        <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path>
-                                        </svg>
-                                    </button>
-                                </div>
-                            </td>
+                            
                         </tr>
 
                         <%}
@@ -225,7 +266,7 @@
                                         <label for="date">Date</label></br>
                                         <input type="date" id="date" name="date" required></br>                                                                  
                                         <label for="description">Description</label></br>
-                                        <textarea id="description" name="description" rows="4" cols="50" required></textarea>                      
+                                        <textarea id="description" name="description" rows="4" cols="50" style="color: black" required></textarea>                      
                                         </br>  
                                         <input type="hidden" name="userId" value="<%=acc.getUserId()%>">
                                         <button style="background-color: green; border-radius: 30px; padding: 3px 10px; margin-top: 15px" type="button" onclick="submitForm()">Add News</button>
