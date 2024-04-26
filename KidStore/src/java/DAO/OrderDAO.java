@@ -305,7 +305,7 @@ public class OrderDAO {
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "select OrderDetail.[order_detail_id], [Order].order_date, Image.image_toy, Toy.toy_name, OrderDetail.quantity, OrderDetail.status, Toy.warranty_time, [Order].phone, [Order].address, OrderDetail.warranty_code, Account.full_name, OrderDetail.description_warranty\n"
+                String sql = "select OrderDetail.[order_detail_id], [Order].order_date, Image.image_toy, Toy.toy_name, OrderDetail.quantity, OrderDetail.status, Toy.warranty_time, [Order].phone, [Order].address, OrderDetail.warranty_code, [Order].name, OrderDetail.description_warranty\n"
                         + "from Toy \n"
                         + "inner join OrderDetail on Toy.toy_id = OrderDetail.toy_id\n"
                         + "inner join [Order] on OrderDetail.order_id = [Order].order_id\n"
@@ -316,7 +316,7 @@ public class OrderDAO {
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
-                    OrderWarranty list = new OrderWarranty(rs.getInt("order_detail_id"), rs.getDate("order_date"), rs.getBytes("image_toy"), rs.getString("toy_name"), rs.getInt("quantity"), rs.getString("status"), rs.getDate("warranty_time"), rs.getString("phone"), rs.getString("address"), rs.getString("warranty_code"), rs.getString("full_name"), rs.getString("description_warranty"));
+                    OrderWarranty list = new OrderWarranty(rs.getInt("order_detail_id"), rs.getDate("order_date"), rs.getBytes("image_toy"), rs.getString("toy_name"), rs.getInt("quantity"), rs.getString("status"), rs.getDate("warranty_time"), rs.getString("phone"), rs.getString("address"), rs.getString("warranty_code"), rs.getString("name"), rs.getString("description_warranty"));
                     listWarranty.add(list);
                 }
             }
@@ -333,7 +333,7 @@ public class OrderDAO {
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "select OrderDetail.[order_detail_id], [Order].order_date, Image.image_toy, Toy.toy_name, OrderDetail.quantity, OrderDetail.status, Toy.warranty_time, [Order].phone, [Order].address, OrderDetail.warranty_code, Account.full_name, OrderDetail.description_warranty\n"
+                String sql = "select OrderDetail.[order_detail_id], [Order].order_date, Image.image_toy, Toy.toy_name, OrderDetail.quantity, OrderDetail.status, Toy.warranty_time, [Order].phone, [Order].address, OrderDetail.warranty_code, [Order].name, OrderDetail.description_warranty\n"
                         + "from Toy \n"
                         + "inner join OrderDetail on Toy.toy_id = OrderDetail.toy_id\n"
                         + "inner join [Order] on OrderDetail.order_id = [Order].order_id\n"
@@ -345,7 +345,7 @@ public class OrderDAO {
                 ps.setInt(1, userId);
                 rs = ps.executeQuery();
                 while (rs.next()) {
-                    OrderWarranty list = new OrderWarranty(rs.getInt("order_detail_id"), rs.getDate("order_date"), rs.getBytes("image_toy"), rs.getString("toy_name"), rs.getInt("quantity"), rs.getString("status"), rs.getDate("warranty_time"), rs.getString("phone"), rs.getString("address"), rs.getString("warranty_code"), rs.getString("full_name"), rs.getString("description_warranty"));
+                    OrderWarranty list = new OrderWarranty(rs.getInt("order_detail_id"), rs.getDate("order_date"), rs.getBytes("image_toy"), rs.getString("toy_name"), rs.getInt("quantity"), rs.getString("status"), rs.getDate("warranty_time"), rs.getString("phone"), rs.getString("address"), rs.getString("warranty_code"), rs.getString("name"), rs.getString("description_warranty"));
                     listWarranty.add(list);
                 }
             }

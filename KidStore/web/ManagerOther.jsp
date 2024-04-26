@@ -282,17 +282,7 @@
 
                             <!-- Thông tin khách hàng + mô tả lỗi -->
                             <td>
-                                <button type="button" class="button-detail" onclick="togglePopup()"><i class='bx bx-detail'></i> &nbsp; Warranty Details</button>                                
-                                <div class="popup-form" id="popupForm">  
-                                    <p style="font-size: 40px; font-weight: bold; font-style: italic; text-align: center;">Warranty - Details</p>
-                                    <a class="close" href="#" style="text-decoration: none; color: black; margin-top: -5%;" onclick="togglePopup()">X</a>
-                                    <div class="form-detail" style="text-align: left;">
-                                        <p style="font-size:30px; padding-top:50px;">Customer Name: Son</p>
-                                        <p style="font-size:30px; padding-top:50px;">Phone: 019293123 </p>
-                                        <p style="font-size:30px; padding-top:50px;">Address: TPHCM</p>
-                                        <p style="font-size:30px; padding-top:50px;">Description: Lỗi do nhà sản xuất</p>
-                                    </div>   
-                                </div>
+                                <button type="button" class="button-detail" onclick="togglePopup('<%= "popupForm_" + warranty.getOrderDetailId()%>')"><i class='bx bx-detail'></i> &nbsp; Warranty Details</button>                                                             
                             </td>
 
                             <td><%=warranty.getStatus()%></td>
@@ -359,6 +349,16 @@
                         });
                     </script>
                     </tr>
+                    <div class="popup-form" id="popupForm_<%= warranty.getOrderDetailId()%>">  
+                        <p style="font-size: 40px; font-weight: bold; font-style: italic; text-align: center;">Warranty - Details</p>
+                        <a class="close" href="#" style="text-decoration: none; color: black; margin-top: -5%;" onclick="togglePopup('<%= "popupForm_" + warranty.getOrderDetailId()%>')">X</a>
+                        <div class="form-detail" style="text-align: left;">
+                            <p style="font-size:30px; padding-top:50px;">Customer Name: <%=warranty.getNameUser()%></p>
+                            <p style="font-size:30px; padding-top:50px;">Phone: <%=warranty.getPhone()%> </p>
+                            <p style="font-size:30px; padding-top:50px;">Address: <%=warranty.getAddress()%></p>
+                            <p style="font-size:30px; padding-top:50px;">Description: <%=warranty.getDescriptionWarranty()%></p>
+                        </div>   
+                    </div>
                     <%}
                     } else {
                     %>
@@ -372,9 +372,11 @@
             </div>
         </div>
         <script>
-            function togglePopup() {
-                var popup = document.getElementById("popupForm");
-                popup.style.display = (popup.style.display === "block") ? "none" : "block";
+            function togglePopup(popupId) {
+                var popup = document.getElementById(popupId);
+                if (popup) {
+                    popup.style.display = (popup.style.display === "block") ? "none" : "block";
+                }
             }
         </script>
     </body>
