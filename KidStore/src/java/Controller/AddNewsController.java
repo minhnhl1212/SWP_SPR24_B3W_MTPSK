@@ -48,7 +48,7 @@ public class AddNewsController extends HttpServlet {
             News addNews = newsDAO.addNews(title, filePart.getInputStream(), newSqlDate, userId, description);
 
             if (addNews != null) {
-                request.setAttribute("ADD_NEWS_SUCCESS", "Add News Failed");
+                request.setAttribute("ADD_NEWS_SUCCESS", "Add News Success");
 
             } else {
                 request.setAttribute("ADD_NEWS_FAILED", "Add News Failed");

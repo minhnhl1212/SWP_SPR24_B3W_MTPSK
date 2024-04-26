@@ -128,7 +128,7 @@
                                             for (int i = startIndex; i < endIndex; i++) {
                                                 Toy toy = toyList.get(i);
                                                 String base64Image = Base64.getEncoder().encodeToString(toy.getImage());
-
+ 
                                     %>
                                     <div class="col mb-5">
 

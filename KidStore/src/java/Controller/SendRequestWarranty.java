@@ -35,10 +35,10 @@ public class SendRequestWarranty extends HttpServlet {
                 request.setAttribute("SEND_REQUEST_FAILED", "Gửi Đơn Bảo Hành Thất Bại");
             }
             
-            RequestDispatcher rd = request.getRequestDispatcher("LoadWarrantyController?userId=" + userId);
-            rd.forward(request, response);
+            response.sendRedirect("LoadWarrantyController?userId=" + userId);
+            
         } catch (Exception ex) {
-            Logger.getLogger(SendRequestWarranty.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SendRequestWarranty.class.getName()).log(Level.SEVERE, null, ex);  
         }
 
     }
