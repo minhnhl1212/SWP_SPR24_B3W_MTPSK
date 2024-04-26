@@ -5,6 +5,8 @@
 --%>
 
 
+<%@page import="java.util.Comparator"%>
+<%@page import="java.util.Collections"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.Base64"%>
 <%@page import="DTO.OrderHistory"%>
@@ -219,6 +221,13 @@
                     <%
                         ArrayList<OrderHistory> orderList = (ArrayList<OrderHistory>) session.getAttribute("ORDER_HISTORY");
                         ArrayList<OrderHistory> idOrderList = (ArrayList<OrderHistory>) session.getAttribute("ID_ORDER_LIST");
+
+                        Collections.sort(idOrderList, new Comparator<OrderHistory>() {
+                            public int compare(OrderHistory order1, OrderHistory order2) {
+                                return order2.getOrderId() - order1.getOrderId();
+                            }
+                        });
+
                         if (orderList != null && idOrderList != null) {
                             for (OrderHistory idOrder : idOrderList) {
                     %>

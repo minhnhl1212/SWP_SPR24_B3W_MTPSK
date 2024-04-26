@@ -1,3 +1,5 @@
+<%@page import="java.util.Comparator"%>
+<%@page import="java.util.Collections"%>
 <%@page import="java.util.Base64"%>
 <%@page import="DTO.OrderWarranty"%>
 <%@page import="java.util.ArrayList"%>
@@ -144,6 +146,77 @@
                     <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
                         <%
                             ArrayList<OrderWarranty> warrantyList = (ArrayList<OrderWarranty>) session.getAttribute("ORDER_WARRANTY");
+
+                            Collections.sort(warrantyList, new Comparator<OrderWarranty>() {
+                                public int compare(OrderWarranty w1, OrderWarranty w2) {
+
+                                    boolean w1IsSentForWarranty = w1.getStatus().equals("Gửi Bảo Hành");
+                                    boolean w2IsSentForWarranty = w2.getStatus().equals("Gửi Bảo Hành");
+
+                                    boolean w1IsProcessingForWarranty = w1.getStatus().equals("Đang Xử Lí");
+                                    boolean w2IsProcessingForWarranty = w2.getStatus().equals("Đang Xử Lí");
+
+                                    boolean w1IsReceivedForWarranty = w1.getStatus().equals("Đã Nhận Hàng");
+                                    boolean w2IsReceivedForWarranty = w2.getStatus().equals("Đã Nhận Hàng");
+                                    
+                                    boolean w1IsUnderWarrantyForWarranty = w1.getStatus().equals("Đang Bảo Hành");
+                                    boolean w2IsUnderWarrantyForWarranty = w2.getStatus().equals("Đang Bảo Hành");
+
+                                    boolean w1IsShippingForWarranty = w1.getStatus().equals("Đang Giao Hàng");
+                                    boolean w2IsShippingForWarranty = w2.getStatus().equals("Đang Giao Hàng");
+
+                                    boolean w1IsDeliveredForWarranty = w1.getStatus().equals("Đã Giao Hàng");
+                                    boolean w2IsDeliveredForWarranty = w2.getStatus().equals("Đã Giao Hàng");
+
+                                    boolean w1IsRefuseForWarranty = w1.getStatus().equals("Từ Chối Bảo Hành");
+                                    boolean w2IsRefuseForWarranty = w2.getStatus().equals("Từ Chối Bảo Hành");
+
+                                    if (w1IsSentForWarranty && !w2IsSentForWarranty) {
+                                        return -1;
+                                    } else if (!w1IsSentForWarranty && w2IsSentForWarranty) {
+                                        return 1;
+                                    }
+                                    
+                                    if (w1IsProcessingForWarranty && !w2IsProcessingForWarranty) {
+                                        return -1;
+                                    } else if (!w1IsProcessingForWarranty && w2IsProcessingForWarranty) {
+                                        return 1;
+                                    }
+                                    
+                                    if (w1IsReceivedForWarranty && !w2IsReceivedForWarranty) {
+                                        return -1;
+                                    } else if (!w1IsReceivedForWarranty && w2IsReceivedForWarranty) {
+                                        return 1;
+                                    }
+                                    
+                                    if (w1IsUnderWarrantyForWarranty && !w2IsUnderWarrantyForWarranty) {
+                                        return -1;
+                                    } else if (!w1IsUnderWarrantyForWarranty && w2IsUnderWarrantyForWarranty) {
+                                        return 1;
+                                    }
+                                    
+                                    if (w1IsShippingForWarranty && !w2IsShippingForWarranty) {
+                                        return -1;
+                                    } else if (!w1IsShippingForWarranty && w2IsShippingForWarranty) {
+                                        return 1;
+                                    }
+                                    
+                                    if (w1IsDeliveredForWarranty && !w2IsDeliveredForWarranty) {
+                                        return -1;
+                                    } else if (!w1IsDeliveredForWarranty && w2IsDeliveredForWarranty) {
+                                        return 1;
+                                    }
+                                    
+                                    if (w1IsRefuseForWarranty && !w2IsRefuseForWarranty) {
+                                        return -1;
+                                    } else if (!w1IsRefuseForWarranty && w2IsRefuseForWarranty) {
+                                        return 1;
+                                    }
+
+                                    return w2.getOrderDetailId() - w1.getOrderDetailId();
+                                }
+                            });
+
                             if (warrantyList != null) {
                                 for (OrderWarranty warranty : warrantyList) {
                                     String base64Image = Base64.getEncoder().encodeToString(warranty.getImageToy());
