@@ -389,19 +389,7 @@
 
                             <!-- Form thông tin khách hàng -->
                             <td>
-                                <button type="button" class="button-detail" onclick="togglePopup()"><i class='bx bx-detail'></i>Customer-Info</button>
-                                <div class="popup-form" id="popupForm">
-                                    <form method="POST">
-                                        <p style="font-size: 40px; font-weight: bold; font-style: italic; text-align: center;">Customer - Detail</p>
-                                        <a class="close-detail" href="#" style="text-decoration: none; color: black; margin-top: -5%;" onclick="togglePopup()">X</a>
-                                        <div class="form-detail">
-                                            <p style="font-size:30px; padding-top:50px;">Customer Name: <%=idOrder.getFullname()%></p>
-                                            <p style="font-size:30px; padding-top:50px;">Phone: <%=idOrder.getPhone()%></p>
-                                            <p style="font-size:30px; padding-top:50px;">Address: <%=idOrder.getAddress()%></p>
-                                            <p style="font-size:30px; padding-top:50px;">Payments: <%= (idOrder.getTypePayment() == 0) ? "Thanh toán khi nhận hàng" : "Thanh toán qua ngân hàng"%></p>
-                                        </div>
-                                    </form>
-                                </div>
+                                <button type="button" class="button-detail" onclick="togglePopup('<%= "popupForm_" + idOrder.getOrderId()%>')"><i class='bx bx-detail'></i>Customer-Info</button>                                
                             </td>
 
 
@@ -432,6 +420,16 @@
                                 </script>
                             </td>
                         </tr>
+                    <div class="popup-form" id="popupForm_<%= idOrder.getOrderId()%>">  
+                            <p style="font-size: 40px; font-weight: bold; font-style: italic; text-align: center;">Customer - Detail</p>
+                            <a class="close-detail" href="#" style="text-decoration: none; color: black; margin-top: -5%;" onclick="togglePopup('<%= "popupForm_" + idOrder.getOrderId()%>')">X</a>
+                            <div class="form-detail">
+                                <p style="font-size:30px; padding-top:50px;">Customer Name: <%=idOrder.getFullname()%></p>
+                                <p style="font-size:30px; padding-top:50px;">Phone: <%=idOrder.getPhone()%></p>
+                                <p style="font-size:30px; padding-top:50px;">Address: <%=idOrder.getAddress()%></p>
+                                <p style="font-size:30px; padding-top:50px;">Payments: <%= (idOrder.getTypePayment() == 0) ? "Thanh toán khi nhận hàng" : "Thanh toán qua ngân hàng"%></p>
+                            </div>   
+                    </div>
                     </tbody>
                     <%}
                     } else {
@@ -444,9 +442,11 @@
             </div>
         </div>
         <script>
-            function togglePopup() {
-                var popup = document.getElementById("popupForm");
-                popup.style.display = (popup.style.display === "block") ? "none" : "block";
+            function togglePopup(popupId) {
+                var popup = document.getElementById(popupId);
+                if (popup) {
+                    popup.style.display = (popup.style.display === "block") ? "none" : "block";
+                }
             }
         </script>
     </body>
