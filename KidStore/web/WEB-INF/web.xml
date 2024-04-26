@@ -188,6 +188,10 @@
         <servlet-name>RefuseWarrantyController</servlet-name>
         <servlet-class>Controller.RefuseWarrantyController</servlet-class>
     </servlet>
+     <servlet>
+        <servlet-name>CheckLoginController</servlet-name>
+        <servlet-class>Controller.CheckLoginController</servlet-class>
+    </servlet>
     <servlet>
         <servlet-name>LoadManagerOtherController</servlet-name>
         <servlet-class>Controller.LoadManagerOtherController</servlet-class>
@@ -479,6 +483,10 @@
     <servlet-mapping>
         <servlet-name>StoredPaymentController</servlet-name>
         <url-pattern>/StoredPaymentController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckLoginController</servlet-name>
+        <url-pattern>/CheckLoginController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>LoadCategoryController</servlet-name>

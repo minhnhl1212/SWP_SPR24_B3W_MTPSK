@@ -5,13 +5,9 @@
  */
 package Controller;
 
-import DAO.PictureDAO;
-import DAO.ToyDAO;
-import DTO.Image;
-import DTO.Toy;
+import DTO.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -23,8 +19,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author admin
  */
-public class DetailController extends HttpServlet {
-private static final String ITEMDETAIL = "detail.jsp";
+public class CheckLoginController extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -37,23 +33,17 @@ private static final String ITEMDETAIL = "detail.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        String url = "checkout.jsp";
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             HttpSession session = request.getSession();
-            int id = Integer.parseInt(request.getParameter("toyId"));
-            ToyDAO dao = new ToyDAO();
-            PictureDAO Pdao = new PictureDAO();
-            Toy toy = dao.getToyUsingID(id);
-            ArrayList<Image> Ilist = Pdao.getImageByToyId(id);
-            if (toy != null) {
-                session.setAttribute("toy", toy);
-                session.setAttribute("IMAGE_LIST", Ilist);
+            Account a = (Account)session.getAttribute("acc");
+            if(a==null){
+                request.setAttribute("LOGIN_ERROR", "Login to use our cart");
+                url = "login.jsp";
             }
-            RequestDispatcher rd = request.getRequestDispatcher(ITEMDETAIL);
+            RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
-
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 

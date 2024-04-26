@@ -125,7 +125,7 @@
                             <p class="card-text">Total: <%= formatTotalPrice%></p>
                         </div>
                     </div>
-                    <a href="checkout.jsp" class="btn btn-success btn-block">Thanh Toán</a>
+                    <a href="CheckLoginController" class="btn btn-success btn-block">Thanh Toán</a>
                 </div>
             </div>
         </div>

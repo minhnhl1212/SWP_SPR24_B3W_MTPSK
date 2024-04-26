@@ -16,16 +16,20 @@ public class OrderSold {
     private String toyName;
     private int quantity;
     private String fullName;
+    private double toyPrice;
     private Date orderDate;
     private double totalPrice;
+    private double discount;
 
-    public OrderSold(byte[] image, String toyName, int quantity, String fullName, Date orderDate, double totalPrice) {
+    public OrderSold(byte[] image, String toyName, int quantity, String fullName,double toyPrice, Date orderDate, double totalPrice, double discount) {
         this.image = image;
         this.toyName = toyName;
         this.quantity = quantity;
         this.fullName = fullName;
+        this.toyPrice = toyPrice;
         this.orderDate = orderDate;
         this.totalPrice = totalPrice;
+        this.discount = discount;
     }
 
     public OrderSold() {
@@ -63,6 +67,14 @@ public class OrderSold {
         this.fullName = fullName;
     }
 
+    public double getToyPrice() {
+        return toyPrice;
+    }
+
+    public void setToyPrice(double toyPrice) {
+        this.toyPrice = toyPrice;
+    }
+
     public Date getOrderDate() {
         return orderDate;
     }
@@ -77,6 +89,14 @@ public class OrderSold {
 
     public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public double getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(double discount) {
+        this.discount = discount;
     }
     
 }

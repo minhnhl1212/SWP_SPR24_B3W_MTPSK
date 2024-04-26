@@ -117,6 +117,30 @@
                                     <label>Số Điện Thoại</label>
                                     <input type="text" class="form-control" id="phone" placeholder="Số Điện Thoại" value="<%=a.getPhone()%>" name="phone">
                                 </div>
+                                <script>
+//                                    // Get references to the input fields
+//                                    var nameInput = document.getElementById('name');
+//                                    var addressInput = document.getElementById('address');
+//                                    var phoneInput = document.getElementById('phone');
+//                                    var paymentMethodInput = document.getElementById('paymentMethod');
+//
+//                                    // Add event listeners to detect changes in the input fields
+//                                    nameInput.addEventListener('input', function () {
+//                                        // No need to update server-side data in this example since we're not doing any real-time processing
+//                                    });
+//
+//                                    addressInput.addEventListener('input', function () {
+//                                        // No need to update server-side data in this example since we're not doing any real-time processing
+//                                    });
+//
+//                                    phoneInput.addEventListener('input', function () {
+//                                        // No need to update server-side data in this example since we're not doing any real-time processing
+//                                    });
+//
+//                                    paymentMethodInput.addEventListener('change', function () {
+//                                        // No need to update server-side data in this example since we're not doing any real-time processing
+//                                    });
+                                </script>
                                 <div><label>Phương thức thanh toán</label></div>
                                 <input type="radio" id="cashOnDelivery" name="paymentMethod" value="cashOnDelivery">
                                 <label for="cashOnDelivery">Thanh toán khi nhận hàng</label><br>

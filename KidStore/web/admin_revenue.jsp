@@ -109,7 +109,7 @@
                 int i = 1;
                 if (orderList != null) {
                     for (OrderSold o : orderList) {
-                        totalRevenue += o.getTotalPrice();
+                        totalRevenue += o.getTotalPrice()*o.getDiscount();
                     }
                 }
 
@@ -145,7 +145,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+<!--                                <tr>
                                     <td>1</td>
                                     <td>Nguyen Hoang Le Minh</td>
                                     <td>25-04-2024</td>
@@ -177,29 +177,28 @@
                                     <td>3</td>
                                     <td>0.85</td>
                                     <td>382.500 VNĐ</td>
-                                </tr>
-                                <%--
+                                </tr>-->
                                 <% if (orderList != null) {
                                         for (OrderSold e : orderList) {
                                             // Format the date using the SimpleDateFormat object
                                             String formattedDate = sdf.format(e.getOrderDate());
-                                            String formatTotalPrice = vnCurrencyFormat.format(e.getTotalPrice());
+                                            String formatTotalPrice = vnCurrencyFormat.format(e.getTotalPrice()*e.getDiscount());
                                             String base64Image = Base64.getEncoder().encodeToString(e.getImage());
 
                                 %>
                                 <tr>
                                     <td><%=i++%></td>
-                                    <td><td><img src="data:image/jpeg;base64,<%= base64Image%>" alt="Loading"></td></td>
-                                    <td><img src="<%=e.getImage()%>" alt ="Loading" style="width: 100px; height: 100px; margin-left: auto; margin-right: auto;"></td>
-                                    <td><%=e.getToyName()%></td>    
-                                    <td><%=e.getQuantity()%></td>
                                     <td><%=e.getFullName()%></td>
                                     <td><%=formattedDate%></td>
+                                    <td><img src="data:image/jpeg;base64,<%=base64Image%>" alt="Loading"></td>
+                                    <td><%=e.getToyName()%></td>   
+                                    <td><%=e.getToyPrice()%></td>
+                                    <td><%=e.getQuantity()%></td>
+                                    <td><%=e.getDiscount()%></td>
                                     <td><%=formatTotalPrice%></td>
                                 </tr>
                                 <%}
                                     }%>
-                                --%>
 
                             </tbody>
                         </table>

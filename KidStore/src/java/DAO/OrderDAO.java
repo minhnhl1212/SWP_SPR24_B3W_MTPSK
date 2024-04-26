@@ -606,20 +606,22 @@ public class OrderDAO {
             con = DBUtils.getConnection();
             if (con != null) {
                 String sql = "select Image.image_toy, Toy.toy_name, OrderDetail.quantity, "
-                        + "Account.full_name, [Order].order_date, [Order].order_amount\n"
-                        + "from Toy \n"
+                        + "Account.full_name, [Order].order_date, [Order].order_amount,\n"
+                        + "OrderDetail.OD_price, Voucher.voucher_discount from Toy \n"
                         + "inner join OrderDetail on Toy.toy_id = OrderDetail.toy_id\n"
                         + "inner join [Order] on OrderDetail.order_id = [Order].order_id\n"
                         + "inner join Image on Toy.toy_id = Image.toy_id\n"
                         + "inner join Account on [Order].user_id = Account.user_id\n"
+                        + "inner join Voucher on [Order].voucher_id = Voucher.id\n"
                         + "where [Order].status_order= N'Đã Giao Hàng'";
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
                     OrderSold os = new OrderSold(rs.getBytes("image_toy"),
-                            rs.getString("toy_name"),
-                            rs.getInt("quantity"), rs.getString("full_name"),
-                            rs.getDate("order_date"), rs.getDouble("order_amount"));
+                            rs.getString("toy_name"),rs.getInt("quantity"), 
+                            rs.getString("full_name"),rs.getDouble("OD_price"), 
+                            rs.getDate("order_date"), rs.getDouble("order_amount"),
+                            rs.getDouble("voucher_discount"));
                     ordersold_list.add(os);
                 }
             }

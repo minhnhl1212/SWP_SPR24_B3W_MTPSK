@@ -83,20 +83,22 @@
                             <div class="carousel-inner">
                                 <% ArrayList<Image> imageList = (ArrayList<Image>) session.getAttribute("IMAGE_LIST");
                                     for (Image i : imageList) {
+                                        if(i!=null){
                                         if (i.isMain()) {
-                                            String base64Image = Base64.getEncoder().encodeToString(toy.getImage());
+                                            String base64Image = Base64.getEncoder().encodeToString(i.getImage());
 
                                 %>
                                 <div class="carousel-item active">
                                     <img src="data:image/jpeg;base64,<%= base64Image%>" alt="Toy Image" class="d-block w-100">
                                 </div>
                                 <%} else {
-                                    String base64Image = Base64.getEncoder().encodeToString(toy.getImage());%>   
+                                    String base64Image = Base64.getEncoder().encodeToString(i.getImage());%>   
                                 <div class="carousel-item">
                                     <img src="data:image/jpeg;base64,<%= base64Image%>" alt="Toy Image" class="d-block w-100">
                                 </div>
                                 <%}
-                                    }%>
+                                    }
+}%>
                             </div>
 
                             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
