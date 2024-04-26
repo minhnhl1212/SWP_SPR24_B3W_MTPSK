@@ -11,6 +11,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Staff Dashboard</title>
         <link rel="stylesheet" href="./assets/css/tailwind.output.css">
+        <!-- CSS Icon -->
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     </head>
     <style>
         .action-btn{
@@ -36,10 +38,12 @@
         }
 
         th:nth-child(3), td:nth-child(3) {
-            max-width: 100px;;
+            max-width: 100px;
+            ;
         }
         th:nth-child(6), td:nth-child(6) {
-            max-width: 100px;;
+            max-width: 100px;
+            ;
         }
         .py-4.text-gray-500.dark\:text-gray-400 {
             text-align: center;
@@ -57,6 +61,30 @@
         }
         th:nth-child(1), td:nth-child(1) {
             max-width: 20%;
+        }
+        .popup-form {
+            display: none;
+            width: 700px;
+            height: 570px;
+            position: fixed;
+            top: 12%;
+            left: 28%;
+            background-color: whitesmoke;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 3000;
+        }
+
+        .close{
+            float: right;
+            font-size: 1.5rem;
+            font-weight: 700;
+            line-height: 1;
+            color: #000;
+            text-shadow: 0 1px 0 #fff;
+            opacity: .5;
         }
     </style>
     <body>
@@ -129,6 +157,7 @@
                 <table class="w-full whitespace-no-wrap" style="text-align: center;">
                     <thead>
                         <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800" style="text-align: center;">
+                            <!--
                             <th class="py-3" style="padding-left: 3rem; padding-right: 3rem;">ID Warranty</th>
                             <th class="py-3" style="padding-left: 3rem; padding-right: 3rem;">Product Name</th>
                             <th class="py-3" style="padding-left: 3rem; padding-right: 3rem;">Quantity</th>
@@ -141,6 +170,16 @@
                             <th class="py-3" style="padding-left: 3rem; padding-right: 3rem;">Status</th>
                             <th class="py-3" style="width: 100px;" style="padding-left: 5rem; padding-right: 5rem;">Description</th>
                             <th class="py-3" style="padding-left: 3rem; padding-right: 3rem;">Action</th>
+                            -->
+                            <th>ID Warranty</th>
+                            <th>Image</th>
+                            <th>Name Toy</th>
+                            <th>Quantity</th>
+                            <th>Purchase Date</th>
+                            <th>Warranty Date</th>
+                            <th>Detail</th>
+                            <th>Status</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
@@ -158,7 +197,7 @@
 
                                     boolean w1IsReceivedForWarranty = w1.getStatus().equals("Đã Nhận Hàng");
                                     boolean w2IsReceivedForWarranty = w2.getStatus().equals("Đã Nhận Hàng");
-                                    
+
                                     boolean w1IsUnderWarrantyForWarranty = w1.getStatus().equals("Đang Bảo Hành");
                                     boolean w2IsUnderWarrantyForWarranty = w2.getStatus().equals("Đang Bảo Hành");
 
@@ -176,37 +215,37 @@
                                     } else if (!w1IsSentForWarranty && w2IsSentForWarranty) {
                                         return 1;
                                     }
-                                    
+
                                     if (w1IsProcessingForWarranty && !w2IsProcessingForWarranty) {
                                         return -1;
                                     } else if (!w1IsProcessingForWarranty && w2IsProcessingForWarranty) {
                                         return 1;
                                     }
-                                    
+
                                     if (w1IsReceivedForWarranty && !w2IsReceivedForWarranty) {
                                         return -1;
                                     } else if (!w1IsReceivedForWarranty && w2IsReceivedForWarranty) {
                                         return 1;
                                     }
-                                    
+
                                     if (w1IsUnderWarrantyForWarranty && !w2IsUnderWarrantyForWarranty) {
                                         return -1;
                                     } else if (!w1IsUnderWarrantyForWarranty && w2IsUnderWarrantyForWarranty) {
                                         return 1;
                                     }
-                                    
+
                                     if (w1IsShippingForWarranty && !w2IsShippingForWarranty) {
                                         return -1;
                                     } else if (!w1IsShippingForWarranty && w2IsShippingForWarranty) {
                                         return 1;
                                     }
-                                    
+
                                     if (w1IsDeliveredForWarranty && !w2IsDeliveredForWarranty) {
                                         return -1;
                                     } else if (!w1IsDeliveredForWarranty && w2IsDeliveredForWarranty) {
                                         return 1;
                                     }
-                                    
+
                                     if (w1IsRefuseForWarranty && !w2IsRefuseForWarranty) {
                                         return -1;
                                     } else if (!w1IsRefuseForWarranty && w2IsRefuseForWarranty) {
@@ -226,19 +265,38 @@
                             <td class="px-4 py-3">
                                 <%=warranty.getWarrantyCode()%>
                             </td>
-                            <td><%=warranty.getToyName()%></td>
-                            <td><%=warranty.getQuantity()%></td>   
                             <td class="px-4 py-3 text-xs">
                                 <img src="data:image/jpeg;base64,<%= base64Image%>" alt="Toy Image">
                             </td>
+                            <td><%=warranty.getToyName()%></td>
+                            <td><%=warranty.getQuantity()%></td>
+
+                            <%--
                             <td><%=warranty.getNameUser()%></td>   
-
-
                             <td><%=warranty.getPhone()%></td>
                             <td><%=warranty.getAddress()%></td>
+                            --%>
+
                             <td><%=warranty.getOrderDate()%></td>
                             <td><%=warranty.getWarrantyTime()%></td>
+
+                            <!-- Thông tin khách hàng + mô tả lỗi -->
+                            <td>
+                                <button type="button" class="button-detail" onclick="togglePopup()"><i class='bx bx-detail'></i> &nbsp; Warranty Details</button>                                
+                                <div class="popup-form" id="popupForm">  
+                                    <p style="font-size: 40px; font-weight: bold; font-style: italic; text-align: center;">Warranty - Details</p>
+                                    <a class="close" href="#" style="text-decoration: none; color: black; margin-top: -5%;" onclick="togglePopup()">X</a>
+                                    <div class="form-detail" style="text-align: left;">
+                                        <p style="font-size:30px; padding-top:50px;">Customer Name: Son</p>
+                                        <p style="font-size:30px; padding-top:50px;">Phone: 019293123 </p>
+                                        <p style="font-size:30px; padding-top:50px;">Address: TPHCM</p>
+                                        <p style="font-size:30px; padding-top:50px;">Description: Lỗi do nhà sản xuất</p>
+                                    </div>   
+                                </div>
+                            </td>
+
                             <td><%=warranty.getStatus()%></td>
+                            <%--
                             <%
                                 if (warranty.getDescriptionWarranty() != null) {
                             %>
@@ -247,10 +305,12 @@
                                     <%=warranty.getDescriptionWarranty()%>
                                 </div>
                             </td>
+                            <!--
                             <td>
                                 <a href="load?pid=${p.id}"  class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                                 <a href="#" class="delete" data-toggle="modal" onclick="doDelete(${p.id})"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                             </td>
+                            -->
                             <%
                             } else {
                             %>
@@ -258,6 +318,7 @@
                             <%
                                 }
                             %>
+                            --%>
 
                             <td class="px-4 py-3">           
                                 <select id="statusSelect_<%=warranty.getOrderDetailId()%>" <% if (warranty.getStatus().equals("Đã Giao Hàng") || warranty.getStatus().equals("Từ Chối Bảo Hành") || warranty.getStatus().equals("Không Có Yêu Cầu Bảo Hành")) { %> style="display: none;" <% } %>>
@@ -310,5 +371,11 @@
                 </table>
             </div>
         </div>
+        <script>
+            function togglePopup() {
+                var popup = document.getElementById("popupForm");
+                popup.style.display = (popup.style.display === "block") ? "none" : "block";
+            }
+        </script>
     </body>
 </html>
