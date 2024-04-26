@@ -108,11 +108,7 @@
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                         if (orderList != null && acc != null && OrderIDList != null) {
                             for (OrderHistory oid : OrderIDList) {
-                                String formatOrderAmount = vnCurrencyFormat.format(oid.getOrderAmount());
-                                double Discount = Math.round(oid.getOrderAmount() - oid.getOrderAmount() * oid.getDiscount());
-                                double OrderAmountAfterDiscount = Math.round(oid.getOrderAmount()) - Discount;
-                                String formatDiscount = vnCurrencyFormat.format(Discount);
-                                String formatOrderAfterDiscount = vnCurrencyFormat.format(OrderAmountAfterDiscount);
+                                double TotalPrice = 0;
                                 String orderDate = sdf.format(oid.getOrderDate());
 
                     %>
@@ -127,9 +123,9 @@
                                     </div>
                                     <div class="col-md-6" >
                                         <div class="product-name" style="color: green; justify-content: flex-end; display: flex; font-weight: bold;"
-                                             color: <%= oid.getStatus().equals("Đã Giao Hàng") ? "green" :
-                                                      oid.getStatus().equals("Đang Xử Lí") ? "black" :
-                                                      oid.getStatus().equals("Từ Chối Bán Hàng") ? "red" : "black"%>;"><%=oid.getStatus()%></div>
+                                             color: <%= oid.getStatus().equals("Đã Giao Hàng") ? "green"
+                                                     : oid.getStatus().equals("Đang Xử Lí") ? "black"
+                                                     : oid.getStatus().equals("Từ Chối Bán Hàng") ? "red" : "black"%>;"><%=oid.getStatus()%></div>
                                     </div>
                                 </div>
 
@@ -152,6 +148,7 @@
                                                             double TotalOrderDetail = order.getOrderPrice() * order.getQuantity();
                                                             String formatTotalOrderDetail = vnCurrencyFormat.format(TotalOrderDetail);
                                                             String base64Image = Base64.getEncoder().encodeToString(order.getImageToy());
+                                                            TotalPrice += TotalOrderDetail;
                                                 %>
                                             <form action="CartController">
                                                 <tr>
@@ -163,7 +160,12 @@
                                                 </tr>
                                             </form>
                                             <%}
-                                                }%>
+                                                }
+                                                String formatOrderAmount = vnCurrencyFormat.format(oid.getOrderAmount());
+                                                double Discount = TotalPrice - oid.getOrderAmount();
+                                                String formatDiscount = vnCurrencyFormat.format(Discount);
+                                                String formatTotalPrice = vnCurrencyFormat.format(TotalPrice);
+                                            %>
                                             </tbody>
                                         </table>
                                     </div>
@@ -202,13 +204,13 @@
                                             </div>
                                             <!-- bảng giá -->
                                             <div class="product-name" style=" display: flex;justify-content: flex-end;">
-                                                <h6>Subtotal: <%=formatOrderAmount%> </h6>
+                                                <h6>Subtotal: <%=formatTotalPrice%></h6>
                                             </div> 
                                             <div class="product-name" style=" display: flex;justify-content: flex-end;">
                                                 <h6>Discount: <%=formatDiscount%></h6>
                                             </div> 
                                             <div class="product-name" style=" display: flex;justify-content: flex-end;">
-                                                <h5><i class='bx bx-money'></i> Total: <%=formatOrderAfterDiscount%></h5>
+                                                <h5><i class='bx bx-money'></i> Total: <%=formatOrderAmount%>  </h5>
                                             </div>                            
                                         </div>
                                     </div>

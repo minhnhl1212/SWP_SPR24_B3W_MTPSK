@@ -160,4 +160,29 @@ public class AccountDAO {
         }
         return check;
     }
+
+    public boolean checkFullName(String name, String phone, String address) throws Exception {
+        boolean check = false;
+
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "select user_id from Account where full_name =? and phone=? and address=?";
+                ps = con.prepareStatement(sql);
+                ps.setString(1, name);
+                ps.setString(2, phone);
+                ps.setString(3, address);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    check = true;
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+        return check;
+    }
 }

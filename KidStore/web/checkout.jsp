@@ -106,9 +106,9 @@
                             <form class="checkout-form" action="MainController" method="post" onsubmit="return validateFormData()">
 
                                 <input type="radio" id="selfPayment" value="selfPayment" name="paymentType">
-                                <label for="thanhtoanchobanthan">Thanh toán cho bản thân</label><br>
+                                <label for="thanhtoanchobanthan">Mua cho bản thân</label><br>
                                 <input type="radio" id="otherPayment" value="otherPayment" name="paymentType">
-                                <label for="thanhtoanchonguoikhac">Thanh toán cho người khác</label><br>
+                                <label for="thanhtoanchonguoikhac">Mua cho người khác</label><br>
                                 <div id="otherPaymentDetails" class="hidden-form">
                                     <label>Tên</label>
                                     <input type="text" class="form-control" id="name" placeholder="Tên" value="<%=a.getFullName()%>" name="name">
