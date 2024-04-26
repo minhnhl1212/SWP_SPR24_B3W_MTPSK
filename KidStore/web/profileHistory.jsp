@@ -180,7 +180,7 @@
                                             <%} else {%>
                                             bằng banking
                                             <%}%></p>
-                                        <div><button id="cancel" style="color:black; background-color: #ffcccc;">Hủy đơn hàng</button></div>
+                                        <div><button hidden="" id="cancel" style="color:black; background-color: #ffcccc;">Hủy đơn hàng</button></div>
                                     </div>
                                     <div id="popup" >
                                         <form id="cancelForm">

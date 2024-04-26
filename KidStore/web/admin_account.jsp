@@ -264,7 +264,7 @@
                                     <td><%=a.getPhone()%></td>
                                     <td><%=a.getAddress()%></td>
                                     <td>
-                                        <a href="AccountEditRoleController?id=<%=a.getUserId()%>&roleId=<%=a.getRoleId()%>" id="toggleButton" class="button-bordered">
+                                        <a href="AccountEditRoleController?id=<%=a.getUserId()%>&roleId=<%=a.getRoleId()%>" id="toggleButton" class="button-bordered" style="width: 70% !important;">
                                             <% if (a.getRoleId() == 2) {%>
                                             Staff
                                             <%} else {%>
@@ -273,7 +273,7 @@
                                         </a>
                                     </td>
                                     <td>
-                                        <a href="AccountStatusController?id=<%=a.getUserId()%>&isActive=<%=a.isActive()%>"id="toggleButton" class="button-bordered">
+                                            <a href="AccountStatusController?id=<%=a.getUserId()%>&isActive=<%=a.isActive()%>"id="toggleButton" class="button-bordered" style="width: 70% !important;">
                                             <% if (a.isActive()) {%>
                                             Active
                                             <%} else {%>

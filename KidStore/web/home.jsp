@@ -46,13 +46,13 @@
                             </div>
                         </div>
                         <div class="carousel-inner" >
-                            <div class="carousel-item active img-fluid"  data-bs-interval="3000">
+                            <div class="carousel-item active img-fluid"  data-bs-interval="1500">
                                 <img src="img/background.png" class="d-block w-100" alt="background1">
                             </div>
-                            <div class="carousel-item img-fluid" data-bs-interval="3000">
+                            <div class="carousel-item img-fluid" data-bs-interval="2500">
                                 <img src="img/background-1.png" class="d-block w-100" alt="background2">
                             </div>
-                            <div class="carousel-item img-fluid" data-bs-interval="3000">
+                            <div class="carousel-item img-fluid" data-bs-interval="2500">
                                 <img src="img/background-2.png" class="d-block w-100" alt="background3">
                             </div>
                         </div>

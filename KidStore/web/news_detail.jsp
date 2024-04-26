@@ -29,7 +29,7 @@
             margin-left: auto;
             margin-right: auto;
             width: 80%;
-            height: 50%%;
+            height: 50%;
         }
         .border-news-img{
             border: 1px none;

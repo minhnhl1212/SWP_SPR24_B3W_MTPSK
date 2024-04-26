@@ -744,7 +744,6 @@ sidebarsidebar {
     cursor: pointer; /* Con trỏ chuột khi di chuyển qua */
     font-size: 16px; /* Kích thước chữ */
     transition: all 0.3s ease; /* Hiệu ứng chuyển đổi mềm mại */
-    width: 55% !important;
     display: inline-block;
 }
 

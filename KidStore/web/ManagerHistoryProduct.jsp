@@ -15,6 +15,8 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="DTO.Account"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!-- CSS Icon -->
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 <!DOCTYPE html>
 <html>
     <head>
@@ -45,8 +47,8 @@
                 left: 0;
                 width: 100%;
                 height: 100%;
-                background-color: rgba(0, 0, 0, 0.5); 
-                display: none; 
+                background-color: rgba(0, 0, 0, 0.5);
+                display: none;
                 z-index: 2;
             }
 
@@ -125,6 +127,31 @@
                 border: 1px solid black;
                 border-radius: 5px;
                 padding: 20px;
+            }
+            /* css form info customer */
+            .popup-form {
+                display: none;
+                width: 800px;
+                height: 500px;
+                position: fixed;
+                top: 15%;
+                left: 25%;
+                background-color: whitesmoke;
+                padding: 20px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                z-index: 3000;
+            }
+
+            .close-detail{
+                float: right;
+                font-size: 1.5rem;
+                font-weight: 700;
+                line-height: 1;
+                color: #000;
+                text-shadow: 0 1px 0 #fff;
+                opacity: .5;
             }
         </style>
     </head>
@@ -209,11 +236,8 @@
                             <th class="px-4 py-3">Discount</th>
                             <th class="px-4 py-3">Quantity</th>
                             <th class="px-4 py-3">Total</th>
-                            <th class="px-4 py-3">Type Payment</th>
                             <th class="px-4 py-3">Date</th>
-                            <th class="px-4 py-3">Customer</th>
-                            <th class="px-4 py-3">Phone</th>
-                            <th class="px-4 py-3">Address</th>
+                            <th class="px-4 py-3">Detail</th>
                             <th class="px-4 py-3">Status</th>
                             <th class="px-4 py-3">Action</th>
                         </tr>
@@ -330,33 +354,57 @@
                                 <%=formatOrderTotal%></br>
 
                             </td>
+
+                            <!--
                             <td class="px-4 py-3 text-sm">
-                                <%
-                                    if (idOrder.getTypePayment() == 0) {
-                                %>
-                                <p>Thanh Toán Khi Nhận Hàng</p>
-                                <%
-                                } else {
-                                %>
-                                <p>Thanh Toán Qua Ngân Hàng</p>
-                                <%
-                                    }
-                                %>
+                            <%
+                                if (idOrder.getTypePayment() == 0) {
+                            %>
+                            <p>Thanh Toán Khi Nhận Hàng</p>
+                            <%
+                            } else {
+                            %>
+                            <p>Thanh Toán Qua Ngân Hàng</p>
+                            <%
+                                }
+                            %>
+                        </td>
+                            -->
 
-
-                            </td>
                             <td class="px-4 py-3 text-sm">
                                 <%=idOrder.getOrderDate()%>
                             </td>
+
+                            <!--
                             <td class="px-4 py-3 text-sm">
-                                <%=idOrder.getFullname()%>
+                            <%=idOrder.getFullname()%>
+                        </td>
+                        <td class="px-4 py-3 text-sm">
+                            <%=idOrder.getPhone()%>
+                        </td>
+                        <td class="px-4 py-3 text-sm">
+                            <%=idOrder.getAddress()%>
+                        </td>
+                            -->
+
+                            <!-- Form thông tin khách hàng -->
+                            <td>
+                                <button type="button" class="button-detail" onclick="togglePopup()"><i class='bx bx-detail'></i>Customer-Info</button>
+                                <div class="popup-form" id="popupForm">
+                                    <form method="POST">
+                                        <p style="font-size: 40px; font-weight: bold; font-style: italic; text-align: center;">Customer - Detail</p>
+                                        <a class="close-detail" href="#" style="text-decoration: none; color: black; margin-top: -5%;" onclick="togglePopup()">X</a>
+                                        <div class="form-detail">
+                                            <p style="font-size:30px; padding-top:50px;">Customer Name: <%=idOrder.getFullname()%></p>
+                                            <p style="font-size:30px; padding-top:50px;">Phone: <%=idOrder.getPhone()%></p>
+                                            <p style="font-size:30px; padding-top:50px;">Address: <%=idOrder.getAddress()%></p>
+                                            <p style="font-size:30px; padding-top:50px;">Payments: <%= (idOrder.getTypePayment() == 0) ? "Thanh toán khi nhận hàng" : "Thanh toán qua ngân hàng"%></p>
+                                        </div>
+                                    </form>
+                                </div>
                             </td>
-                            <td class="px-4 py-3 text-sm">
-                                <%=idOrder.getPhone()%>
-                            </td>
-                            <td class="px-4 py-3 text-sm">
-                                <%=idOrder.getAddress()%>
-                            </td>
+
+
                             <td class="px-4 py-3 text-sm">
                                 <%=idOrder.getStatus()%>
                             </td>
@@ -395,6 +443,12 @@
                 </table>
             </div>
         </div>
+        <script>
+            function togglePopup() {
+                var popup = document.getElementById("popupForm");
+                popup.style.display = (popup.style.display === "block") ? "none" : "block";
+            }
+        </script>
     </body>
 </html>
 
