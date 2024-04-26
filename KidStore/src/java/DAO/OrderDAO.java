@@ -160,19 +160,18 @@ public class OrderDAO {
         }
         return detailList;
     }
-    
+
     public ArrayList<OrderHistory> idOrderList() throws SQLException, Exception {
         ArrayList<OrderHistory> idOrderList = new ArrayList<>();
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "select [Order].order_id, [Order].order_date, [Order].status_order, [Order].order_amount, Account.full_name, Account.phone, Account.address, [Order].payment_type\n"
-                        + "from [Order]\n"
-                        + "inner join Account on [Order].user_id = Account.user_id";
+                String sql = "select [Order].order_id, [Order].order_date, [Order].status_order, [Order].order_amount, [Order].name, [Order].phone, [Order].address, [Order].payment_type\n"
+                        + "from [Order]";
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
-                    OrderHistory list = new OrderHistory(rs.getInt("order_id"), rs.getDate("order_date"), rs.getString("status_order"), rs.getDouble("order_amount"), rs.getString("full_name"), rs.getString("phone"), rs.getString("address"), rs.getInt("payment_type"));
+                    OrderHistory list = new OrderHistory(rs.getInt("order_id"), rs.getDate("order_date"), rs.getString("status_order"), rs.getDouble("order_amount"), rs.getString("name"), rs.getString("phone"), rs.getString("address"), rs.getInt("payment_type"));
                     idOrderList.add(list);
                 }
             }
@@ -618,8 +617,8 @@ public class OrderDAO {
                 rs = ps.executeQuery();
                 while (rs.next()) {
                     OrderSold os = new OrderSold(rs.getBytes("image_toy"),
-                            rs.getString("toy_name"),rs.getInt("quantity"), 
-                            rs.getString("full_name"),rs.getDouble("OD_price"), 
+                            rs.getString("toy_name"), rs.getInt("quantity"),
+                            rs.getString("full_name"), rs.getDouble("OD_price"),
                             rs.getDate("order_date"), rs.getDouble("order_amount"),
                             rs.getDouble("voucher_discount"));
                     ordersold_list.add(os);
@@ -633,11 +632,11 @@ public class OrderDAO {
         return ordersold_list;
     }
 
-    public ArrayList<OrderHistory> getAllOrderIDByUserID(int id) throws Exception{
+    public ArrayList<OrderHistory> getAllOrderIDByUserID(int id) throws Exception {
         ArrayList<OrderHistory> listOfOrderID = new ArrayList<>();
-        try{
+        try {
             con = DBUtils.getConnection();
-            if(con!=null){
+            if (con != null) {
                 String sql = "select [Order].order_id, [Order].status_order, "
                         + "[Order].order_date, [Order].order_amount, "
                         + "[Order].payment_type, Voucher.voucher_discount from [Order] "
@@ -646,21 +645,19 @@ public class OrderDAO {
                 ps = con.prepareStatement(sql);
                 ps.setInt(1, id);
                 rs = ps.executeQuery();
-                while(rs.next()){
+                while (rs.next()) {
                     OrderHistory oh = new OrderHistory(rs.getInt("order_id"),
-                            addTwoDays(rs.getDate("order_date")), rs.getString("status_order"), 
+                            addTwoDays(rs.getDate("order_date")), rs.getString("status_order"),
                             rs.getDouble("order_amount"),
-                            rs.getDouble("voucher_discount"),rs.getBoolean("payment_type"));
+                            rs.getDouble("voucher_discount"), rs.getBoolean("payment_type"));
                     listOfOrderID.add(oh);
                 }
             }
-    }
-        catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        }
-        finally{
+        } finally {
             closeConnection();
         }
         return listOfOrderID;
-}
+    }
 }
