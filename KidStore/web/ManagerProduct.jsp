@@ -1,4 +1,5 @@
 
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.Base64"%>
 <%@page import="DTO.Toy"%>
 <%@page import="DTO.Category"%>
@@ -195,7 +196,12 @@
                                 <img src="data:image/jpeg;base64,<%= base64Image%>" alt="Toy Image">
                             </td>
                             <td class="px-4 py-3 get-price center">
-                                <%=toy.getPrice()%> VNĐ
+                                <%
+                                    DecimalFormat vnCurrencyFormat = new DecimalFormat("###,### VNĐ");
+                                    String formatPrice = vnCurrencyFormat.format(toy.getPrice());
+                                %>
+                                <%=formatPrice%>
+                                <%-- <%=toy.getPrice()%> VNĐ --%>
                             <td class="px-4 py-3 text-sm">
                                 <%=toy.getName_category()%>
                             </td>
