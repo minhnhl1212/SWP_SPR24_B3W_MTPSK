@@ -47,6 +47,10 @@ public class OrderController extends HttpServlet {
             if (a != null) {
                 String paymentType = request.getParameter("paymentType");
                 if(paymentType==null){
+                paymentType = (String)session.getAttribute("callPaymentType");
+                }
+                session.setAttribute("callPaymentType", paymentType);
+                if(paymentType==null){
                     request.setAttribute("ERROR_NOT_CHOOSING", "You didn't set your payment details");
                     RequestDispatcher rd = request.getRequestDispatcher("checkout.jsp");
                     rd.forward(request, response);

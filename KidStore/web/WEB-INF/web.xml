@@ -188,7 +188,7 @@
         <servlet-name>RefuseWarrantyController</servlet-name>
         <servlet-class>Controller.RefuseWarrantyController</servlet-class>
     </servlet>
-     <servlet>
+    <servlet>
         <servlet-name>CheckLoginController</servlet-name>
         <servlet-class>Controller.CheckLoginController</servlet-class>
     </servlet>
