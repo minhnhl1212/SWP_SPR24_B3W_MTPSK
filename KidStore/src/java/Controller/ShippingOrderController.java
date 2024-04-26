@@ -35,7 +35,7 @@ public class ShippingOrderController extends HttpServlet {
                 session.setAttribute("ORDER_HISTORY_ERROR", "Not Foun List Order");
             }
 
-            RequestDispatcher rd = request.getRequestDispatcher("ManagerHistoryProduct.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("LoadHistoryProductController");
             rd.forward(request, response);
         } catch (Exception ex) {
             Logger.getLogger(ProcessingOrderController.class.getName()).log(Level.SEVERE, null, ex);
