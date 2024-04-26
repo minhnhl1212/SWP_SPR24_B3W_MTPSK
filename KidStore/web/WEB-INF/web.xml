@@ -240,6 +240,10 @@
         <servlet-name>LoadCategoryController</servlet-name>
         <servlet-class>Controller.LoadCategoryController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoadManagerProductController</servlet-name>
+        <servlet-class>Controller.LoadManagerProductController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -479,6 +483,10 @@
     <servlet-mapping>
         <servlet-name>LoadCategoryController</servlet-name>
         <url-pattern>/LoadCategoryController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadManagerProductController</servlet-name>
+        <url-pattern>/LoadManagerProductController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
