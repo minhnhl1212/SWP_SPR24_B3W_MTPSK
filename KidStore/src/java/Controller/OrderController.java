@@ -5,6 +5,7 @@
  */
 package Controller;
 
+import DAO.AccountDAO;
 import DAO.OrderDAO;
 import DTO.Account;
 import DTO.DataStore;
@@ -39,6 +40,7 @@ public class OrderController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         boolean type = true;
         String url = DETAIL;
+        String name, phone, address;
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             HttpSession session = request.getSession();
@@ -55,10 +57,18 @@ public class OrderController extends HttpServlet {
                     RequestDispatcher rd = request.getRequestDispatcher("checkout.jsp");
                     rd.forward(request, response);
                 }
-                String name = request.getParameter("name");
-                String phone = request.getParameter("phone");
-                String address = request.getParameter("address");
+                name = request.getParameter("name");
+                phone = request.getParameter("phone");
+                address = request.getParameter("address");
                 String paymentMethod = request.getParameter("paymentMethod");
+                if(paymentType.equals("selfPayment")){
+                    AccountDAO dao = new AccountDAO();
+                    if(!dao.checkFullName(name, phone, address)){
+                        name =a.getFullName();
+                        phone = a.getPhone();
+                        address = a.getAddress();
+                    }
+                }
                 if (name != null && phone != null && address != null && paymentMethod != null) {
                     DataStore ds = new DataStore(name, phone, address, paymentMethod);
                     session.setAttribute("DataStore", ds);
