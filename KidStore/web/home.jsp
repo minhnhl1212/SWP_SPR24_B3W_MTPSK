@@ -147,7 +147,7 @@
                                                 <div class="text-center">
 
                                                     <!-- Product name -->
-                                                    <h5 class="fw-bolder"><a href="detail.jsp" style="text-decoration: none; color: black;"><%=toy.getToyName()%></a></h5>                                             </div>
+                                                    <h5 class="fw-bolder"><a href="MainController?btAction=Detail&toyId=<%=toy.getToyId()%>" style="text-decoration: none; color: black;"><%=toy.getToyName()%></a></h5>                                             </div>
                                         </div>
                                         <ul class="text-center list-group-item">
                                             <!-- Product reviews -->
@@ -252,7 +252,7 @@
 
                                                     <!-- Product name -->
                                                     <h5 class="fw-bolder">
-                                                        <a href="detail.jsp" style="text-decoration: none; color: black;"><%=toy.getToyName()%></a></h5> 
+                                                        <a href="MainController?btAction=Detail&toyId=<%=toy.getToyId()%>" style="text-decoration: none; color: black;"><%=toy.getToyName()%></a></h5> 
                                             </div>
                                         </div>
                                         <ul class="text-center list-group-item">

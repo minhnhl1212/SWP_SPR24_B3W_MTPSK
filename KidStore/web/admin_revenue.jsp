@@ -128,7 +128,7 @@
                         <div class="head">
                             <h3>Revenue Stream</h3>
 <!--                            <h3 style="text-align: left; margin-left: 470px;">Total Revenue: &nbsp; <%=formatTotalRevenue%></h3>-->
-                            <h3 style="text-align: left; margin-left: 470px;">Total Revenue: 450.000 VNĐ</h3>
+                            <h3 style="text-align: left; margin-left: 470px;">Total Revenue: 1.147.000 VNĐ</h3>
                         </div>
                         <table>
                             <thead>
@@ -140,6 +140,7 @@
                                     <th>Name</th>
                                     <th>Price</th>
                                     <th>Quantity</th>
+                                    <th>Discount</th>
                                     <th>Total Price</th>
                                 </tr>
                             </thead>
@@ -152,7 +153,8 @@
                                     <td>Đồ chơi mô hình</td>
                                     <td>50.000 VNĐ</td>
                                     <td>3</td>
-                                    <td>150.000 VNĐ</td>
+                                    <td>0.85</td>
+                                    <td>382.500 VNĐ</td>
                                 </tr>
                                 <tr>
                                     <td>2</td>
@@ -162,7 +164,8 @@
                                     <td>Đồ chơi mô hình</td>
                                     <td>50.000 VNĐ</td>
                                     <td>3</td>
-                                    <td>150.000 VNĐ</td>
+                                    <td>0.85</td>
+                                    <td>382.500 VNĐ</td>
                                 </tr>
                                 <tr>
                                     <td>3</td>
@@ -172,7 +175,8 @@
                                     <td>Đồ chơi mô hình</td>
                                     <td>50.000 VNĐ</td>
                                     <td>3</td>
-                                    <td>150.000 VNĐ</td>
+                                    <td>0.85</td>
+                                    <td>382.500 VNĐ</td>
                                 </tr>
                                 <%--
                                 <% if (orderList != null) {

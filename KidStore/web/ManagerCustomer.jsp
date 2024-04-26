@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="DTO.OrderWarranty"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -122,7 +123,12 @@
                                 <%=feedback.getToyName()%>
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                <%=feedback.getPrice()%>
+                                <%
+                                    DecimalFormat vnCurrencyFormat = new DecimalFormat("###,### VNĐ");
+                                    String formatPrice = vnCurrencyFormat.format(feedback.getPrice());
+                                %>
+                                <%= formatPrice %>
+                                <%-- <%=feedback.getPrice()%> --%>
                             </td>
                             <td class="px-4 py-3">
                                 <%

@@ -5,6 +5,7 @@
 --%>
 
 
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.Base64"%>
 <%@page import="DTO.OrderHistory"%>
 <%@page import="DTO.Toy"%>
@@ -260,6 +261,7 @@
                                 %>
                             </td>
                             <td class="px-4 py-3 text-sm">
+                                <%--
                                 <%
                                     for (OrderHistory order : orderList) {
                                         if (order.getOrderId() == idOrder.getOrderId()) {
@@ -267,14 +269,36 @@
                                 <%=order.getPrice()%></br>
                                 <%}
                                     }
+                                %> --%>
+                                <%
+                                    for (OrderHistory order : orderList) {
+                                        if (order.getOrderId() == idOrder.getOrderId()) {
+                                            DecimalFormat vnCurrencyFormat = new DecimalFormat("###,### VNĐ");
+                                            String formatPrice = vnCurrencyFormat.format(order.getPrice());
+                                %>
+                                <%=formatPrice%></br>
+                                <%}
+                                    }
                                 %>
                             </td>
                             <td class="px-4 py-3 text-sm">
+                                <%--
                                 <%
                                     for (OrderHistory order : orderList) {
                                         if (order.getOrderId() == idOrder.getOrderId()) {
                                 %>
                                 <%=order.getOrderPrice()%>  VNĐ</br>
+                                <%}
+                                    }
+                                %>
+                                --%>
+                                <%
+                                    for (OrderHistory order : orderList) {
+                                        if (order.getOrderId() == idOrder.getOrderId()) {
+                                            DecimalFormat vnCurrencyFormat = new DecimalFormat("###,### VNĐ");
+                                            String formatOrderPrice = vnCurrencyFormat.format(order.getOrderPrice());
+                                %>
+                                <%=formatOrderPrice%></br>
                                 <%}
                                     }
                                 %>
@@ -290,7 +314,12 @@
                                 %>
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                <%=idOrder.getOrderAmount()%>  VNĐ
+                                <%
+                                    DecimalFormat vnCurrencyFormat = new DecimalFormat("###,### VNĐ");
+                                    String formatOrderTotal = vnCurrencyFormat.format(idOrder.getOrderAmount());
+                                %>
+                                <%=formatOrderTotal%></br>
+
                             </td>
                             <td class="px-4 py-3 text-sm">
                                 <%

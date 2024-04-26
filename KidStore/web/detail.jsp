@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.Base64"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="DTO.Toy"%>
@@ -89,7 +90,8 @@
                                 <div class="carousel-item active">
                                     <img src="data:image/jpeg;base64,<%= base64Image%>" alt="Toy Image" class="d-block w-100">
                                 </div>
-                                <%} else { String base64Image = Base64.getEncoder().encodeToString(toy.getImage());%>   
+                                <%} else {
+                                    String base64Image = Base64.getEncoder().encodeToString(toy.getImage());%>   
                                 <div class="carousel-item">
                                     <img src="data:image/jpeg;base64,<%= base64Image%>" alt="Toy Image" class="d-block w-100">
                                 </div>
@@ -110,14 +112,25 @@
                     <div class="col-md-6">
                         <form action="CartController">
                             <div class="product-details">
+                                <%
+                                    double price = toy.getPrice();
+                                    double discount = toy.getDiscount();
+                                    double discountedPrice = price * discount;
 
+                                    DecimalFormat vnCurrencyFormat = new DecimalFormat("###,### VNĐ");
+
+                                    // Định dạng giá giảm giá thành tiền tệ Việt Nam
+                                    String formattedPrice = vnCurrencyFormat.format(discountedPrice);
+                                    String priceBefore = vnCurrencyFormat.format(price);
+                                %>
 
                                 <input type="hidden" name="toyId" value="<%=toy.getToyId()%>">
                                 <div class="product-name"><%=toy.getToyName()%></div>
                                 <div class="rating">
                                     &#9733; &#9733; &#9733; &#9733; &#9733;
                                 </div>
-                                <div class="product-price"><%=toy.getPrice()%></div>
+<!--                                <div class="product-price"><%=toy.getPrice()%></div>-->
+                                <div class="product-price"><span class="text-muted text-decoration-line-through"><%=priceBefore%></span> <span class="text-black"><%= formattedPrice%></span></div>
                                 <div class="product-name"><p>&#10159; Bảo hành chính hãng</p></div>
                                 <div class="product-name"><p>&#10159; Áp dụng nhiều voucher giảm giá</p></div>
                                 <div class="product-name"><p>&#10159; Hoàn trả khi sản phẩm có lỗi</p></div>
@@ -129,7 +142,9 @@
 
                                 <div class="product-name">ID: <%=toy.getToyId()%></div>
                                 <div class="product-name">Danh mục: <%=toy.getName_category()%></div>
-                                <button type="submit"style="margin-top: 50px;" class="btn btn-success btn-block">Thêm vào giỏ hàng</button>
+                                <a href="MainController?btAction=Sell&toyId=<%=toy.getToyId()%>">
+                                    <button type="submit"style="margin-top: 50px;" class="btn btn-success btn-block">Thêm vào giỏ hàng</button>
+                                </a>
                             </div>                       
                         </form>
                     </div>
