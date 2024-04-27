@@ -41,10 +41,6 @@
             max-width: 100px;
             ;
         }
-        th:nth-child(6), td:nth-child(6) {
-            max-width: 100px;
-            ;
-        }
         .py-4.text-gray-500.dark\:text-gray-400 {
             text-align: center;
             background-color: #80DFFF;
@@ -171,15 +167,15 @@
                             <th class="py-3" style="width: 100px;" style="padding-left: 5rem; padding-right: 5rem;">Description</th>
                             <th class="py-3" style="padding-left: 3rem; padding-right: 3rem;">Action</th>
                             -->
-                            <th>ID Warranty</th>
-                            <th>Image</th>
-                            <th>Name Toy</th>
-                            <th>Quantity</th>
-                            <th>Purchase Date</th>
-                            <th>Warranty Date</th>
-                            <th>Detail</th>
-                            <th>Status</th>
-                            <th>Action</th>
+                            <th class="py-3" style="padding-left: 3rem; padding-right: 3rem;">ID Warranty</th>
+                            <th class="py-3" style="padding-left: 5rem; padding-right: 5rem;">Image</th>
+                            <th class="py-3" style="padding-left:20rem; padding-right: 20rem;">Name Toy</th>
+                            <th class="py-3" style="padding-left: 3rem; padding-right: 3rem;">Quantity</th>
+                            <th class="py-3" style="padding-left: 5rem; padding-right: 5rem;">Purchase Date</th>
+                            <th class="py-3" style="padding-left: 5rem; padding-right: 5rem;">Warranty Date</th>
+                            <th class="py-3" style="padding-left: 10rem; padding-right: 10rem;">Detail</th>
+                            <th class="py-3" style="padding-left: 5rem; padding-right: 5rem;">Status</th>
+                            <th class="py-3" style="padding-left: 5rem; padding-right: 5rem;">Action</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
@@ -356,7 +352,7 @@
                             <p style="font-size:30px; padding-top:50px;">Customer Name: <%=warranty.getNameUser()%></p>
                             <p style="font-size:30px; padding-top:50px;">Phone: <%=warranty.getPhone()%> </p>
                             <p style="font-size:30px; padding-top:50px;">Address: <%=warranty.getAddress()%></p>
-                            <p style="font-size:30px; padding-top:50px;">Description: <%=warranty.getDescriptionWarranty()%></p>
+                            <p style="font-size:30px; padding-top:50px; word-wrap: break-word;">Description: <%=warranty.getDescriptionWarranty()%></p>
                         </div>   
                     </div>
                     <%}
