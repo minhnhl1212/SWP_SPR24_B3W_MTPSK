@@ -83,9 +83,9 @@
                             <div class="carousel-inner">
                                 <% ArrayList<Image> imageList = (ArrayList<Image>) session.getAttribute("IMAGE_LIST");
                                     for (Image i : imageList) {
-                                        if(i!=null){
-                                        if (i.isMain()) {
-                                            String base64Image = Base64.getEncoder().encodeToString(i.getImage());
+                                        if (i != null) {
+                                            if (i.isMain()) {
+                                                String base64Image = Base64.getEncoder().encodeToString(i.getImage());
 
                                 %>
                                 <div class="carousel-item active">
@@ -97,8 +97,8 @@
                                     <img src="data:image/jpeg;base64,<%= base64Image%>" alt="Toy Image" class="d-block w-100">
                                 </div>
                                 <%}
-                                    }
-}%>
+                                        }
+                                    }%>
                             </div>
 
                             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
@@ -138,10 +138,11 @@
                                 <div class="product-name"><p>&#10159; Hoàn trả khi sản phẩm có lỗi</p></div>
 
                                 <div class="quantity">
-                                    <label for="quantity"></label>
-                                    <input type="number" id="quantity" class="quantity-input" name="InputValue" value="1">
-                                </div>  
-
+                                    
+                                    
+                                    <div><label for="quantity">Số Lượng</label><input type="number" id="quantity" class="quantity-input" name="InputValue" min="1" max="<%=toy.getQuantity()%>" value="1"><%=toy.getQuantity()%> sản phẩm có sẵn</div>
+                                    
+                                </div>                                  
                                 <div class="product-name">ID: <%=toy.getToyId()%></div>
                                 <div class="product-name">Danh mục: <%=toy.getName_category()%></div>
                                 <a href="MainController?btAction=Sell&toyId=<%=toy.getToyId()%>">

@@ -35,6 +35,7 @@ public class AddToyController extends HttpServlet {
             double price = Double.parseDouble(request.getParameter("price"));
             String description = request.getParameter("description");
             int idCategory = Integer.parseInt(request.getParameter("idCategory"));
+            int quantity = Integer.parseInt(request.getParameter("quantity"));
             double discount = Double.parseDouble(request.getParameter("discount"));
             String warrantyTimeStr = request.getParameter("warrantyTime");
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -46,7 +47,7 @@ public class AddToyController extends HttpServlet {
             java.util.Date newWarrantyTime = calendar.getTime();
             java.sql.Date newSqlWarrantyTime = new java.sql.Date(newWarrantyTime.getTime());
             int userId = Integer.parseInt(request.getParameter("userId"));
-            Toy addToy = toyDAO.addToy(name, filePart.getInputStream(), price, description, idCategory, discount, newSqlWarrantyTime, userId);
+            Toy addToy = toyDAO.addToy(name, filePart.getInputStream(), price, description, idCategory, quantity, discount, newSqlWarrantyTime, userId);
             if (addToy != null) {
                 request.setAttribute("ADD_TOY_SUCCESS", "Added " + addToy.getToyName() + " Success");
             } else {

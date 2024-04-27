@@ -103,7 +103,7 @@
 
                         <div class="col-md-6">
                             <h5>Billing Details</h5>
-                            <form class="checkout-form" action="MainController" method="post" onsubmit="return validateFormData()">
+                            <form class="checkout-form" action="MainController" onsubmit="return validateFormData()">
 
                                 <input type="radio" id="selfPayment" value="selfPayment" name="paymentType">
                                 <label for="thanhtoanchobanthan">Mua cho bản thân</label><br>

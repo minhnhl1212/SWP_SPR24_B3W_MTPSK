@@ -218,13 +218,13 @@
                     <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
                         <%
                             ArrayList<Toy> toyList = (ArrayList<Toy>) session.getAttribute("TOY_LIST");
-                            
+
                             Collections.sort(toyList, new Comparator<Toy>() {
-                            public int compare(Toy toy1, Toy toy2) {
-                                return toy2.getToyId()- toy1.getToyId();
-                            }
-                        });
-                            
+                                public int compare(Toy toy1, Toy toy2) {
+                                    return toy2.getToyId() - toy1.getToyId();
+                                }
+                            });
+
                             if (toyList != null) {
                                 for (Toy toy : toyList) {
                                     String base64Image = Base64.getEncoder().encodeToString(toy.getImage());
@@ -305,7 +305,9 @@
                                         <%
                                             }
                                         %>
-                                    </select><br>                                                                  
+                                    </select><br>      
+                                    <label for="quantity">Quantity</label></br>
+                                    <input type="number" id="quantity" style="width: 150px" name="quantity"  min="0" required></br>
                                     <label for="warrantyTime">Warranty Time</label></br>
                                     <input type="date" id="warranty" name="warrantyTime" required></br>
                                     <label for="description">Description</label><br>
