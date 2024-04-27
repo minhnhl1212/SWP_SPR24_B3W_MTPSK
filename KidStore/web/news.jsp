@@ -51,7 +51,8 @@
                             <div class="fh5co_heading fh5co_heading_border_bottom py-2 mb-4">News</div>
                         </div>
 
-                        <%                            ArrayList<News> newsList = (ArrayList<News>) session.getAttribute("NEWS_LIST");
+                        <%                           
+                            ArrayList<News> newsList = (ArrayList<News>) session.getAttribute("NEWS_LIST");
                             if (newsList != null && !newsList.isEmpty()) {
                                 for (News news : newsList) {
                                     String base64Image = Base64.getEncoder().encodeToString(news.getImage());
@@ -63,8 +64,8 @@
                                 <div class="col-md-5">
                                     <div class="fh5co_hover_news_img">
                                         <a href="news_detail.jsp">
-<!--                                            <div class="fh5co_news_img"><img src="data:image/jpeg;base64,<%= base64Image%>" alt="News Image"></div>-->
-                                            <div class="fh5co_news_img"><img src="https://www.mykingdom.com.vn/cdn/shop/articles/hot-wheels-tang-toc-rinh-qua-sieu-soc_thumbnail_384x.jpg?v=1713927223" alt="News Image"></div>
+                                            <div class="fh5co_news_img"><img src="data:image/jpeg;base64,<%= base64Image%>" alt="News Image"></div>
+<!--                                            <div class="fh5co_news_img"><img src="https://www.mykingdom.com.vn/cdn/shop/articles/hot-wheels-tang-toc-rinh-qua-sieu-soc_thumbnail_384x.jpg?v=1713927223" alt="News Image"></div>-->
                                         </a>
                                     </div>
                                 </div>

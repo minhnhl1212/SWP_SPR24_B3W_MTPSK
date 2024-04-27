@@ -352,7 +352,11 @@
                             <p style="font-size:30px; padding-top:50px;">Customer Name: <%=warranty.getNameUser()%></p>
                             <p style="font-size:30px; padding-top:50px;">Phone: <%=warranty.getPhone()%> </p>
                             <p style="font-size:30px; padding-top:50px;">Address: <%=warranty.getAddress()%></p>
+                            <% if (warranty.getDescriptionWarranty() != null && !warranty.getDescriptionWarranty().isEmpty()) {%>
                             <p style="font-size:30px; padding-top:50px; word-wrap: break-word;">Description: <%=warranty.getDescriptionWarranty()%></p>
+                            <% } else { %>
+                            <p style="font-size:30px; padding-top:50px; word-wrap: break-word;"></p>    
+                            <% } %>
                         </div>   
                     </div>
                     <%}

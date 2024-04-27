@@ -1,4 +1,7 @@
 
+<%@page import="java.util.Comparator"%>
+<%@page import="java.util.Collections"%>
+<%@page import="DTO.OrderHistory"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.Base64"%>
 <%@page import="DTO.Toy"%>
@@ -121,7 +124,7 @@
                 padding-left: 1rem;
                 padding-right: 1rem;
             }
-                
+
 
 
 
@@ -158,7 +161,7 @@
                         <span class="ml-4">ManagerProduct</span>
                     </a>
                 </li>            
-                
+
                 <li class="relative px-6 py-3">
                     <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200" href="LoadOrderFeedback">
                         <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -193,7 +196,9 @@
                         <span class="ml-4">Add News</span>
                     </a>
                 </li>
-            </ul>                        
+            </ul>  
+            <h2 style="color: greenyellow">${ADD_TOY_SUCCESS}</h2>
+            <h2 style="color: red">${ADD_TOY_FAILED}</h2>
         </div>
         <div class="w-full overflow-hidden rounded-lg shadow-xs">
             <div class="w-full overflow-x-auto">
@@ -213,6 +218,13 @@
                     <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
                         <%
                             ArrayList<Toy> toyList = (ArrayList<Toy>) session.getAttribute("TOY_LIST");
+                            
+                            Collections.sort(toyList, new Comparator<Toy>() {
+                            public int compare(Toy toy1, Toy toy2) {
+                                return toy2.getToyId()- toy1.getToyId();
+                            }
+                        });
+                            
                             if (toyList != null) {
                                 for (Toy toy : toyList) {
                                     String base64Image = Base64.getEncoder().encodeToString(toy.getImage());
@@ -246,12 +258,12 @@
                             </td>
 
 
-                            
+
                         </tr>
                         <%}
                         } else {
                         %>
-                    <p>Không có ?? ch?i nào</p>
+                    <p>Không có đồ chơi nào</p>
                     <%
                         }
                     %>                
@@ -260,8 +272,6 @@
 
                 <section class="my-8 mx-auto max-w-4xl">
                     <button onclick="toggleAddProductForm()" class="add">Add New Product</button>
-                    <h2 style="color: greenyellow">${ADD_TOY_SUCCESS}</h2>
-                    <h2 style="color: red">${ADD_TOY_FAILED}</h2>
                 </section>
 
                 <div class="wrap">
