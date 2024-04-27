@@ -131,14 +131,14 @@
             /* css form info customer */
             .popup-form {
                 display: none;
-                width: 800px;
-                height: 500px;
+                width: 500px;
+                height: 100%;
                 position: fixed;
-                top: 15%;
-                left: 25%;
+                top: 0%;
+                left: 35%;
                 background-color: whitesmoke;
                 padding: 20px;
-                border: 1px solid #ccc;
+                border: 2px solid black;
                 border-radius: 5px;
                 box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
                 z-index: 3000;
@@ -224,22 +224,17 @@
         </div>    
         <div class="w-full overflow-hidden rounded-lg shadow-xs">
             <div class="w-full overflow-x-auto">
-                <table class="w-full whitespace-no-wrap">
+                <table class="w-full whitespace-no-wrap" style="text-align: center;">
 
                     <thead>
-                        <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
-                            <th class="px-4 py-3">ID</th>
-                            <th class="px-4 py-3">Product Name</th>
-                            <th class="px-4 py-3">Image</th>
-                            <th class="px-4 py-3">Category</th>
-                            <th class="px-4 py-3">Price</th>
-                            <th class="px-4 py-3">Discount</th>
-                            <th class="px-4 py-3">Quantity</th>
-                            <th class="px-4 py-3">Total</th>
-                            <th class="px-4 py-3">Date</th>
-                            <th class="px-4 py-3">Detail</th>
-                            <th class="px-4 py-3">Status</th>
-                            <th class="px-4 py-3">Action</th>
+                        <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800" style="text-align: center;">
+                            <th class="py-3" style="padding-left: 1rem; padding-right: 1rem;">Mã Đơn Hàng</th>
+                            <th class="py-3" style="padding-left: 5rem; padding-right: 5rem;">Ngày Tạo Đơn Hàng</th>
+                            <th class="py-3" style="padding-left: 1rem; padding-right: 1rem;">Discount</th>
+                            <th class="py-3" style="padding-left: 1rem; padding-right: 1rem;">Total</th>
+                            <th class="py-3" style="padding-left: 1rem; padding-right: 1rem;">Chi tiết</th>
+                            <th class="py-3" style="padding-left: 1rem; padding-right: 1rem;">Status</th>
+                            <th class="py-3" style="padding-left: 1rem; padding-right: 1rem;">Action</th>
                         </tr>
                     </thead>                                     
                     <%
@@ -261,38 +256,8 @@
                                 <%=idOrder.getOrderId()%>
                             </td>                                        
 
-                            <td class="px-4 py-3 text-sm">
-                                <%
-                                    for (OrderHistory order : orderList) {
-                                        if (order.getOrderId() == idOrder.getOrderId()) {
-                                %>
-                                <%=order.getToyName()%></br>
-                                <%}
-                                    }
-                                %>
-                            </td>
-                            <td class="px-4 py-3 text-xs">
-                                <%
-                                    for (OrderHistory order : orderList) {
-                                        if (order.getOrderId() == idOrder.getOrderId()) {
-                                            String base64Image = Base64.getEncoder().encodeToString(order.getImageToy());
 
-                                %>
-                                <img src="data:image/jpeg;base64,<%= base64Image%>" alt="Toy Image">
-                                <%}
-                                    }
-                                %>
-                            </td>
-                            <td class="px-4 py-3 text-sm">
-                                <%
-                                    for (OrderHistory order : orderList) {
-                                        if (order.getOrderId() == idOrder.getOrderId()) {
-                                %>
-                                <%=order.getNameCategory()%></br>
-                                <%}
-                                    }
-                                %>
-                            </td>
+
                             <td class="px-4 py-3 text-sm">
                                 <%--
                                 <%
@@ -310,38 +275,6 @@
                                             String formatPrice = vnCurrencyFormat.format(order.getPrice());
                                 %>
                                 <%=formatPrice%></br>
-                                <%}
-                                    }
-                                %>
-                            </td>
-                            <td class="px-4 py-3 text-sm">
-                                <%--
-                                <%
-                                    for (OrderHistory order : orderList) {
-                                        if (order.getOrderId() == idOrder.getOrderId()) {
-                                %>
-                                <%=order.getOrderPrice()%>  VNĐ</br>
-                                <%}
-                                    }
-                                %>
-                                --%>
-                                <%
-                                    for (OrderHistory order : orderList) {
-                                        if (order.getOrderId() == idOrder.getOrderId()) {
-                                            DecimalFormat vnCurrencyFormat = new DecimalFormat("###,### VNĐ");
-                                            String formatOrderPrice = vnCurrencyFormat.format(order.getOrderPrice());
-                                %>
-                                <%=formatOrderPrice%></br>
-                                <%}
-                                    }
-                                %>
-                            </td>
-                            <td class="px-4 py-3 text-sm">
-                                <%
-                                    for (OrderHistory order : orderList) {
-                                        if (order.getOrderId() == idOrder.getOrderId()) {
-                                %>
-                                <%=order.getQuantity()%></br>
                                 <%}
                                     }
                                 %>
@@ -389,7 +322,7 @@
 
                             <!-- Form thông tin khách hàng -->
                             <td>
-                                <button type="button" class="button-detail" onclick="togglePopup('<%= "popupForm_" + idOrder.getOrderId()%>')"><i class='bx bx-detail'></i>Customer-Info</button>                                
+                                <button type="button" class="button-detail" onclick="togglePopup('<%= "popupForm_" + idOrder.getOrderId()%>')"><i class='bx bx-detail'></i>Chi tiết đơn hàng</button>                                
                             </td>
 
 
@@ -421,14 +354,37 @@
                             </td>
                         </tr>
                     <div class="popup-form" id="popupForm_<%= idOrder.getOrderId()%>">  
-                            <p style="font-size: 40px; font-weight: bold; font-style: italic; text-align: center;">Customer - Detail</p>
-                            <a class="close-detail" href="#" style="text-decoration: none; color: black; margin-top: -5%;" onclick="togglePopup('<%= "popupForm_" + idOrder.getOrderId()%>')">X</a>
-                            <div class="form-detail">
-                                <p style="font-size:30px; padding-top:50px;">Customer Name: <%=idOrder.getFullname()%></p>
-                                <p style="font-size:30px; padding-top:50px;">Phone: <%=idOrder.getPhone()%></p>
-                                <p style="font-size:30px; padding-top:50px;">Address: <%=idOrder.getAddress()%></p>
-                                <p style="font-size:30px; padding-top:50px;">Payments: <%= (idOrder.getTypePayment() == 0) ? "Thanh toán khi nhận hàng" : "Thanh toán qua ngân hàng"%></p>
-                            </div>   
+                        <p style="font-weight: bold; font-style: italic; text-align: center; margin-bottom: 20px;">Chi tiết Đơn hàng</p>
+                        <a class="close-detail" href="#" style="text-decoration: none; color: black; margin-top: -5%;" onclick="togglePopup('<%= "popupForm_" + idOrder.getOrderId()%>')">X</a>
+                        <div class="form-detail" style="margin-top: 30px;">
+                            <p style="font-weight: bold;">Thông tin đơn hàng</p>
+                            <p>Mã đơn hàng: </p>
+                            <p>Ngày tạo đơn: </p>
+                        </div>   
+                        <div class="form-detail" style="margin-top: 30px;">
+                            <p style="font-weight: bold;">Thông tin khách hàng</p>
+                            <p>Họ Tên: <%=idOrder.getFullname()%></p>
+                            <p>Số điện thoại: <%=idOrder.getPhone()%></p>
+                            <p>Địa chỉ: <%=idOrder.getAddress()%></p>
+                        </div>   
+                        <div class="form-detail" style="margin-top: 30px;">
+                            <p style="font-weight: bold;">Thông tin thanh toán</p>
+                            <p>Hình thức: <%= (idOrder.getTypePayment() == 0) ? "Thanh toán khi nhận hàng" : "Thanh toán qua ngân hàng"%></p>
+                            <p>Discount: </p>
+                            <p>Total: </p>                             
+                        </div> 
+                        <div class="form-detail" style="margin-top: 30px;">
+                            <p style="font-weight: bold;">Thông tin sản phẩm</p>
+                            <div class="flex items-center" style="margin-top: 20px;">
+                                <img src="https://d1hjkbq40fs2x4.cloudfront.net/2017-08-21/files/landscape-photography_1645.jpg" alt="Product Image" class="w-24 h-auto mr-4">
+                                <div>
+                                    <p>Tên sản phẩm của bạn</p>
+                                    <p>Giá sản phẩm</p>
+                                    <p>Số lượng sản phẩm</p>
+                                    <p>Thành tiền</p>
+                                </div>
+                            </div>                          
+                        </div> 
                     </div>
                     </tbody>
                     <%}
