@@ -167,15 +167,15 @@
                             <th class="py-3" style="width: 100px;" style="padding-left: 5rem; padding-right: 5rem;">Description</th>
                             <th class="py-3" style="padding-left: 3rem; padding-right: 3rem;">Action</th>
                             -->
-                            <th class="py-3" style="padding-left: 3rem; padding-right: 3rem;">ID Warranty</th>
-                            <th class="py-3" style="padding-left: 5rem; padding-right: 5rem;">Image</th>
-                            <th class="py-3" style="padding-left:20rem; padding-right: 20rem;">Name Toy</th>
-                            <th class="py-3" style="padding-left: 3rem; padding-right: 3rem;">Quantity</th>
-                            <th class="py-3" style="padding-left: 5rem; padding-right: 5rem;">Purchase Date</th>
-                            <th class="py-3" style="padding-left: 5rem; padding-right: 5rem;">Warranty Date</th>
-                            <th class="py-3" style="padding-left: 10rem; padding-right: 10rem;">Detail</th>
-                            <th class="py-3" style="padding-left: 5rem; padding-right: 5rem;">Status</th>
-                            <th class="py-3" style="padding-left: 5rem; padding-right: 5rem;">Action</th>
+                            <th class="py-3" style="padding-left: 1rem; padding-right: 1rem;">ID Warranty</th>
+                            <th class="py-3" style="padding-left: 3rem; padding-right: 3rem;">Image</th>
+                            <th class="py-3" style="padding-left:20rem; padding-right: 20rem; word-wrap: break-word;">Name Toy</th>
+                            <th class="py-3" style="padding-left: 1rem; padding-right: 1rem;">Quantity</th>
+                            <th class="py-3" style="padding-left: 2rem; padding-right: 2rem;">Purchase Date</th>
+                            <th class="py-3" style="padding-left: 2rem; padding-right: 2rem;">Warranty Date</th>
+                            <th class="py-3" style="padding-left: 3rem; padding-right: 3rem;">Detail</th>
+                            <th class="py-3" style="padding-left: 8rem; padding-right: 8rem;">Status</th>
+                            <th class="py-3">Action</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
