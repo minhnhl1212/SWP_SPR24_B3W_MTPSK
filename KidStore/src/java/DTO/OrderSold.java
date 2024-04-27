@@ -12,6 +12,11 @@ import java.util.Date;
  * @author admin
  */
 public class OrderSold {
+    private int orderId;
+    private String CustomerName;
+    private String phone;
+    private String address;
+    private boolean paymentType;
     private byte[] image;
     private String toyName;
     private int quantity;
@@ -32,6 +37,64 @@ public class OrderSold {
         this.discount = discount;
     }
 
+    public OrderSold(int orderId, String CustomerName, String phone, String address, boolean paymentType, byte[] image, String toyName, int quantity, String fullName, double toyPrice, Date orderDate, double totalPrice, double discount) {
+        this.orderId = orderId;
+        this.CustomerName = CustomerName;
+        this.phone = phone;
+        this.address = address;
+        this.paymentType = paymentType;
+        this.image = image;
+        this.toyName = toyName;
+        this.quantity = quantity;
+        this.fullName = fullName;
+        this.toyPrice = toyPrice;
+        this.orderDate = orderDate;
+        this.totalPrice = totalPrice;
+        this.discount = discount;
+    }
+
+   
+
+    public int getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
+    }
+
+    public String getCustomerName() {
+        return CustomerName;
+    }
+
+    public void setCustomerName(String CustomerName) {
+        this.CustomerName = CustomerName;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public boolean isPaymentType() {
+        return paymentType;
+    }
+
+    public void setPaymentType(boolean paymentType) {
+        this.paymentType = paymentType;
+    }
+    
     public OrderSold() {
     }
 

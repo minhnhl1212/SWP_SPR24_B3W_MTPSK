@@ -604,8 +604,10 @@ public class OrderDAO {
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "select Image.image_toy, Toy.toy_name, OrderDetail.quantity, "
-                        + "Account.full_name, [Order].order_date, [Order].order_amount,\n"
+                String sql = "select [Order].order_id, [Order].name, [Order].phone,\n"
+                        + " [Order].address, [Order].payment_type, \n"
+                        + "Image.image_toy, Toy.toy_name, OrderDetail.quantity, "
+                        + "Account.full_name, [Order].order_date,\n"
                         + "OrderDetail.OD_price, Voucher.voucher_discount from Toy \n"
                         + "inner join OrderDetail on Toy.toy_id = OrderDetail.toy_id\n"
                         + "inner join [Order] on OrderDetail.order_id = [Order].order_id\n"
@@ -616,10 +618,13 @@ public class OrderDAO {
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
-                    OrderSold os = new OrderSold(rs.getBytes("image_toy"),
+                    OrderSold os = new OrderSold(rs.getInt("order_id"), rs.getString("name"),
+                            rs.getString("phone"), rs.getString("address"), 
+                            rs.getBoolean("payment_type"),rs.getBytes("image_toy"),
                             rs.getString("toy_name"), rs.getInt("quantity"),
                             rs.getString("full_name"), rs.getDouble("OD_price"),
-                            rs.getDate("order_date"), rs.getDouble("order_amount"),
+                            addTwoDays(rs.getDate("order_date")), 
+                            rs.getDouble("OD_price")*rs.getInt("quantity"),
                             rs.getDouble("voucher_discount"));
                     ordersold_list.add(os);
                 }

@@ -138,6 +138,7 @@
                 if (orderList != null) {
                     for (OrderSold o : orderList) {
                         totalRevenue += o.getTotalPrice() * o.getDiscount();
+                        System.out.println(totalRevenue);
                     }
                 }
 
@@ -156,7 +157,7 @@
                         <div class="head">
                             <h3>Revenue Stream</h3>
 <!--                            <h3 style="text-align: left; margin-left: 470px;">Total Revenue: &nbsp; <%=formatTotalRevenue%></h3>-->
-                            <h3 style="text-align: left; margin-left: 470px;">Total Revenue: 1.147.000 VNĐ</h3>
+                            <h3 style="text-align: left; margin-left: 470px;">Total Revenue: <%=formatTotalRevenue%> VNĐ</h3>
                         </div>
                         <table>
                             <thead>
@@ -167,7 +168,7 @@
                                     <th>Name</th>
                                     <th>Price</th>
                                     <th>Quantity</th>
-                                    <th>Discount</th>
+                                    <th>Voucher Discount</th>
                                     <th>Total Price</th>
                                     <th>Detail</th>
                                 </tr>
@@ -213,6 +214,9 @@
                                             String formatPrice = vnCurrencyFormat.format(e.getToyPrice());
                                             String formatTotalPrice = vnCurrencyFormat.format(e.getTotalPrice() * e.getDiscount());
                                             String base64Image = Base64.getEncoder().encodeToString(e.getImage());
+                                            String paymentName;
+                                            if(e.isPaymentType()) paymentName = "Thanh toán bằng ngân hàng";
+                                            else paymentName = "Thanh toán bằng tiền mặt";
 
                                 %>
                                 <tr>
@@ -233,12 +237,11 @@
                                 <a class="close" href="#" style="text-decoration: none; color: black; margin-top: 2%;" onclick="togglePopup()">X</a> 
                                 <div class="form-detail">
                                     <p style="font-size: 40px; font-weight: bold; font-style: italic; text-align: center;">Detail</p>
-                                    <p style="font-size:15px; padding-top:50px;">Order ID: 1</p>
-                                    <p style="font-size:15px; padding-top:50px;">Staff Name: Staff</p>
-                                    <p style="font-size:15px; padding-top:50px;">Customer Name: Minh</p>
-                                    <p style="font-size:15px; padding-top:50px;">Phone: 012931212</p>
-                                    <p style="font-size:15px; padding-top:50px;">Address: TPHCM</p>
-                                    <p style="font-size:15px; padding-top:50px;">Payments: Thanh toán bằng ngân hàng</p>
+                                    <p style="font-size:15px; padding-top:50px;">Order ID: <%=e.getOrderId()%></p>
+                                   <p style="font-size:15px; padding-top:50px;">Customer Name:<%=e.getCustomerName()%></p>
+                                    <p style="font-size:15px; padding-top:50px;">Phone: <%=e.getPhone()%></p>
+                                    <p style="font-size:15px; padding-top:50px;">Address: <%=e.getAddress()%></p>
+                                    <p style="font-size:15px; padding-top:50px;">Payments: <%=paymentName%></p>
                                 </div>   
                             </div>
                             <%}
