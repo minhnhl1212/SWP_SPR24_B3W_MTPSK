@@ -192,7 +192,7 @@ public class OrderDAO {
                         + "[Order].order_date, Image.image_toy, "
                         + "Toy.toy_name, OrderDetail.quantity, Category.category_name,"
                         + " Toy.description, [Order].status_order, "
-                        + "Toy.price, OrderDetail.OD_price, [Order].order_amount\n"
+                        + "Toy.price, OrderDetail.OD_price, [Order].order_amount, Toy.discount\n"
                         + "from Toy \n"
                         + "inner join OrderDetail on Toy.toy_id = OrderDetail.toy_id\n"
                         + "inner join [Order] on OrderDetail.order_id = [Order].order_id\n"
@@ -202,7 +202,7 @@ public class OrderDAO {
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
-                    OrderHistory list = new OrderHistory(rs.getInt("order_id"), rs.getDate("order_date"), rs.getBytes("image_toy"), rs.getString("toy_name"), rs.getInt("quantity"), rs.getString("category_name"), rs.getString("description"), rs.getString("status_order"), rs.getDouble("price"), rs.getDouble("OD_price"), rs.getDouble("order_amount"));
+                    OrderHistory list = new OrderHistory(rs.getInt("order_id"), rs.getDate("order_date"), rs.getBytes("image_toy"), rs.getString("toy_name"), rs.getInt("quantity"), rs.getString("category_name"), rs.getString("description"), rs.getString("status_order"), rs.getDouble("price"), rs.getDouble("OD_price"), rs.getDouble("order_amount"), rs.getDouble("discount"));
                     listOrder.add(list);
                 }
             }

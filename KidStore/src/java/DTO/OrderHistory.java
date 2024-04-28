@@ -59,7 +59,7 @@ public class OrderHistory {
         this.typePayment = typePayment;
     }   
 
-    public OrderHistory(int orderId, Date orderDate, byte[] imageToy, String toyName, int quantity, String nameCategory, String description, String status, double price, double orderPrice, double orderAmount) {
+    public OrderHistory(int orderId, Date orderDate, byte[] imageToy, String toyName, int quantity, String nameCategory, String description, String status, double price, double orderPrice, double orderAmount, double discount) {
         this.orderId = orderId;
         this.orderDate = orderDate;
         this.imageToy = imageToy;
@@ -71,6 +71,7 @@ public class OrderHistory {
         this.price = price;
         this.orderPrice = orderPrice;
         this.orderAmount = orderAmount;
+        this.discount = discount;
     }
 
     public OrderHistory(int orderId, int orderDetailId, Date orderDate, byte[] imageToy, String toyName, int quantity, String nameCategory, String description, String status, double price, double orderPrice, double orderAmount) {
@@ -240,4 +241,6 @@ public class OrderHistory {
     public void setTypePayment(int typePayment) {
         this.typePayment = typePayment;
     }       
+    
+    
 }
