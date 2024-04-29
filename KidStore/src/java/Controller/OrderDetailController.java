@@ -7,6 +7,7 @@ package Controller;
 
 import DAO.Code;
 import DAO.OrderDAO;
+import DAO.ToyDAO;
 import DTO.Toy;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -43,6 +44,7 @@ public class OrderDetailController extends HttpServlet {
         double price;
         String warrantyCode;
         Code code = new Code();
+        ToyDAO tdao = new ToyDAO();
         OrderDAO dao = new OrderDAO();
         int orderId = (Integer)session.getAttribute("OrderID");
         HashMap<Toy,Integer> cartList = (HashMap<Toy,Integer>) session.getAttribute("cartList");
@@ -52,7 +54,9 @@ public class OrderDetailController extends HttpServlet {
             price = c.getKey().getPrice()*c.getKey().getDiscount();
             warrantyCode = code.Code();
             int a = dao.CreateOrderDetail(toyId, quantity, price, orderId, warrantyCode, "Đang xử lý");
+            int b = tdao.ReduceToyQuantityAfterSell(toyId, quantity);
             System.out.println(a);
+            System.out.println(b);
         }
         session.setAttribute("cartList", null);
         session.setAttribute("OrderID", null);
@@ -63,7 +67,6 @@ public class OrderDetailController extends HttpServlet {
         RequestDispatcher rd = request.getRequestDispatcher("home.jsp");
         rd.forward(request, response);
         }
-        
         catch(Exception e){
             e.printStackTrace();
         }

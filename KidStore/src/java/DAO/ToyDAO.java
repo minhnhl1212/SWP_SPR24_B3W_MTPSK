@@ -38,7 +38,10 @@ public class ToyDAO {
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "select Toy.toy_id, Toy.toy_name, Toy.quantity, Image.image_toy, Toy.price, Toy.description, Toy.category_id, Toy.discount, Toy.warranty_time, Toy.isActive, Toy.isDisable, Image.image_id, Image.main, Category.category_name\n"
+                String sql = "select Toy.toy_id, Toy.toy_name, Toy.quantity, Image.image_toy, "
+                        + "Toy.price, Toy.description, Toy.category_id, Toy.discount,"
+                        + " Toy.warranty_time, Toy.isActive, Toy.isDisable, Image.image_id, "
+                        + "Image.main, Category.category_name\n"
                         + "from Image\n"
                         + "inner join Toy on Image.toy_id = Toy.toy_id\n"
                         + "inner join Category on Toy.category_id = Category.category_id\n"
@@ -296,5 +299,25 @@ public class ToyDAO {
             closeConnection();
         }
         return toy;
+    }
+
+    public int ReduceToyQuantityAfterSell(int id, int quantity) throws Exception {
+        int check = 2;
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "UPDATE Toy SET quantity = quantity - ? where toy_id=? ";
+                ps = con.prepareStatement(sql);
+                ps.setInt(1, quantity);
+                ps.setInt(2, id);
+                check = ps.executeUpdate();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally{
+            closeConnection();
+        }
+        return check;
     }
 }

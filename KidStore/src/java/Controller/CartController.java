@@ -52,6 +52,11 @@ public class CartController extends HttpServlet {
             String valueParam = request.getParameter("InputValue");
             if (valueParam != null) {
                 value = Integer.parseInt(valueParam);
+                if(item.getQuantity()<value){
+                    session.setAttribute("TOO_MANY", "We don't have enough items in our stock."
+                            + " We will set the maximum we have for you.");
+                    value = item.getQuantity();
+                }
             }
             //không có List thì tạo cái mới
             if (cartList == null) {
