@@ -128,20 +128,30 @@
                 border-radius: 5px;
                 padding: 20px;
             }
-            /* css form info customer */
+
+
             .popup-form {
                 display: none;
-                width: 500px;
-                height: 100%;
+                width: 1200px;
+                height: 700px;
                 position: fixed;
-                top: 0%;
-                left: 35%;
+                top: 2%;
+                left: 13%;
                 background-color: whitesmoke;
                 padding: 20px;
                 border: 2px solid black;
                 border-radius: 5px;
                 box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
                 z-index: 3000;
+                overflow-y: auto;
+            }
+
+            .form-detail {
+                /* Thiết lập lại các thuộc tính để đảm bảo rằng nó xuất hiện bên trong popup */
+                position: relative;
+                display: block;
+                width: 100%; /* hoặc 100% - padding nếu có */
+                height: auto; /* hoặc kích thước phù hợp */
             }
 
             .close-detail{
@@ -175,7 +185,7 @@
                         <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                         <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
                         </svg>
-                        <span class="ml-4">ManagerProduct</span>
+                        <span class="ml-4">Manage Product</span>
                     </a>
                 </li>            
                 <li class="relative px-6 py-3">
@@ -183,7 +193,7 @@
                         <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                         <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
                         </svg>
-                        <span class="ml-4">ManagerCategory</span>
+                        <span class="ml-4">Manage Category</span>
                     </a>
                 </li>
                 <li class="relative px-6 py-3">
@@ -191,7 +201,7 @@
                         <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                         <path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
                         </svg>
-                        <span class="ml-4">ManagerCustomer</span>
+                        <span class="ml-4">Manage Customer</span>
                     </a>
                 </li>
                 <li class="relative px-6 py-3">
@@ -200,7 +210,7 @@
                         <path d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path>
                         <path d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
                         </svg>
-                        <span class="ml-4">ManagerWarranty</span>
+                        <span class="ml-4">Manage Warranty</span>
                     </a>
                 </li>
                 <li class="relative px-6 py-3">
@@ -209,7 +219,7 @@
                         <path d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path>
                         <path d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
                         </svg>
-                        <span class="ml-4">ManagerHistoryProduct</span>
+                        <span class="ml-4">Manage Order</span>
                     </a>
                 </li>
                 <li class="relative px-6 py-3">
@@ -296,27 +306,48 @@
                             </td>
                         </tr>
                     <div class="popup-form" id="popupForm_<%= idOrder.getOrderId()%>">  
-                        <p style="font-weight: bold; font-style: italic; text-align: center; margin-bottom: 20px;">Chi tiết Đơn hàng</p>
+                        <p style="font-weight: bold; font-style: italic; text-align: center; margin-bottom: 20px; font-size: 30px;">Chi tiết Đơn hàng</p>
                         <a class="close-detail" href="#" style="text-decoration: none; color: black; margin-top: -5%;" onclick="togglePopup('<%= "popupForm_" + idOrder.getOrderId()%>')">X</a>
                         <div class="form-detail" style="margin-top: 30px;">
-                            <p style="font-weight: bold;">Thông tin đơn hàng</p>
-                            <p>Mã đơn hàng: <%=idOrder.getOrderId()%></p>
-                            <p>Ngày tạo đơn: <%=idOrder.getOrderDate()%></p>
+                            <p style="font-weight: bold; font-size: 25px;">Thông tin đơn hàng</p>
+                            <div style="display:flex;">
+                                <p style="font-weight: bold;">Mã đơn hàng:</p>
+                                <p>&nbsp;&nbsp;<%=idOrder.getOrderId()%></p>
+                            </div>
+                            <div style="display: flex;">
+                                <p style="font-weight: bold;">Ngày tạo đơn: </p>
+                                <p>&nbsp; <%=idOrder.getOrderDate()%></p>
+                            </div>
                         </div>   
 
                         <div class="form-detail" style="margin-top: 30px;">
-                            <p style="font-weight: bold;">Thông tin khách hàng</p>
-                            <p>Họ Tên: <%=idOrder.getFullname()%></p>
-                            <p>Số điện thoại: <%=idOrder.getPhone()%></p>
-                            <p>Địa chỉ: <%=idOrder.getAddress()%></p>
+                            <p style="font-weight: bold; font-size: 25px;"">Thông tin khách hàng</p>
+                            <div style="display: flex;">
+                                <p style="font-weight: bold;">Họ và Tên: </p> 
+                                <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<%=idOrder.getFullname()%></p>
+                            </div>
+                            <div style="display: flex;">
+                                <p style="font-weight: bold;">Số điện thoại: </p>
+                                <p>&nbsp; &nbsp;<%=idOrder.getPhone()%></p>
+                            </div>
+                            <div style="display: flex;">
+                                <p style="font-weight: bold;">Địa chỉ: </p>
+                                <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <%=idOrder.getAddress()%></p>
+                            </div>
                         </div>   
                         <div class="form-detail" style="margin-top: 30px;">
-                            <p style="font-weight: bold;">Thông tin thanh toán</p>
-                            <p>Hình thức: <%= (idOrder.getTypePayment() == 0) ? "Thanh toán khi nhận hàng" : "Thanh toán qua ngân hàng"%></p>
-                            <!--                            <p>Discount: </p>-->
-                            <p>Total: <%=formatOrderTotal%></p>                             
+                            <p style="font-weight: bold; font-size: 25px;"">Thông tin thanh toán</p>
+                            <div style="display: flex;">
+                                <p style="font-weight: bold;">Hình thức: </p> 
+                                <p>&nbsp; &nbsp; &nbsp; &nbsp; <%= (idOrder.getTypePayment() == 0) ? "Thanh toán khi nhận hàng" : "Thanh toán qua ngân hàng"%></p>
+                            </div>
+                            <div style="display: flex;">
+                                <p style="font-weight: bold;">Total: </p> 
+                                <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<%=formatOrderTotal%></p>  
+                            </div>
+                            <!--                            <p>Discount: </p>-->                         
                         </div> 
-                        <p style="font-weight: bold; margin-top: 30px;">Thông tin sản phẩm</p>
+                        <p style="font-weight: bold; margin-top: 30px; font-size: 25px;"">Thông tin sản phẩm</p>
                         <%
 
                             for (OrderHistory order : orderList) {
@@ -330,11 +361,26 @@
                             <div class="flex items-center" style="margin-top: 20px;">
                                 <img src="data:image/jpeg;base64,<%= base64Image%>" alt="Product Image" class="w-24 h-auto mr-4">
                                 <div>
-                                    <p>Tên sản phẩm: <%=order.getToyName()%></p>
-                                    <p>Giá sản phẩm: <%=price%></p>
-                                    <p>Giảm giá: <%=discount%></p>
-                                    <p>Số lượng: <%=order.getQuantity()%></p>
-                                    <p>Thành tiền: <%=total%></p>
+                                    <div style="display: flex;">
+                                        <p style="font-weight: bold;">Tên sản phẩm: </p> 
+                                        <p>&nbsp; &nbsp; &nbsp; &nbsp;<%=order.getToyName()%></p>
+                                    </div>
+                                    <div style="display: flex;">
+                                        <p style="font-weight: bold;">Giá sản phẩm: </p>
+                                        <p>&nbsp; &nbsp; &nbsp; &nbsp;<%=price%></p>
+                                    </div>
+                                    <div style="display: flex;">
+                                        <p style="font-weight: bold;">Giảm giá: </p>
+                                        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<%=discount%></p>
+                                    </div>
+                                    <div style="display: flex;">
+                                        <p style="font-weight: bold;">Số lượng:</p>
+                                        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<%=order.getQuantity()%></p>
+                                    </div>
+                                    <div style="display: flex;">
+                                        <p style="font-weight: bold;">Thành tiền: </p>
+                                        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <%=total%></p>
+                                    </div>
                                 </div>
                             </div>                          
                         </div> 
@@ -347,6 +393,8 @@
                             }
                         %>
                     </div>
+
+
                     </tbody>
                     <%}
                     } else {
