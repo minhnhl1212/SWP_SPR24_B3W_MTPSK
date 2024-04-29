@@ -146,14 +146,6 @@
                 overflow-y: auto;
             }
 
-            .form-detail {
-                /* Thiết lập lại các thuộc tính để đảm bảo rằng nó xuất hiện bên trong popup */
-                position: relative;
-                display: block;
-                width: 100%; /* hoặc 100% - padding nếu có */
-                height: auto; /* hoặc kích thước phù hợp */
-            }
-
             .close-detail{
                 float: right;
                 font-size: 1.5rem;
@@ -321,7 +313,7 @@
                         </div>   
 
                         <div class="form-detail" style="margin-top: 30px;">
-                            <p style="font-weight: bold; font-size: 25px;"">Thông tin khách hàng</p>
+                            <p style="font-weight: bold; font-size: 25px;">Thông tin khách hàng</p>
                             <div style="display: flex;">
                                 <p style="font-weight: bold;">Họ và Tên: </p> 
                                 <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<%=idOrder.getFullname()%></p>
@@ -336,7 +328,7 @@
                             </div>
                         </div>   
                         <div class="form-detail" style="margin-top: 30px;">
-                            <p style="font-weight: bold; font-size: 25px;"">Thông tin thanh toán</p>
+                            <p style="font-weight: bold; font-size: 25px;">Thông tin thanh toán</p>
                             <div style="display: flex;">
                                 <p style="font-weight: bold;">Hình thức: </p> 
                                 <p>&nbsp; &nbsp; &nbsp; &nbsp; <%= (idOrder.getTypePayment() == 0) ? "Thanh toán khi nhận hàng" : "Thanh toán qua ngân hàng"%></p>
@@ -347,7 +339,7 @@
                             </div>
                             <!--                            <p>Discount: </p>-->                         
                         </div> 
-                        <p style="font-weight: bold; margin-top: 30px; font-size: 25px;"">Thông tin sản phẩm</p>
+                        <p style="font-weight: bold; margin-top: 30px; font-size: 25px;">Thông tin sản phẩm</p>
                         <%
 
                             for (OrderHistory order : orderList) {

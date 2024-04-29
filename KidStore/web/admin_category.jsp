@@ -38,6 +38,12 @@
             </a>
             <ul class="side-menu top">
                 <li>
+                    <a href="admin_dashboard.jsp">
+                        <i class='bx bxs-dashboard' ></i>
+                        <span class="text">Dashboard</span>
+                    </a>
+                </li>
+                <li>
                     <a href="AccountController">
                         <i class='bx bxs-group' ></i>
                         <span class="text">Account</span>
@@ -55,7 +61,7 @@
                         <span class="text">Category</span>
                     </a>
                 </li>
-                <li>
+                <li hidden="">
                     <a href="RevenueController">
                         <i class='bx bx-money'></i>
                         <span class="text">Revenue</span>

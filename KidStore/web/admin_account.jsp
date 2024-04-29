@@ -1,7 +1,7 @@
-    <%-- 
-    Document   : admin_page
-    Created on : Apr 15, 2024, 6:10:37 PM
-    Author     : TUF
+<%-- 
+Document   : admin_page
+Created on : Apr 15, 2024, 6:10:37 PM
+Author     : TUF
 --%>
 
 <%@page import="DTO.Account"%>
@@ -59,6 +59,12 @@
                 <span class="text">AdminHub</span>
             </a>
             <ul class="side-menu top">
+                <li>
+                    <a href="admin_dashboard.jsp">
+                        <i class='bx bxs-dashboard' ></i>
+                        <span class="text">Dashboard</span>
+                    </a>
+                </li>
                 <li class="active">
                     <a href="AccountController">
                         <i class='bx bxs-group' ></i>
@@ -77,7 +83,7 @@
                         <span class="text">Category</span>
                     </a>
                 </li>
-                <li>
+                <li hidden="">
                     <a href="RevenueController">
                         <i class='bx bx-money'></i>
                         <span class="text">Revenue</span>
@@ -164,7 +170,7 @@
 
                                         <label for="username">User Name: </label>
                                         <input onkeyup="checkUsername()" style="border-style: none none solid; width: 100%; margin: 15px 0; background-color: whitesmoke;" type="text" id="userName" name="user_name"><br>
-                                        
+
 
                                         <label for="password">Password: </label>
                                         <input style="border-style: none none solid; width: 100%; margin: 15px 0; background-color: whitesmoke;" type="password" id="password" name="password"><br>
@@ -273,7 +279,7 @@
                                         </a>
                                     </td>
                                     <td>
-                                            <a href="AccountStatusController?id=<%=a.getUserId()%>&isActive=<%=a.isActive()%>"id="toggleButton" class="button-bordered" style="width: 70% !important;">
+                                        <a href="AccountStatusController?id=<%=a.getUserId()%>&isActive=<%=a.isActive()%>"id="toggleButton" class="button-bordered" style="width: 70% !important;">
                                             <% if (a.isActive()) {%>
                                             Active
                                             <%} else {%>
@@ -321,11 +327,11 @@
                 var addressInvalid = document.getElementById("addressInvalid");
                 if (address.length == "") {
                     addressInvalid.innerHTML = "Invalid Value";
-                }else {
+                } else {
                     addressInvalid.innerHTML = "";
                 }
             }
-            
+
         </script>
         <script src="js/admin.js"></script>
     </body>
