@@ -70,7 +70,10 @@
                             <td><img src="data:image/jpeg;base64,<%= base64Image%>" alt="Toy Image" width="50"></td>
                             <td><%=c.getKey().getToyName()%></td>
                             <td><%=formatEachPrices%></td>
-                            <td><input onchange="this.form.submit()" type="number" name="InputValue" value="<%=c.getValue()%>"/></td>
+                            <td>
+                                <input onchange="this.form.submit()" type="number" name="InputValue" value="<%=c.getValue()%>"/>
+                                <p style="color: red">${TOO_MANY}</p>
+                            </td>
                             <td><% sum += prices;%><%=formatPrices%></td>
                             <td><a method="POST" href="DeleteCartController?productId=<%=c.getKey().getToyId()%>" class="btn btn-outline-danger"><i class="bi bi-trash"></i></a></td>
                             </tr>
