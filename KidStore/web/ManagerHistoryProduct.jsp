@@ -5,6 +5,7 @@
 --%>
 
 
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Comparator"%>
 <%@page import="java.util.Collections"%>
 <%@page import="java.text.DecimalFormat"%>
@@ -257,8 +258,11 @@
                                 <%=idOrder.getOrderId()%>
                             </td>                                        
                             <td class="px-4 py-3 text-sm">
-
-                                <%=idOrder.getOrderDate()%>
+                                <%
+                                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+                                    String date = dateFormat.format(idOrder.getOrderDate());
+                                %>
+                                <%=date%>
                             </td>             
                             <td class="px-4 py-3 text-sm">
                                 <%
