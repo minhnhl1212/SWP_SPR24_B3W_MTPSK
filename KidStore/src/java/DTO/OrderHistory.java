@@ -31,6 +31,12 @@ public class OrderHistory {
         this.orderId = orderId;
     }
 
+    public OrderHistory(int orderId, Date orderDate, double orderAmount) {
+        this.orderId = orderId;
+        this.orderDate = orderDate;
+        this.orderAmount = orderAmount;
+    }
+
     public OrderHistory(int orderId, Date orderDate, String status, double orderAmount, double discount) {
         this.orderId = orderId;
         this.orderDate = orderDate;

@@ -349,7 +349,7 @@
                                     String discount = vnCurrencyFormat.format(order.getPrice() * (1 - order.getDiscount()));
                                     String total = vnCurrencyFormat.format(order.getOrderPrice() * order.getQuantity());
                         %>
-                        <div class="form-detail" >                            
+                        <div class="form-detail">                            
                             <div class="flex items-center" style="margin-top: 20px;">
                                 <img src="data:image/jpeg;base64,<%= base64Image%>" alt="Product Image" class="w-24 h-auto mr-4">
                                 <div>

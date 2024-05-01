@@ -6,6 +6,7 @@
 package DAO;
 
 import DTO.Order;
+import DTO.OrderDashboard;
 import DTO.OrderDetail;
 import DTO.OrderHistory;
 import DTO.OrderSold;
@@ -171,7 +172,7 @@ public class OrderDAO {
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
-                    OrderHistory list = new OrderHistory(rs.getInt("order_id"), rs.getDate("order_date"), rs.getString("status_order"), rs.getDouble("order_amount"), rs.getString("name"), rs.getString("phone"), rs.getString("address"), rs.getInt("payment_type"));
+                    OrderHistory list = new OrderHistory(rs.getInt("order_id"), addTwoDays(rs.getDate("order_date")), rs.getString("status_order"), rs.getDouble("order_amount"), rs.getString("name"), rs.getString("phone"), rs.getString("address"), rs.getInt("payment_type"));
                     idOrderList.add(list);
                 }
             }
@@ -202,7 +203,11 @@ public class OrderDAO {
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
-                    OrderHistory list = new OrderHistory(rs.getInt("order_id"), rs.getDate("order_date"), rs.getBytes("image_toy"), rs.getString("toy_name"), rs.getInt("quantity"), rs.getString("category_name"), rs.getString("description"), rs.getString("status_order"), rs.getDouble("price"), rs.getDouble("OD_price"), rs.getDouble("order_amount"), rs.getDouble("discount"));
+                    OrderHistory list = new OrderHistory(rs.getInt("order_id"), 
+                            addTwoDays(rs.getDate("order_date")), 
+                            rs.getBytes("image_toy"), rs.getString("toy_name"), 
+                            rs.getInt("quantity"), rs.getString("category_name"), 
+                            rs.getString("description"), rs.getString("status_order"), rs.getDouble("price"), rs.getDouble("OD_price"), rs.getDouble("order_amount"), rs.getDouble("discount"));
                     listOrder.add(list);
                 }
             }
@@ -619,12 +624,12 @@ public class OrderDAO {
                 rs = ps.executeQuery();
                 while (rs.next()) {
                     OrderSold os = new OrderSold(rs.getInt("order_id"), rs.getString("name"),
-                            rs.getString("phone"), rs.getString("address"), 
-                            rs.getBoolean("payment_type"),rs.getBytes("image_toy"),
+                            rs.getString("phone"), rs.getString("address"),
+                            rs.getBoolean("payment_type"), rs.getBytes("image_toy"),
                             rs.getString("toy_name"), rs.getInt("quantity"),
                             rs.getString("full_name"), rs.getDouble("OD_price"),
-                            addTwoDays(rs.getDate("order_date")), 
-                            rs.getDouble("OD_price")*rs.getInt("quantity"),
+                            addTwoDays(rs.getDate("order_date")),
+                            rs.getDouble("OD_price") * rs.getInt("quantity"),
                             rs.getDouble("voucher_discount"));
                     ordersold_list.add(os);
                 }
@@ -665,4 +670,57 @@ public class OrderDAO {
         }
         return listOfOrderID;
     }
+    public ArrayList<OrderDashboard> getAllOrderIDByDate(Date date) throws Exception {
+        ArrayList<OrderDashboard> listOfOrderID = new ArrayList<>();
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "select order_id, order_amount, name, phone, address,"
+                        + " payment_type from [Order]"
+                        + "where order_date=? AND status_order=N'Đã Giao Hàng'";
+                ps = con.prepareStatement(sql);
+                ps.setDate(1, (java.sql.Date) date);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    OrderDashboard oh = new OrderDashboard(rs.getInt("order_id"),
+                            date, rs.getDouble("order_amount"), rs.getString("name"),
+                            rs.getString("phone"), rs.getString("address"), 
+                            rs.getBoolean("payment_type"));
+                    listOfOrderID.add(oh);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+        return listOfOrderID;
+    }
+
+    public ArrayList<OrderDashboard> getAllOrderID() throws Exception {
+        ArrayList<OrderDashboard> listOfOrderID = new ArrayList<>();
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "select order_id, order_date,"
+                        + "order_amount, name, phone, address, payment_type from [Order]"
+                        + " where status_order =N'Đã Giao Hàng'";
+                ps = con.prepareStatement(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    OrderDashboard oh = new OrderDashboard(rs.getInt("order_id"),
+                            addTwoDays(rs.getDate("order_date")), rs.getDouble("order_amount"),
+                            rs.getString("name"), rs.getString("phone"),
+                            rs.getString("address"),rs.getBoolean("payment_type"));
+                    listOfOrderID.add(oh);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+        return listOfOrderID;
+    }
+   
 }

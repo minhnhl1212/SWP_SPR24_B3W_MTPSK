@@ -4,6 +4,14 @@
     Author     : minhn
 --%>
 
+<%@page import="java.util.Base64"%>
+<%@page import="DTO.OrderDetail"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="DTO.OrderDashboard"%>
+<%@page import="DTO.OrderSold"%>
+<%@page import="java.text.DecimalFormat"%>
+<%@page import="DTO.OrderHistory"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -83,7 +91,7 @@
                 box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
                 outline: 0;
             }
-            
+
             .date-13 {
                 background-color: #fff;
                 border: 1px solid #d5d9d9;
@@ -129,7 +137,7 @@
             </a>
             <ul class="side-menu top">
                 <li class="active">
-                    <a href="admin_dashboard.jsp">
+                    <a href="DashboardController">
                         <i class='bx bxs-dashboard' ></i>
                         <span class="text">Dashboard</span>
                     </a>
@@ -210,27 +218,40 @@
                         <fieldset style="background: var(--light); padding: 12px; border-radius: 20px; align-items: center; grid-gap: 24px; border: none">
                             <p  style="font-size: 20px; font-weight: bold;">Select date</p>
 
-                            <form>
+                            <form action ="DashboardController" method="POST">
                                 <input type="date" name="date" value="" class="date-13"> 
                                 <button type="submit" class="button-13" <!--style="border-radius: 20px; padding: 5px; background: var(--light)" --> Submit </button>
                             </form>
-
                         </fieldset>
                     </div>
                 </div>
-
+                <%  int No2 = 0;
+                    double TotalSales = 0;
+                    DecimalFormat vnCurrencyFormat = new DecimalFormat("###.###");
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    ArrayList<OrderDashboard> orderIDList
+                            = (ArrayList<OrderDashboard>) session.getAttribute("OrderIDList");
+                    ArrayList<OrderHistory> ODList
+                            = (ArrayList<OrderHistory>) session.getAttribute("OrderDetailList");
+                    if (orderIDList != null) {
+                        for (OrderDashboard od : orderIDList) {
+                            No2++;
+                            TotalSales += od.getOrderAmount();
+                        }
+                    }
+                    String formatTotalSales = vnCurrencyFormat.format(TotalSales);%>
                 <ul class="box-info">
                     <li>
                         <i class='bx bxs-calendar-check' ></i>
                         <span class="text">
-                            <h3>2</h3>
+                            <h3><%=No2%></h3>
                             <p>Number of Order</p>
                         </span>
                     </li>
                     <li>
                         <i class='bx bxs-dollar-circle' ></i>
                         <span class="text">
-                            <h3>2.000.000 VNĐ</h3>
+                            <h3><%=formatTotalSales%> VNĐ</h3>
                             <p>Total Sales</p>
                         </span>
                     </li>
@@ -251,26 +272,29 @@
                                     <th>Detail</th>
                                 </tr>
                             </thead>
-
-                            <tbody>
+                            <% for (OrderDashboard odh : orderIDList) {
+                                    String formatValue = vnCurrencyFormat.format(odh.getOrderAmount());
+                                    String date = sdf.format(odh.getOrderDate());
+                            %>
+                            <tbody>                               
                                 <tr>
-                                    <td>1</td>
-                                    <td style="text-align: center; padding-left: 5px;">27-04-2024</td>
-                                    <td style="text-align: center; padding-left: 5px;">251.000 VNĐ</td>
+                                    <td><%=odh.getOrderId()%></td>
+                                    <td style="text-align: center; padding-left: 5px;"><%=date%></td>
+                                    <td style="text-align: center; padding-left: 5px;"><%=formatValue%> VNĐ</td>
                                     <td>
-                                        <button type="button" onclick="togglePopup()" style="border: none; background: var(--light);"><i class='bx bx-detail'></i>&nbsp;Detail </button>
-                                        <div class="popup-form" id="popupForm">
+                                        <button type="button" class="button-detail" onclick="togglePopup('<%= "popupForm_" + odh.getOrderId()%>')" style="border: none; background: var(--light);"><i class='bx bx-detail'></i>&nbsp;Detail </button>
+                                        <div class="popup-form" id="popupForm_<%= odh.getOrderId()%>">
                                             <p style="font-weight: bold; font-style: italic; text-align: center; margin-bottom: 20px; font-size: 30px;">Order Detail</p>
-                                            <a class="close" href="#" style="text-decoration: none; color: black; margin-top: -5%;" onclick="togglePopup()">X</a>
+                                            <a class="close" href="#" style="text-decoration: none; color: black; margin-top: -5%;" onclick="togglePopup('<%= "popupForm_" + odh.getOrderId()%>')">X</a>
                                             <div class="form-detail" style="margin-top: 30px;">
                                                 <p style="font-weight: bold; font-size: 25px; text-align: left;">Thông tin đơn hàng</p>
                                                 <div style="display:flex;">
                                                     <p style="font-weight: bold;">Mã đơn hàng:</p>
-                                                    <p>&nbsp;&nbsp; 1</p>
+                                                    <p>&nbsp;&nbsp; <%=odh.getOrderId()%></p>
                                                 </div>
                                                 <div style="display: flex;">
                                                     <p style="font-weight: bold;">Ngày tạo đơn: </p>
-                                                    <p>&nbsp; 29-04-2024</p>
+                                                    <p>&nbsp; <%=date%></p>
                                                 </div>
                                             </div>
 
@@ -278,15 +302,15 @@
                                                 <p style="font-weight: bold; font-size: 25px; text-align: left;">Thông tin khách hàng</p>
                                                 <div style="display: flex;">
                                                     <p style="font-weight: bold;">Họ và Tên: </p> 
-                                                    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Nguyễn Hoàng Lê Minh</p>
+                                                    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<%=odh.getName()%></p>
                                                 </div>
                                                 <div style="display: flex;">
                                                     <p style="font-weight: bold;">Số điện thoại: </p>
-                                                    <p>&nbsp; &nbsp;0912345678</p>
+                                                    <p>&nbsp; &nbsp;<%=odh.getPhone()%></p>
                                                 </div>
                                                 <div style="display: flex;">
                                                     <p style="font-weight: bold;">Địa chỉ: </p>
-                                                    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; TPHCM</p>
+                                                    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <%=odh.getAddress()%></p>
                                                 </div>
                                             </div> 
 
@@ -294,46 +318,61 @@
                                                 <p style="font-weight: bold; font-size: 25px; text-align: left;">Thông tin thanh toán</p>
                                                 <div style="display: flex;">
                                                     <p style="font-weight: bold;">Hình thức: </p> 
-                                                    <p>&nbsp; &nbsp; &nbsp; &nbsp; Thanh toán khi nhận hàng</p>
+                                                    <p>&nbsp; &nbsp; &nbsp; &nbsp;<%= (odh.isPaymentType() == false) ? "Thanh toán khi nhận hàng" : "Thanh toán qua ngân hàng"%></p>
                                                 </div>
                                                 <div style="display: flex;">
                                                     <p style="font-weight: bold;">Total: </p> 
-                                                    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 6,277,500 VNĐ</p>  
+                                                    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <%=formatValue%> VNĐ</p>  
                                                 </div>                     
                                             </div>
                                             <p style="font-weight: bold; margin-top: 30px; font-size: 25px; text-align: left;">Thông tin sản phẩm</p>
+                                            <%
+                                                if (ODList != null) {
+                                                    for (OrderHistory od : ODList) {
+                                                        if (od.getOrderId() == odh.getOrderId()) {
+                                                            String base64Image = Base64.getEncoder().encodeToString(od.getImageToy());
+                                                            String price = vnCurrencyFormat.format(od.getPrice());
+                                                            String discount = vnCurrencyFormat.format(od.getPrice() * (1 - od.getDiscount()));
+                                                            String total = vnCurrencyFormat.format(od.getOrderPrice() * od.getQuantity());
+                                            %>
                                             <div class="form-detail" >                            
                                                 <div class="flex items-center" style="margin-top: 20px; display: flex;">
-                                                    <img src="img/people.jpg" alt="Product Image" style="width: 120px; height: 120px; margin-left: 20px; margin-right: 20px;">
+                                                    <img src="data:image/jpeg;base64,<%= base64Image%>" alt="Product Image" style="width: 120px; height: 120px; margin-left: 20px; margin-right: 20px;">
                                                     <div>
                                                         <div style="display: flex;">
                                                             <p style="font-weight: bold;">Tên sản phẩm: </p> 
-                                                            <p>&nbsp; &nbsp; &nbsp; Mô Hình Dimoo Animal Kingdom</p>
+                                                            <p>&nbsp; &nbsp; &nbsp;<%=od.getToyName()%></p>
                                                         </div>
                                                         <div style="display: flex;">
                                                             <p style="font-weight: bold;">Giá sản phẩm: </p>
-                                                            <p>&nbsp; &nbsp; &nbsp; &nbsp;270,000 VNĐ</p>
+                                                            <p>&nbsp; &nbsp; &nbsp; &nbsp;<%=price%> VNĐ</p>
                                                         </div>
                                                         <div style="display: flex;">
                                                             <p style="font-weight: bold;">Giảm giá: </p>
-                                                            <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 18,900 VNĐ</p>
+                                                            <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<%=discount%> VNĐ</p>
                                                         </div>
                                                         <div style="display: flex;">
                                                             <p style="font-weight: bold;">Số lượng:</p>
-                                                            <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1</p>
+                                                            <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <%=od.getQuantity()%></p>
                                                         </div>
                                                         <div style="display: flex;">
                                                             <p style="font-weight: bold;">Thành tiền: </p>
-                                                            <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  251,100 VNĐ</p>
+                                                            <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  <%=total%> VNĐ</p>
                                                         </div>
                                                     </div>
                                                 </div>                          
                                             </div>
-
+                                            <%}
+                                                }
+                                            } else {
+                                            %>
+                                            <p></p>
+                                            <%}%>
                                         </div>
                                     </td>
                                 </tr>
                             </tbody>
+                            <%}%>
                         </table>
                     </div>
 

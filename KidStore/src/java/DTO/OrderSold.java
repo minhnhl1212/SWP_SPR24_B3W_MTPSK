@@ -26,6 +26,12 @@ public class OrderSold {
     private double totalPrice;
     private double discount;
 
+    public OrderSold(int orderId, Date orderDate, double totalPrice) {
+        this.orderId = orderId;
+        this.orderDate = orderDate;
+        this.totalPrice = totalPrice;
+    }
+
     public OrderSold(byte[] image, String toyName, int quantity, String fullName,double toyPrice, Date orderDate, double totalPrice, double discount) {
         this.image = image;
         this.toyName = toyName;
