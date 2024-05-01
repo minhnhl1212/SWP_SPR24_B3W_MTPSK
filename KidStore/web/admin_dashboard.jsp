@@ -225,9 +225,10 @@
                         </fieldset>
                     </div>
                 </div>
-                <%  int No2 = 0;
+                <%  
+                    int No2 = 0;
                     double TotalSales = 0;
-                    DecimalFormat vnCurrencyFormat = new DecimalFormat("###.###");
+                    DecimalFormat vnCurrencyFormat = new DecimalFormat("###,### VNĐ");
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                     ArrayList<OrderDashboard> orderIDList
                             = (ArrayList<OrderDashboard>) session.getAttribute("OrderIDList");
@@ -239,7 +240,8 @@
                             TotalSales += od.getOrderAmount();
                         }
                     }
-                    String formatTotalSales = vnCurrencyFormat.format(TotalSales);%>
+                    String formatTotalSales = vnCurrencyFormat.format(TotalSales);
+                %>
                 <ul class="box-info">
                     <li>
                         <i class='bx bxs-calendar-check' ></i>
@@ -251,7 +253,7 @@
                     <li>
                         <i class='bx bxs-dollar-circle' ></i>
                         <span class="text">
-                            <h3><%=formatTotalSales%> VNĐ</h3>
+                            <h3><%=formatTotalSales%></h3>
                             <p>Total Sales</p>
                         </span>
                     </li>
@@ -280,7 +282,7 @@
                                 <tr>
                                     <td><%=odh.getOrderId()%></td>
                                     <td style="text-align: center; padding-left: 5px;"><%=date%></td>
-                                    <td style="text-align: center; padding-left: 5px;"><%=formatValue%> VNĐ</td>
+                                    <td style="text-align: left; padding-left: 250px;"><%=formatValue%></td>
                                     <td>
                                         <button type="button" class="button-detail" onclick="togglePopup('<%= "popupForm_" + odh.getOrderId()%>')" style="border: none; background: var(--light);"><i class='bx bx-detail'></i>&nbsp;Detail </button>
                                         <div class="popup-form" id="popupForm_<%= odh.getOrderId()%>">
@@ -322,7 +324,7 @@
                                                 </div>
                                                 <div style="display: flex;">
                                                     <p style="font-weight: bold;">Total: </p> 
-                                                    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <%=formatValue%> VNĐ</p>  
+                                                    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <%=formatValue%></p>  
                                                 </div>                     
                                             </div>
                                             <p style="font-weight: bold; margin-top: 30px; font-size: 25px; text-align: left;">Thông tin sản phẩm</p>
@@ -345,19 +347,19 @@
                                                         </div>
                                                         <div style="display: flex;">
                                                             <p style="font-weight: bold;">Giá sản phẩm: </p>
-                                                            <p>&nbsp; &nbsp; &nbsp; &nbsp;<%=price%> VNĐ</p>
+                                                            <p>&nbsp; &nbsp; &nbsp; <%=price%></p>
                                                         </div>
                                                         <div style="display: flex;">
                                                             <p style="font-weight: bold;">Giảm giá: </p>
-                                                            <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<%=discount%> VNĐ</p>
+                                                            <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<%=discount%></p>
                                                         </div>
                                                         <div style="display: flex;">
                                                             <p style="font-weight: bold;">Số lượng:</p>
-                                                            <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <%=od.getQuantity()%></p>
+                                                            <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<%=od.getQuantity()%></p>
                                                         </div>
                                                         <div style="display: flex;">
                                                             <p style="font-weight: bold;">Thành tiền: </p>
-                                                            <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  <%=total%> VNĐ</p>
+                                                            <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <%=total%> </p>
                                                         </div>
                                                     </div>
                                                 </div>                          
@@ -382,9 +384,11 @@
         </section>
         <!-- CONTENT -->
         <script>
-            function togglePopup() {
-                var popup = document.getElementById("popupForm");
-                popup.style.display = (popup.style.display === "block") ? "none" : "block";
+            function togglePopup(popupId) {
+                var popup = document.getElementById(popupId);
+                if (popup) {
+                    popup.style.display = (popup.style.display === "block") ? "none" : "block";
+                }
             }
         </script>
         <script src="js/admin.js"></script>
