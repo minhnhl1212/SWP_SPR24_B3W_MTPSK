@@ -53,7 +53,7 @@ public class CartController extends HttpServlet {
             if (valueParam != null) {
                 value = Integer.parseInt(valueParam);
                 if(item.getQuantity()<value){
-                    session.setAttribute("TOO_MANY", "We don't have enough items in our stock."
+                    request.setAttribute("TOO_MANY", "We don't have enough items in our stock."
                             + " We will set the maximum we have for you.");
                     value = item.getQuantity();
                 }

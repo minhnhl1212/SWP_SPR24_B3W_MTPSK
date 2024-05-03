@@ -140,7 +140,7 @@
                                 <div class="quantity">
                                     
                                     <input type="number" id="quantity" class="quantity-input" name="InputValue" min="1" max="<%=toy.getQuantity()%>" value="1">
-                                    <div><label for="quantity">Số Lượng</label><%=toy.getQuantity()%> sản phẩm có sẵn</div>
+                                    <div><label for="quantity">Số Lượng: </label><%=toy.getQuantity()%> sản phẩm có sẵn</div>
                                     
                                 </div>                                  
                                 <div class="product-name">ID: <%=toy.getToyId()%></div>
