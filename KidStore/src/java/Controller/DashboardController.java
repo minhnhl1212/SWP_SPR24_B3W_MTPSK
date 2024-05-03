@@ -41,12 +41,12 @@ public class DashboardController extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             String dateParam = request.getParameter("date");
             OrderDAO dao = new OrderDAO();
-            if(dateParam!=null){
-                date = Date.valueOf(dateParam);
+            if(dateParam!=null && !dateParam.isEmpty()){
+            date = Date.valueOf(dateParam);
             session.setAttribute("OrderIDList", dao.getAllOrderIDByDate(date));
             }
-            else{
-            session.setAttribute("OrderIDList", dao.getAllOrderID());
+            else {
+                session.setAttribute("OrderIDList", dao.getAllOrderID());
             }
             session.setAttribute("OrderDetailList", dao.orderHistory());
             RequestDispatcher rd = request.getRequestDispatcher("admin_dashboard.jsp");

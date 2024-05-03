@@ -38,7 +38,7 @@
             </a>
             <ul class="side-menu top">
                 <li>
-                    <a href="admin_dashboard.jsp">
+                    <a href="DashboardController">
                         <i class='bx bxs-dashboard' ></i>
                         <span class="text">Dashboard</span>
                     </a>
